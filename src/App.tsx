@@ -5,7 +5,7 @@ const App: React.FC = () => {
 
     return (
         <div className="flex h-screen items-center justify-center">
-            <span className="text-3xl font-bold">Hello, i am Rentally</span>
+            <span className="animate-bounce text-3xl font-bold">Hello, i am Rentally</span>
         </div>
     )
 }
