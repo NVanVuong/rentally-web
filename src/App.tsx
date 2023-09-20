@@ -1,7 +1,9 @@
-import React from "react"
+import { useGetUsersQuery } from "./redux/services/userApi"
 
 const App: React.FC = () => {
-    console.log(import.meta.env.VITE_REACT_APP_API_URL)
+    const { data = [], isLoading } = useGetUsersQuery()
+
+    !isLoading && console.log(data)
 
     return (
         <div className="flex h-screen items-center justify-center">
