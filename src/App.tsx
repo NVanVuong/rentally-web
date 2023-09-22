@@ -1,4 +1,4 @@
-import { useGetUsersQuery } from "./redux/services/userApi"
+import { useGetUsersQuery } from "@/redux/services/user/user.service"
 
 const App: React.FC = () => {
     const { data = [], isLoading } = useGetUsersQuery()
