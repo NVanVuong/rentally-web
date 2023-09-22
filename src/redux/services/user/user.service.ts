@@ -1,7 +1,8 @@
-import { creatApiWithAuth } from "../apiWithAuth.service";
 import { IUser } from "@/interfaces/user.interface";
+import { creatApiWithAuth } from '../apiWithAuth.service';
 
-export const userApi = creatApiWithAuth.injectEndpoints({
+const creatApiUserWithAuth = creatApiWithAuth('userApi', ['Users'])
+export const userApi = creatApiUserWithAuth.injectEndpoints({
     endpoints: (builder) => ({
         getUsers: builder.query<IUser[], number | void>({
             query(limit = 10) {

@@ -47,10 +47,10 @@ const baseQueryWithReauth = async (args: BaseQueryWithReauthArgs[0],
 	return result;
 };
 
-export const creatApiWithAuth = createApi({
+export const creatApiWithAuth = (reducerPath: string, tagTypes: Array<string>) => createApi({
 	baseQuery: baseQueryWithReauth,
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	endpoints: (builder) => ({}),
-	reducerPath: 'apiWithAuth',
-	
+	reducerPath: reducerPath,
+	tagTypes:tagTypes
 });

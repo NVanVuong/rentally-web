@@ -1,6 +1,8 @@
 import { creatApiWithAuth } from "../apiWithAuth.service";
 
-export const authApi = creatApiWithAuth.injectEndpoints({
+const creatApiAuthWithAuth = creatApiWithAuth('AuthApi', ['Auth'])
+
+export const authApi = creatApiAuthWithAuth.injectEndpoints({
 	endpoints: (builder) => ({
 		login: builder.mutation({
 			query: (body: { email: string; password: string }) => ({
