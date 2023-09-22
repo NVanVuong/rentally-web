@@ -1,20 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { BASE_URL } from "../../utils/constants";
+import { IUser } from "@/interfaces/user.interface";
+import { creatApiWithAuth } from '../apiWithAuth.service';
 
-export interface IUser {
-    id: number;
-    googleId: string;
-    email:string;
-    firstName: string;
-    lastName: string;
-    photo: string;
-    phone_number: string;
-    role: string;
-}
-
-export const userApi = createApi({
-    reducerPath: 'userApi',
-    baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+const creatApiUserWithAuth = creatApiWithAuth('userApi', ['Users'])
+export const userApi = creatApiUserWithAuth.injectEndpoints({
     endpoints: (builder) => ({
         getUsers: builder.query<IUser[], number | void>({
             query(limit = 10) {
