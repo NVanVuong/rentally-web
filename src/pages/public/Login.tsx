@@ -1,3 +1,4 @@
+import { InputWithLabel } from '@/components'
 import React from 'react'
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
 const Login = (props: Props) => {
     return (
         <div>
-            Login
+            <InputWithLabel placeholer='email*'/>
         </div>
     )
 }
