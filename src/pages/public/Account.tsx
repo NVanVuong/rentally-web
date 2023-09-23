@@ -6,7 +6,6 @@ import Cloud from '@/assets/images/cloud.svg'
 interface Props {
     
 } 
-
 const Account = (props: Props) => {
     return (
         <div className='w-screen h-screen bg-gray-200 flex items-center justify-center'> 
@@ -28,4 +27,6 @@ const Account = (props: Props) => {
     )
 }
 
+
+//test git
 export default Account
