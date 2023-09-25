@@ -1,10 +1,12 @@
 import React, { useState } from "react"
 import { ButtonAuth, InputWithLabel } from "@/components"
 import mail from "@/assets/images/mailsvg.svg"
-
+import { Link, useNavigate } from "react-router-dom"
 interface Props {}
 
 const Register = (props: Props) => {
+    const navigate = useNavigate()
+
     const [isPermitted, SetIsPermitted] = useState(false)
 
     return (
@@ -14,7 +16,11 @@ const Register = (props: Props) => {
                     <h1 className="text-[40px] font-semibold text-primary ">Login to your account</h1>
                     <div className="mt-3">
                         <p className="mb-1 text-[14px] text-primary">
-                            Already a member?<span className="font-medium text-secondary1"> Login now</span>
+                            Already a member?
+                            <Link to={"account/login"} className="font-medium text-secondary1">
+                                {" "}
+                                Login now
+                            </Link>
                         </p>
                         <div className="flex flex-col gap-4">
                             <InputWithLabel placeholer="Email *" type="text" />
@@ -44,7 +50,9 @@ const Register = (props: Props) => {
                             />
                         </div>
                         <div className="mt-4 flex justify-between">
-                            <p className="text-[14px] text-primary">Forgot your password?</p>
+                            <Link to={"/account/forgot-password"} className="text-[14px] text-primary">
+                                Forgot your password?
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -66,7 +74,7 @@ const Register = (props: Props) => {
                                 <ButtonAuth
                                     text="Submit"
                                     onClick={() => {
-                                        SetIsPermitted(true)
+                                        navigate("/")
                                     }}
                                 />
                             </div>

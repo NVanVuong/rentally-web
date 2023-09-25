@@ -1,9 +1,12 @@
 import React, { useState } from "react"
 import { ButtonAuth, InputWithLabel } from "@/components"
 import mail from "@/assets/images/mailsvg.svg"
+import { Link, useNavigate } from "react-router-dom"
 interface Props {}
 
 const ResetPassword = (props: Props) => {
+    const navigate = useNavigate()
+
     const [isPermitted, SetIsPermitted] = useState(false)
 
     return (
@@ -33,7 +36,11 @@ const ResetPassword = (props: Props) => {
                         </div>
                         <div className="absolute bottom-20 left-0 flex w-full justify-center ">
                             <p className="mb-1 text-[14px] text-primary">
-                                Back to<span className="text-secondary1"> Login</span>
+                                Back to
+                                <Link to={"account/login"} className="text-secondary1">
+                                    {" "}
+                                    Login
+                                </Link>
                             </p>
                         </div>
                     </div>
@@ -46,23 +53,29 @@ const ResetPassword = (props: Props) => {
                             In order to <span className="text-secondary1">protect your account</span>, make sure your
                             <br />
                             <span>password:</span>
-                           
-                                <li className="mx-4">Longer than 8 characters</li>
-                                <li className="mx-4">Does not match or contain your username</li>
-                           
+                            <li className="mx-4">Longer than 8 characters</li>
+                            <li className="mx-4">Does not match or contain your username</li>
                         </p>
                         <div className="flex flex-col gap-8">
                             <InputWithLabel placeholer="Password *" type="Password" />
                             <InputWithLabel placeholer="Confirm password *" type="Password" />
-                            <ButtonAuth text="Login" onClick={() => {}} />
+                            <ButtonAuth
+                                text="Reset password"
+                                onClick={() => {
+                                    navigate("/")
+                                }}
+                            />
                         </div>
-                        
                     </div>
                     <div className="absolute bottom-20 left-0 flex w-full justify-center ">
-                            <p className="mb-1 text-[14px] text-primary">
-                                Back to<span className="text-secondary1"> Login</span>
-                            </p>
-                        </div>
+                        <p className="mb-1 text-[14px] text-primary">
+                            Back to
+                            <Link to={"account/login"} className="text-secondary1">
+                                {" "}
+                                Login
+                            </Link>
+                        </p>
+                    </div>
                 </div>
             )}
         </>

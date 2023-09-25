@@ -21,9 +21,11 @@ const Account = (props: Props) => {
                     <h3 className="m-8 text-[21px] font-normal text-white">Since 2023</h3>
                     <img src={Cloud} alt="" className="absolute bottom-0 left-0 z-0 w-[480px] rounded-l-[20px]" />
                 </div>
-                <div className="relative flex flex-1 flex-col items-center justify-center rounded-r-[20px] bg-white">
-                    <img src={logoRentally} alt="" className="w-[96px]" />
-                    <Outlet />
+                <div className="relative flex-1 rounded-r-[20px] bg-white  pb-10">
+                    <div className="flex h-full w-full flex-col items-center justify-center  ">
+                        <img src={logoRentally} alt="" className="w-[96px]" />
+                        <Outlet />
+                    </div>
                 </div>
             </div>
         </div>
