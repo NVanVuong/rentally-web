@@ -1,12 +1,13 @@
 import React, { useState } from "react"
 import { ButtonAuth, InputWithLabel } from "@/components"
 import mail from "@/assets/images/mailsvg.svg"
-import { Link, useNavigate } from "react-router-dom"
-interface Props {}
+import { Link, useNavigate, useParams } from "react-router-dom"
 
-const ResetPassword = (props: Props) => {
+
+const ResetPassword = () => {
     const navigate = useNavigate()
-
+    const { email } = useParams();
+    console.log(email)
     const [isPermitted, SetIsPermitted] = useState(false)
 
     return (
@@ -37,7 +38,7 @@ const ResetPassword = (props: Props) => {
                         <div className="absolute bottom-20 left-0 flex w-full justify-center ">
                             <p className="mb-1 text-[14px] text-primary">
                                 Back to
-                                <Link to={"account/login"} className="text-secondary1">
+                                <Link to={"/account/login"} className="text-secondary1">
                                     {" "}
                                     Login
                                 </Link>
@@ -70,7 +71,7 @@ const ResetPassword = (props: Props) => {
                     <div className="absolute bottom-20 left-0 flex w-full justify-center ">
                         <p className="mb-1 text-[14px] text-primary">
                             Back to
-                            <Link to={"account/login"} className="text-secondary1">
+                            <Link to={"/account/login"} className="text-secondary1">
                                 {" "}
                                 Login
                             </Link>

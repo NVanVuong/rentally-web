@@ -1,22 +1,37 @@
-import React from "react"
+import { useState } from "react"
 import { ButtonAuth, InputWithLabel } from "@/components"
 import { Link, useNavigate } from "react-router-dom"
-interface Props {}
+import {} from "@/redux/services/auth/auth.service"
+import { setCredentials } from "@/redux/features/auth/auth.slice"
+import { useAppDispatch } from "@/redux/hook"
+import { useForgotPasswordMutation } from "@/redux/services/auth/auth.service"
 
-const ForgotPassword = (props: Props) => {
+const ForgotPassword = () => {
     const navigate = useNavigate()
+    const [email, setEmail] = useState<string>("")
+    const [forgotPassword] = useForgotPasswordMutation()
+    const handleResetPassword = async () => {
+        const res = await forgotPassword({ email }).unwrap()
+        console.log(res)
+        if (res.status === "SUCCESS") {
+            navigate(`/account/reset-password/${email}`)
+        }
+    }
     return (
         <div className="flex w-full flex-col items-center justify-center ">
             <div className="m-8">
                 <h1 className="text-[24px] font-semibold text-primary ">Forgot Password?</h1>
                 <p className="mb-1 text-[14px] text-primary">No worries, we'll send you reset password instruction</p>
                 <div className="flex flex-col gap-8">
-                    <InputWithLabel placeholer="Email *" type="text" />
+                    <InputWithLabel
+                        placeholer="Email *"
+                        type="text"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
                     <ButtonAuth
                         text="Reset password"
-                        onClick={() => {
-                            navigate("/account/reset-password/1")
-                        }}
+                        onClick={handleResetPassword}
                     />
                 </div>
             </div>

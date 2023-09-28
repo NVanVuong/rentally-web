@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit"
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState: IAuth = {
-    accessToken: null
+    accessToken: localStorage.getItem("jwt") || null
 }
 
 const authSlice = createSlice({
@@ -18,6 +18,7 @@ const authSlice = createSlice({
         ) => {
             const { accessToken } = action.payload
             state.accessToken = accessToken
+            localStorage.setItem("jwt", accessToken as string)
         },
 
         logOut: (state) => {
