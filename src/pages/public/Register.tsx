@@ -28,7 +28,7 @@ const Register = () => {
 
     const [isPermitted, setIsPermitted] = useState(false)
     const [code, setCode] = useState<{ email: string; code: string }>({ email: "", code: "" })
-    const [register, { loading }] = useRegisterMutation()
+    const [register] = useRegisterMutation()
     const [registerVerification] = useRegisterVerificationMutation()
 
     const initialValues: Values = {

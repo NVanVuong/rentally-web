@@ -2,8 +2,6 @@ import { useState } from "react"
 import { ButtonAuth, InputWithLabel } from "@/components"
 import { Link, useNavigate } from "react-router-dom"
 import {} from "@/redux/services/auth/auth.service"
-import { setCredentials } from "@/redux/features/auth/auth.slice"
-import { useAppDispatch } from "@/redux/hook"
 import { useForgotPasswordMutation } from "@/redux/services/auth/auth.service"
 
 const ForgotPassword = () => {
@@ -29,10 +27,7 @@ const ForgotPassword = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <ButtonAuth
-                        text="Reset password"
-                        onClick={handleResetPassword}
-                    />
+                    <ButtonAuth text="Reset password" onClick={handleResetPassword} />
                 </div>
             </div>
             <div className="absolute bottom-20 left-0 flex w-full justify-center ">

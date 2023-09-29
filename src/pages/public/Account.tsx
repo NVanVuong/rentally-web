@@ -1,10 +1,9 @@
-import React from "react"
 import { Outlet } from "react-router-dom"
 import Logo from "@/assets/images/Logo.svg"
 import Cloud from "@/assets/images/cloud.png"
 import logoRentally from "@/assets/images/rentally-logo.png"
-interface Props {}
-const Account = (props: Props) => {
+
+const Account = () => {
     return (
         <div className="flex h-screen w-screen items-center justify-center bg-gray-200 ">
             <div className="flex h-[800px] w-[1200px] rounded-[20px] border-2 border-neutral-700 ">
