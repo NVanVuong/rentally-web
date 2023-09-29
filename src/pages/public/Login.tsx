@@ -42,10 +42,12 @@ const Login = () => {
 
     const submitForm = async (values: Values) => {
         console.log(values)
-        const data = await login(values).unwrap()
-        console.log(data)
-        dispatch(setCredentials({ accessToken: data.data.token }))
-        navigate("/")
+        const res = await login(values).unwrap()
+        if (res.status === "SUCCESS") {
+            dispatch(setCredentials({ accessToken: res.data.token }))
+            navigate("/")
+        }
+    
     }
 
     return (
