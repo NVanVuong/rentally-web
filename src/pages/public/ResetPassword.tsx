@@ -3,7 +3,11 @@ import { ButtonAuth, InputWithLabel } from "@/components"
 import { Formik } from "formik"
 import mail from "@/assets/images/mailsvg.svg"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { useResetPasswordMutation, useForgotPasswordVerifyMutation,useResendEmailMutation, } from "@/redux/services/auth/auth.service"
+import {
+    useResetPasswordMutation,
+    useForgotPasswordVerifyMutation,
+    useResendEmailMutation
+} from "@/redux/services/auth/auth.service"
 
 interface Values {
     password: string
@@ -55,9 +59,9 @@ const ResetPassword = () => {
             SetIsPermitted(true)
         }
     }
-    
+
     const handleResetPassword = async () => {
-        const res = await resendEmail({ email:email||'' }).unwrap()
+        const res = await resendEmail({ email: email || "" }).unwrap()
         console.log(res)
     }
     return (
@@ -85,8 +89,13 @@ const ResetPassword = () => {
                                 <ButtonAuth text="Reset password" onClick={handleSubmitCode} />
                             </div>
                             <p className="px-3 pt-3 text-[14px] text-primary">
-                            Didn't receive the email?
-                                <span className="text-[14px] text-secondary1 cursor-pointer" onClick={handleResetPassword}>Click to resend</span>{" "}
+                                Didn't receive the email?
+                                <span
+                                    className="cursor-pointer text-[14px] text-secondary1"
+                                    onClick={handleResetPassword}
+                                >
+                                    Click to resend
+                                </span>{" "}
                             </p>
                         </div>
                         <div className="absolute bottom-20 left-0 flex w-full justify-center ">

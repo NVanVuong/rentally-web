@@ -5,6 +5,9 @@ import { Formik } from "formik"
 import { useLoginMutation } from "@/redux/services/auth/auth.service"
 import { setCredentials } from "@/redux/features/auth/auth.slice"
 import { useAppDispatch } from "@/redux/hook"
+import { GoogleLogin } from "@react-oauth/google"
+import { useGoogleOneTapLogin } from "@react-oauth/google"
+
 
 interface Values {
     email: string
@@ -47,8 +50,16 @@ const Login = () => {
             dispatch(setCredentials({ accessToken: res.data.token }))
             navigate("/")
         }
-    
     }
+
+    useGoogleOneTapLogin({
+        onSuccess: (credentialResponse) => {
+            console.log(credentialResponse)
+        },
+        onError: () => {
+            console.log("Login Failed")
+        }
+    })
 
     return (
         <Formik initialValues={initialValues} validate={validate} onSubmit={submitForm}>
@@ -61,7 +72,8 @@ const Login = () => {
                             <p className="mb-1 text-[14px] text-primary">
                                 Not a member?
                                 <Link to={"/account/register"} className="font-medium text-secondary1">
-                                    {' ' }Create account
+                                    {" "}
+                                    Create account
                                 </Link>
                             </p>
                             <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
@@ -88,6 +100,14 @@ const Login = () => {
                                     Forgot your password?
                                 </Link>
                             </div>
+                            <GoogleLogin
+                                onSuccess={(credentialResponse) => {
+                                    console.log(credentialResponse)
+                                }}
+                                onError={() => {
+                                    console.log("Login Failed")
+                                }}
+                            />
                         </div>
                     </div>
                 )
