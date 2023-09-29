@@ -3,7 +3,7 @@ import { ButtonAuth, InputWithLabel } from "@/components"
 import { Formik } from "formik"
 import mail from "@/assets/images/mailsvg.svg"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { useResetPasswordMutation, useForgotPasswordVerifyMutation } from "@/redux/services/auth/auth.service"
+import { useResetPasswordMutation, useForgotPasswordVerifyMutation,useResendEmailMutation, } from "@/redux/services/auth/auth.service"
 
 interface Values {
     password: string
@@ -16,6 +16,7 @@ const ResetPassword = () => {
     const [isPermitted, SetIsPermitted] = useState(false)
     const [resetPassword] = useResetPasswordMutation()
     const [forgotPasswordVerify] = useForgotPasswordVerifyMutation()
+    const [resendEmail] = useResendEmailMutation()
     const [code, setCode] = useState<string>("")
 
     const initialValues: Values = {
@@ -54,6 +55,11 @@ const ResetPassword = () => {
             SetIsPermitted(true)
         }
     }
+    
+    const handleResetPassword = async () => {
+        const res = await resendEmail({ email:email||'' }).unwrap()
+        console.log(res)
+    }
     return (
         <>
             {!isPermitted ? (
@@ -66,7 +72,7 @@ const ResetPassword = () => {
                             </div>
                             <p className="mb-1 px-3 text-[14px] text-primary">
                                 We sent a verification code to <br />
-                                <span className="text-[14px] text-secondary1">abc@gmail.com</span>{" "}
+                                <span className="text-[14px] text-secondary1">{email}</span>{" "}
                             </p>
 
                             <div className="flex flex-col gap-8">
@@ -78,6 +84,10 @@ const ResetPassword = () => {
                                 />
                                 <ButtonAuth text="Reset password" onClick={handleSubmitCode} />
                             </div>
+                            <p className="px-3 pt-3 text-[14px] text-primary">
+                            Didn't receive the email?
+                                <span className="text-[14px] text-secondary1 cursor-pointer" onClick={handleResetPassword}>Click to resend</span>{" "}
+                            </p>
                         </div>
                         <div className="absolute bottom-20 left-0 flex w-full justify-center ">
                             <p className="mb-1 text-[14px] text-primary">

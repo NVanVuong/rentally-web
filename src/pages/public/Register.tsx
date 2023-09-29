@@ -4,7 +4,7 @@ import Select from "react-select"
 import mail from "@/assets/images/mailsvg.svg"
 import { Formik } from "formik"
 import { Link, useNavigate } from "react-router-dom"
-import { useRegisterMutation, useRegisterVerificationMutation } from "@/redux/services/auth/auth.service"
+import { useRegisterMutation, useRegisterVerificationMutation, useResendEmailMutation} from "@/redux/services/auth/auth.service"
 // import { useAppDispatch } from "@/redux/hook"
 
 interface Values {
@@ -30,6 +30,7 @@ const Register = () => {
     const [code, setCode] = useState<{ email: string; code: string }>({ email: "", code: "" })
     const [register] = useRegisterMutation()
     const [registerVerification] = useRegisterVerificationMutation()
+    const [resendEmail] = useResendEmailMutation()
 
     const initialValues: Values = {
         email: "",
@@ -103,6 +104,10 @@ const Register = () => {
             navigate("/account/login")
         }
     }
+    const handleResetPassword = async () => {
+        const res = await resendEmail({ email:code.email }).unwrap()
+        console.log(res)
+    }
     return (
         <>
             {!isPermitted ? (
@@ -117,7 +122,7 @@ const Register = () => {
                                     <p className="mb-1 text-[14px] text-primary">
                                         Already a member?
                                         <Link to={"/account/login"} className="font-medium text-secondary1">
-                                            Login now
+                                        {' '}Login now
                                         </Link>
                                     </p>
                                     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
@@ -206,7 +211,7 @@ const Register = () => {
                             </div>
                             <p className="mb-1 px-3 text-[14px] text-primary">
                                 We sent a verification code to <br />
-                                <span className="text-[14px] text-secondary1">abc@gmail.com</span>{" "}
+                                <span className="text-[14px] text-secondary1">{code.email}</span>{" "}
                             </p>
 
                             <div className="flex flex-col gap-8">
@@ -225,6 +230,10 @@ const Register = () => {
                                     }}
                                 />
                             </div>
+                            <p className="px-3 pt-3 text-[14px] text-primary">
+                            Didn't receive the email?
+                                <span className="text-[14px] text-secondary1 cursor-pointer" onClick={()=>handleResetPassword()}>{' '}Click to resend</span>{" "}
+                            </p>
                         </div>
                         <div className="absolute bottom-20 left-0 flex w-full justify-center ">
                             <p className="mb-1 text-[14px] text-primary">

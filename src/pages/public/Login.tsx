@@ -61,7 +61,7 @@ const Login = () => {
                             <p className="mb-1 text-[14px] text-primary">
                                 Not a member?
                                 <Link to={"/account/register"} className="font-medium text-secondary1">
-                                    Create account
+                                    {' ' }Create account
                                 </Link>
                             </p>
                             <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
