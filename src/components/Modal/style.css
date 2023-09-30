@@ -1,0 +1,81 @@
+.ant-modal {
+    @apply top-8 w-fit !important;
+}
+
+.ant-modal-content {
+    @apply w-[28rem];
+}
+
+.ant-col-14 {
+    @apply max-w-full;
+}
+
+.ant-upload,
+.ant-form-item .ant-form-item-control-input-content button {
+    @apply w-full;
+}
+
+.ant-btn {
+    @apply px-2.5;
+}
+
+.ant-upload > .ant-btn-default {
+    @apply text-gray-300;
+}
+
+.ant-form-item-control-input-content > .ant-btn-default:not(:disabled):not(.ant-btn-disabled) {
+    @apply font-medium;
+}
+
+.ant-form-item-control-input-content > .ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+    @apply bg-primary/95 text-white shadow-2xl transition-all duration-100;
+}
+
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+    @apply text-gray-300;
+}
+
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover > svg {
+    @apply text-primary;
+}
+
+.ant-select:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover > span {
+    @apply text-primary;
+}
+
+.ant-select-open > span {
+    @apply text-primary;
+}
+
+.ant-form-item-explain-error {
+    @apply my-0.5 text-sm font-medium;
+}
+
+/* .ant-input:hover {
+    @apply transition duration-100 placeholder:text-primary;
+} */
+
+/* .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
+.ant-input:hover,
+.ant-input:focus {
+    @apply border-primary;
+}
+
+.ant-select:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover
+    .ant-select-selector,
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+    @apply border-primary text-primary;
+} */
+
+/* .ant-btn-primary {
+    @apply border-primary bg-primary text-white;
+} */
+
+/* .ant-btn-default:not(:disabled):not(.ant-btn-disabled),
+.ant-btn-default {
+    @apply font-normal text-gray-300;
+} */
+
+/* .ant-form-item .ant-form-item-control-input-content button:hover {
+    @apply text-white;
+} */
