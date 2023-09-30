@@ -61,7 +61,14 @@ export const authApi = creatApiAuthWithAuth.injectEndpoints({
                 method: "POST",
                 body
             })
-        })
+        }),
+        continueWithGG: builder.mutation({
+            query: (body: { accessToken: string }) => ({
+                url: "/auth/google/callback",
+                method: "POST",
+                body
+            })
+        }),
     })
 })
 
@@ -73,4 +80,5 @@ export const {
     useForgotPasswordVerifyMutation,
     useResendEmailMutation,
     useResetPasswordMutation
+    ,useContinueWithGGMutation
 } = authApi

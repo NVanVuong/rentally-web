@@ -7,9 +7,13 @@ import { Link, useNavigate } from "react-router-dom"
 import {
     useRegisterMutation,
     useRegisterVerificationMutation,
-    useResendEmailMutation
+    useResendEmailMutation,
+    useContinueWithGGMutation
 } from "@/redux/services/auth/auth.service"
-// import { useAppDispatch } from "@/redux/hook"
+import { useGoogleLogin } from "@react-oauth/google"
+import logoGG from "@/assets/images/logoGG.svg"
+
+import { useAppDispatch } from "@/redux/hook"
 
 interface Values {
     email: string
@@ -28,13 +32,14 @@ const options = [
 
 const Register = () => {
     const navigate = useNavigate()
-    // const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch()
 
     const [isPermitted, setIsPermitted] = useState(false)
     const [code, setCode] = useState<{ email: string; code: string }>({ email: "", code: "" })
     const [register] = useRegisterMutation()
     const [registerVerification] = useRegisterVerificationMutation()
     const [resendEmail] = useResendEmailMutation()
+    const [continueWithGG] = useContinueWithGGMutation()
 
     const initialValues: Values = {
         email: "",
@@ -112,6 +117,20 @@ const Register = () => {
         const res = await resendEmail({ email: code.email }).unwrap()
         console.log(res)
     }
+
+    const registerWithGG = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+            console.log(tokenResponse.access_token || "")
+            const res = await continueWithGG({ accessToken: tokenResponse.access_token || "" }).unwrap()
+            if (res.status === "SUCCESS") {
+                dispatch(setCredentials({ accessToken: res.data.token }))
+                navigate("/")
+            }
+        },
+        onError: () => {
+            console.log("Login Failed")
+        }
+    })
     return (
         <>
             {!isPermitted ? (
@@ -196,10 +215,13 @@ const Register = () => {
 
                                         <ButtonAuth text="Register" type="submit" disabled={!(dirty && isValid)} />
                                     </form>
-                                    <div className="mt-4 flex justify-between">
-                                        <Link to={"/account/forgot-password"} className="text-[14px] text-primary">
-                                            Forgot your password?
-                                        </Link>
+                                    <div className="mt-4 flex justify-end">
+                                        <button
+                                            className="flex items-center justify-center gap-2 rounded-[6px] border-2 border-neutral-300 p-1 text-[14px]"
+                                            onClick={() => registerWithGG()}
+                                        >
+                                            Countinue with <img src={logoGG} alt="logoGG" />
+                                        </button>
                                     </div>
                                 </div>
                             </div>

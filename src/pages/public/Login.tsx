@@ -2,13 +2,11 @@ import { Link } from "react-router-dom"
 import { ButtonAuth, InputWithLabel } from "@/components"
 import { useNavigate } from "react-router-dom"
 import { Formik } from "formik"
-import { useLoginMutation } from "@/redux/services/auth/auth.service"
+import { useLoginMutation, useContinueWithGGMutation } from "@/redux/services/auth/auth.service"
 import { setCredentials } from "@/redux/features/auth/auth.slice"
 import { useAppDispatch } from "@/redux/hook"
-import { GoogleLogin } from "@react-oauth/google"
-import { useGoogleOneTapLogin } from "@react-oauth/google"
-
-
+import { useGoogleLogin } from "@react-oauth/google"
+import logoGG from "@/assets/images/logoGG.svg"
 interface Values {
     email: string
     password: string
@@ -22,6 +20,7 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [login] = useLoginMutation()
+    const [continueWithGG] = useContinueWithGGMutation()
     const initialValues: Values = {
         email: "",
         password: ""
@@ -51,10 +50,14 @@ const Login = () => {
             navigate("/")
         }
     }
-
-    useGoogleOneTapLogin({
-        onSuccess: (credentialResponse) => {
-            console.log(credentialResponse)
+    const loginWithGG = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+            console.log(tokenResponse.access_token || "")
+            const res = await continueWithGG({ accessToken: tokenResponse.access_token || "" }).unwrap()
+            if (res.status === "SUCCESS") {
+                dispatch(setCredentials({ accessToken: res.data.token }))
+                navigate("/")
+            }
         },
         onError: () => {
             console.log("Login Failed")
@@ -95,19 +98,17 @@ const Login = () => {
                                 />
                                 <ButtonAuth text="Login" type="submit" disabled={!(dirty && isValid)} />
                             </form>
-                            <div className="mt-4 flex justify-between">
+                            <div className="mt-4 flex items-center justify-between">
                                 <Link to="/account/forgot-password" className="text-[14px] text-primary">
                                     Forgot your password?
                                 </Link>
+                                <button
+                                    className="flex items-center justify-center gap-2 rounded-[6px] border-2 border-neutral-300 p-1 text-[14px]"
+                                    onClick={() => loginWithGG()}
+                                >
+                                    Countinue with <img src={logoGG} alt="logoGG" />
+                                </button>
                             </div>
-                            <GoogleLogin
-                                onSuccess={(credentialResponse) => {
-                                    console.log(credentialResponse)
-                                }}
-                                onError={() => {
-                                    console.log("Login Failed")
-                                }}
-                            />
                         </div>
                     </div>
                 )
