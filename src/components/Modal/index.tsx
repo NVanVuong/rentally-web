@@ -24,16 +24,26 @@ const ModalAntd = () => {
         required: "'${name}' is required!"
     }
 
-    const onFinish = (values: any) => {
+    const onFinish = async (values: any) => {
         console.log("Received values of form:", values)
+        const formData = new FormData();
+        formData.append('email', values.email);
+        formData.append('password', values.password);
+        formData.append('firstName', values.firstName);
+        formData.append('lastName', values.lastName);
+        formData.append('phoneNumber', values.phoneNumber);
+        formData.append('role', values.role);
+        formData.append('photo', values.photo[0].originFileObj); // Lưu ý rằng ở đây chúng ta chỉ lấy tệp đầu tiên
+        try {
+            console.log(formData)
+            const response = await createUser(formData);
+            // Xử lý response từ máy chủ nếu cần
+            console.log(response);
+          } catch (error) {
+            // Xử lý lỗi nếu có
+            console.error(error);
+          }
 
-        if (values.photo && values.photo.length > 0) {
-            values = {
-                ...values,
-                photo: values.photo[0]
-            }
-            createUser(values)
-        }
     }
 
     const handleChange = async (info: any) => {
@@ -97,9 +107,9 @@ const ModalAntd = () => {
                         rules={[{ required: true }]}
                     >
                         <Upload
-                            action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+                            // action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
                             listType="picture"
-                            onChange={handleChange}
+                            // onChange={handleChange}
                         >
                             <Button
                                 icon={<AiOutlineUpload className="-mr-2 h-5 w-5" />}

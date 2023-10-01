@@ -14,7 +14,7 @@ export const userApi = creatApiUserWithAuth.injectEndpoints({
         getUserById: builder.query<IUser, number>({
             query: (id) => `/users/${id}`
         }),
-        createUser: builder.mutation<IUser, Partial<IUser>>({
+        createUser: builder.mutation<IUser, FormData>({
             query: (body) => ({
                 url: `/users`,
                 method: "POST",
