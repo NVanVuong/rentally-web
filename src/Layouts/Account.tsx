@@ -5,9 +5,9 @@ import logoRentally from "@/assets/images/rentally-logo.png"
 
 const Account = () => {
     return (
-        <div className="flex h-screen w-screen items-center justify-center bg-gray-200 ">
-            <div className="flex h-[800px] w-[1200px] rounded-[20px] border-2 border-neutral-700 ">
-                <div className="relative flex flex-1 flex-col items-center rounded-l-[20px] bg-primary">
+        <div className=" relative flex h-screen w-screen items-center justify-center overflow-hidden before:absolute before:right-[-600px] before:top-[-600px] before:h-[1200px] before:w-[1200px] before:rounded-full before:bg-bgColor">
+            <div className="relative flex h-[800px] w-[1200px] rounded-[20px] border-neutral-700 shadow-3xl before:absolute before:bottom-[-400px] before:left-[-400px] before:h-[800px] before:w-[800px] before:rounded-full before:border-[140px] before:border-primary ">
+                <div className="relative flex flex-1 flex-col items-center rounded-l-[20px] bg-primary ">
                     <div className="mt-16 w-full px-16 pt-4">
                         <h1 className="text-[40px] font-semibold text-secondary1 ">
                             Finding a<br /> dream room to rent?

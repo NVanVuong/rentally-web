@@ -8,6 +8,7 @@ import {
     useForgotPasswordVerifyMutation,
     useResendEmailMutation
 } from "@/redux/services/auth/auth.service"
+import { motion } from "framer-motion"
 
 interface Values {
     password: string
@@ -67,8 +68,12 @@ const ResetPassword = () => {
     return (
         <>
             {!isPermitted ? (
-                <div>
-                    <div className="flex w-full flex-col items-center justify-center ">
+                <motion.div
+                    initial={{ x: 100, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: -30, opacity: 0 }}
+                >
+                    <div className="relative flex w-full flex-col items-center justify-center">
                         <div className="m-8">
                             <div className="mb-6 flex items-center justify-center gap-8">
                                 <img src={mail} alt="" />
@@ -91,31 +96,37 @@ const ResetPassword = () => {
                             <p className="px-3 pt-3 text-[14px] text-primary">
                                 Didn't receive the email?
                                 <span
-                                    className="cursor-pointer text-[14px] text-secondary1"
+                                    className="cursor-pointer text-[14px] text-secondary1 hover:underline"
                                     onClick={handleResetPassword}
                                 >
+                                    {" "}
                                     Click to resend
                                 </span>{" "}
                             </p>
                         </div>
-                        <div className="absolute bottom-20 left-0 flex w-full justify-center ">
+                        <div className="absolute bottom-[-100px] left-0 flex w-full justify-center ">
                             <p className="mb-1 text-[14px] text-primary">
                                 Back to
-                                <Link to={"/account/login"} className="text-secondary1">
+                                <Link to={"/account/login"} className="text-secondary1 hover:underline">
                                     {" "}
                                     Login
                                 </Link>
                             </p>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             ) : (
                 <Formik initialValues={initialValues} validate={validate} onSubmit={submitForm}>
                     {(formik) => {
                         const { values, handleChange, handleSubmit, dirty, isValid } = formik
 
                         return (
-                            <div className="flex w-full flex-col items-center justify-center">
+                            <motion.div
+                                initial={{ x: 100, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                exit={{ x: -30, opacity: 0 }}
+                                className="relative flex w-full flex-col items-center justify-center"
+                            >
                                 <h1 className="text-[40px] font-semibold text-primary ">Reset Password</h1>
                                 <div className="mt-3">
                                     <p className="my-4 text-[14px] text-primary">
@@ -150,16 +161,16 @@ const ResetPassword = () => {
                                         />
                                     </form>
                                 </div>
-                                <div className="absolute bottom-20 left-0 flex w-full justify-center ">
+                                <div className="absolute bottom-[-100px] left-0 flex w-full justify-center ">
                                     <p className="mb-1 text-[14px] text-primary">
                                         Back to
-                                        <Link to={"/account/login"} className="text-secondary1">
+                                        <Link to={"/account/login"} className="text-secondary1 hover:underline">
                                             {" "}
                                             Login
                                         </Link>
                                     </p>
                                 </div>
-                            </div>
+                            </motion.div>
                         )
                     }}
                 </Formik>

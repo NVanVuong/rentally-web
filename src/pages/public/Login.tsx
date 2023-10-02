@@ -7,6 +7,8 @@ import { setCredentials } from "@/redux/features/auth/auth.slice"
 import { useAppDispatch } from "@/redux/hook"
 import { useGoogleLogin } from "@react-oauth/google"
 import logoGG from "@/assets/images/logoGG.svg"
+import { motion } from "framer-motion"
+
 interface Values {
     email: string
     password: string
@@ -69,12 +71,17 @@ const Login = () => {
             {(formik) => {
                 const { values, handleChange, handleSubmit, dirty, isValid } = formik
                 return (
-                    <div className="flex w-full flex-col items-center justify-center">
+                    <motion.div
+                        initial={{ x: 100, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        exit={{ x: -30, opacity: 0 }}
+                        className="flex w-full flex-col items-center justify-center"
+                    >
                         <h1 className="text-[40px] font-semibold text-primary ">Login to your account</h1>
                         <div className="mt-3">
                             <p className="mb-1 text-[14px] text-primary">
                                 Not a member?
-                                <Link to={"/account/register"} className="font-medium text-secondary1">
+                                <Link to={"/account/register"} className="font-medium text-secondary1 hover:underline">
                                     {" "}
                                     Create account
                                 </Link>
@@ -96,21 +103,24 @@ const Login = () => {
                                     value={values.password}
                                     onChange={handleChange}
                                 />
-                                <ButtonAuth text="Login" type="submit" disabled={!(dirty && isValid)} />
+                                <ButtonAuth text="Login" type="submit" />
                             </form>
                             <div className="mt-4 flex items-center justify-between">
-                                <Link to="/account/forgot-password" className="text-[14px] text-primary">
+                                <Link
+                                    to="/account/forgot-password"
+                                    className="text-[14px] text-primary hover:underline"
+                                >
                                     Forgot your password?
                                 </Link>
                                 <button
-                                    className="flex items-center justify-center gap-2 rounded-[6px] border-2 border-neutral-300 p-1 text-[14px]"
+                                    className="flex items-center justify-center gap-2 rounded-[6px] border-2 border-neutral-300 p-1 text-[14px] hover:border-neutral-500 hover:bg-slate-200"
                                     onClick={() => loginWithGG()}
                                 >
                                     Countinue with <img src={logoGG} alt="logoGG" />
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 )
             }}
         </Formik>

@@ -1,7 +1,8 @@
-import { Login, Register, ForgotPassword, Account, ResetPassword } from "@/pages/public"
+import { Login, Register, ForgotPassword, ResetPassword } from "@/pages/public"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { path } from "@/utils/constants"
 import { GoogleOAuthProvider } from "@react-oauth/google"
+import Account from "@/Layouts/Account"
 
 const App: React.FC = () => {
     return (

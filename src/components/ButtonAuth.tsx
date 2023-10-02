@@ -10,7 +10,7 @@ const ButtonAuth = ({ text, type, disabled, onClick }: Props) => {
         <button
             disabled={disabled}
             type={type}
-            className="h-[38px] w-[360px] rounded-[6px] bg-secondary1 text-[20px] text-white"
+            className="h-[38px] w-[360px] rounded-[6px] bg-secondary1 text-[20px] text-white hover:bg-orange-500"
             onClick={onClick}
         >
             {text}

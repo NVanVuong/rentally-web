@@ -14,6 +14,8 @@ import { useGoogleLogin } from "@react-oauth/google"
 import logoGG from "@/assets/images/logoGG.svg"
 
 import { useAppDispatch } from "@/redux/hook"
+import { setCredentials } from "@/redux/features/auth/auth.slice"
+import { motion } from "framer-motion"
 
 interface Values {
     email: string
@@ -139,12 +141,20 @@ const Register = () => {
                         const { values, handleChange, handleSubmit, dirty, isValid } = formik
 
                         return (
-                            <div className="flex w-full flex-col items-center justify-center">
-                                <h1 className="text-[40px] font-semibold text-primary ">Login to your account</h1>
+                            <motion.div
+                                initial={{ x: 100, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                exit={{ x: -30, opacity: 0 }}
+                                className="flex w-full flex-col items-center justify-center"
+                            >
+                                <h1 className="text-[40px] font-semibold text-primary ">Create new account</h1>
                                 <div className="mt-3">
                                     <p className="mb-1 text-[14px] text-primary">
                                         Already a member?
-                                        <Link to={"/account/login"} className="font-medium text-secondary1">
+                                        <Link
+                                            to={"/account/login"}
+                                            className="font-medium text-secondary1 hover:underline"
+                                        >
                                             {" "}
                                             Login now
                                         </Link>
@@ -204,7 +214,36 @@ const Register = () => {
                                             </p>
                                             <Select
                                                 name="role"
-                                                styles={customStyles}
+                                                placeholder="Role"
+                                                styles={{
+                                                    control: (provided, state) => ({
+                                                        ...provided,
+                                                        height: "40px",
+                                                        width: "360px",
+                                                        borderRadius: "0.5rem",
+                                                        borderWidth: "2px",
+                                                        borderColor: state.isFocused ? "#E3641C" : "#D1D5DB",
+                                                        backgroundColor: state.isFocused ? "#FFFFFF" : "#E5E7EB",
+
+                                                        outline: "none"
+                                                    }),
+                                                    placeholder: (provided) => ({
+                                                        ...provided,
+                                                        fontSize: "18px",
+                                                        fontWeight: "normal",
+                                                        color: "rgba(60,64,67,0.8)"
+                                                    }),
+                                                    option: (styles, { isFocused, isSelected }) => {
+                                                        return {
+                                                            ...styles,
+                                                            backgroundColor: isSelected
+                                                                ? "rgba(227, 100, 28, 1)"
+                                                                : isFocused
+                                                                ? "rgba(227, 100, 28,0.6 )"
+                                                                : undefined
+                                                        }
+                                                    }
+                                                }}
                                                 value={options.find((option) => option.value === values.role)}
                                                 onChange={(selectedOption) => {
                                                     handleChange("role")(selectedOption ? selectedOption.value : "")
@@ -213,23 +252,27 @@ const Register = () => {
                                             />
                                         </div>
 
-                                        <ButtonAuth text="Register" type="submit" disabled={!(dirty && isValid)} />
+                                        <ButtonAuth text="Register" type="submit" />
                                     </form>
                                     <div className="mt-4 flex justify-end">
                                         <button
-                                            className="flex items-center justify-center gap-2 rounded-[6px] border-2 border-neutral-300 p-1 text-[14px]"
+                                            className="flex items-center justify-center gap-2 rounded-[6px] border-2 border-neutral-300 p-1 text-[14px] hover:border-neutral-500 hover:bg-slate-200"
                                             onClick={() => registerWithGG()}
                                         >
                                             Countinue with <img src={logoGG} alt="logoGG" />
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         )
                     }}
                 </Formik>
             ) : (
-                <div>
+                <motion.div
+                    initial={{ x: 100, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: -30, opacity: 0 }}
+                >
                     <div className="flex w-full flex-col items-center justify-center ">
                         <div className="m-8">
                             <div className="mb-6 flex items-center justify-center gap-8">
@@ -270,34 +313,18 @@ const Register = () => {
                         </div>
                         <div className="absolute bottom-20 left-0 flex w-full justify-center ">
                             <p className="mb-1 text-[14px] text-primary">
-                                Back to
+                                {/* Back to
                                 <Link to={"/account/login"} className="text-secondary1">
                                     {" "}
                                     Login
-                                </Link>
+                                </Link> */}
                             </p>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             )}
         </>
     )
-}
-
-const customStyles = {
-    control: (provided: any, state: any) => ({
-        ...provided,
-        border: "2px solid ", // Màu viền
-        borderRadius: "8px" // Bo tròn viền
-    }),
-    option: (provided: any, state: { isFocused: any }) => ({
-        ...provided,
-        background: state.isFocused ? "#E5E7EB" : "white", // Màu nền khi hover
-        color: "#333" // Màu văn bản
-    }),
-    menu: (provided: any, state: any) => ({
-        ...provided
-    })
 }
 
 export default Register

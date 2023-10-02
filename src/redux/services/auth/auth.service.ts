@@ -68,7 +68,7 @@ export const authApi = creatApiAuthWithAuth.injectEndpoints({
                 method: "POST",
                 body
             })
-        }),
+        })
     })
 })
 
@@ -79,6 +79,6 @@ export const {
     useForgotPasswordMutation,
     useForgotPasswordVerifyMutation,
     useResendEmailMutation,
-    useResetPasswordMutation
-    ,useContinueWithGGMutation
+    useResetPasswordMutation,
+    useContinueWithGGMutation
 } = authApi
