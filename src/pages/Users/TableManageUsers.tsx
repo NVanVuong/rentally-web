@@ -4,11 +4,16 @@ import { ROLE } from "@/utils/constants/GlobalConst"
 import { ColumnsType } from "antd/es/table"
 import { AlignType } from "rc-table/lib/interface"
 import { FaEllipsis } from "react-icons/fa6"
-import { Dropdown, Space } from "antd"
+import { Dropdown, Space, Spin } from "antd"
 import { useMenuActions } from "../../hooks/useMenuActions"
+import { useGetUsersQuery } from "@/redux/services/user/user.service"
+import { useAppSelector } from "@/redux/hook"
 
-const TableManageUsers = (props: any) => {
-    const menuActions = useMenuActions()
+const TableManageUsers = () => {
+    const keyword = useAppSelector((state) => state.search.keyword)
+    const { data, isLoading } = useGetUsersQuery({ keyword: keyword })
+
+    const getMenuActions = useMenuActions()
 
     const columns: ColumnsType<IUser> = [
         {
@@ -73,17 +78,27 @@ const TableManageUsers = (props: any) => {
             key: "action",
             width: "8%",
             align: "center" as AlignType,
-            render: () => (
-                <Dropdown menu={{ items: menuActions }} trigger={["click"]} placement="bottomRight" arrow>
-                    <Space>
-                        <FaEllipsis className="cursor-pointer text-center text-lg" />
-                    </Space>
-                </Dropdown>
-            )
+            render: (record) => {
+                const menuActions = getMenuActions(record.id)
+
+                return (
+                    <Dropdown menu={{ items: menuActions }} trigger={["click"]} placement="bottomRight" arrow>
+                        <Space>
+                            <FaEllipsis className="cursor-pointer text-center text-lg" />
+                        </Space>
+                    </Dropdown>
+                )
+            }
         }
     ]
 
-    return <TableAntd dataSource={props.users} columns={columns} rowKey={(record) => record.id} />
+    if (!data) return
+
+    return (
+        <Spin spinning={isLoading}>
+            <TableAntd dataSource={data?.data} columns={columns} rowKey={(record) => record.id} />
+        </Spin>
+    )
 }
 
 export default TableManageUsers

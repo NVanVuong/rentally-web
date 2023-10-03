@@ -7,6 +7,7 @@ export interface IUser {
     photo: string
     phoneNumber: string
     role: string
+    password?: string
 }
 
 export interface IUserQuery {
@@ -18,8 +19,11 @@ export interface IUserQuery {
 }
 
 export interface IUsersResponse {
-    users: IUser[]
-    totalItems: number
-    totalPages: number
-    currentPage: number
+    data: any
+    message: string
+    status: string
+}
+
+export interface IUpdateUserData extends FormData {
+    id: number
 }

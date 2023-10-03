@@ -48,34 +48,8 @@
 }
 
 .ant-form-item-explain-error {
-    @apply my-0.5 text-sm font-medium;
+    @apply text-sm font-medium;
 }
-
-/* .ant-input:hover {
-    @apply transition duration-100 placeholder:text-primary;
-} */
-
-/* .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
-.ant-input:hover,
-.ant-input:focus {
-    @apply border-primary;
+.ant-form-item-with-help .ant-form-item-explain {
+    @apply h-6;
 }
-
-.ant-select:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover
-    .ant-select-selector,
-.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
-    @apply border-primary text-primary;
-} */
-
-/* .ant-btn-primary {
-    @apply border-primary bg-primary text-white;
-} */
-
-/* .ant-btn-default:not(:disabled):not(.ant-btn-disabled),
-.ant-btn-default {
-    @apply font-normal text-gray-300;
-} */
-
-/* .ant-form-item .ant-form-item-control-input-content button:hover {
-    @apply text-white;
-} */

@@ -11,7 +11,9 @@ const baseQuery = fetchBaseQuery({
     mode: "cors",
     prepareHeaders: (headers, { getState }) => {
         headers.set("Access-Control-Allow-Origin", "*")
-        // const token = (getState() as RootState).auth.accessToken
+        const token = (getState() as RootState).auth.accessToken
+        console.log(token)
+
         // if (token) {
         headers.set(
             "authorization",
