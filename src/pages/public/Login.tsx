@@ -69,7 +69,7 @@ const Login = () => {
     return (
         <Formik initialValues={initialValues} validate={validate} onSubmit={submitForm}>
             {(formik) => {
-                const { values, handleChange, handleSubmit, dirty, isValid } = formik
+                const { values, handleChange, handleSubmit} = formik
                 return (
                     <motion.div
                         initial={{ x: 100, opacity: 0 }}

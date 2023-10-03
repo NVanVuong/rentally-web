@@ -36,7 +36,7 @@ const Register = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
 
-    const [isPermitted, setIsPermitted] = useState(false)
+    const [isPermitted, setIsPermitted] = useState<boolean>(false)
     const [code, setCode] = useState<{ email: string; code: string }>({ email: "", code: "" })
     const [register] = useRegisterMutation()
     const [registerVerification] = useRegisterVerificationMutation()
@@ -99,9 +99,6 @@ const Register = () => {
             setIsPermitted(true)
             setCode((pre) => ({ ...pre, email: body.email }))
         }
-
-        // dispatch(setCredentials(user));
-        // navigate("/");
     }
     const handleSubmitCode = async () => {
         console.log(code)
@@ -138,7 +135,7 @@ const Register = () => {
             {!isPermitted ? (
                 <Formik initialValues={initialValues} validate={validate} onSubmit={submitForm}>
                     {(formik) => {
-                        const { values, handleChange, handleSubmit, dirty, isValid } = formik
+                        const { values, handleChange, handleSubmit } = formik
 
                         return (
                             <motion.div
@@ -273,7 +270,7 @@ const Register = () => {
                     animate={{ x: 0, opacity: 1 }}
                     exit={{ x: -30, opacity: 0 }}
                 >
-                    <div className="flex w-full flex-col items-center justify-center ">
+                    <div className="flex w-full flex-col items-center justify-center relative">
                         <div className="m-8">
                             <div className="mb-6 flex items-center justify-center gap-8">
                                 <img src={mail} alt="" />
@@ -311,13 +308,13 @@ const Register = () => {
                                 </span>{" "}
                             </p>
                         </div>
-                        <div className="absolute bottom-20 left-0 flex w-full justify-center ">
+                        <div className="absolute bottom-[-120px] left-0 flex w-full justify-center ">
                             <p className="mb-1 text-[14px] text-primary">
-                                {/* Back to
-                                <Link to={"/account/login"} className="text-secondary1">
+                                Back to
+                                <Link to={"/account/login"} className="text-secondary1 hover:underline">
                                     {" "}
                                     Login
-                                </Link> */}
+                                </Link>
                             </p>
                         </div>
                     </div>

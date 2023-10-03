@@ -18,7 +18,7 @@ interface Values {
 const ResetPassword = () => {
     const navigate = useNavigate()
     const { email } = useParams()
-    const [isPermitted, SetIsPermitted] = useState(false)
+    const [isPermitted, SetIsPermitted] = useState<boolean>(false)
     const [resetPassword] = useResetPasswordMutation()
     const [forgotPasswordVerify] = useForgotPasswordVerifyMutation()
     const [resendEmail] = useResendEmailMutation()
