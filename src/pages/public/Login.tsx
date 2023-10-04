@@ -13,10 +13,6 @@ interface Values {
     email: string
     password: string
 }
-type Errors = {
-    email?: string
-    password?: string
-}
 
 const Login = () => {
     const navigate = useNavigate()
@@ -28,8 +24,8 @@ const Login = () => {
         password: ""
     }
 
-    const validate = (values: Values): Errors => {
-        const errors: Errors = {}
+    const validate = (values: Values): Partial<Values> => {
+        const errors: Partial<Values> = {}
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
         if (!values.email) {
             errors.email = "Email is required"
@@ -38,7 +34,7 @@ const Login = () => {
         }
         if (!values.password) {
             errors.password = "Password is required"
-        } else if (values.password.length < 4) {
+        } else if (values.password.length < 8) {
             errors.password = "Password too short"
         }
         return errors
@@ -69,7 +65,7 @@ const Login = () => {
     return (
         <Formik initialValues={initialValues} validate={validate} onSubmit={submitForm}>
             {(formik) => {
-                const { values, handleChange, handleSubmit} = formik
+                const { values, handleChange, handleSubmit } = formik
                 return (
                     <motion.div
                         initial={{ x: 100, opacity: 0 }}

@@ -2,7 +2,7 @@ import { useState } from "react"
 import { ButtonAuth, InputWithLabel } from "@/components"
 import Select from "react-select"
 import mail from "@/assets/images/mailsvg.svg"
-import { Formik } from "formik"
+import { Formik, Form } from "formik"
 import { Link, useNavigate } from "react-router-dom"
 import {
     useRegisterMutation,
@@ -16,6 +16,7 @@ import logoGG from "@/assets/images/logoGG.svg"
 import { useAppDispatch } from "@/redux/hook"
 import { setCredentials } from "@/redux/features/auth/auth.slice"
 import { motion } from "framer-motion"
+import * as Yup from "yup"
 
 interface Values {
     email: string
@@ -53,44 +54,21 @@ const Register = () => {
         confirmPassword: ""
     }
 
-    const validate = (values: Values) => {
-        const errors: Partial<Values> = {}
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
+    const SignupSchema = Yup.object().shape<Values>({
+        email: Yup.string().email("Email is invalid!").required("Email Required!"),
+        firstName: Yup.string().required("Firstname Required!"),
+        lastName: Yup.string().required("Lastname Required!"),
 
-        if (!values.email) {
-            errors.email = "Email is required"
-        } else if (!regex.test(values.email)) {
-            errors.email = "Invalid Email"
-        }
+        password: Yup.string().min(4, "Password must be minimum 4 digits!").required("Password Required!"),
+        confirmPassword: Yup.string()
+            .oneOf([Yup.ref("password"), null], "Password must match!")
+            .required("Confirm password is reqired!"),
+        phoneNumber: Yup.string()
+            .matches(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im, "Invalid phone number")
+            .required("Number phone must be required!"),
+        role: Yup.string().required("Role Required!")
+    })
 
-        if (!values.password) {
-            errors.password = "Password is required"
-        } else if (values.password.length < 4) {
-            errors.password = "Password too short"
-        }
-
-        if (values.password !== values.confirmPassword) {
-            errors.confirmPassword = "Passwords do not match"
-        }
-
-        if (!values.firstName) {
-            errors.firstName = "First name is required"
-        }
-
-        if (!values.lastName) {
-            errors.lastName = "Last name is required"
-        }
-
-        if (!values.phoneNumber) {
-            errors.phoneNumber = "Phone number is required"
-        }
-
-        if (!values.role) {
-            errors.role = "Role is required"
-        }
-
-        return errors
-    }
     const submitForm = async (values: Values) => {
         const { confirmPassword, ...body } = values
         console.log(body, confirmPassword)
@@ -133,10 +111,10 @@ const Register = () => {
     return (
         <>
             {!isPermitted ? (
-                <Formik initialValues={initialValues} validate={validate} onSubmit={submitForm}>
+                <Formik initialValues={initialValues} validationSchema={SignupSchema} onSubmit={submitForm}>
                     {(formik) => {
                         const { values, handleChange, handleSubmit } = formik
-
+                        // console.log(errors)
                         return (
                             <motion.div
                                 initial={{ x: 100, opacity: 0 }}
@@ -156,55 +134,55 @@ const Register = () => {
                                             Login now
                                         </Link>
                                     </p>
-                                    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+                                    <Form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                                         <InputWithLabel
                                             placeholer="Email *"
-                                            type="email"
+                                            type="text"
                                             name="email"
-                                            id="email"
                                             value={values.email}
                                             onChange={handleChange}
                                         />
+
                                         <InputWithLabel
                                             placeholer="Password *"
                                             type="password"
                                             name="password"
-                                            id="password"
                                             value={values.password}
                                             onChange={handleChange}
                                         />
+
                                         <InputWithLabel
                                             placeholer="Confirm password *"
                                             type="password"
                                             name="confirmPassword"
-                                            id="confirmPassword"
                                             value={values.confirmPassword}
                                             onChange={handleChange}
                                         />
+
                                         <InputWithLabel
                                             placeholer="Firstname *"
                                             type="text"
                                             name="firstName"
-                                            id="firstName"
                                             value={values.firstName}
                                             onChange={handleChange}
                                         />
+
                                         <InputWithLabel
                                             placeholer="Lastname *"
                                             type="text"
                                             name="lastName"
-                                            id="lastName"
                                             value={values.lastName}
                                             onChange={handleChange}
                                         />
+
                                         <InputWithLabel
                                             placeholer="Phone number *"
                                             type="text"
                                             name="phoneNumber"
-                                            id="phoneNumber"
                                             value={values.phoneNumber}
                                             onChange={handleChange}
                                         />
+
                                         <div>
                                             <p className="mb-1 text-[14px] font-medium text-secondary1">
                                                 Which describes best your role?
@@ -250,7 +228,7 @@ const Register = () => {
                                         </div>
 
                                         <ButtonAuth text="Register" type="submit" />
-                                    </form>
+                                    </Form>
                                     <div className="mt-4 flex justify-end">
                                         <button
                                             className="flex items-center justify-center gap-2 rounded-[6px] border-2 border-neutral-300 p-1 text-[14px] hover:border-neutral-500 hover:bg-slate-200"
@@ -270,7 +248,7 @@ const Register = () => {
                     animate={{ x: 0, opacity: 1 }}
                     exit={{ x: -30, opacity: 0 }}
                 >
-                    <div className="flex w-full flex-col items-center justify-center relative">
+                    <div className="relative flex w-full flex-col items-center justify-center">
                         <div className="m-8">
                             <div className="mb-6 flex items-center justify-center gap-8">
                                 <img src={mail} alt="" />
