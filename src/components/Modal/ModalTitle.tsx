@@ -1,16 +1,17 @@
 import { useAppSelector } from "@/redux/hook"
-import { MODAL } from "@/utils/constants/GlobalConst"
-
-const MODAL_TITLES = {
-    [MODAL.ADD]: "Register New Account",
-    [MODAL.UPDATE]: "Edit Account Information",
-    [MODAL.DELETE]: "Remove Account",
-    [MODAL.DISABLE]: "Deactivate Account",
-    [MODAL.VIEW]: "Account Overview"
-}
+import { MODAL, STATUS } from "@/utils/constants/GlobalConst"
 
 const ModalTitle = () => {
     const type = useAppSelector((state) => state.modal.type)
+    const data = useAppSelector((state) => state.modal.data)
+
+    const MODAL_TITLES = {
+        [MODAL.ADD]: "Register New Account",
+        [MODAL.UPDATE]: "Edit Account Information",
+        [MODAL.DELETE]: "Remove Account",
+        [MODAL.DISABLE]: data?.status === STATUS.ACTIVE ? "Deactivate Account" : "Activate Account",
+        [MODAL.VIEW]: "Account Overview"
+    }
 
     if (!type) return
 

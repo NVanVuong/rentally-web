@@ -11,13 +11,13 @@ const baseQuery = fetchBaseQuery({
     mode: "cors",
     prepareHeaders: (headers, { getState }) => {
         headers.set("Access-Control-Allow-Origin", "*")
-        const token = (getState() as RootState).auth.accessToken
-        console.log(token)
+        // const token = (getState() as RootState).auth.accessToken
+        // console.log(token)
 
         // if (token) {
         headers.set(
             "authorization",
-            `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnb29nbGVJZCI6bnVsbCwiZW1haWwiOiJ0aGluaG1uc2QyMDAyQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6IlRoaW5oIiwibGFzdE5hbWUiOiJMZSBWYW4iLCJwaG90byI6Imh0dHBzOi8vYXZhdGFycy5naXRodWJ1c2VyY29udGVudC5jb20vdS81NjgyMzUwNiIsInJvbGUiOiJBRE1JTiIsImlkIjo5NSwiY3JlYXRlZF9hdCI6IjIwMjMtMDktMjZUMTQ6Mjk6MTQuMDAwWiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA5LTI2VDE0OjI5OjE0LjAwMFoiLCJpYXQiOjE2OTU5MDQzMTksImV4cCI6MTY5NjUwOTExOX0.CkxUoYGFU3xO80HiAPc9paczx9mpMRPwpEgYnt0QmOk`
+            `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnb29nbGVJZCI6ImFjODg2YTdlLTM2MDAtNGEyYS04NjgwLTNlNTAzN2JlZDk0MCIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiQWRtaW4iLCJsYXN0TmFtZSI6IlJlbnRhbGx5IiwicGhvdG8iOiJodHRwczovL2Nsb3VkZmxhcmUtaXBmcy5jb20vaXBmcy9RbWQzVzVEdWhnSGlyTEhHVml4aTZWNzZMaENrWlV6NnBuRnQ1QUpCaXl2SHllL2F2YXRhci8xMjAuanBnIiwicm9sZSI6IkFETUlOIiwiaWQiOjEwLCJjcmVhdGVkX2F0IjoiMjAyMy0xMC0wN1QxOToxMzowNy4wMDBaIiwidXBkYXRlZF9hdCI6IjIwMjMtMTAtMDdUMTk6MTM6MDcuMDAwWiIsImlhdCI6MTY5NjczMzg5NCwiZXhwIjoxNjk3MzM4Njk0fQ.Gel9skGNSe_SgyNonEn-MfXcfH7OacQ06JsC1843rPk`
         )
         // }
         return headers

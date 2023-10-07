@@ -2,8 +2,8 @@ import { SITE_MAP } from "@/utils/constants/Path"
 import { Suspense, lazy } from "react"
 import { Route, Routes } from "react-router-dom"
 
-const HomePage = lazy(() => import("../pages/Home"))
-const UsersPage = lazy(() => import("../pages/Users"))
+const HomePage = lazy(() => import("../pages/home"))
+const UsersPage = lazy(() => import("../pages/users"))
 
 const MainRoute = () => {
     return (

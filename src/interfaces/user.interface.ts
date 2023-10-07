@@ -1,29 +1,34 @@
 export interface IUser {
     id: number
-    googleId: string
     email: string
     firstName: string
     lastName: string
-    photo: string
     phoneNumber: string
+    photo: string
     role: string
-    password?: string
+    googleId?: string
+    status?: string
 }
 
 export interface IUserQuery {
-    limit?: number
-    pageNo?: number
-    keyword?: string
-    sortDir?: "asc" | "desc"
-    sortField?: Array<"id" | "googleId" | "email" | "firstName" | "role" | "phone_number">
+    keyword: string
 }
 
 export interface IUsersResponse {
-    data: any
+    data: IUser[]
     message: string
     status: string
 }
 
-export interface IUpdateUserData extends FormData {
+export interface ICreateUserRequest extends FormData {}
+export interface IUpdateUserRequest {
     id: number
+    formData: FormData
 }
+
+export interface IDisableUserRequest {
+    id: number
+    status: string
+}
+
+export interface IDeleteUserRequest extends Pick<IUser, "id"> {}

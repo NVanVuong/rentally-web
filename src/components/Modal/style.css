@@ -50,6 +50,23 @@
 .ant-form-item-explain-error {
     @apply text-sm font-medium;
 }
+
 .ant-form-item-with-help .ant-form-item-explain {
     @apply h-6;
+}
+
+.ant-upload-wrapper {
+    @apply flex-1;
+}
+
+.ant-upload-wrapper .ant-upload {
+    @apply flex items-center gap-4;
+}
+
+.ant-image .ant-image-mask {
+    @apply static;
+}
+
+.ant-image {
+    @apply h-10 w-10;
 }

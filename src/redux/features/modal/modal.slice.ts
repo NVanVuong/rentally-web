@@ -4,7 +4,8 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 const initialState: IModal = {
     isOpen: false,
     type: null,
-    id: null
+    id: null,
+    data: null
 }
 
 const modalSlice = createSlice({
@@ -15,11 +16,13 @@ const modalSlice = createSlice({
             state.isOpen = true
             state.type = action.payload.type
             state.id = action.payload.id
+            state.data = action.payload.data
         },
         closeModal: (state) => {
             state.isOpen = false
             state.type = null
             state.id = null
+            state.data = null
         }
     }
 })

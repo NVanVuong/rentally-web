@@ -5,7 +5,15 @@ import "./styled.css"
 const TableAntd = (props: ITable<any>) => {
     return (
         <Table
-            pagination={{ position: ["bottomCenter"], pageSize: 8, prevIcon: "Previous", nextIcon: "Next" }}
+            pagination={{
+                position: ["bottomCenter"],
+                pageSize: 8,
+                prevIcon: "Previous",
+                nextIcon: "Next",
+                showSizeChanger: false,
+                responsive: true,
+                showLessItems: true
+            }}
             dataSource={props.dataSource}
             columns={props.columns}
             rowKey={props.rowKey}

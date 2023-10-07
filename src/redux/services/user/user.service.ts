@@ -1,4 +1,4 @@
-import { IUpdateUserData, IUser, IUserQuery, IUsersResponse } from "@/interfaces/user.interface"
+import { ICreateUserRequest, IUpdateUserRequest, IUser, IUserQuery, IUsersResponse } from "@/interfaces/user.interface"
 import { creatApiWithAuth } from "../apiWithAuth.service"
 
 const creatApiUserWithAuth = creatApiWithAuth("userApi", ["Users"])
@@ -10,28 +10,25 @@ export const userApi = creatApiUserWithAuth.injectEndpoints({
             },
             providesTags: ["Users"]
         }),
-        getUserById: builder.query<IUsersResponse, string>({
-            query: (id) => `/users/${id}`
-        }),
-        createUser: builder.mutation<IUsersResponse, FormData>({
+        createUser: builder.mutation<IUsersResponse, ICreateUserRequest>({
             query: (body) => ({
                 url: `/users`,
                 method: "POST",
-
                 body
             }),
             invalidatesTags: ["Users"]
         }),
-        updateUser: builder.mutation<IUser, IUpdateUserData>({
-            query: ({ id, ...patch }) => ({
-                url: `/users/${id}`,
-                method: "PATCH",
-
-                body: patch
-            }),
+        updateUser: builder.mutation<IUsersResponse, IUpdateUserRequest>({
+            query: ({ id, formData }) => {
+                return {
+                    url: `/users/${id}`,
+                    method: "PATCH",
+                    body: formData
+                }
+            },
             invalidatesTags: ["Users"]
         }),
-        deleteUser: builder.mutation<void, string>({
+        deleteUser: builder.mutation<void, Pick<IUser, "id">>({
             query: (id) => ({
                 url: `/users/${id}`,
                 method: "DELETE"
@@ -41,10 +38,4 @@ export const userApi = creatApiUserWithAuth.injectEndpoints({
     })
 })
 
-export const {
-    useGetUsersQuery,
-    useGetUserByIdQuery,
-    useCreateUserMutation,
-    useUpdateUserMutation,
-    useDeleteUserMutation
-} = userApi
+export const { useGetUsersQuery, useCreateUserMutation, useUpdateUserMutation, useDeleteUserMutation } = userApi

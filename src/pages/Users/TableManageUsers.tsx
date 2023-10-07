@@ -1,17 +1,20 @@
 import TableAntd from "@/components/Table"
 import { IUser } from "@/interfaces/user.interface"
-import { ROLE } from "@/utils/constants/GlobalConst"
+import { ROLE, ROLE_COLORS, RoleType, STATUS, STATUS_COLORS, StatusType } from "@/utils/constants/GlobalConst"
 import { ColumnsType } from "antd/es/table"
 import { AlignType } from "rc-table/lib/interface"
 import { FaEllipsis } from "react-icons/fa6"
-import { Dropdown, Space, Spin } from "antd"
+import { Badge, Dropdown, Space, Spin } from "antd"
 import { useMenuActions } from "../../hooks/useMenuActions"
 import { useGetUsersQuery } from "@/redux/services/user/user.service"
 import { useAppSelector } from "@/redux/hook"
+import { formatStatus } from "@/utils/helpers"
 
 const TableManageUsers = () => {
     const keyword = useAppSelector((state) => state.search.keyword)
     const { data, isLoading } = useGetUsersQuery({ keyword: keyword })
+
+    const users = data?.data as IUser[]
 
     const getMenuActions = useMenuActions()
 
@@ -27,7 +30,7 @@ const TableManageUsers = () => {
         {
             title: <span className="font-bold">Name</span>,
             key: "firstName",
-            width: "25%",
+            width: "18%",
             sorter: (a, b) => a.firstName?.localeCompare(b.firstName),
             render: (record: IUser) => (
                 <div className="flex items-center">
@@ -40,9 +43,9 @@ const TableManageUsers = () => {
             title: <span className="font-bold">Email</span>,
             dataIndex: "email",
             key: "email",
-            width: "20%",
+            width: "16%",
             sorter: (a, b) => a.email?.localeCompare(b.email),
-            render: (email: string) => <span className=" text-sm font-medium">{email}</span>
+            render: (email: string) => <span className="text-sm font-medium">{email}</span>
         },
         {
             title: <span className="font-bold">Phone</span>,
@@ -53,9 +56,28 @@ const TableManageUsers = () => {
             render: (phoneNumber: string) => <span className="text-sm font-medium">{phoneNumber}</span>
         },
         {
+            title: <span className="font-bold">Status</span>,
+            key: "status",
+            dataIndex: "status",
+            width: "8%",
+            filters: [
+                { text: "Active", value: STATUS.ACTIVE },
+                { text: "Disable", value: STATUS.DISABLED },
+                { text: "Registing", value: STATUS.REGISTING }
+            ],
+            onFilter: (value, record) => record.status === value,
+            render: (status: StatusType) => (
+                <Badge
+                    color={STATUS_COLORS[status]}
+                    className="flex items-center text-xs font-medium"
+                    text={formatStatus(status)}
+                ></Badge>
+            )
+        },
+        {
             title: <span className="font-bold">Role</span>,
             key: "role",
-            width: "10%",
+            width: "8%",
             dataIndex: "role",
             filters: [
                 { text: "Admin", value: ROLE.ADMIN },
@@ -65,9 +87,8 @@ const TableManageUsers = () => {
             onFilter: (value, record) => record.role === value,
             render: (role: string) => (
                 <span
-                    className={`${
-                        role === ROLE.MOD ? "bg-primary" : "bg-secondary"
-                    } rounded-2xl px-2 py-1.5 text-center text-xs font-semibold text-white`}
+                    style={{ backgroundColor: ROLE_COLORS[role as RoleType] }}
+                    className={`rounded-2xl px-2 py-1.5 text-center text-xs font-semibold text-white`}
                 >
                     {role}
                 </span>
@@ -76,10 +97,10 @@ const TableManageUsers = () => {
         {
             title: <span className="text-center font-bold">Action</span>,
             key: "action",
-            width: "8%",
+            width: "6%",
             align: "center" as AlignType,
-            render: (record) => {
-                const menuActions = getMenuActions(record.id)
+            render: (record: IUser) => {
+                const menuActions = getMenuActions(record)
 
                 return (
                     <Dropdown menu={{ items: menuActions }} trigger={["click"]} placement="bottomRight" arrow>
@@ -96,7 +117,7 @@ const TableManageUsers = () => {
 
     return (
         <Spin spinning={isLoading}>
-            <TableAntd dataSource={data?.data} columns={columns} rowKey={(record) => record.id} />
+            <TableAntd dataSource={users} columns={columns} rowKey={(record) => record.id} />
         </Spin>
     )
 }

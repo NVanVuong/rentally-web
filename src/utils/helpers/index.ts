@@ -6,7 +6,7 @@ export const createUserFormData = (values: any) => {
     formData.append("lastName", values.lastName)
     formData.append("phoneNumber", values.phoneNumber)
     formData.append("role", values.role)
-    formData.append("photo", values.photo[0].originFileObj)
+    if (values.photo) formData.append("photo", values.photo[0].originFileObj)
 
     return formData
 }
@@ -16,4 +16,9 @@ export const normFile = (e: any) => {
         return e
     }
     return e?.fileList
+}
+
+export function formatStatus(status?: string): string {
+    if (!status) return ""
+    return status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()
 }
