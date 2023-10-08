@@ -1,14 +1,11 @@
-import { useGetUsersQuery } from "@/redux/services/user/user.service"
+import { BrowserRouter } from "react-router-dom"
+import MainRoute from "./routes"
 
 const App: React.FC = () => {
-    const { data = [], isLoading } = useGetUsersQuery()
-
-    !isLoading && console.log(data)
-
     return (
-        <div className="flex h-screen items-center justify-center">
-            <span className="animate-bounce text-3xl font-bold">Hello, i am Rentally</span>
-        </div>
+        <BrowserRouter>
+            <MainRoute />
+        </BrowserRouter>
     )
 }
 

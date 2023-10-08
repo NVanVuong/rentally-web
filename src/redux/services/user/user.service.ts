@@ -1,46 +1,41 @@
-import { IUser } from "@/interfaces/user.interface";
-import { creatApiWithAuth } from '../apiWithAuth.service';
+import { ICreateUserRequest, IUpdateUserRequest, IUser, IUserQuery, IUsersResponse } from "@/interfaces/user.interface"
+import { creatApiWithAuth } from "../apiWithAuth.service"
 
-const creatApiUserWithAuth = creatApiWithAuth('userApi', ['Users'])
+const creatApiUserWithAuth = creatApiWithAuth("userApi", ["Users"])
 export const userApi = creatApiUserWithAuth.injectEndpoints({
     endpoints: (builder) => ({
-        getUsers: builder.query<IUser[], number | void>({
-            query(limit = 10) {
-                return `/users?limit=${limit}`;
+        getUsers: builder.query<IUsersResponse, IUserQuery>({
+            query({ keyword = "" }) {
+                return `/users?keyword=${keyword}`
             },
+            providesTags: ["Users"]
         }),
-        getUserById: builder.query<IUser, number>({
-            query: (id) => `/users/${id}`,
-        }),
-        createUser: builder.mutation<IUser, Partial<IUser>>({
+        createUser: builder.mutation<IUsersResponse, ICreateUserRequest>({
             query: (body) => ({
                 url: `/users`,
-                method: 'POST',
-                body,
+                method: "POST",
+                body
             }),
+            invalidatesTags: ["Users"]
         }),
-        updateUser: builder.mutation<IUser, Partial<IUser>>({
-            query: ({ id, ...patch }) => ({
-                url: `/users/${id}`,
-                method: 'PATCH',
-
-                body: patch,
-            }),
+        updateUser: builder.mutation<IUsersResponse, IUpdateUserRequest>({
+            query: ({ id, formData }) => {
+                return {
+                    url: `/users/${id}`,
+                    method: "PATCH",
+                    body: formData
+                }
+            },
+            invalidatesTags: ["Users"]
         }),
-        deleteUser: builder.mutation<void, number>({
+        deleteUser: builder.mutation<void, Pick<IUser, "id">>({
             query: (id) => ({
                 url: `/users/${id}`,
-                method: 'DELETE',
+                method: "DELETE"
             }),
-        }),
-    }),
-});
+            invalidatesTags: ["Users"]
+        })
+    })
+})
 
-export const {
-    useGetUsersQuery,
-    useGetUserByIdQuery,
-    useCreateUserMutation,
-    useUpdateUserMutation,
-    useDeleteUserMutation,
-} = userApi;
-
+export const { useGetUsersQuery, useCreateUserMutation, useUpdateUserMutation, useDeleteUserMutation } = userApi
