@@ -19,8 +19,8 @@ interface Account {
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
-    const [login] = useLoginMutation()
-    const [continueWithGG, { isLoading }] = useContinueWithGGMutation()
+    const [login, { isLoading: isLoginLoading }] = useLoginMutation();
+    const [continueWithGG, { isLoading: isContinueWithGGLoading }] = useContinueWithGGMutation();
     const [messageApi, contextHolder] = message.useMessage()
     const initialValues: Account = {
         email: "",
@@ -74,7 +74,7 @@ const Login = () => {
     })
 
     return (
-        <Spin spinning={isLoading}>
+        <Spin spinning={isLoginLoading||isContinueWithGGLoading}>
             <Formik initialValues={initialValues} validate={validate} onSubmit={submitForm}>
                 {(formik) => {
                     const { values, handleChange, handleSubmit } = formik
