@@ -4,8 +4,8 @@ export const SITE_MAP = {
     LOGIN_AS_ADMIN: "/administrator",
     FORGOT_PASSWORD: "/forgot-password",
     LOGOUT: "/logout",
-
-    ADMIN: {
-        USERS_MANAGEMENT: "/admin/users"
-    }
+    ADMIN: "/admin",
+    USERS_MANAGEMENT: "users",
+    MODS_MANAGEMENT: "mods",
+    PROPS_MANAGEMENT: "props"
 }

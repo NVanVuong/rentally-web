@@ -5,10 +5,10 @@ import { ColumnsType } from "antd/es/table"
 import { AlignType } from "rc-table/lib/interface"
 import { FaEllipsis } from "react-icons/fa6"
 import { Badge, Dropdown, Space, Spin } from "antd"
-import { useMenuActions } from "../../hooks/useMenuActions"
 import { useGetUsersQuery } from "@/redux/services/user/user.service"
 import { useAppSelector } from "@/redux/hook"
 import { formatStatus } from "@/utils/helpers"
+import { useMenuActions } from "@/hooks/useMenuActions"
 
 const TableManageUsers = () => {
     const keyword = useAppSelector((state) => state.search.keyword)

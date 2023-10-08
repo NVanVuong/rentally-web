@@ -26,3 +26,7 @@
 .ant-menu .ant-menu-item .anticon + span {
     @apply ms-4;
 }
+
+.ant-menu-inline .ant-menu-item {
+    @apply h-12;
+}
