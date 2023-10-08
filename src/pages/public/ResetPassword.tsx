@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { ButtonAuth, InputWithLabel } from "@/components"
-import { Formik } from "formik"
+import { Form, Formik } from "formik"
 import mail from "@/assets/images/mailsvg.svg"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import {
@@ -9,28 +9,35 @@ import {
     useResendEmailMutation
 } from "@/redux/services/auth/auth.service"
 import { motion } from "framer-motion"
+import { message, Spin } from "antd"
 
-interface Values {
+interface ResetPasswordValues {
     password: string
     confirmPassword: string
+}
+interface SendCodeValues {
+    code: string
 }
 
 const ResetPassword = () => {
     const navigate = useNavigate()
     const { email } = useParams()
     const [isPermitted, SetIsPermitted] = useState<boolean>(false)
-    const [resetPassword] = useResetPasswordMutation()
-    const [forgotPasswordVerify] = useForgotPasswordVerifyMutation()
-    const [resendEmail] = useResendEmailMutation()
+    const [resetPassword, { isLoading: isResetPasswordLoading }] = useResetPasswordMutation()
+    const [forgotPasswordVerify, { isLoading: isForgotPasswordVerifyLoading }] = useForgotPasswordVerifyMutation()
+    const [resendEmail, { isLoading: isResendEmailLoading }] = useResendEmailMutation()
     const [code, setCode] = useState<string>("")
 
-    const initialValues: Values = {
+    const initialValues: ResetPasswordValues = {
         password: "",
         confirmPassword: ""
     }
+    const initialSendCodeValues: SendCodeValues = {
+        code: ""
+    }
 
-    const validate = (values: Values) => {
-        const errors: Partial<Values> = {}
+    const resetPasswordValidate = (values: ResetPasswordValues) => {
+        const errors: Partial<ResetPasswordValues> = {}
         if (!values.password) {
             errors.password = "Password is required"
         } else if (values.password.length < 8) {
@@ -43,21 +50,29 @@ const ResetPassword = () => {
 
         return errors
     }
-    const submitForm = async (values: Values) => {
+    const sendCodeValidate = (values: SendCodeValues): Partial<SendCodeValues> => {
+        const errors: Partial<SendCodeValues> = {}
+        if (!values.code) {
+            errors.code = "Email is required"
+        }
+        return errors
+    }
+
+    const submitResetPasswordForm = async (values: ResetPasswordValues) => {
         const res = await resetPassword({ email: email || "", password: values.password, code: "R-" + code }).unwrap()
         if (res.status === "SUCCESS") {
             navigate("/account/login")
         }
     }
-    const handleSubmitCode = async () => {
-        console.log(code)
+    const submitCodeForm = async (values: SendCodeValues) => {
         const res = await forgotPasswordVerify({
             email: email || "",
-            code: "R-" + code
+            code: "R-" + values.code
         }).unwrap()
         console.log(res)
         if (res.status === "SUCCESS") {
             SetIsPermitted(true)
+            setCode(values.code)
         }
     }
 
@@ -66,59 +81,74 @@ const ResetPassword = () => {
         console.log(res)
     }
     return (
-        <>
+        <Spin spinning={isForgotPasswordVerifyLoading || isResendEmailLoading || isResetPasswordLoading}>
             {!isPermitted ? (
-                <motion.div
-                    initial={{ x: 100, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    exit={{ x: -30, opacity: 0 }}
-                >
-                    <div className="relative flex w-full flex-col items-center justify-center">
-                        <div className="m-8">
-                            <div className="mb-6 flex items-center justify-center gap-8">
-                                <img src={mail} alt="" />
-                                <h1 className="text-[24px] font-semibold text-primary ">Check your email!</h1>
-                            </div>
-                            <p className="mb-1 px-3 text-[14px] text-primary">
-                                We sent a verification code to <br />
-                                <span className="text-[14px] text-secondary1">{email}</span>{" "}
-                            </p>
-
-                            <div className="flex flex-col gap-8">
-                                <InputWithLabel
-                                    placeholer="Code *"
-                                    type="text"
-                                    value={code}
-                                    onChange={(e) => setCode(e.target.value)}
-                                />
-                                <ButtonAuth text="Reset password" onClick={handleSubmitCode} />
-                            </div>
-                            <p className="px-3 pt-3 text-[14px] text-primary">
-                                Didn't receive the email?
-                                <span
-                                    className="cursor-pointer text-[14px] text-secondary1 hover:underline"
-                                    onClick={handleResetPassword}
-                                >
-                                    {" "}
-                                    Click to resend
-                                </span>{" "}
-                            </p>
-                        </div>
-                        <div className="absolute bottom-[-100px] left-0 flex w-full justify-center ">
-                            <p className="mb-1 text-[14px] text-primary">
-                                Back to
-                                <Link to={"/account/login"} className="text-secondary1 hover:underline">
-                                    {" "}
-                                    Login
-                                </Link>
-                            </p>
-                        </div>
-                    </div>
-                </motion.div>
-            ) : (
-                <Formik initialValues={initialValues} validate={validate} onSubmit={submitForm}>
+                <Formik initialValues={initialSendCodeValues} validate={sendCodeValidate} onSubmit={submitCodeForm}>
                     {(formik) => {
-                        const { values, handleChange, handleSubmit, dirty, isValid } = formik
+                        const { values, handleChange, handleSubmit } = formik
+
+                        return (
+                            <motion.div
+                                initial={{ x: 100, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                exit={{ x: -30, opacity: 0 }}
+                            >
+                                <div className="relative flex w-full flex-col items-center justify-center">
+                                    <div className="m-8">
+                                        <div className="mb-6 flex items-center justify-center gap-8">
+                                            <img src={mail} alt="" />
+                                            <h1 className="text-[24px] font-semibold text-primary ">
+                                                Check your email!
+                                            </h1>
+                                        </div>
+                                        <p className="mb-1 px-3 text-[14px] text-primary">
+                                            We sent a verification code to <br />
+                                            <span className="text-[14px] text-secondary1">{email}</span>{" "}
+                                        </p>
+
+                                        <Form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+                                            <InputWithLabel
+                                                placeholer="Code *"
+                                                type="text"
+                                                name="code"
+                                                value={values.code}
+                                                onChange={handleChange}
+                                            />
+                                            <ButtonAuth type="submit" text="Reset password" />
+                                        </Form>
+                                        <p className="px-3 pt-3 text-[14px] text-primary">
+                                            Didn't receive the email?
+                                            <span
+                                                className="cursor-pointer text-[14px] text-secondary1 hover:underline"
+                                                onClick={handleResetPassword}
+                                            >
+                                                {" "}
+                                                Click to resend
+                                            </span>{" "}
+                                        </p>
+                                    </div>
+                                    <div className="absolute bottom-[-100px] left-0 flex w-full justify-center ">
+                                        <p className="mb-1 text-[14px] text-primary">
+                                            Back to
+                                            <Link to={"/account/login"} className="text-secondary1 hover:underline">
+                                                {" "}
+                                                Login
+                                            </Link>
+                                        </p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )
+                    }}
+                </Formik>
+            ) : (
+                <Formik
+                    initialValues={initialValues}
+                    validate={resetPasswordValidate}
+                    onSubmit={submitResetPasswordForm}
+                >
+                    {(formik) => {
+                        const { values, handleChange, handleSubmit } = formik
 
                         return (
                             <motion.div
@@ -154,11 +184,7 @@ const ResetPassword = () => {
                                             value={values.confirmPassword}
                                             onChange={handleChange}
                                         />
-                                        <ButtonAuth
-                                            text="Reset password"
-                                            type="submit"
-                                            disabled={!(dirty && isValid)}
-                                        />
+                                        <ButtonAuth text="Reset password" type="submit" />
                                     </form>
                                 </div>
                                 <div className="absolute bottom-[-100px] left-0 flex w-full justify-center ">
@@ -175,7 +201,7 @@ const ResetPassword = () => {
                     }}
                 </Formik>
             )}
-        </>
+        </Spin>
     )
 }
 

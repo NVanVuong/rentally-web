@@ -2,7 +2,7 @@ import { useState } from "react"
 import { ButtonAuth, InputWithLabel } from "@/components"
 import Select from "react-select"
 import mail from "@/assets/images/mailsvg.svg"
-import { Formik, Form } from "formik"
+import { Formik, Form, ErrorMessage } from "formik"
 import { Link, useNavigate } from "react-router-dom"
 import {
     useRegisterMutation,
@@ -17,15 +17,20 @@ import { useAppDispatch } from "@/redux/hook"
 import { setCredentials } from "@/redux/features/auth/auth.slice"
 import { motion } from "framer-motion"
 import * as Yup from "yup"
+import { message, Spin } from "antd"
 
-interface Values {
+interface RegisterValues {
     email: string
-    password: string
-    confirmPassword: string
     firstName: string
     lastName: string
+    password: string
+    confirmPassword: string
     phoneNumber: string
     role: string
+}
+
+interface SendCodeValues {
+    code: string
 }
 
 const options = [
@@ -38,60 +43,70 @@ const Register = () => {
     const dispatch = useAppDispatch()
 
     const [isPermitted, setIsPermitted] = useState<boolean>(false)
-    const [code, setCode] = useState<{ email: string; code: string }>({ email: "", code: "" })
-    const [register] = useRegisterMutation()
-    const [registerVerification] = useRegisterVerificationMutation()
-    const [resendEmail] = useResendEmailMutation()
-    const [continueWithGG] = useContinueWithGGMutation()
+    const [email, setEmail] = useState<string>("")
+    const [register, { isLoading: isRegisterLoading }] = useRegisterMutation()
+    const [registerVerification, { isLoading: isRegisterVerificationLoading }] = useRegisterVerificationMutation()
+    const [resendEmail, { isLoading: isResendEmailLoading }] = useResendEmailMutation()
+    const [continueWithGG, { isLoading: isContinueWithGGLoading }] = useContinueWithGGMutation()
 
-    const initialValues: Values = {
+    const initialRegisterValues: RegisterValues = {
         email: "",
-        password: "",
         firstName: "",
         lastName: "",
+        password: "",
+        confirmPassword: "",
         phoneNumber: "",
-        role: "",
-        confirmPassword: ""
+        role: ""
+    }
+    const initialSendCodeValues: SendCodeValues = {
+        code: ""
     }
 
-    const SignupSchema = Yup.object().shape<Values>({
+    const RegisterSchema = Yup.object().shape<Record<string, any>>({
         email: Yup.string().email("Email is invalid!").required("Email Required!"),
         firstName: Yup.string().required("Firstname Required!"),
         lastName: Yup.string().required("Lastname Required!"),
-
         password: Yup.string().min(4, "Password must be minimum 4 digits!").required("Password Required!"),
         confirmPassword: Yup.string()
-            .oneOf([Yup.ref("password"), null], "Password must match!")
+            .oneOf([Yup.ref("password"), undefined], "Password must match!")
             .required("Confirm password is reqired!"),
         phoneNumber: Yup.string()
-            .matches(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im, "Invalid phone number")
+            .matches(/^[\\+]?[(]?[0-9]{3}[)]?[-\s\\.]?[0-9]{3}[-\s\\.]?[0-9]{4,6}$/im, "Invalid phone number")
             .required("Number phone must be required!"),
         role: Yup.string().required("Role Required!")
     })
 
-    const submitForm = async (values: Values) => {
+    const sendCodeValidate = (values: SendCodeValues): Partial<SendCodeValues> => {
+        const errors: Partial<SendCodeValues> = {}
+        if (!values.code) {
+            errors.code = "Email is required"
+        }
+        return errors
+    }
+
+    const submitRegisterForm = async (values: RegisterValues) => {
         const { confirmPassword, ...body } = values
         console.log(body, confirmPassword)
         const res = await register(body).unwrap()
         if (res.status === "SUCCESS") {
             setIsPermitted(true)
-            setCode((pre) => ({ ...pre, email: body.email }))
+            setEmail(body.email)
         }
     }
-    const handleSubmitCode = async () => {
-        console.log(code)
+    const submitCodeForm = async (values: SendCodeValues) => {
         const body = {
-            email: code.email,
-            code: "R-" + code.code
+            email: email,
+            code: "R-" + values.code
         }
         const res = await registerVerification(body).unwrap()
         console.log(res)
         if (res.status === "SUCCESS") {
-            navigate("/account/login")
+            dispatch(setCredentials({ accessToken: res.data.token }))
+            navigate("/")
         }
     }
     const handleResetPassword = async () => {
-        const res = await resendEmail({ email: code.email }).unwrap()
+        const res = await resendEmail({ email: email }).unwrap()
         console.log(res)
     }
 
@@ -109,12 +124,19 @@ const Register = () => {
         }
     })
     return (
-        <>
+        <Spin
+            spinning={
+                isRegisterLoading || isContinueWithGGLoading || isRegisterVerificationLoading || isResendEmailLoading
+            }
+        >
             {!isPermitted ? (
-                <Formik initialValues={initialValues} validationSchema={SignupSchema} onSubmit={submitForm}>
+                <Formik
+                    initialValues={initialRegisterValues}
+                    validationSchema={RegisterSchema}
+                    onSubmit={submitRegisterForm}
+                >
                     {(formik) => {
                         const { values, handleChange, handleSubmit } = formik
-                        // console.log(errors)
                         return (
                             <motion.div
                                 initial={{ x: 100, opacity: 0 }}
@@ -225,6 +247,7 @@ const Register = () => {
                                                 }}
                                                 options={options}
                                             />
+                                            <ErrorMessage component="div" name={'role'} className="absolute text-[12px] text-red-700" />
                                         </div>
 
                                         <ButtonAuth text="Register" type="submit" />
@@ -243,62 +266,65 @@ const Register = () => {
                     }}
                 </Formik>
             ) : (
-                <motion.div
-                    initial={{ x: 100, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    exit={{ x: -30, opacity: 0 }}
-                >
-                    <div className="relative flex w-full flex-col items-center justify-center">
-                        <div className="m-8">
-                            <div className="mb-6 flex items-center justify-center gap-8">
-                                <img src={mail} alt="" />
-                                <h1 className="text-[24px] font-semibold text-primary ">Check your email!</h1>
-                            </div>
-                            <p className="mb-1 px-3 text-[14px] text-primary">
-                                We sent a verification code to <br />
-                                <span className="text-[14px] text-secondary1">{code.email}</span>{" "}
-                            </p>
+                <Formik initialValues={initialSendCodeValues} validate={sendCodeValidate} onSubmit={submitCodeForm}>
+                    {(formik) => {
+                        const { values, handleChange, handleSubmit } = formik
+                        return (
+                            <motion.div
+                                initial={{ x: 100, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                exit={{ x: -30, opacity: 0 }}
+                            >
+                                <div className="relative flex w-full flex-col items-center justify-center">
+                                    <div className="m-8">
+                                        <div className="mb-6 flex items-center justify-center gap-8">
+                                            <img src={mail} alt="" />
+                                            <h1 className="text-[24px] font-semibold text-primary ">
+                                                Check your email!
+                                            </h1>
+                                        </div>
+                                        <p className="mb-1 px-3 text-[14px] text-primary">
+                                            We sent a verification code to <br />
+                                            <span className="text-[14px] text-secondary1">{email}</span>{" "}
+                                        </p>
 
-                            <div className="flex flex-col gap-8">
-                                <InputWithLabel
-                                    placeholer="Code *"
-                                    type="text"
-                                    name={""}
-                                    id={""}
-                                    value={code.code}
-                                    onChange={(e) => setCode((values) => ({ ...values, code: e.target.value }))}
-                                />
-                                <ButtonAuth
-                                    text="Submit"
-                                    onClick={() => {
-                                        handleSubmitCode()
-                                    }}
-                                />
-                            </div>
-                            <p className="px-3 pt-3 text-[14px] text-primary">
-                                Didn't receive the email?
-                                <span
-                                    className="cursor-pointer text-[14px] text-secondary1"
-                                    onClick={() => handleResetPassword()}
-                                >
-                                    {" "}
-                                    Click to resend
-                                </span>{" "}
-                            </p>
-                        </div>
-                        <div className="absolute bottom-[-120px] left-0 flex w-full justify-center ">
-                            <p className="mb-1 text-[14px] text-primary">
-                                Back to
-                                <Link to={"/account/login"} className="text-secondary1 hover:underline">
-                                    {" "}
-                                    Login
-                                </Link>
-                            </p>
-                        </div>
-                    </div>
-                </motion.div>
+                                        <Form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+                                            <InputWithLabel
+                                                placeholer="Code *"
+                                                type="text"
+                                                name="code"
+                                                value={values.code}
+                                                onChange={handleChange}
+                                            />
+                                            <ButtonAuth text="Submit" type="submit" />
+                                        </Form>
+                                        <p className="px-3 pt-3 text-[14px] text-primary">
+                                            Didn't receive the email?
+                                            <span
+                                                className="cursor-pointer text-[14px] text-secondary1"
+                                                onClick={() => handleResetPassword()}
+                                            >
+                                                {" "}
+                                                Click to resend
+                                            </span>{" "}
+                                        </p>
+                                    </div>
+                                    <div className="absolute bottom-[-120px] left-0 flex w-full justify-center ">
+                                        <p className="mb-1 text-[14px] text-primary">
+                                            Back to
+                                            <Link to={"/account/login"} className="text-secondary1 hover:underline">
+                                                {" "}
+                                                Login
+                                            </Link>
+                                        </p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )
+                    }}
+                </Formik>
             )}
-        </>
+        </Spin>
     )
 }
 

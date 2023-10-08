@@ -3,13 +3,15 @@ import { ButtonAuth, InputWithLabel } from "@/components"
 import { useNavigate } from "react-router-dom"
 import { Formik } from "formik"
 import { useLoginMutation, useContinueWithGGMutation } from "@/redux/services/auth/auth.service"
+import { message, Spin } from "antd"
+
 import { setCredentials } from "@/redux/features/auth/auth.slice"
 import { useAppDispatch } from "@/redux/hook"
 import { useGoogleLogin } from "@react-oauth/google"
 import logoGG from "@/assets/images/logoGG.svg"
 import { motion } from "framer-motion"
 
-interface Values {
+interface Account {
     email: string
     password: string
 }
@@ -18,14 +20,14 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [login] = useLoginMutation()
-    const [continueWithGG] = useContinueWithGGMutation()
-    const initialValues: Values = {
+    const [continueWithGG, { isLoading }] = useContinueWithGGMutation()
+    const [messageApi, contextHolder] = message.useMessage()
+    const initialValues: Account = {
         email: "",
         password: ""
     }
-
-    const validate = (values: Values): Partial<Values> => {
-        const errors: Partial<Values> = {}
+    const validate = (values: Account): Partial<Account> => {
+        const errors: Partial<Account> = {}
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
         if (!values.email) {
             errors.email = "Email is required"
@@ -34,18 +36,24 @@ const Login = () => {
         }
         if (!values.password) {
             errors.password = "Password is required"
-        } else if (values.password.length < 8) {
-            errors.password = "Password too short"
         }
         return errors
     }
 
-    const submitForm = async (values: Values) => {
+    const submitForm = async (values: Account) => {
         console.log(values)
         const res = await login(values).unwrap()
+        messageApi.open({
+            type: "error",
+            content: "This is an error message"
+        })
+
         if (res.status === "SUCCESS") {
             dispatch(setCredentials({ accessToken: res.data.token }))
             navigate("/")
+        } else {
+            console.log("Login Failed")
+            // messageApi.error(res)
         }
     }
     const loginWithGG = useGoogleLogin({
@@ -55,6 +63,9 @@ const Login = () => {
             if (res.status === "SUCCESS") {
                 dispatch(setCredentials({ accessToken: res.data.token }))
                 navigate("/")
+            } else {
+                console.log(res.data.message)
+                // messageApi.error(res)
             }
         },
         onError: () => {
@@ -63,63 +74,70 @@ const Login = () => {
     })
 
     return (
-        <Formik initialValues={initialValues} validate={validate} onSubmit={submitForm}>
-            {(formik) => {
-                const { values, handleChange, handleSubmit } = formik
-                return (
-                    <motion.div
-                        initial={{ x: 100, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: -30, opacity: 0 }}
-                        className="flex w-full flex-col items-center justify-center"
-                    >
-                        <h1 className="text-[40px] font-semibold text-primary ">Login to your account</h1>
-                        <div className="mt-3">
-                            <p className="mb-1 text-[14px] text-primary">
-                                Not a member?
-                                <Link to={"/account/register"} className="font-medium text-secondary1 hover:underline">
-                                    {" "}
-                                    Create account
-                                </Link>
-                            </p>
-                            <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
-                                <InputWithLabel
-                                    placeholer="Email *"
-                                    type="email"
-                                    name="email"
-                                    id="email"
-                                    value={values.email}
-                                    onChange={handleChange}
-                                />
-                                <InputWithLabel
-                                    placeholer="Password *"
-                                    type="password"
-                                    name="password"
-                                    id="password"
-                                    value={values.password}
-                                    onChange={handleChange}
-                                />
-                                <ButtonAuth text="Login" type="submit" />
-                            </form>
-                            <div className="mt-4 flex items-center justify-between">
-                                <Link
-                                    to="/account/forgot-password"
-                                    className="text-[14px] text-primary hover:underline"
-                                >
-                                    Forgot your password?
-                                </Link>
-                                <button
-                                    className="flex items-center justify-center gap-2 rounded-[6px] border-2 border-neutral-300 p-1 text-[14px] hover:border-neutral-500 hover:bg-slate-200"
-                                    onClick={() => loginWithGG()}
-                                >
-                                    Countinue with <img src={logoGG} alt="logoGG" />
-                                </button>
+        <Spin spinning={isLoading}>
+            <Formik initialValues={initialValues} validate={validate} onSubmit={submitForm}>
+                {(formik) => {
+                    const { values, handleChange, handleSubmit } = formik
+                    return (
+                        <motion.div
+                            initial={{ x: 100, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            exit={{ x: -30, opacity: 0 }}
+                            className="flex w-full flex-col items-center justify-center"
+                        >
+                            {" "}
+                            {contextHolder}
+                            <h1 className="text-[40px] font-semibold text-primary ">Login to your account</h1>
+                            <div className="mt-3">
+                                <p className="mb-1 text-[14px] text-primary">
+                                    Not a member?
+                                    <Link
+                                        to={"/account/register"}
+                                        className="font-medium text-secondary1 hover:underline"
+                                    >
+                                        {" "}
+                                        Create account
+                                    </Link>
+                                </p>
+                                <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+                                    <InputWithLabel
+                                        placeholer="Email *"
+                                        type="text"
+                                        name="email"
+                                        id="email"
+                                        value={values.email}
+                                        onChange={handleChange}
+                                    />
+                                    <InputWithLabel
+                                        placeholer="Password *"
+                                        type="password"
+                                        name="password"
+                                        id="password"
+                                        value={values.password}
+                                        onChange={handleChange}
+                                    />
+                                    <ButtonAuth text="Login" type="submit" />
+                                </form>
+                                <div className="mt-4 flex items-center justify-between">
+                                    <Link
+                                        to="/account/forgot-password"
+                                        className="text-[14px] text-primary hover:underline"
+                                    >
+                                        Forgot your password?
+                                    </Link>
+                                    <button
+                                        className="flex items-center justify-center gap-2 rounded-[6px] border-2 border-neutral-300 p-1 text-[14px] hover:border-neutral-500 hover:bg-slate-200"
+                                        onClick={() => loginWithGG()}
+                                    >
+                                        Countinue with <img src={logoGG} alt="logoGG" />
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </motion.div>
-                )
-            }}
-        </Formik>
+                        </motion.div>
+                    )
+                }}
+            </Formik>
+        </Spin>
     )
 }
 

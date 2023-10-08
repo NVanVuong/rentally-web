@@ -29,7 +29,7 @@ export const authApi = creatApiAuthWithAuth.injectEndpoints({
         }),
         registerVerification: builder.mutation({
             query: (body: { email: string; code: string }) => ({
-                url: "/auth/verify",
+                url: "/auth/register/verify",
                 method: "POST",
                 body
             })
