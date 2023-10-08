@@ -1,4 +1,4 @@
-import { TbEdit, TbTrashX } from "react-icons/tb"
+import { TbEdit } from "react-icons/tb"
 import { FiShieldOff } from "react-icons/fi"
 import { HiOutlineViewfinderCircle } from "react-icons/hi2"
 import { useAppDispatch } from "@/redux/hook"
