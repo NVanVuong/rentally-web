@@ -1,9 +1,11 @@
 import { GoogleOAuthProvider } from "@react-oauth/google"
 import MainRoute from "./routes"
+import { CLIENT_ID } from "@/utils/constants/GlobalConst"
 
 const App: React.FC = () => {
+    console.log(CLIENT_ID)
     return (
-        <GoogleOAuthProvider clientId="835753748894-nkpb4ri9qqer621v4sq06u7imce8bnri.apps.googleusercontent.com">
+        <GoogleOAuthProvider clientId={CLIENT_ID}>
             <MainRoute />
         </GoogleOAuthProvider>
     )
