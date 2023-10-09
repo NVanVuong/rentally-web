@@ -1,11 +1,13 @@
-import { BrowserRouter } from "react-router-dom"
+import { GoogleOAuthProvider } from "@react-oauth/google"
 import MainRoute from "./routes"
+import { CLIENT_ID } from "@/utils/constants/GlobalConst"
 
 const App: React.FC = () => {
+    console.log(CLIENT_ID)
     return (
-        <BrowserRouter>
+        <GoogleOAuthProvider clientId={CLIENT_ID}>
             <MainRoute />
-        </BrowserRouter>
+        </GoogleOAuthProvider>
     )
 }
 

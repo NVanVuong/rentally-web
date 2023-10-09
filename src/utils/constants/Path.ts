@@ -1,9 +1,13 @@
 export const SITE_MAP = {
     INDEX: "/",
-    LOGIN: "/login",
     LOGIN_AS_ADMIN: "/administrator",
-    FORGOT_PASSWORD: "/forgot-password",
-    LOGOUT: "/logout",
+    AUTH: {
+        ACCOUNT: "/account/*",
+        LOGIN: "login",
+        REGISTER: "register",
+        FORGOTPASSWORD: "forgot-password",
+        RESETPASSWORD: "reset-password/:email"
+    },
     ADMIN: "/admin",
     USERS_MANAGEMENT: "users",
     MODS_MANAGEMENT: "mods",
