@@ -144,9 +144,9 @@ const Register = () => {
                                 exit={{ x: -30, opacity: 0 }}
                                 className="flex w-full flex-col items-center justify-center"
                             >
-                                <h1 className="text-[40px] font-semibold text-primary ">Create new account</h1>
+                                <h1 className="text-[40px] font-semibold text-primary1 ">Create new account</h1>
                                 <div className="mt-3">
-                                    <p className="mb-1 text-[14px] text-primary">
+                                    <p className="mb-1 text-[14px] text-primary1">
                                         Already a member?
                                         <Link
                                             to={"/account/login"}
@@ -247,7 +247,11 @@ const Register = () => {
                                                 }}
                                                 options={options}
                                             />
-                                            <ErrorMessage component="div" name={'role'} className="absolute text-[12px] text-red-700" />
+                                            <ErrorMessage
+                                                component="div"
+                                                name={"role"}
+                                                className="absolute text-[12px] text-red-700"
+                                            />
                                         </div>
 
                                         <ButtonAuth text="Register" type="submit" />
@@ -279,11 +283,11 @@ const Register = () => {
                                     <div className="m-8">
                                         <div className="mb-6 flex items-center justify-center gap-8">
                                             <img src={mail} alt="" />
-                                            <h1 className="text-[24px] font-semibold text-primary ">
+                                            <h1 className="text-[24px] font-semibold text-primary1 ">
                                                 Check your email!
                                             </h1>
                                         </div>
-                                        <p className="mb-1 px-3 text-[14px] text-primary">
+                                        <p className="mb-1 px-3 text-[14px] text-primary1">
                                             We sent a verification code to <br />
                                             <span className="text-[14px] text-secondary1">{email}</span>{" "}
                                         </p>
@@ -298,7 +302,7 @@ const Register = () => {
                                             />
                                             <ButtonAuth text="Submit" type="submit" />
                                         </Form>
-                                        <p className="px-3 pt-3 text-[14px] text-primary">
+                                        <p className="px-3 pt-3 text-[14px] text-primary1">
                                             Didn't receive the email?
                                             <span
                                                 className="cursor-pointer text-[14px] text-secondary1"
@@ -310,7 +314,7 @@ const Register = () => {
                                         </p>
                                     </div>
                                     <div className="absolute bottom-[-120px] left-0 flex w-full justify-center ">
-                                        <p className="mb-1 text-[14px] text-primary">
+                                        <p className="mb-1 text-[14px] text-primary1">
                                             Back to
                                             <Link to={"/account/login"} className="text-secondary1 hover:underline">
                                                 {" "}

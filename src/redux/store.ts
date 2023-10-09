@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
     search: searchSlice,
     modal: modalSlice,
-    auth: authSlice
+    auth: authSlice.reducer
 })
 
 export const store = configureStore({

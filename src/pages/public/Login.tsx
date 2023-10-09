@@ -19,8 +19,8 @@ interface Account {
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
-    const [login, { isLoading: isLoginLoading }] = useLoginMutation();
-    const [continueWithGG, { isLoading: isContinueWithGGLoading }] = useContinueWithGGMutation();
+    const [login, { isLoading: isLoginLoading }] = useLoginMutation()
+    const [continueWithGG, { isLoading: isContinueWithGGLoading }] = useContinueWithGGMutation()
     const [messageApi, contextHolder] = message.useMessage()
     const initialValues: Account = {
         email: "",
@@ -74,7 +74,7 @@ const Login = () => {
     })
 
     return (
-        <Spin spinning={isLoginLoading||isContinueWithGGLoading}>
+        <Spin spinning={isLoginLoading || isContinueWithGGLoading}>
             <Formik initialValues={initialValues} validate={validate} onSubmit={submitForm}>
                 {(formik) => {
                     const { values, handleChange, handleSubmit } = formik
@@ -87,9 +87,9 @@ const Login = () => {
                         >
                             {" "}
                             {contextHolder}
-                            <h1 className="text-[40px] font-semibold text-primary ">Login to your account</h1>
+                            <h1 className="text-[40px] font-semibold text-primary1 ">Login to your account</h1>
                             <div className="mt-3">
-                                <p className="mb-1 text-[14px] text-primary">
+                                <p className="mb-1 text-[14px] text-primary1">
                                     Not a member?
                                     <Link
                                         to={"/account/register"}
@@ -121,7 +121,7 @@ const Login = () => {
                                 <div className="mt-4 flex items-center justify-between">
                                     <Link
                                         to="/account/forgot-password"
-                                        className="text-[14px] text-primary hover:underline"
+                                        className="text-[14px] text-primary1 hover:underline"
                                     >
                                         Forgot your password?
                                     </Link>

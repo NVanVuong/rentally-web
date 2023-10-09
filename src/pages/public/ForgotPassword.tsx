@@ -49,8 +49,8 @@ const ForgotPassword = () => {
                             className="relative flex w-full flex-col items-center justify-center"
                         >
                             <div className="m-8">
-                                <h1 className="text-[24px] font-semibold text-primary ">Forgot Password?</h1>
-                                <p className="mb-1 text-[14px] text-primary">
+                                <h1 className="text-[24px] font-semibold text-primary1 ">Forgot Password?</h1>
+                                <p className="mb-1 text-[14px] text-primary1">
                                     No worries, we'll send you reset password instruction
                                 </p>
                                 <Form className="flex flex-col gap-8" onSubmit={handleSubmit}>
@@ -66,7 +66,7 @@ const ForgotPassword = () => {
                                 </Form>
                             </div>
                             <div className="absolute bottom-[-160px] left-0 flex w-full justify-center ">
-                                <p className="mb-1 text-[14px] text-primary">
+                                <p className="mb-1 text-[14px] text-primary1">
                                     Back to
                                     <Link to={"/account/login"} className="text-secondary1 hover:underline">
                                         {" "}
