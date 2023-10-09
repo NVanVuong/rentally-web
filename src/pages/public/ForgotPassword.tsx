@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useForgotPasswordMutation } from "@/redux/services/auth/auth.service"
 import { motion } from "framer-motion"
 import { Form, Formik } from "formik"
-import { message, Spin } from "antd"
+import { Spin } from "antd"
 
 interface Values {
     email: string

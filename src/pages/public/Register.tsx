@@ -12,12 +12,12 @@ import {
 } from "@/redux/services/auth/auth.service"
 import { useGoogleLogin } from "@react-oauth/google"
 import logoGG from "@/assets/images/logoGG.svg"
-
+import { ROLE } from "@/utils/constants/GlobalConst"
 import { useAppDispatch } from "@/redux/hook"
 import { setCredentials } from "@/redux/features/auth/auth.slice"
 import { motion } from "framer-motion"
 import * as Yup from "yup"
-import { message, Spin } from "antd"
+import { Spin } from "antd"
 
 interface RegisterValues {
     email: string
@@ -34,8 +34,8 @@ interface SendCodeValues {
 }
 
 const options = [
-    { value: "USER", label: "renter" },
-    { value: "MOD", label: "Landlord" }
+    { value: ROLE.USER, label: "renter" },
+    { value: ROLE.MOD, label: "Landlord" }
 ]
 
 const Register = () => {

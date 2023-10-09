@@ -1,3 +1,4 @@
+import RequireAuth from "@/Layouts/RequireAuth"
 import { SITE_MAP } from "@/utils/constants/Path"
 import { Suspense, lazy } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
@@ -19,12 +20,15 @@ const MainRoute = () => {
              <BrowserRouter>
              <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route element={<RequireAuth />}>
                 <Route path={SITE_MAP.ADMIN} element={<AdminPage />}>
                     <Route index element={<Navigate to={SITE_MAP.USERS_MANAGEMENT} replace />} />
                     <Route path={SITE_MAP.USERS_MANAGEMENT} element={<UsersPage />} />
                     <Route path={SITE_MAP.MODS_MANAGEMENT} element={<ModsPage />} />
                     <Route path={SITE_MAP.PROPS_MANAGEMENT} element={<PropsPage />} />
                 </Route>
+                </Route>
+               
                 <Route path={SITE_MAP.AUTH.ACCOUNT} element={<Account />}>
                     <Route path={SITE_MAP.AUTH.LOGIN} element={<Login />} />
                     <Route path={SITE_MAP.AUTH.REGISTER} element={<Register />} />

@@ -9,7 +9,7 @@ import {
     useResendEmailMutation
 } from "@/redux/services/auth/auth.service"
 import { motion } from "framer-motion"
-import { message, Spin } from "antd"
+import { Spin } from "antd"
 
 interface ResetPasswordValues {
     password: string
