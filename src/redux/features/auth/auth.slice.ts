@@ -1,11 +1,11 @@
 import type { IAuth } from "@/interfaces/auth.interface"
 import type { PayloadAction } from "@reduxjs/toolkit"
 import { createSlice } from "@reduxjs/toolkit"
-import jwt from 'jwt-decode'
+import jwt from "jwt-decode"
 
 const initialState: IAuth = {
     accessToken: localStorage.getItem("jwt") || null,
-    userInfo: localStorage.getItem("jwt")? jwt(localStorage.getItem("jwt")||'') : null
+    userInfo: localStorage.getItem("jwt") ? jwt(localStorage.getItem("jwt") || "") : null
 }
 
 const authSlice = createSlice({
@@ -27,10 +27,10 @@ const authSlice = createSlice({
         },
 
         logOut: (state) => {
-            console.log('haha')
+            console.log("haha")
             state.accessToken = null
-            localStorage.setItem("jwt", '')
-            state.userInfo= null
+            localStorage.setItem("jwt", "")
+            state.userInfo = null
         }
     }
 })

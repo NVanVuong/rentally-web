@@ -1,12 +1,15 @@
-import { Outlet } from "react-router-dom"
+import { Navigate, Outlet } from "react-router-dom"
 import Logo from "@/assets/images/Logo.svg"
 import Cloud from "@/assets/images/cloud.png"
 import logoRentally from "@/assets/images/rentally-logo.png"
-
+import { useEffect } from "react"
+import { useAppSelector } from "@/redux/hook"
 const Account = () => {
-    return (
+    const accessToken = useAppSelector((state) => state.auth.accessToken)
+    useEffect(() => {})
+    return ( !accessToken? (
         <div className=" relative flex h-screen w-screen items-center justify-center overflow-hidden before:absolute before:right-[-600px] before:top-[-600px] before:h-[1200px] before:w-[1200px] before:rounded-full before:bg-bgColor">
-            <div className="shadow-3xl relative flex h-[800px] w-[1200px] rounded-[20px] border-neutral-700 before:absolute before:bottom-[-400px] before:left-[-400px] before:h-[800px] before:w-[800px] before:rounded-full before:border-[140px] before:border-primary1 ">
+            <div className="relative flex h-[800px] w-[1200px] rounded-[20px] border-neutral-700 shadow-3xl before:absolute before:bottom-[-400px] before:left-[-400px] before:h-[800px] before:w-[800px] before:rounded-full before:border-[140px] before:border-primary1 ">
                 <div className="relative flex flex-1 flex-col items-center rounded-l-[20px] bg-primary1 ">
                     <div className="mt-16 w-full px-16 pt-4">
                         <h1 className="text-[40px] font-semibold text-secondary1 ">
@@ -28,7 +31,7 @@ const Account = () => {
                 </div>
             </div>
         </div>
-    )
+    ):(<Navigate to="/" />))
 }
 
 //test git

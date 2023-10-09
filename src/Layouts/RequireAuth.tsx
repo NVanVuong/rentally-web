@@ -1,17 +1,15 @@
 import { Navigate, Outlet } from "react-router-dom"
-import { useAppSelector } from '@/redux/hook'
+import { useAppSelector } from "@/redux/hook"
 import { ROLE } from "@/utils/constants/GlobalConst"
 
 const RequireAuth = () => {
-    const role = useAppSelector((state) =>state.auth.userInfo?.role)
+    const role = useAppSelector((state) => state.auth.userInfo?.role)
 
     switch (role) {
         case ROLE.ADMIN:
-        case ROLE.MOD:
-        case ROLE.USER:
             return <Outlet />
         default:
-            return <Navigate to="/"/>
+            return <Navigate to="/" />
     }
 }
 export default RequireAuth
