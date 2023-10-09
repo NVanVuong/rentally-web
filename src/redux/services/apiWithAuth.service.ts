@@ -1,13 +1,15 @@
 import { logOut, setCredentials } from "../features/auth/auth.slice"
 import type { RootState } from "@/redux/store"
 import { BaseQueryFn, createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { BASE_URL } from "@/utils/constants/GlobalConst"
 
 type BaseQueryWithReauthArgs = Parameters<BaseQueryFn>
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: "http://localhost:3003/api/v1",
+    baseUrl: BASE_URL,
     // credentials: 'include',
     mode: "cors",
+
     prepareHeaders: (headers, { getState }) => {
         headers.set("Access-Control-Allow-Origin", "*")
         headers.set("Cross-Origin-Opener-Policy", "same-origin-allow-popups")
@@ -52,9 +54,8 @@ const baseQueryWithReauth = async (
 
 export const creatApiWithAuth = (reducerPath: string, tagTypes: Array<string>) =>
     createApi({
-        baseQuery: baseQueryWithReauth,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        endpoints: (builder) => ({}),
+        baseQuery: baseQueryWithReAuth,
+        endpoints: () => ({}),
         reducerPath: reducerPath,
         tagTypes: tagTypes
     })
