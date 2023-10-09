@@ -18,16 +18,9 @@ import { setCredentials } from "@/redux/features/auth/auth.slice"
 import { motion } from "framer-motion"
 import * as Yup from "yup"
 import { Spin } from "antd"
+import { IAccounRegister } from "@/interfaces/auth.interface"
 
-interface RegisterValues {
-    email: string
-    firstName: string
-    lastName: string
-    password: string
-    confirmPassword: string
-    phoneNumber: string
-    role: string
-}
+type RegisterValues = IAccounRegister& { confirmPassword?: string}
 
 interface SendCodeValues {
     code: string
@@ -100,7 +93,7 @@ const Register = () => {
         }
         const res = await registerVerification(body).unwrap()
         console.log(res)
-        if (res.status === "SUCCESS") {
+        if (res.status === "SUCCESS" && res.data) {
             dispatch(setCredentials({ accessToken: res.data.token }))
             navigate("/")
         }
@@ -114,7 +107,7 @@ const Register = () => {
         onSuccess: async (tokenResponse) => {
             console.log(tokenResponse.access_token || "")
             const res = await continueWithGG({ accessToken: tokenResponse.access_token || "" }).unwrap()
-            if (res.status === "SUCCESS") {
+            if (res.status === "SUCCESS" && res.data) {
                 dispatch(setCredentials({ accessToken: res.data.token }))
                 navigate("/")
             }

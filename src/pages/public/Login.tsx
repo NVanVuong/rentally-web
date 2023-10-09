@@ -10,11 +10,7 @@ import { useAppDispatch } from "@/redux/hook"
 import { useGoogleLogin } from "@react-oauth/google"
 import logoGG from "@/assets/images/logoGG.svg"
 import { motion } from "framer-motion"
-
-interface Account {
-    email: string
-    password: string
-}
+import { IAccountLogin } from "@/interfaces/auth.interface"
 
 const Login = () => {
     const navigate = useNavigate()
@@ -22,12 +18,12 @@ const Login = () => {
     const [login, { isLoading: isLoginLoading }] = useLoginMutation()
     const [continueWithGG, { isLoading: isContinueWithGGLoading }] = useContinueWithGGMutation()
     const [messageApi, contextHolder] = message.useMessage()
-    const initialValues: Account = {
+    const initialValues: IAccountLogin = {
         email: "",
         password: ""
     }
-    const validate = (values: Account): Partial<Account> => {
-        const errors: Partial<Account> = {}
+    const validate = (values: IAccountLogin): Partial<IAccountLogin> => {
+        const errors: Partial<IAccountLogin> = {}
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
         if (!values.email) {
             errors.email = "Email is required"
@@ -40,7 +36,7 @@ const Login = () => {
         return errors
     }
 
-    const submitForm = async (values: Account) => {
+    const submitForm = async (values: IAccountLogin) => {
         console.log(values)
         const res = await login(values).unwrap()
         messageApi.open({
@@ -48,7 +44,7 @@ const Login = () => {
             content: "This is an error message"
         })
 
-        if (res.status === "SUCCESS") {
+        if (res.status === "SUCCESS" && res.data) {
             dispatch(setCredentials({ accessToken: res.data.token }))
             navigate("/")
         } else {
@@ -60,12 +56,9 @@ const Login = () => {
         onSuccess: async (tokenResponse) => {
             console.log(tokenResponse.access_token || "")
             const res = await continueWithGG({ accessToken: tokenResponse.access_token || "" }).unwrap()
-            if (res.status === "SUCCESS") {
+            if (res.status === "SUCCESS" &&  res.data) {
                 dispatch(setCredentials({ accessToken: res.data.token }))
                 navigate("/")
-            } else {
-                console.log(res.data.message)
-                // messageApi.error(res)
             }
         },
         onError: () => {

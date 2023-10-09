@@ -4,21 +4,19 @@ import { useForgotPasswordMutation } from "@/redux/services/auth/auth.service"
 import { motion } from "framer-motion"
 import { Form, Formik } from "formik"
 import { Spin } from "antd"
+import { IEmail } from "@/interfaces/auth.interface"
 
-interface Values {
-    email: string
-}
 
 const ForgotPassword = () => {
     const navigate = useNavigate()
     const [forgotPassword, { isLoading }] = useForgotPasswordMutation()
 
-    const initialValues: Values = {
+    const initialValues: IEmail = {
         email: ""
     }
 
-    const validate = (values: Values): Partial<Values> => {
-        const errors: Partial<Values> = {}
+    const validate = (values: IEmail): Partial<IEmail> => {
+        const errors: Partial<IEmail > = {}
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
         if (!values.email) {
             errors.email = "Email is required"
@@ -28,7 +26,7 @@ const ForgotPassword = () => {
         return errors
     }
 
-    const submitForm = async (values: Values) => {
+    const submitForm = async (values: IEmail) => {
         const res = await forgotPassword({ email: values.email }).unwrap()
         console.log(res)
         if (res.status === "SUCCESS") {

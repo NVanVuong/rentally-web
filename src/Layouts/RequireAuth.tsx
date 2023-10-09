@@ -7,6 +7,8 @@ const RequireAuth = () => {
 
     switch (role) {
         case ROLE.ADMIN:
+        case ROLE.USER:
+        case ROLE.MOD:
             return <Outlet />
         default:
             return <Navigate to="/" />
