@@ -56,7 +56,7 @@ const Login = () => {
         onSuccess: async (tokenResponse) => {
             console.log(tokenResponse.access_token || "")
             const res = await continueWithGG({ accessToken: tokenResponse.access_token || "" }).unwrap()
-            if (res.status === "SUCCESS" &&  res.data) {
+            if (res.status === "SUCCESS" && res.data) {
                 dispatch(setCredentials({ accessToken: res.data.token }))
                 navigate("/")
             }
@@ -80,8 +80,8 @@ const Login = () => {
                         >
                             {" "}
                             {contextHolder}
-                            <h1 className="text-[40px] font-semibold text-primary1 ">Login to your account</h1>
-                            <div className="mt-3">
+                            <h1 className="mt-2 text-4xl font-semibold text-primary1">Login to your account</h1>
+                            <div className="mt-8">
                                 <p className="mb-1 text-[14px] text-primary1">
                                     Not a member?
                                     <Link
@@ -92,7 +92,7 @@ const Login = () => {
                                         Create account
                                     </Link>
                                 </p>
-                                <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+                                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                                     <InputWithLabel
                                         placeholer="Email *"
                                         type="text"
