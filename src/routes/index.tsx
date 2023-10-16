@@ -12,7 +12,7 @@ const Login = lazy(() => import("../pages/auth/Login"))
 const Register = lazy(() => import("../pages/auth/Register"))
 const ForgotPassword = lazy(() => import("../pages/auth/ForgotPassword"))
 const ResetPassword = lazy(() => import("../pages/auth/ResetPassword"))
-const Account = lazy(() => import("../Layouts/Account"))
+
 
 const MainRoute = () => {
     return (
