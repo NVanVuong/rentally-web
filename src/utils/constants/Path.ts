@@ -2,7 +2,6 @@ export const SITE_MAP = {
     INDEX: "/",
     LOGIN_AS_ADMIN: "/administrator",
     AUTH: {
-        ACCOUNT: "/account/*",
         LOGIN: "login",
         REGISTER: "register",
         FORGOTPASSWORD: "forgot-password",

@@ -4,18 +4,18 @@ export interface IAuth {
     accessToken: string | null
     userInfo: IUser | null
 }
-export type IAccounRegister = Omit<IUser, 'id' | 'photo'> &{password:string};
+export type IAccounRegister = Omit<IUser, "id" | "photo"> & { password: string }
 
-export interface IEmail{
+export interface IEmail {
     email: string
 }
-export interface IVerifyCode{
+export interface IVerifyCode {
     email: string
-    code: string 
+    code: string
 }
-export interface ResetPassword{
+export interface ResetPassword {
     password: string
-    code: string 
+    code: string
 }
 export interface IAccountLogin {
     email: string
@@ -23,11 +23,11 @@ export interface IAccountLogin {
 }
 export interface INewPassword {
     password: string
-    code: string 
+    code: string
     email: string
 }
 export interface IAuthResponse {
-    data?: {token:string}
+    data?: { token: string }
     message: string
     status: string
 }

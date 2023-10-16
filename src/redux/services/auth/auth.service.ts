@@ -1,5 +1,12 @@
 import { creatApiWithAuth } from "../apiWithAuth.service"
-import { IAccountLogin, IAuthResponse, IEmail, IVerifyCode,INewPassword, IAccounRegister } from "@/interfaces/auth.interface";
+import {
+    IAccountLogin,
+    IAuthResponse,
+    IEmail,
+    IVerifyCode,
+    INewPassword,
+    IAccounRegister
+} from "@/interfaces/auth.interface"
 const creatApiAuthWithAuth = creatApiWithAuth("AuthApi", ["Auth"])
 
 export const authApi = creatApiAuthWithAuth.injectEndpoints({

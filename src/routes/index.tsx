@@ -8,10 +8,10 @@ const AdminPage = lazy(() => import("../pages/admin"))
 const UsersPage = lazy(() => import("../pages/admin/users"))
 const ModsPage = lazy(() => import("../pages/admin/mods"))
 const PropsPage = lazy(() => import("../pages/admin/props"))
-const Login = lazy(() => import("../pages/public/Login"))
-const Register = lazy(() => import("../pages/public/Register"))
-const ForgotPassword = lazy(() => import("../pages/public/ForgotPassword"))
-const ResetPassword = lazy(() => import("../pages/public/ResetPassword"))
+const Login = lazy(() => import("../pages/auth/Login"))
+const Register = lazy(() => import("../pages/auth/Register"))
+const ForgotPassword = lazy(() => import("../pages/auth/ForgotPassword"))
+const ResetPassword = lazy(() => import("../pages/auth/ResetPassword"))
 const Account = lazy(() => import("../Layouts/Account"))
 
 const MainRoute = () => {
@@ -29,13 +29,11 @@ const MainRoute = () => {
                         </Route>
                     </Route>
 
-                    <Route path={SITE_MAP.AUTH.ACCOUNT} element={<Account />}>
-                        <Route path={SITE_MAP.AUTH.LOGIN} element={<Login />} />
-                        <Route path={SITE_MAP.AUTH.REGISTER} element={<Register />} />
-                        <Route path={SITE_MAP.AUTH.FORGOTPASSWORD} element={<ForgotPassword />} />
-                        <Route path={SITE_MAP.AUTH.RESETPASSWORD} element={<ResetPassword />} />
-                        <Route path="*" element={<Login />} />
-                    </Route>
+                    <Route path={SITE_MAP.AUTH.LOGIN} element={<Login />} />
+                    <Route path={SITE_MAP.AUTH.REGISTER} element={<Register />} />
+                    <Route path={SITE_MAP.AUTH.FORGOTPASSWORD} element={<ForgotPassword />} />
+                    <Route path={SITE_MAP.AUTH.RESETPASSWORD} element={<ResetPassword />} />
+                    <Route path="*" element={<Login />} />
                 </Routes>
             </BrowserRouter>
         </Suspense>

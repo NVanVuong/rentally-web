@@ -3,10 +3,15 @@ import Logo from "@/assets/images/Logo.svg"
 import Cloud from "@/assets/images/cloud.png"
 import logoRentally from "@/assets/images/rentally-logo.png"
 import { useAppSelector } from "@/redux/hook"
-const Account = () => {
+
+type Props = {
+    children: string | JSX.Element
+}
+
+const Account = ({ children }: Props) => {
     const accessToken = useAppSelector((state) => state.auth.accessToken)
     console.log(accessToken)
-    return ( !accessToken? (
+    return !accessToken ? (
         <div className=" relative flex h-screen w-screen items-center justify-center overflow-hidden before:absolute before:right-[-600px] before:top-[-600px] before:h-[1200px] before:w-[1200px] before:rounded-full before:bg-bgColor">
             <div className="relative flex h-[800px] w-[1200px] rounded-[20px] border-neutral-700 shadow-3xl before:absolute before:bottom-[-400px] before:left-[-400px] before:h-[800px] before:w-[800px] before:rounded-full before:border-[140px] before:border-primary1 ">
                 <div className="relative flex flex-1 flex-col items-center rounded-l-[20px] bg-primary1 ">
@@ -25,12 +30,14 @@ const Account = () => {
                 <div className="relative flex-1 rounded-r-[20px] bg-white  pb-10">
                     <div className="flex h-full w-full flex-col items-center justify-center  ">
                         <img src={logoRentally} alt="" className="w-[96px]" />
-                        <Outlet />
+                        {children}
                     </div>
                 </div>
             </div>
         </div>
-    ):(<Navigate to="/" />))
+    ) : (
+        <Navigate to="/" />
+    )
 }
 
 //test git
