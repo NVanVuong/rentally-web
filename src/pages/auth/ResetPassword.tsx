@@ -99,13 +99,13 @@ const ResetPassword = () => {
                                         <div className="m-8">
                                             <div className="mb-6 flex items-center justify-center gap-8">
                                                 <img src={mail} alt="" />
-                                                <h1 className="text-[24px] font-semibold text-primary1 ">
+                                                <h1 className="text-[24px] font-semibold text-secondary ">
                                                     Check your email!
                                                 </h1>
                                             </div>
-                                            <p className="mb-1 px-3 text-[14px] text-primary1">
+                                            <p className="mb-1 px-3 text-[14px] text-secondary">
                                                 We sent a verification code to <br />
-                                                <span className="text-[14px] text-secondary1">{email}</span>{" "}
+                                                <span className="text-[14px] text-primary">{email}</span>{" "}
                                             </p>
 
                                             <Form className="flex flex-col gap-8" onSubmit={handleSubmit}>
@@ -118,10 +118,10 @@ const ResetPassword = () => {
                                                 />
                                                 <ButtonAuth type="submit" text="Reset password" />
                                             </Form>
-                                            <p className="px-3 pt-3 text-[14px] text-primary1">
+                                            <p className="px-3 pt-3 text-[14px] text-secondary">
                                                 Didn't receive the email?
                                                 <span
-                                                    className="cursor-pointer text-[14px] text-secondary1 hover:underline"
+                                                    className="cursor-pointer text-[14px] text-primary hover:underline"
                                                     onClick={handleResetPassword}
                                                 >
                                                     {" "}
@@ -130,9 +130,9 @@ const ResetPassword = () => {
                                             </p>
                                         </div>
                                         <div className="absolute bottom-[-100px] left-0 flex w-full justify-center ">
-                                            <p className="mb-1 text-[14px] text-primary1">
+                                            <p className="mb-1 text-[14px] text-secondary">
                                                 Back to
-                                                <Link to={"/login"} className="text-secondary1 hover:underline">
+                                                <Link to={"/login"} className="text-primary hover:underline">
                                                     {" "}
                                                     Login
                                                 </Link>
@@ -159,10 +159,10 @@ const ResetPassword = () => {
                                     exit={{ x: -30, opacity: 0 }}
                                     className="relative flex w-full flex-col items-center justify-center"
                                 >
-                                    <h1 className="text-[40px] font-semibold text-primary1 ">Reset Password</h1>
+                                    <h1 className="text-[40px] font-semibold text-secondary ">Reset Password</h1>
                                     <div className="mt-3">
-                                        <p className="my-4 text-[14px] text-primary1">
-                                            In order to <span className="text-secondary1">protect your account</span>,
+                                        <p className="my-4 text-[14px] text-secondary">
+                                            In order to <span className="text-primary">protect your account</span>,
                                             make sure your
                                             <br />
                                             <span>password:</span>
@@ -190,9 +190,9 @@ const ResetPassword = () => {
                                         </form>
                                     </div>
                                     <div className="absolute bottom-[-100px] left-0 flex w-full justify-center ">
-                                        <p className="mb-1 text-[14px] text-primary1">
+                                        <p className="mb-1 text-[14px] text-secondary">
                                             Back to
-                                            <Link to={"/login"} className="text-secondary1 hover:underline">
+                                            <Link to={"/login"} className="text-primary hover:underline">
                                                 {" "}
                                                 Login
                                             </Link>

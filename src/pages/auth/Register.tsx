@@ -142,13 +142,13 @@ const Register = () => {
                                     exit={{ x: -30, opacity: 0 }}
                                     className="flex w-full flex-col items-center justify-center"
                                 >
-                                    <h1 className="text-[40px] font-semibold text-primary1 ">Create new account</h1>
+                                    <h1 className="text-[40px] font-semibold text-secondary ">Create new account</h1>
                                     <div className="mt-3">
-                                        <p className="mb-1 text-[14px] text-primary1">
+                                        <p className="mb-1 text-[14px] text-secondary">
                                             Already a member?
                                             <Link
                                                 to={"/login"}
-                                                className="font-medium text-secondary1 hover:underline"
+                                                className="font-medium text-primary hover:underline"
                                             >
                                                 {" "}
                                                 Login now
@@ -204,7 +204,7 @@ const Register = () => {
                                             />
 
                                             <div>
-                                                <p className="mb-1 text-[14px] font-medium text-secondary1">
+                                                <p className="mb-1 text-[14px] font-medium text-primary">
                                                     Which describes best your role?
                                                 </p>
                                                 <Select
@@ -281,13 +281,13 @@ const Register = () => {
                                         <div className="m-8">
                                             <div className="mb-6 flex items-center justify-center gap-8">
                                                 <img src={mail} alt="" />
-                                                <h1 className="text-[24px] font-semibold text-primary1 ">
+                                                <h1 className="text-[24px] font-semibold text-secondary ">
                                                     Check your email!
                                                 </h1>
                                             </div>
-                                            <p className="mb-1 px-3 text-[14px] text-primary1">
+                                            <p className="mb-1 px-3 text-[14px] text-secondary">
                                                 We sent a verification code to <br />
-                                                <span className="text-[14px] text-secondary1">{email}</span>{" "}
+                                                <span className="text-[14px] text-primary">{email}</span>{" "}
                                             </p>
 
                                             <Form className="flex flex-col gap-8" onSubmit={handleSubmit}>
@@ -300,10 +300,10 @@ const Register = () => {
                                                 />
                                                 <ButtonAuth text="Submit" type="submit" />
                                             </Form>
-                                            <p className="px-3 pt-3 text-[14px] text-primary1">
+                                            <p className="px-3 pt-3 text-[14px] text-secondary">
                                                 Didn't receive the email?
                                                 <span
-                                                    className="cursor-pointer text-[14px] text-secondary1"
+                                                    className="cursor-pointer text-[14px] text-primary"
                                                     onClick={() => handleResetPassword()}
                                                 >
                                                     {" "}
@@ -312,9 +312,9 @@ const Register = () => {
                                             </p>
                                         </div>
                                         <div className="absolute bottom-[-120px] left-0 flex w-full justify-center ">
-                                            <p className="mb-1 text-[14px] text-primary1">
+                                            <p className="mb-1 text-[14px] text-secondary">
                                                 Back to
-                                                <Link to={"/login"} className="text-secondary1 hover:underline">
+                                                <Link to={"/login"} className="text-primary hover:underline">
                                                     {" "}
                                                     Login
                                                 </Link>

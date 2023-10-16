@@ -81,13 +81,13 @@ const Login = () => {
                             >
                                 {" "}
                                 {contextHolder}
-                                <h1 className="text-[40px] font-semibold text-primary1 ">Login to your account</h1>
+                                <h1 className="text-[40px] font-semibold text-secondary ">Login to your account</h1>
                                 <div className="mt-3">
-                                    <p className="mb-1 text-[14px] text-primary1">
+                                    <p className="mb-1 text-[14px] text-secondary">
                                         Not a member?
                                         <Link
                                             to={"/register"}
-                                            className="font-medium text-secondary1 hover:underline"
+                                            className="font-medium text-primary hover:underline"
                                         >
                                             {" "}
                                             Create account
@@ -115,7 +115,7 @@ const Login = () => {
                                     <div className="mt-4 flex items-center justify-between">
                                         <Link
                                             to="/forgot-password"
-                                            className="text-[14px] text-primary1 hover:underline"
+                                            className="text-[14px] text-secondary hover:underline"
                                         >
                                             Forgot your password?
                                         </Link>
