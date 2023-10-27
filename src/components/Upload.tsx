@@ -1,6 +1,6 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { PlusOutlined } from "@ant-design/icons"
-import { Button, Form, Modal, Upload } from "antd"
+import { Form, Modal, Upload } from "antd"
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface"
 
 const UploadImage = () => {
@@ -28,7 +28,7 @@ const UploadImage = () => {
     }
 
     const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-        setFileList(newFileList), console.log(newFileList)
+        setFileList(newFileList)
     }
 
     const onRemove = (file: UploadFile) => {
@@ -46,13 +46,13 @@ const UploadImage = () => {
     const uploadButton = (
         <div>
             <PlusOutlined />
-            <div style={{ marginTop: 8 }}>Upload</div>
+            <div className="mt-2">Upload</div>
         </div>
     )
 
     return (
         <div className="w-full rounded-lg border-[1px] border-[#d9d9d9] bg-white px-[34px] py-4">
-            <Form.Item className="w-full" name="files" rules={[{ required: true, message: "Please input images!" }]}>
+            <Form.Item className="w-full" name="images" rules={[{ required: true, message: "Please input images!" }]}>
                 <Upload
                     listType="picture-card"
                     onRemove={onRemove}

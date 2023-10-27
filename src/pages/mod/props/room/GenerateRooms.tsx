@@ -1,33 +1,41 @@
 import { RoomCard } from "@/components"
 import PageHeader from "@/container/PageHeader"
-import { openModal } from "@/redux/features/modal/modal.slice"
 import { useAppDispatch } from "@/redux/hook"
-import { MODAL } from "@/utils/constants/GlobalConst"
-import { FaPlus } from "react-icons/fa6"
-
+import { BsSave } from "react-icons/bs"
+import { useAppSelector } from "@/redux/hook"
+import { saveRoom } from "@/redux/features/generateRoom/generateRoom.slice"
+import { FaPlus } from "react-icons/fa"
+import { useNavigate } from "react-router-dom"
 const GenerateRooms = () => {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+    const rooms = useAppSelector((state) => state.generateRoom.rooms)
     return (
         <div className="">
             <PageHeader title="Room Management - Block Nguyen Van Linh" />
-            <div className="mb-4 flex justify-between">
+            <div className="mb-4 flex justify-end gap-4 mx-4">
                 <button
-                    onClick={() => dispatch(openModal({ type: MODAL.ADD }))}
-                    className="flex items-center space-x-2 rounded-xl bg-primary px-3 py-2 text-white"
+                    onClick={() => {
+
+                    }}
+                    className="flex items-center space-x-2 rounded-xl bg-secondary px-3 py-2 text-white"
                 >
                     <FaPlus className="h-3 w-3" />
+                    <span className="text-xs font-bold tracking-wide">Add</span>
+                </button>
+                <button
+                    onClick={() => {
+                        dispatch(saveRoom())
+                        navigate('/mod/props')
+                    }}
+                    className="flex items-center space-x-2 rounded-xl bg-primary px-3 py-2 text-white"
+                >
+                    <BsSave className="h-3 w-3" />
                     <span className="text-xs font-bold tracking-wide">Submit</span>
                 </button>
             </div>
-            <div className="my-12 flex w-full flex-col md:grid grid_product max-sm:justify-between justify-center gap-16">
-                <RoomCard />
-                <RoomCard />
-                <RoomCard />
-                <RoomCard />
-                <RoomCard />
-                <RoomCard />
-                <RoomCard />
-                <RoomCard />
+            <div className="grid_product my-12 flex w-full flex-col justify-center gap-16 max-sm:justify-between md:grid">
+                {rooms?.map((room, index) => <RoomCard key={index} room={room} />)}
             </div>
         </div>
     )

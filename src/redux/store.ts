@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
     search: searchSlice,
     modal: modalSlice,
     auth: authSlice.reducer,
-    generateRoomSlice: generateRoomSlice
+    generateRoom: generateRoomSlice
 })
 
 export const store = configureStore({

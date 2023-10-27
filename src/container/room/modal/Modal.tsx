@@ -1,12 +1,15 @@
 import { IModal } from "@/interfaces/modal.interface"
 import { Button, Form, Input, Spin } from "antd"
-import UploadImage from "@/components/RoomCard/Upload"
+import UploadImage from "@/components/Upload"
 import { useEffect, useState } from "react"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
 import { useAppDispatch } from "@/redux/hook"
 import { generateRoom } from "@/redux/features/generateRoom/generateRoom.slice"
 import { IRoom } from "@/interfaces/room.interface"
+import { useNavigate } from "react-router-dom"
+
+import { closeModal } from "@/redux/features/modal/modal.slice"
 
 const top100Films = [
     { title: "The Shawshank Redemption", year: 1994 },
@@ -16,10 +19,10 @@ const top100Films = [
 
 const Modal = (props: IModal) => {
     const [form] = Form.useForm()
-    const dispath = useAppDispatch()
+    const dispatch = useAppDispatch()
     const [selectedOptions, setSelectedOptions] = useState([])
-
-    const handleChange = (event, value: any) => {
+    const navigate = useNavigate()
+    const handleChange = (event: any, value: any) => {
         setSelectedOptions(value)
     }
     const handleValuesChange = (changedValues: any, allValues: any) => {
@@ -28,16 +31,17 @@ const Modal = (props: IModal) => {
     }
 
     const onFinish = (values: any) => {
-        values.files = JSON.stringify(values.files.fileList)
-        const {quantity, ...roomPattern} = values
-        console.log({roomPattern: roomPattern as IRoom,quantity:quantity})
-        dispath(generateRoom({roomPattern: roomPattern as IRoom,quantity:quantity}))
+        dispatch(closeModal())       
+        values.images = values.images.fileList.map((file:any)=>JSON.stringify(file))
+        const { quantity, ...roomPattern } = values
+        console.log({ roomPattern: roomPattern as IRoom, quantity: quantity })
+        dispatch(generateRoom({ roomPattern: roomPattern as IRoom, quantity: quantity }))
+        navigate("/mod/props/generate-rooms")
     }
 
     useEffect(() => {
-       
         form.setFieldsValue({
-            utility: selectedOptions
+            utilities: selectedOptions
         })
     }, [selectedOptions, form])
 
@@ -100,8 +104,8 @@ const Modal = (props: IModal) => {
                         />
                         <Form.Item
                             className="hidden w-full"
-                            name="utility"
-                            rules={[{ required: true, message: "Please input utility!" }]}
+                            name="utilities"
+                            rules={[{ required: true, message: "Please input utilities!" }]}
                         >
                             <Input className="hidden h-0" />
                         </Form.Item>
