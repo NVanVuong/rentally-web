@@ -5,15 +5,16 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 
 const HomePage = lazy(() => import("../pages/home"))
 const AdminPage = lazy(() => import("../pages/admin"))
+const ModPage = lazy(() => import("../pages/mod"))
 const UsersPage = lazy(() => import("../pages/admin/users"))
 const ModsPage = lazy(() => import("../pages/admin/mods"))
-const PropsPage = lazy(() => import("../pages/admin/props"))
+const ModPropsPage = lazy(() => import("../pages/mod/props"))
+const AdminPropsPage = lazy(() => import("../pages/admin/props"))
 const Login = lazy(() => import("../pages/auth/Login"))
 const Register = lazy(() => import("../pages/auth/Register"))
 const ForgotPassword = lazy(() => import("../pages/auth/ForgotPassword"))
 const ResetPassword = lazy(() => import("../pages/auth/ResetPassword"))
-
-
+const GenerateRooms = lazy(() => import("../pages/mod/props/room/GenerateRooms"))
 const MainRoute = () => {
     return (
         <Suspense fallback={<div>Loading...</div>}>
@@ -25,7 +26,15 @@ const MainRoute = () => {
                             <Route index element={<Navigate to={SITE_MAP.USERS_MANAGEMENT} replace />} />
                             <Route path={SITE_MAP.USERS_MANAGEMENT} element={<UsersPage />} />
                             <Route path={SITE_MAP.MODS_MANAGEMENT} element={<ModsPage />} />
-                            <Route path={SITE_MAP.PROPS_MANAGEMENT} element={<PropsPage />} />
+                            <Route path={SITE_MAP.PROPS_MANAGEMENT} element={<AdminPropsPage />} />
+                        </Route>
+                    </Route>
+                    <Route element={<RequireAuth />}>
+                        <Route path={SITE_MAP.MOD} element={<ModPage />}>
+                            <Route index element={<Navigate to={SITE_MAP.PROPS_MANAGEMENT} replace />} />
+                            <Route path={SITE_MAP.PROPS_MANAGEMENT} element={<ModPropsPage />}>
+                                <Route path={SITE_MAP.ROOMS_GENERATION} element={<GenerateRooms />} />
+                            </Route>
                         </Route>
                     </Route>
 

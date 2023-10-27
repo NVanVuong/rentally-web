@@ -13,3 +13,9 @@
 body {
     @apply overflow-hidden;
 }
+
+.grid_product {
+    grid-template-columns: repeat(auto-fit, 240px);
+    grid-template-rows: repeat(auto-fit, 320px);
+    gap: 60px;
+}

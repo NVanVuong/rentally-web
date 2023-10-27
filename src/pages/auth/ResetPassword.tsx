@@ -162,8 +162,8 @@ const ResetPassword = () => {
                                     <h1 className="text-[40px] font-semibold text-secondary ">Reset Password</h1>
                                     <div className="mt-3">
                                         <p className="my-4 text-[14px] text-secondary">
-                                            In order to <span className="text-primary">protect your account</span>,
-                                            make sure your
+                                            In order to <span className="text-primary">protect your account</span>, make
+                                            sure your
                                             <br />
                                             <span>password:</span>
                                             <li className="mx-4">Longer than 8 characters</li>

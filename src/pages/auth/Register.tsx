@@ -146,10 +146,7 @@ const Register = () => {
                                     <div className="mt-3">
                                         <p className="mb-1 text-[14px] text-secondary">
                                             Already a member?
-                                            <Link
-                                                to={"/login"}
-                                                className="font-medium text-primary hover:underline"
-                                            >
+                                            <Link to={"/login"} className="font-medium text-primary hover:underline">
                                                 {" "}
                                                 Login now
                                             </Link>

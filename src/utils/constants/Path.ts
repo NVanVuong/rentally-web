@@ -8,7 +8,10 @@ export const SITE_MAP = {
         RESETPASSWORD: "reset-password/:email"
     },
     ADMIN: "/admin",
+    MOD: "/mod",
     USERS_MANAGEMENT: "users",
     MODS_MANAGEMENT: "mods",
+    ROOMS_MANAGEMENT: "rooms",
+    ROOMS_GENERATION: "generate-rooms",
     PROPS_MANAGEMENT: "props"
 }

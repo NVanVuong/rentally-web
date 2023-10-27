@@ -85,10 +85,7 @@ const Login = () => {
                                 <div className="mt-3">
                                     <p className="mb-1 text-[14px] text-secondary">
                                         Not a member?
-                                        <Link
-                                            to={"/register"}
-                                            className="font-medium text-primary hover:underline"
-                                        >
+                                        <Link to={"/register"} className="font-medium text-primary hover:underline">
                                             {" "}
                                             Create account
                                         </Link>

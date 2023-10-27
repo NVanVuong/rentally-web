@@ -6,13 +6,15 @@ import { authApi } from "@/redux/services/auth/auth.service"
 import authSlice from "@/redux/features/auth/auth.slice"
 import searchSlice from "@/redux/features/search/search.slice"
 import modalSlice from "./features/modal/modal.slice"
+import generateRoomSlice from "./features/generateRoom/generateRoom.slice"
 
 const rootReducer = combineReducers({
     [userApi.reducerPath]: userApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     search: searchSlice,
     modal: modalSlice,
-    auth: authSlice.reducer
+    auth: authSlice.reducer,
+    generateRoomSlice: generateRoomSlice
 })
 
 export const store = configureStore({

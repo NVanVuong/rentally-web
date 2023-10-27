@@ -4,8 +4,9 @@ export interface IAuth {
     accessToken: string | null
     userInfo: IUser | null
 }
-export type IAccounRegister = Omit<IUser, "id" | "photo"> & { password: string }
-
+export interface IAccountRegister extends Omit<IUser, "id" | "photo"> {
+    password: string
+}
 export interface IEmail {
     email: string
 }

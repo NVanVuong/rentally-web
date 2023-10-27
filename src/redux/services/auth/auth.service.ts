@@ -5,7 +5,7 @@ import {
     IEmail,
     IVerifyCode,
     INewPassword,
-    IAccounRegister
+    IAccountRegister
 } from "@/interfaces/auth.interface"
 const creatApiAuthWithAuth = creatApiWithAuth("AuthApi", ["Auth"])
 
@@ -18,7 +18,7 @@ export const authApi = creatApiAuthWithAuth.injectEndpoints({
                 body
             })
         }),
-        register: builder.mutation<IAuthResponse, IAccounRegister>({
+        register: builder.mutation<IAuthResponse, IAccountRegister>({
             query: (body) => {
                 return {
                     url: "/auth/register",
