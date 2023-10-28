@@ -10,18 +10,16 @@ import { IRoom } from "@/interfaces/room.interface"
 import { useNavigate } from "react-router-dom"
 
 import { closeModal } from "@/redux/features/modal/modal.slice"
+import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
 
-const top100Films = [
-    { title: "The Shawshank Redemption", year: 1994 },
-    { title: "The Godfather", year: 1972 }
-    //...
-]
 
 const Modal = (props: IModal) => {
     const [form] = Form.useForm()
     const dispatch = useAppDispatch()
     const [selectedOptions, setSelectedOptions] = useState([])
     const navigate = useNavigate()
+    const { data } = useGetUtilitiesQuery("")
+
     const handleChange = (event: any, value: any) => {
         setSelectedOptions(value)
     }
@@ -31,8 +29,8 @@ const Modal = (props: IModal) => {
     }
 
     const onFinish = (values: any) => {
-        dispatch(closeModal())       
-        values.images = values.images.fileList.map((file:any)=>JSON.stringify(file))
+        dispatch(closeModal())
+        values.images = values.images.fileList.map((file: any) => JSON.stringify(file))
         const { quantity, ...roomPattern } = values
         console.log({ roomPattern: roomPattern as IRoom, quantity: quantity })
         dispatch(generateRoom({ roomPattern: roomPattern as IRoom, quantity: quantity }))
@@ -97,8 +95,8 @@ const Modal = (props: IModal) => {
                             onChange={handleChange}
                             multiple
                             id="tags-outlined"
-                            options={top100Films}
-                            getOptionLabel={(option) => option.title}
+                            options={data?.data.utilities||[]}
+                            getOptionLabel={(option) => option.name}
                             filterSelectedOptions
                             renderInput={(params) => <TextField {...params} label="Utilities" placeholder="New util" />}
                         />

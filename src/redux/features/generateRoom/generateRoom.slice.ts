@@ -2,7 +2,8 @@ import { IRoom } from "@/interfaces/room.interface"
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    rooms: [] as IRoom[]
+    rooms: [] as IRoom[],
+    roomPattern: {} as IRoom
 }
 
 const generateRoomSlice = createSlice({
@@ -13,6 +14,7 @@ const generateRoomSlice = createSlice({
             const rooms = []
             const { quantity, roomPattern } = action.payload
             const quantityValue = parseInt(quantity, 10)
+            state.roomPattern = roomPattern
             roomPattern.id = "0"
             roomPattern.roomName = "F0"
             for (let i = 0; i < quantityValue; i++) {
@@ -34,7 +36,12 @@ const generateRoomSlice = createSlice({
             const { id, utilities } = action.payload
             state.rooms[parseInt(id, 10)].utilities = utilities
         },
-
+        addRoom: (state) =>{
+            const newRoom = {...state.roomPattern}
+            newRoom.id = `${state.rooms.length}`
+            newRoom.roomName = `F${state.rooms.length}`
+            state.rooms.push(newRoom)
+        },
         saveRoom: (state) => {
             console.log("saveRoom")
             state.rooms = []
@@ -42,6 +49,6 @@ const generateRoomSlice = createSlice({
     }
 })
 
-export const { generateRoom, changeRoomName, saveRoom, changeUtilitiesRoom } = generateRoomSlice.actions
+export const { generateRoom, changeRoomName, saveRoom, addRoom,changeUtilitiesRoom } = generateRoomSlice.actions
 
 export default generateRoomSlice.reducer

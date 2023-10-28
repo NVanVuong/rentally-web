@@ -1,17 +1,14 @@
 // interface Props {
 import { IRoom } from "@/interfaces/room.interface"
+import { IUtiltity } from "@/interfaces/utility.interface"
 import { changeRoomName, changeUtilitiesRoom } from "@/redux/features/generateRoom/generateRoom.slice"
 import { useAppDispatch } from "@/redux/hook"
+import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
 import Autocomplete from "@mui/material/Autocomplete"
 import TextField from "@mui/material/TextField"
 import { useState } from "react"
 import { AiOutlineHome } from "react-icons/ai"
 
-const top100Films = [
-    { title: "The Shawshank Redemption", year: 1994 },
-    { title: "The Godfather", year: 1972 }
-    //...
-]
 interface Props {
     room: IRoom
 }
@@ -19,15 +16,16 @@ const RoomCard = ({ room }: Props) => {
     const dispatch = useAppDispatch()
     const { area, price, depositAmount, utilities, id } = room
     const [roomName, setRoomName] = useState(room.roomName)
+    const { data } = useGetUtilitiesQuery("")
+
     const [selectedOptions, setSelectedOptions] = useState([])
     let srcImg = ""
     if (room.images) {
         srcImg = JSON.parse(room?.images[0]).thumbUrl
     }
 
-    const handleChange = (event, value: any) => {
+    const handleChange = (event:any, value: any) => {
         setSelectedOptions(value)
-        console.log(value)
         dispatch(changeUtilitiesRoom({ id: `${id}`, utilities: value }))
     }
     return (
@@ -42,7 +40,7 @@ const RoomCard = ({ room }: Props) => {
                         onChange={(e) => {
                             setRoomName(e.target.value)
 
-                            dispatch(changeRoomName({ id, roomName: e.target.value }))
+                            dispatch(changeRoomName({ id: id||'', roomName: e.target.value }))
                         }}
                         placeholder="Room ID"
                         className="h-full w-[100px] text-[14px] outline-none  placeholder:text-[14px] placeholder:font-normal "
@@ -59,9 +57,9 @@ const RoomCard = ({ room }: Props) => {
                         onChange={handleChange}
                         multiple
                         id="tags-outlined"
-                        options={top100Films}
-                        getOptionLabel={(option) => option.title}
-                        defaultValue={utilities}
+                        options={data?.data.utilities||[]}
+                        getOptionLabel={(option) => option.name}
+                        defaultValue={utilities.map((value:IUtiltity, index: number) => data?.data.utilities.find((utility) => utility.id=== value.id))}
                         filterSelectedOptions
                         renderInput={(params) => (
                             <TextField

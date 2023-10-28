@@ -1,11 +1,11 @@
 export interface IUtiltity {
     name: string
     note: string
-    id:string
+    id: string
 }
 export interface IUtiltityResponse {
     data: {
-        utilities:IUtiltity[]
+        utilities: IUtiltity[]
     }
     message: string
     status: string
