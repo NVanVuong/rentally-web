@@ -1,9 +1,10 @@
-import avatar from "@/assets/images/avatar.png"
-import { Avatar, Badge, Dropdown, MenuProps } from "antd"
+import { Avatar, Dropdown, MenuProps } from "antd"
 import { MdOutlineAdminPanelSettings, MdLogout } from "react-icons/md"
 import { BiUser } from "react-icons/bi"
 import { logOut } from "@/redux/features/auth/auth.slice"
-import { useAppDispatch } from "@/redux/hook"
+import { useAppDispatch, useAppSelector } from "@/redux/hook"
+import { MdOutlineMenu } from "react-icons/md"
+import { useState } from "react"
 import "./style.css"
 
 interface IPageHeader {
@@ -31,6 +32,7 @@ const items: MenuProps["items"] = [
 ]
 
 const PageHeader = (props: IPageHeader) => {
+    const userInfo = useAppSelector((state) => state.auth.userInfo)
     const dispatch = useAppDispatch()
     const onClick: MenuProps["onClick"] = ({ key }) => {
         switch (key) {
@@ -46,13 +48,26 @@ const PageHeader = (props: IPageHeader) => {
                 break
         }
     }
+
+    const [isOpen, setIsOpen] = useState(false)
+
     return (
         <div className="mb-3 flex w-full items-center justify-between">
             <h1 className="text-2xl font-medium  text-secondary">{props.title}</h1>
-            <Dropdown menu={{ items, onClick }} trigger={["click"]} placement="bottomLeft" arrow>
-                <Badge size="small" count={1}>
-                    <Avatar className="cursor-pointer" src={avatar} size={48} />
-                </Badge>
+            <Dropdown
+                className={`flex items-center justify-center gap-2 rounded-full border border-gray-200 py-1 pl-3 pr-2 transition duration-200 hover:shadow-xl ${
+                    isOpen ? "shadow-xl" : "shadow-none"
+                }`}
+                menu={{ items, onClick }}
+                trigger={["click"]}
+                placement="bottomLeft"
+                arrow
+                onOpenChange={() => setIsOpen(!isOpen)}
+            >
+                <div>
+                    <MdOutlineMenu className="h-5 w-5" />
+                    <Avatar className="cursor-pointer" src={userInfo?.photo} size={36} />
+                </div>
             </Dropdown>
         </div>
     )

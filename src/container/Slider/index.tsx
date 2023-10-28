@@ -3,7 +3,7 @@ import type { MenuProps } from "antd"
 import { Menu } from "antd"
 import "./style.css"
 import { useState } from "react"
-import ArrowCircle from "./ArrowCircle"
+import ArrowCircle from "../../assets/icons/ArrowCircle"
 import RetallyLogo from "../../assets/images/rentally_logo.png"
 import RetallyLogoFull from "../../assets/images/rentally_logo_full.png"
 import { useNavigate } from "react-router-dom"
@@ -76,7 +76,7 @@ const Slider = () => {
         <div
             className={`${
                 isExpanding ? "w-60" : "w-20"
-            } trasition relative flex h-screen flex-col items-center rounded-br-3xl rounded-tr-3xl border-2 border-gray-300 bg-white duration-200`}
+            } trasition relative flex h-screen flex-col items-center rounded-br-3xl rounded-tr-3xl border border-gray-200 bg-white duration-200 peer-hover:bg-red-500`}
         >
             <img
                 className={`${isExpanding ? "h-12" : "h-8"} my-4  transition duration-100`}

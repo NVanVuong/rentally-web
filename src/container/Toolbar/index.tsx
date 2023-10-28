@@ -16,7 +16,7 @@ const TableToolbar = () => {
                 className="flex items-center space-x-2 rounded-xl bg-primary px-3 py-2 text-white"
             >
                 <FaPlus className="h-3 w-3" />
-                <span className="text-xs font-bold tracking-wide">Add Account</span>
+                <span className="text-xs font-bold tracking-wide">Add new</span>
             </button>
         </div>
     )
