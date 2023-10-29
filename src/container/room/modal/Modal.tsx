@@ -51,7 +51,7 @@ const Modal = (props: IModal) => {
     return (
         <div>
             <Spin spinning={false}>
-                <div className="mb-6 mt-4 text-center text-2xl font-bold text-secondary">Create a book</div>
+                <div className="mb-6 mt-4 text-center text-2xl font-bold text-secondary">Create a room</div>
 
                 <Form
                     form={form}
@@ -95,38 +95,49 @@ const Modal = (props: IModal) => {
                         </Form.Item>
                     </div>
 
-                    <div className="mb-6 w-full rounded-md border">
-                        <Autocomplete
-                            onChange={handleChange}
-                            multiple
-                            id="tags-outlined"
-                            sx={{
-                                // border: "1px solid blue",
-                                "& .MuiOutlinedInput-root": {
-                                    border: "0px solid #fff",
-                                    borderRadius: "20px",
-                                    padding: "0"
-                                },
-                                "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                                    border: "none"
-                                },
-                                "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-                                    border: "0px solid #fff"
+                    <div className="relative mb-6 w-full rounded-md ">
+                        
+                            <Autocomplete
+                                onChange={handleChange}
+                                multiple
+                                id=""
+                                sx={{
+                                    "& .MuiAutocomplete-popper":{ fontSize:'12px'},
+                                    "& .MuiOutlinedInput-root": {
+                                        border: "1px solid #d9d9d9",
+                                        lineHeight: "0px",
+                                        height: "80px",
+                                        width:'full',
+                                        fontSize:'12px'
+                                    },
+                                    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                                        border: "0px solid #fff"
+                                        
+                                    },
+                                    
+                                }}
+                                options={data || []}
+                                getOptionLabel={(option) => option.name}
+                                defaultValue={
+                                    []
                                 }
-                            }}
-                            options={data || []}
-                            getOptionLabel={(option) => option.name}
-                            filterSelectedOptions
-                            renderInput={(params) => <TextField {...params} label="" placeholder="New util" />}
-                        />
+                                filterSelectedOptions
+                                renderInput={(params) => <TextField {...params} sx={{"& .MuiButtonBase-root":{
+                                    lineHeight: '20px',
+                                    fontSize:'12px',
+                                   
+                                }}} label="" placeholder="New util" />}
+                            />
+                        
                         <Form.Item
-                            className="hidden w-full"
+                            className=" absolute top-0 z-[-100] w-full"
                             name="utilities"
                             rules={[{ required: true, message: "Please input utilities!" }]}
                         >
-                            <Input className="hidden h-0" />
+                            <Input className="hidden " />
                         </Form.Item>
                     </div>
+
                     <UploadImage />
                     <Form.Item className="w-full  pt-6">
                         <Button type="primary" htmlType="submit" className="h-10 bg-primary text-white">
@@ -140,3 +151,4 @@ const Modal = (props: IModal) => {
 }
 
 export default Modal
+

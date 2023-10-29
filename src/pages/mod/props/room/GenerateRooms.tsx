@@ -18,69 +18,68 @@ const GenerateRooms = () => {
     const [UploadImages, uploadImagesResult] = useUploadImagesMutation()
     const [createModRooms, { data, error, isLoading }] = useCreateModRoomsMutation()
     const navigate = useNavigate()
-    const [isSave, setIsSave] = useState(false) 
-    
+    const [isSave, setIsSave] = useState(false)
+
     useServerMessage({ data: data!, error: error })
 
     useEffect(() => {
         console.log(isSave)
         const fetchData = async () => {
-            if(isSave){
-                await createModRooms({roomBlockId:'34', rooms});
+            if (isSave) {
+                await createModRooms({ roomBlockId: "34", rooms })
                 setIsSave(false)
-                navigate('/mod/props')
+                navigate("/mod/props")
                 dispatch(saveRoom())
             }
-        };
-        fetchData();
-    }, [isSave]);
-    
+        }
+        fetchData()
+    }, [isSave])
+
     const handleSubmit = async () => {
         for (const [index, room] of rooms.entries()) {
-            const formData = new FormData();
+            const formData = new FormData()
             room.images?.forEach((image) => {
-                formData.append("files", image);
-            });
-            const res = await UploadImages(formData).unwrap();
+                formData.append("files", image)
+            })
+            const res = await UploadImages(formData).unwrap()
             if (res.status === "success" && res.data) {
-                dispatch(changeImagesRoom({ index, images: res.data }));
+                dispatch(changeImagesRoom({ index, images: res.data }))
             } else {
-                console.log("upload error");
+                console.log("upload error")
             }
-
         }
         setIsSave(true)
-        
     }
-    
+
     return (
-        <Spin spinning={isLoading||uploadImagesResult.isLoading}>
-             <div className="">
-            <PageHeader title="Room Management - Block Nguyen Van Linh" />
-            <div className="mx-4 mb-4 flex justify-end gap-4">
-                <button
-                    onClick={() => {
-                        dispatch(addRoom())
-                    }}
-                    className="flex items-center space-x-2 rounded-xl bg-secondary px-3 py-2 text-white"
-                >
-                    <FaPlus className="h-3 w-3" />
-                    <span className="text-xs font-bold tracking-wide">Add</span>
-                </button>
-                <button
-                    onClick={handleSubmit}
-                    className="flex items-center space-x-2 rounded-xl bg-primary px-3 py-2 text-white"
-                >
-                    <BsSave className="h-3 w-3" />
-                    <span className="text-xs font-bold tracking-wide">Submit</span>
-                </button>
+        <Spin spinning={isLoading || uploadImagesResult.isLoading}>
+            <div className="w-full">
+                <PageHeader title="Room Management - Block Nguyen Van Linh" />
+                <div className="mx-4 mb-4 flex justify-end gap-4">
+                    <button
+                        onClick={() => {
+                            dispatch(addRoom())
+                        }}
+                        className="flex items-center space-x-2 rounded-xl bg-secondary px-3 py-2 text-white"
+                    >
+                        <FaPlus className="h-3 w-3" />
+                        <span className="text-xs font-bold tracking-wide">Add</span>
+                    </button>
+                    <button
+                        onClick={handleSubmit}
+                        className="flex items-center space-x-2 rounded-xl bg-primary px-3 py-2 text-white"
+                    >
+                        <BsSave className="h-3 w-3" />
+                        <span className="text-xs font-bold tracking-wide">Submit</span>
+                    </button>
+                </div>
+                <div className="scrollbar-hide mx-14 h-[730px] overflow-y-auto rounded-2xl border-2">
+                    <div className="grid_product flex w-full flex-col  justify-center gap-16 p-3 max-sm:justify-between md:grid">
+                        {rooms?.map((room) => <RoomCard key={room.id} room={room} />)}
+                    </div>
+                </div>
             </div>
-            <div className="grid_product my-12 flex w-full flex-col justify-center gap-16 max-sm:justify-between md:grid">
-                {rooms?.map((room) => <RoomCard key={room.id} room={room} />)}
-            </div>
-        </div>
         </Spin>
-       
     )
 }
 
