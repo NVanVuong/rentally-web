@@ -1,24 +1,31 @@
 import { IModal } from "@/interfaces/modal.interface"
-import { Button, Form, Input, Spin } from "antd"
+import { Button, Form, Input, InputNumber, Spin } from "antd"
 import UploadImage from "@/components/Upload"
 import { useEffect, useState } from "react"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
 import { useAppDispatch } from "@/redux/hook"
-import { generateRoom } from "@/redux/features/generateRoom/generateRoom.slice"
+import { generateRoom, saveSrcImage } from "@/redux/features/generateRoom/generateRoom.slice"
 import { IRoom } from "@/interfaces/room.interface"
 import { useNavigate } from "react-router-dom"
 
 import { closeModal } from "@/redux/features/modal/modal.slice"
 import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
-
+import { IUtiltity } from "@/interfaces/utility.interface"
+import TypedInputNumber from "antd/es/input-number"
 
 const Modal = (props: IModal) => {
     const [form] = Form.useForm()
     const dispatch = useAppDispatch()
-    const [selectedOptions, setSelectedOptions] = useState([])
+    const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>([])
     const navigate = useNavigate()
     const { data } = useGetUtilitiesQuery("")
+
+    useEffect(() => {
+        form.setFieldsValue({
+            utilities: selectedOptions.map((selectedOption) => selectedOption.id)
+        })
+    }, [selectedOptions, form])
 
     const handleChange = (event: any, value: any) => {
         setSelectedOptions(value)
@@ -30,18 +37,16 @@ const Modal = (props: IModal) => {
 
     const onFinish = (values: any) => {
         dispatch(closeModal())
-        values.images = values.images.fileList.map((file: any) => JSON.stringify(file))
+        const srcImage = values.images.fileList[0].thumbUrl
+
+        dispatch(saveSrcImage({ srcImage: JSON.stringify(srcImage) }))
+
+        values.images = values.images.fileList.map((file: any) => file.originFileObj)
+
         const { quantity, ...roomPattern } = values
-        console.log({ roomPattern: roomPattern as IRoom, quantity: quantity })
         dispatch(generateRoom({ roomPattern: roomPattern as IRoom, quantity: quantity }))
         navigate("/mod/props/generate-rooms")
     }
-
-    useEffect(() => {
-        form.setFieldsValue({
-            utilities: selectedOptions
-        })
-    }, [selectedOptions, form])
 
     return (
         <div>
@@ -57,20 +62,20 @@ const Modal = (props: IModal) => {
                     layout="horizontal"
                     className="flex w-full flex-col items-center"
                 >
-                    <div className="flex gap-8">
+                    <div className="flex w-full gap-8">
                         <Form.Item
                             className="w-full"
                             name="area"
                             rules={[{ required: true, message: "Please input area!" }]}
                         >
-                            <Input placeholder="Area" />
+                            <TypedInputNumber className="w-full" placeholder="Area" />
                         </Form.Item>
                         <Form.Item
                             className="w-full"
                             name="price"
                             rules={[{ required: true, message: "Please input price!" }]}
                         >
-                            <Input placeholder="Price" />
+                            <TypedInputNumber className="w-full" placeholder="Price" />
                         </Form.Item>
                     </div>
                     <div className="flex gap-8">
@@ -79,26 +84,40 @@ const Modal = (props: IModal) => {
                             name="depositAmount"
                             rules={[{ required: true, message: "Please input deposit amount" }]}
                         >
-                            <Input placeholder="Deposit amount" />
+                            <TypedInputNumber className="w-full" placeholder="Deposit amount" />
                         </Form.Item>
                         <Form.Item
                             className="w-full"
                             name="quantity"
                             rules={[{ required: true, message: "Please input quantity!" }]}
                         >
-                            <Input placeholder="Quantity" />
+                            <TypedInputNumber className="w-full" placeholder="Quantity" />
                         </Form.Item>
                     </div>
 
-                    <div className="w-full pb-6">
+                    <div className="mb-6 w-full rounded-md border">
                         <Autocomplete
                             onChange={handleChange}
                             multiple
                             id="tags-outlined"
-                            options={data?.data.utilities||[]}
+                            sx={{
+                                // border: "1px solid blue",
+                                "& .MuiOutlinedInput-root": {
+                                    border: "0px solid #fff",
+                                    borderRadius: "20px",
+                                    padding: "0"
+                                },
+                                "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
+                                    border: "none"
+                                },
+                                "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                                    border: "0px solid #fff"
+                                }
+                            }}
+                            options={data || []}
                             getOptionLabel={(option) => option.name}
                             filterSelectedOptions
-                            renderInput={(params) => <TextField {...params} label="Utilities" placeholder="New util" />}
+                            renderInput={(params) => <TextField {...params} label="" placeholder="New util" />}
                         />
                         <Form.Item
                             className="hidden w-full"

@@ -1,10 +1,10 @@
 export interface IRoom {
     id?: string
-    area: string
+    area: number
     roomName: string
-    price: string
-    depositAmount: string
-    images?: string
+    price: number
+    depositAmount: number
+    images?: File[] | string[]
     utilities?: any
 }
 export interface IRoomQuery {

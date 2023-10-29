@@ -9,8 +9,8 @@ import {
 } from "@/interfaces/roomBlock.interface"
 import { creatApiWithAuth } from "../apiWithAuth.service"
 
-const creatApiUserWithAuth = creatApiWithAuth("userApi", ["ModRoomBlocks"])
-export const modRoomBlockApi = creatApiUserWithAuth.injectEndpoints({
+const creatRoomBlocksWithAuth = creatApiWithAuth("userApi", ["ModRoomBlocks"])
+export const modRoomBlockApi = creatRoomBlocksWithAuth.injectEndpoints({
     endpoints: (builder) => ({
         getModRoomBlocks: builder.query<IRoomBlocksResponse, IRoomBlockQuery>({
             query({ keyword = "" }) {

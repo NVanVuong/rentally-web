@@ -3,43 +3,65 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     rooms: [] as IRoom[],
-    roomPattern: {} as IRoom
+    roomPattern: {} as IRoom,
+    count: 0 as number,
+    srcImage: "" as string
 }
 
 const generateRoomSlice = createSlice({
-    name: "modal",
+    name: "generateRoom",
     initialState,
     reducers: {
-        generateRoom: (state, action: PayloadAction<{ roomPattern: IRoom; quantity: string }>) => {
+        generateRoom: (state, action: PayloadAction<{ roomPattern: IRoom; quantity: number }>) => {
             const rooms = []
             const { quantity, roomPattern } = action.payload
-            const quantityValue = parseInt(quantity, 10)
             state.roomPattern = roomPattern
             roomPattern.id = "0"
             roomPattern.roomName = "F0"
-            for (let i = 0; i < quantityValue; i++) {
+            for (let i = 0; i < quantity; i++) {
+                state.count++
                 const room = { ...roomPattern }
-                const id = i
-                room.id = `${id}`
-                room.roomName = `F${id}`
+                // const id = i
+                room.id = `${state.count}`
+                room.roomName = `F${state.count}`
                 rooms.push(room)
             }
             state.rooms = rooms
             console.log(state.rooms)
         },
 
+        saveSrcImage: (state, action: PayloadAction<{ srcImage: string }>) => {
+            state.srcImage = action.payload.srcImage
+        },
+
         changeRoomName: (state, action: PayloadAction<{ id: string; roomName: string }>) => {
-            const { id, roomName } = action.payload
-            state.rooms[parseInt(id, 10)].roomName = roomName
+            const roomIndex = state.rooms.findIndex((room) => room.id === action.payload.id)
+            if (roomIndex !== -1) {
+                state.rooms[roomIndex].roomName = action.payload.roomName
+            }
         },
         changeUtilitiesRoom: (state, action: PayloadAction<{ id: string; utilities: string[] }>) => {
-            const { id, utilities } = action.payload
-            state.rooms[parseInt(id, 10)].utilities = utilities
+            const roomIndex = state.rooms.findIndex((room) => room.id === action.payload.id)
+            if (roomIndex !== -1) {
+                state.rooms[roomIndex].utilities = action.payload.utilities
+            }
         },
-        addRoom: (state) =>{
-            const newRoom = {...state.roomPattern}
-            newRoom.id = `${state.rooms.length}`
-            newRoom.roomName = `F${state.rooms.length}`
+        changeImagesRoom: (state, action: PayloadAction<{ index: number; images: string[] }>) => {
+            state.rooms[action.payload.index].images = action.payload.images
+        },
+        deleteRoom: (state, action: PayloadAction<{ id: string }>) => {
+            const roomIndex = state.rooms.findIndex((room) => room.id === action.payload.id)
+
+            if (roomIndex !== -1) {
+                console.log(state.rooms[roomIndex].roomName + " deleted")
+                state.rooms.splice(roomIndex, 1)
+            }
+        },
+        addRoom: (state) => {
+            const newRoom = { ...state.roomPattern }
+            state.count++
+            newRoom.id = `${state.count}`
+            newRoom.roomName = `F${state.count}`
             state.rooms.push(newRoom)
         },
         saveRoom: (state) => {
@@ -49,6 +71,15 @@ const generateRoomSlice = createSlice({
     }
 })
 
-export const { generateRoom, changeRoomName, saveRoom, addRoom,changeUtilitiesRoom } = generateRoomSlice.actions
+export const {
+    generateRoom,
+    changeRoomName,
+    changeImagesRoom,
+    saveRoom,
+    addRoom,
+    deleteRoom,
+    changeUtilitiesRoom,
+    saveSrcImage
+} = generateRoomSlice.actions
 
 export default generateRoomSlice.reducer
