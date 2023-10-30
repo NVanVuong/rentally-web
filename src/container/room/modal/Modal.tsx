@@ -95,7 +95,7 @@ const Modal = (props: IModal) => {
                         </Form.Item>
                     </div>
 
-                    <div className="relative mb-6 w-full rounded-md ">
+                    <div className="relative mb-6 w-full rounded-md border focus-within:border-primary hover:border-primary">
                         
                             <Autocomplete
                                 onChange={handleChange}
@@ -104,7 +104,7 @@ const Modal = (props: IModal) => {
                                 sx={{
                                     "& .MuiAutocomplete-popper":{ fontSize:'12px'},
                                     "& .MuiOutlinedInput-root": {
-                                        border: "1px solid #d9d9d9",
+                                        border: "px solid #d9d9d9",
                                         lineHeight: "0px",
                                         height: "80px",
                                         width:'full',

@@ -9,7 +9,7 @@ import {
 } from "@/interfaces/roomBlock.interface"
 import { creatApiWithAuth } from "../apiWithAuth.service"
 
-const creatRoomBlocksWithAuth = creatApiWithAuth("userApi", ["ModRoomBlocks"])
+const creatRoomBlocksWithAuth = creatApiWithAuth("modRoomBlockApi", ["ModRoomBlocks"])
 export const modRoomBlockApi = creatRoomBlocksWithAuth.injectEndpoints({
     endpoints: (builder) => ({
         getModRoomBlocks: builder.query<IRoomBlocksResponse, IRoomBlockQuery>({
@@ -18,11 +18,20 @@ export const modRoomBlockApi = creatRoomBlocksWithAuth.injectEndpoints({
             },
             providesTags: ["RoomBlocks"]
         }),
+
         getModRoomBlock: builder.query<IRoomBlockResponse, IRoomBlockRequest>({
             query({ id }) {
                 return `/mod/room-blocks/${id}`
             }
         }),
+
+        getModRoomsInBlocks: builder.query<any, string>({
+            query( id ) {
+                return `/mod/room-blocks/${id}/rooms`
+            },
+            providesTags: ["RoomBlocks"]
+        }),
+
         createModRoomBlock: builder.mutation<IRoomBlockResponse, ICreateRoomBlockRequest>({
             query: (body) => ({
                 url: `/mod/room-blocks`,
@@ -54,6 +63,7 @@ export const modRoomBlockApi = creatRoomBlocksWithAuth.injectEndpoints({
 export const {
     useGetModRoomBlocksQuery,
     useGetModRoomBlockQuery,
+    useGetModRoomsInBlocksQuery,
     useCreateModRoomBlockMutation,
     useDeleteModRoomBlockMutation,
     useUpdateModRoomBlockMutation
