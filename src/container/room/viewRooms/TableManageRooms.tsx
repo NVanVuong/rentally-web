@@ -6,8 +6,7 @@ import { Dropdown, Space } from "antd"
 import { useMenuActions } from "@/hooks/useMenuActions"
 import { IRoom } from "@/interfaces/room.interface"
 
-const TableManageRooms = ({rooms}:{rooms:IRoom[]}) => {
-
+const TableManageRooms = ({ rooms }: { rooms: IRoom[] }) => {
     const getMenuActions = useMenuActions({ isDelete: true })
     const columns: ColumnsType<IRoom> = [
         {
@@ -77,8 +76,6 @@ const TableManageRooms = ({rooms}:{rooms:IRoom[]}) => {
             }
         }
     ]
-    return (
-            <TableAntd dataSource={rooms} columns={columns} rowKey={(record) => record.id} />
-    )
+    return <TableAntd dataSource={rooms} columns={columns} rowKey={(record) => record.id} />
 }
 export default TableManageRooms

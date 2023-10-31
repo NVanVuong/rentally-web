@@ -65,7 +65,7 @@ const Modal = () => {
     return (
         <div>
             <Spin spinning={false}>
-                <ModalTitle/>
+                <ModalTitle />
                 <Form
                     form={form}
                     onValuesChange={handleValuesChange}
@@ -129,7 +129,7 @@ const Modal = () => {
                             }}
                             options={data || []}
                             getOptionLabel={(option) => option.name}
-                            defaultValue={roomData?.utilities.map(
+                            defaultValue={roomData?.utilities?.map(
                                 (value: string) => data?.find((utility) => utility.id === value)
                             )}
                             filterSelectedOptions

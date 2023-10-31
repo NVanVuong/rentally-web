@@ -1,4 +1,3 @@
-// interface Props {
 import { IRoom } from "@/interfaces/room.interface"
 import { IUtiltity } from "@/interfaces/utility.interface"
 import { changeRoomName, changeUtilitiesRoom, deleteRoom } from "@/redux/features/generateRoom/generateRoom.slice"
@@ -16,8 +15,9 @@ const RoomCard = ({ room }: Props) => {
     const dispatch = useAppDispatch()
     const { area, price, depositAmount, utilities, id } = room
     const srcImage = JSON.parse(useAppSelector((state) => state.generateRoom.srcImage))
-    const [roomName, setRoomName] = useState(room.roomName)
     const { data } = useGetUtilitiesQuery("")
+
+    const [roomName, setRoomName] = useState(room.roomName)
     const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>([])
 
     const handleChange = (event: any, value: IUtiltity[]) => {
@@ -80,7 +80,7 @@ const RoomCard = ({ room }: Props) => {
                         }}
                         options={data || []}
                         getOptionLabel={(option) => option.name}
-                        defaultValue={utilities.map((value: string) => data?.find((utility) => utility.id === value))}
+                        defaultValue={utilities?.map((value: string) => data?.find((utility) => utility.id === value))}
                         filterSelectedOptions
                         renderInput={(params) => (
                             <TextField

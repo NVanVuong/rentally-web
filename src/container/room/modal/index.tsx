@@ -14,7 +14,7 @@ const ModalProps = () => {
             case MODAL.UPDATE:
                 return <Modal />
             case MODAL.VIEW:
-                return <ViewModal/>
+                return <ViewModal />
             case MODAL.DELETE:
                 return <DeleteModal />
             default:

@@ -1,5 +1,5 @@
 import { useGetModRoomsInBlocksQuery } from "@/redux/services/room/room.service"
-import {  Spin } from "antd"
+import { Spin } from "antd"
 import { useAppSelector } from "@/redux/hook"
 import PageHeader from "@/container/PageHeader"
 import TableToolbar from "@/container/Toolbar"
