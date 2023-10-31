@@ -1,4 +1,4 @@
-import { Button, Form, Input, InputNumber, Spin } from "antd"
+import { Button, Form, Input, Spin } from "antd"
 import UploadImage from "@/components/Upload"
 import { useEffect, useState } from "react"
 import TextField from "@mui/material/TextField"
@@ -13,6 +13,7 @@ import { IUtiltity } from "@/interfaces/utility.interface"
 
 import { MODAL } from "@/utils/constants/GlobalConst"
 import TypedInputNumber from "antd/es/input-number"
+import ModalTitle from "@/components/Modal/ModalTitle"
 const Modal = () => {
     const type = useAppSelector((state) => state.modal.type)
     const roomData = useAppSelector((state) => state.modal.data) as IRoom
@@ -64,8 +65,7 @@ const Modal = () => {
     return (
         <div>
             <Spin spinning={false}>
-                <div className="mb-6 mt-4 text-center text-2xl font-bold text-secondary">Create a room</div>
-
+                <ModalTitle/>
                 <Form
                     form={form}
                     onValuesChange={handleValuesChange}

@@ -3,6 +3,7 @@ import { useAppSelector } from "@/redux/hook"
 import ModalAntd from "@/components/Modal"
 import Modal from "./Modal"
 import DeleteModal from "./DeleteModal"
+import ViewModal from "./ViewModal"
 
 const ModalProps = () => {
     const type = useAppSelector((state) => state.modal.type)
@@ -11,8 +12,9 @@ const ModalProps = () => {
         switch (type) {
             case MODAL.ADD:
             case MODAL.UPDATE:
-            case MODAL.VIEW:
                 return <Modal />
+            case MODAL.VIEW:
+                return <ViewModal/>
             case MODAL.DELETE:
                 return <DeleteModal />
             default:
