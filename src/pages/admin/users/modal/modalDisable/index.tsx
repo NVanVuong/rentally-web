@@ -1,12 +1,13 @@
 import ModalTitle from "@/components/Modal/ModalTitle"
 import useServerMessage from "@/hooks/useServerMessage"
 import { IModal } from "@/interfaces/modal.interface"
+import { IUser } from "@/interfaces/user.interface"
 import { useUpdateUserMutation } from "@/redux/services/user/user.service"
 import { STATUS } from "@/utils/constants/GlobalConst"
 import { Button, Image, Spin } from "antd"
 
 const ModalDisable = (props: IModal) => {
-    const userData = props.data
+    const userData = props.data as IUser
     const isActive = userData?.status === STATUS.ACTIVE
     const [updateUser, { data, error, isLoading }] = useUpdateUserMutation()
 
@@ -25,7 +26,7 @@ const ModalDisable = (props: IModal) => {
             <ModalTitle />
             <p className=" mb-6 text-center font-medium">
                 Are you sure you want to {isActive ? "disable" : "active"} the account of <br />
-                <span className=" font-bold">{props.data?.firstName}</span>?
+                <span className=" font-bold">{userData?.firstName}</span>?
             </p>
             <div className="mb-6 flex w-full justify-center">
                 <Image src={userData?.photo} width={100} height={100} className="rounded-full" />

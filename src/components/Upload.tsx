@@ -3,11 +3,14 @@ import { PlusOutlined } from "@ant-design/icons"
 import { Form, Modal, Upload } from "antd"
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface"
 
-const UploadImage = () => {
+const UploadImage = ({ imageList }: { imageList: string[] }) => {
     const [previewOpen, setPreviewOpen] = useState(false)
     const [previewImage, setPreviewImage] = useState("")
     const [previewTitle, setPreviewTitle] = useState("")
-    const [fileList, setFileList] = useState<UploadFile[]>([])
+
+    const [fileList, setFileList] = useState<UploadFile[]>(
+        imageList?.map((image: string, index) => ({ status: "done", url: image, name: "image.png", uid: index + "" }))
+    )
 
     const getBase64 = (file: RcFile): Promise<string> =>
         new Promise((resolve, reject) => {

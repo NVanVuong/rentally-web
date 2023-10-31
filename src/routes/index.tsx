@@ -36,7 +36,6 @@ const MainRoute = () => {
                             <Route path={SITE_MAP.PROPS_MANAGEMENT} element={<ModPropsPage />}>
                                 <Route path={SITE_MAP.ROOMS_GENERATION} element={<GenerateRooms />} />
                                 <Route path={SITE_MAP.ROOMS_MANAGEMENT} element={<RoomsManagement />} />
-
                             </Route>
                         </Route>
                     </Route>

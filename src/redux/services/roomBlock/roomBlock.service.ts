@@ -25,13 +25,6 @@ export const modRoomBlockApi = creatRoomBlocksWithAuth.injectEndpoints({
             }
         }),
 
-        getModRoomsInBlocks: builder.query<any, string>({
-            query( id ) {
-                return `/mod/room-blocks/${id}/rooms`
-            },
-            providesTags: ["RoomBlocks"]
-        }),
-
         createModRoomBlock: builder.mutation<IRoomBlockResponse, ICreateRoomBlockRequest>({
             query: (body) => ({
                 url: `/mod/room-blocks`,
@@ -63,7 +56,6 @@ export const modRoomBlockApi = creatRoomBlocksWithAuth.injectEndpoints({
 export const {
     useGetModRoomBlocksQuery,
     useGetModRoomBlockQuery,
-    useGetModRoomsInBlocksQuery,
     useCreateModRoomBlockMutation,
     useDeleteModRoomBlockMutation,
     useUpdateModRoomBlockMutation

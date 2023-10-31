@@ -6,9 +6,10 @@ import { createUserFormData, normFile } from "@/utils/helpers"
 import useServerMessage from "@/hooks/useServerMessage"
 import ModalTitle from "@/components/Modal/ModalTitle"
 import { IModal } from "@/interfaces/modal.interface"
+import { IUser } from "@/interfaces/user.interface"
 
 const ModalUpdate = (props: IModal) => {
-    const userData = props?.data
+    const userData = props?.data as IUser
     const [updateUser, { data, error, isLoading }] = useUpdateUserMutation()
 
     useServerMessage({ data: data!, error: error })

@@ -26,9 +26,9 @@ const RoomCard = ({ room }: Props) => {
     }
 
     return (
-        <div className="relative flex h-[320px] w-[240px] flex-col rounded-[16px] shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] hover:shadow-2xl font-momo text-slate-600" >
+        <div className="font-momo relative flex h-[320px] w-[240px] flex-col rounded-[16px] text-slate-600 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] hover:shadow-2xl">
             <AiOutlineCloseCircle
-                className="animate-1-s absolute cursor-pointer right-3 top-2 h-6 w-6 rounded-full bg-white opacity-30 hover:text-red-600 hover:opacity-80 "
+                className="animate-1-s absolute right-3 top-2 h-6 w-6 cursor-pointer rounded-full bg-white opacity-30 hover:text-red-600 hover:opacity-80 "
                 onClick={() => {
                     dispatch(deleteRoom({ id: id || "" }))
                 }}
@@ -50,13 +50,13 @@ const RoomCard = ({ room }: Props) => {
                         className="h-full w-[100px] text-[14px] outline-none  placeholder:text-[14px] placeholder:font-normal "
                     />
                 </div>
-                <div className="border-b pb-1 mb-1">
+                <div className="mb-1 border-b pb-1">
                     <h5 className="text-[16px] font-bold text-[#128E07]">Vacant</h5>
                     <div className="flex flex-row justify-between text-[13px]">
-                    <p>{`Price: ${price} dollar`}</p>
-                    <p>{`Area: ${area} m2`}</p>
+                        <p>{`Price: ${price} dollar`}</p>
+                        <p>{`Area: ${area} m2`}</p>
                     </div>
-                    
+
                     <p className="text-[13px]">{`Deposit amount: ${depositAmount} dollar`}</p>
                 </div>
                 <div className="h-4">
@@ -71,9 +71,9 @@ const RoomCard = ({ room }: Props) => {
                                 padding: "0",
                                 lineHeight: "0px",
                                 height: "70px",
-                                width:'full'
+                                width: "full"
                             },
-                           
+
                             "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
                                 border: "0px solid #fff"
                             }
@@ -82,11 +82,19 @@ const RoomCard = ({ room }: Props) => {
                         getOptionLabel={(option) => option.name}
                         defaultValue={utilities.map((value: string) => data?.find((utility) => utility.id === value))}
                         filterSelectedOptions
-                        renderInput={(params) => <TextField {...params} label="" placeholder="New util" sx={{"& .MuiButtonBase-root":{
-                            lineHeight: '10px',
-                            fontSize:'11px',
-                           
-                        }}} />}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label=""
+                                placeholder="New util"
+                                sx={{
+                                    "& .MuiButtonBase-root": {
+                                        lineHeight: "10px",
+                                        fontSize: "11px"
+                                    }
+                                }}
+                            />
+                        )}
                     />
                 </div>
             </div>

@@ -1,19 +1,19 @@
-import { useGetModRoomsInBlocksQuery } from "@/redux/services/roomBlock/roomBlock.service"
+import { useGetModRoomsInBlocksQuery } from "@/redux/services/room/room.service"
 import TableAntd from "@/components/Table"
-import { IUser } from "@/interfaces/user.interface"
 import { ColumnsType } from "antd/es/table"
 import { AlignType } from "rc-table/lib/interface"
 import { FaEllipsis } from "react-icons/fa6"
-import { Badge, Dropdown, Space, Spin } from "antd"
+import { Dropdown, Space, Spin } from "antd"
 import { useAppSelector } from "@/redux/hook"
 import { useMenuActions } from "@/hooks/useMenuActions"
 import { IRoom } from "@/interfaces/room.interface"
+import PageHeader from "@/container/PageHeader"
+import TableToolbar from "@/container/Toolbar"
 const RoomsManagement = () => {
-    const {data, isLoading} = useGetModRoomsInBlocksQuery('34')
-    const rooms = data?.data?.roomBlocks
     const keyword = useAppSelector((state) => state.search.keyword)
-    console.log(rooms)
-    const getMenuActions = useMenuActions()
+    const { data, isLoading } = useGetModRoomsInBlocksQuery({ id: "34", keyword })
+    const rooms = data?.data?.roomBlocks
+    const getMenuActions = useMenuActions({ isDelete: true })
 
     const columns: ColumnsType<IRoom> = [
         {
@@ -28,28 +28,31 @@ const RoomsManagement = () => {
             title: <span className="font-bold">Room_ID</span>,
             key: "roomName",
             width: "15%",
-            render: (record: IRoom) => (
-                <div className="flex items-center">
-                    <img className="h-8 w-8 rounded-full" src={record.images[0]} alt={record.roomName} />
-                    <span className="ml-2 text-sm font-semibold">{record.roomName}</span>
-                </div>
-            )
+            render: (record: IRoom) => {
+                const firstImage = record.images?.[0] as string
+                return (
+                    <div className="flex items-center">
+                        <img className="h-8 w-8 rounded-full" src={firstImage} alt={record.roomName} />
+                        <span className="ml-2 text-sm font-semibold">{record.roomName}</span>
+                    </div>
+                )
+            }
         },
         {
             title: <span className="font-bold">Area</span>,
             dataIndex: "area",
             key: "area",
             width: "15%",
-            sortDirections: ['ascend', 'descend'],
+            sortDirections: ["ascend", "descend"],
             sorter: (a, b) => a.area - b.area,
             render: (area: number) => <span className="text-sm font-medium">{area}</span>
-        },        
+        },
         {
             title: <span className="font-bold">Price</span>,
             key: "price",
             dataIndex: "price",
             width: "15%",
-            sortDirections: ['ascend', 'descend'],
+            sortDirections: ["ascend", "descend"],
             sorter: (a, b) => a.price - b.price,
             render: (price: number) => <span className="text-sm font-medium">{price}</span>
         },
@@ -58,7 +61,7 @@ const RoomsManagement = () => {
             key: "depositAmount",
             dataIndex: "depositAmount",
             width: "15%",
-            sortDirections: ['ascend', 'descend'],
+            sortDirections: ["ascend", "descend"],
             sorter: (a, b) => a.depositAmount - b.depositAmount,
             render: (depositAmount: number) => <span className="text-sm font-medium">{depositAmount}</span>
         },
@@ -67,7 +70,7 @@ const RoomsManagement = () => {
             key: "action",
             width: "10%",
             align: "center" as AlignType,
-            render: (record: IUser) => {
+            render: (record: IRoom) => {
                 const menuActions = getMenuActions(record)
 
                 return (
@@ -85,6 +88,8 @@ const RoomsManagement = () => {
 
     return (
         <Spin spinning={isLoading}>
+            <PageHeader title="Rooms Management" />
+            <TableToolbar />
             <TableAntd dataSource={rooms} columns={columns} rowKey={(record) => record.id} />
         </Spin>
     )

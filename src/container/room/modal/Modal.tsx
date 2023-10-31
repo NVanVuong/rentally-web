@@ -1,20 +1,33 @@
-import { IModal } from "@/interfaces/modal.interface"
 import { Button, Form, Input, InputNumber, Spin } from "antd"
 import UploadImage from "@/components/Upload"
 import { useEffect, useState } from "react"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
-import { useAppDispatch } from "@/redux/hook"
+import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { generateRoom, saveSrcImage } from "@/redux/features/generateRoom/generateRoom.slice"
 import { IRoom } from "@/interfaces/room.interface"
 import { useNavigate } from "react-router-dom"
-
 import { closeModal } from "@/redux/features/modal/modal.slice"
 import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
 import { IUtiltity } from "@/interfaces/utility.interface"
-import TypedInputNumber from "antd/es/input-number"
 
-const Modal = (props: IModal) => {
+import { MODAL } from "@/utils/constants/GlobalConst"
+import TypedInputNumber from "antd/es/input-number"
+const Modal = () => {
+    const type = useAppSelector((state) => state.modal.type)
+    const roomData = useAppSelector((state) => state.modal.data) as IRoom
+    const imageList = roomData?.images as string[]
+    let initialValues = {}
+    if (type === MODAL.UPDATE) {
+        console.log(roomData)
+        initialValues = {
+            id: roomData?.id,
+            area: roomData?.area,
+            price: roomData?.price,
+            depositAmount: roomData?.depositAmount
+        }
+    }
+
     const [form] = Form.useForm()
     const dispatch = useAppDispatch()
     const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>([])
@@ -61,6 +74,7 @@ const Modal = (props: IModal) => {
                     wrapperCol={{ span: 14 }}
                     layout="horizontal"
                     className="flex w-full flex-col items-center"
+                    initialValues={initialValues}
                 >
                     <div className="flex w-full gap-8">
                         <Form.Item
@@ -96,39 +110,44 @@ const Modal = (props: IModal) => {
                     </div>
 
                     <div className="relative mb-6 w-full rounded-md border focus-within:border-primary hover:border-primary">
-                        
-                            <Autocomplete
-                                onChange={handleChange}
-                                multiple
-                                id=""
-                                sx={{
-                                    "& .MuiAutocomplete-popper":{ fontSize:'12px'},
-                                    "& .MuiOutlinedInput-root": {
-                                        border: "px solid #d9d9d9",
-                                        lineHeight: "0px",
-                                        height: "80px",
-                                        width:'full',
-                                        fontSize:'12px'
-                                    },
-                                    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-                                        border: "0px solid #fff"
-                                        
-                                    },
-                                    
-                                }}
-                                options={data || []}
-                                getOptionLabel={(option) => option.name}
-                                defaultValue={
-                                    []
+                        <Autocomplete
+                            onChange={handleChange}
+                            multiple
+                            id=""
+                            sx={{
+                                "& .MuiAutocomplete-popper": { fontSize: "12px" },
+                                "& .MuiOutlinedInput-root": {
+                                    border: "px solid #d9d9d9",
+                                    lineHeight: "0px",
+                                    height: "80px",
+                                    width: "full",
+                                    fontSize: "12px"
+                                },
+                                "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                                    border: "0px solid #fff"
                                 }
-                                filterSelectedOptions
-                                renderInput={(params) => <TextField {...params} sx={{"& .MuiButtonBase-root":{
-                                    lineHeight: '20px',
-                                    fontSize:'12px',
-                                   
-                                }}} label="" placeholder="New util" />}
-                            />
-                        
+                            }}
+                            options={data || []}
+                            getOptionLabel={(option) => option.name}
+                            defaultValue={roomData?.utilities.map(
+                                (value: string) => data?.find((utility) => utility.id === value)
+                            )}
+                            filterSelectedOptions
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    sx={{
+                                        "& .MuiButtonBase-root": {
+                                            lineHeight: "20px",
+                                            fontSize: "12px"
+                                        }
+                                    }}
+                                    label=""
+                                    placeholder="New util"
+                                />
+                            )}
+                        />
+
                         <Form.Item
                             className=" absolute top-0 z-[-100] w-full"
                             name="utilities"
@@ -138,7 +157,7 @@ const Modal = (props: IModal) => {
                         </Form.Item>
                     </div>
 
-                    <UploadImage />
+                    <UploadImage imageList={imageList || []} />
                     <Form.Item className="w-full  pt-6">
                         <Button type="primary" htmlType="submit" className="h-10 bg-primary text-white">
                             Finish
@@ -151,4 +170,3 @@ const Modal = (props: IModal) => {
 }
 
 export default Modal
-
