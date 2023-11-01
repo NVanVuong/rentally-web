@@ -23,7 +23,6 @@ const GenerateRooms = () => {
     useServerMessage({ data: data!, error: error })
 
     useEffect(() => {
-        console.log(isSave)
         const fetchData = async () => {
             if (isSave) {
                 await createModRooms({ roomBlockId: "34", rooms })

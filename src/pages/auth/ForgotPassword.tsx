@@ -28,7 +28,7 @@ const ForgotPassword = () => {
 
     const submitForm = async (values: IEmail) => {
         const res = await forgotPassword({ email: values.email }).unwrap()
-        console.log(res)
+
         if (res.status === "SUCCESS") {
             navigate(`/reset-password/${values.email}`)
         }

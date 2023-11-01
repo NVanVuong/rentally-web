@@ -80,7 +80,6 @@ const Register = () => {
 
     const submitRegisterForm = async (values: RegisterValues) => {
         const { confirmPassword, ...body } = values
-        console.log(body, confirmPassword)
         const res = await register(body).unwrap()
         if (res.status === "SUCCESS") {
             setIsPermitted(true)

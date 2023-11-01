@@ -39,7 +39,7 @@ const PageHeader = (props: IPageHeader) => {
             case "1":
                 break
             case "2":
-                console.log("2")
+
                 dispatch(logOut())
                 break
             default:

@@ -10,7 +10,6 @@ const ViewModal = () => {
 
     const { data } = useGetUtilitiesQuery("")
     const { id, area, depositAmount, price, roomName, utilities, images } = roomData
-    console.log(images)
     return (
         <div className="flex w-full flex-col items-center">
             <ModalTitle />

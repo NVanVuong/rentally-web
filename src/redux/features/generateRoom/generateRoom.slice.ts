@@ -27,7 +27,6 @@ const generateRoomSlice = createSlice({
                 rooms.push(room)
             }
             state.rooms = rooms
-            console.log(state.rooms)
         },
 
         saveSrcImage: (state, action: PayloadAction<{ srcImage: string }>) => {
@@ -53,7 +52,6 @@ const generateRoomSlice = createSlice({
             const roomIndex = state.rooms.findIndex((room) => room.id === action.payload.id)
 
             if (roomIndex !== -1) {
-                console.log(state.rooms[roomIndex].roomName + " deleted")
                 state.rooms.splice(roomIndex, 1)
             }
         },
@@ -65,7 +63,7 @@ const generateRoomSlice = createSlice({
             state.rooms.push(newRoom)
         },
         saveRoom: (state) => {
-            console.log("saveRoom")
+            
             state.rooms = []
         }
     }

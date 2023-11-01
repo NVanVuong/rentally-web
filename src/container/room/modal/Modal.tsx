@@ -24,7 +24,6 @@ const Modal = () => {
     const imageList = roomData?.images as string[]
     let initialValues = {}
     if (type === MODAL.UPDATE) {
-        console.log(roomData)
         initialValues = {
             id: roomData?.id,
             roomName: roomData?.roomName,
@@ -64,9 +63,8 @@ const Modal = () => {
             setIsloading(true)
             const formData = new FormData()
             
-            console.log(values.images.fileList)
             for (const value of values.images.fileList) {
-                console.log(value)
+            
                 if ("status" in value) {
                     fetch(value.url)
                         .then((response) => {
@@ -88,7 +86,7 @@ const Modal = () => {
             const res = await updateRoomImages({ id: roomData?.id || "", body: formData }).unwrap()
             if (res.status === "success" && res.data) {
                 values.images = res.data as string[]
-                console.log(values)
+
             } else {
                 console.log("upload error")
             }
