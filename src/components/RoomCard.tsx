@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
 import Autocomplete from "@mui/material/Autocomplete"
 import TextField from "@mui/material/TextField"
+import { message } from "antd"
 import { useState } from "react"
 import { AiOutlineCloseCircle, AiOutlineHome } from "react-icons/ai"
 
@@ -30,6 +31,7 @@ const RoomCard = ({ room }: Props) => {
             <AiOutlineCloseCircle
                 className="animate-1-s absolute right-3 top-2 h-6 w-6 cursor-pointer rounded-full bg-white opacity-30 hover:text-red-600 hover:opacity-80 "
                 onClick={() => {
+                    message.success(`Deleted room ${id}`)
                     dispatch(deleteRoom({ id: id || "" }))
                 }}
             />

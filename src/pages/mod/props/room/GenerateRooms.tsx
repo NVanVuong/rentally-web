@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom"
 import { useUploadImagesMutation } from "@/redux/services/help/help.service"
 import { useCreateModRoomsMutation } from "@/redux/services/room/room.service"
 import { useEffect, useState } from "react"
-import { Spin } from "antd"
+import { Spin, message } from "antd"
 import useServerMessage from "@/hooks/useServerMessage"
 
 const GenerateRooms = () => {
@@ -59,6 +59,8 @@ const GenerateRooms = () => {
                     <button
                         onClick={() => {
                             dispatch(addRoom())
+                            message.success(`Added room`)
+
                         }}
                         className="flex items-center space-x-2 rounded-xl bg-secondary px-3 py-2 text-white"
                     >
