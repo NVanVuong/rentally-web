@@ -28,7 +28,7 @@ const GenerateRooms = () => {
             if (isSave) {
                 await createModRooms({ roomBlockId: "34", rooms })
                 setIsSave(false)
-                navigate("/mod/props")
+                navigate("/mod/props/rooms")
                 dispatch(saveRoom())
             }
         }

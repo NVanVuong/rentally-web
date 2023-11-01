@@ -24,8 +24,33 @@ export const modRoomApi = createModRoomWithAuth.injectEndpoints({
                 method: "DELETE"
             }),
             invalidatesTags: ["ModRooms"]
+        }),
+
+        UpdateModRoom: builder.mutation<any, any>({
+            query: ({ id, body }) => ({
+                url: `/mod/rooms/${id}`,
+                method: "PUT",
+                body
+            }),
+            invalidatesTags: ["ModRooms"]
+        }),
+        UpdateRoomImages: builder.mutation<
+            { status: string; message: string; data: string[] },
+            { id: string; body: FormData }
+        >({
+            query: ({ body, id }) => ({
+                url: `/aws/upload?id=${id}`,
+                method: "POST",
+                body
+            })
         })
     })
 })
 
-export const { useCreateModRoomsMutation, useDeleteModRoomMutation, useGetModRoomsInBlocksQuery } = modRoomApi
+export const {
+    useCreateModRoomsMutation,
+    useDeleteModRoomMutation,
+    useGetModRoomsInBlocksQuery,
+    useUpdateRoomImagesMutation,
+    useUpdateModRoomMutation
+} = modRoomApi

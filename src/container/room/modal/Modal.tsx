@@ -14,20 +14,26 @@ import { IUtiltity } from "@/interfaces/utility.interface"
 import { MODAL } from "@/utils/constants/GlobalConst"
 import TypedInputNumber from "antd/es/input-number"
 import ModalTitle from "@/components/Modal/ModalTitle"
+import { useUpdateModRoomMutation, useUpdateRoomImagesMutation } from "@/redux/services/room/room.service"
+import useServerMessage from "@/hooks/useServerMessage"
 const Modal = () => {
     const type = useAppSelector((state) => state.modal.type)
     const roomData = useAppSelector((state) => state.modal.data) as IRoom
+    const [updateRoomImages] = useUpdateRoomImagesMutation()
+    const [updateRoom, updateRoomResult] = useUpdateModRoomMutation()
     const imageList = roomData?.images as string[]
     let initialValues = {}
     if (type === MODAL.UPDATE) {
         console.log(roomData)
         initialValues = {
             id: roomData?.id,
+            roomName: roomData?.roomName,
             area: roomData?.area,
             price: roomData?.price,
             depositAmount: roomData?.depositAmount
         }
     }
+
 
     const [form] = Form.useForm()
     const dispatch = useAppDispatch()
@@ -35,6 +41,10 @@ const Modal = () => {
     const navigate = useNavigate()
     const { data } = useGetUtilitiesQuery("")
 
+    const [isLoading, setIsloading] = useState<boolean>(false) 
+
+    useServerMessage({ data: updateRoomResult.data!, error: updateRoomResult.data })
+    
     useEffect(() => {
         form.setFieldsValue({
             utilities: selectedOptions.map((selectedOption) => selectedOption.id)
@@ -49,22 +59,62 @@ const Modal = () => {
         console.log("All Values:", allValues)
     }
 
-    const onFinish = (values: any) => {
-        dispatch(closeModal())
-        const srcImage = values.images.fileList[0].thumbUrl
+    const onFinish = async (values: any) => {
+        if (type === MODAL.UPDATE) {
+            setIsloading(true)
+            const formData = new FormData()
+            
+            console.log(values.images.fileList)
+            for (const value of values.images.fileList) {
+                console.log(value)
+                if ("status" in value) {
+                    fetch(value.url)
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error("Network response was not ok")
+                            }
+                            return response.blob()
+                        })
+                        .then((blob) => {
+                            formData.append("files", blob)
+                        })
+                        .catch((error) => {
+                            console.error("There was a problem with the fetch operation:", error)
+                        })
+                } else {
+                    formData.append("files", value.originFileObj)
+                }
+            }
+            const res = await updateRoomImages({ id: roomData?.id || "", body: formData }).unwrap()
+            if (res.status === "success" && res.data) {
+                values.images = res.data as string[]
+                console.log(values)
+            } else {
+                console.log("upload error")
+            }
+            values.area = parseInt(values.area, 10); 
+            values.price = parseInt(values.price, 10); 
+            values.depositAmount = parseInt(values.depositAmount, 10); 
+            await updateRoom({ id: roomData?.id || "", body: values })
+            setIsloading(false);
+            dispatch(closeModal())
+        } else {
+            dispatch(closeModal())
+            const srcImage = values.images.fileList[0].thumbUrl
 
-        dispatch(saveSrcImage({ srcImage: JSON.stringify(srcImage) }))
+            dispatch(saveSrcImage({ srcImage: JSON.stringify(srcImage) }))
 
-        values.images = values.images.fileList.map((file: any) => file.originFileObj)
+            values.images = values.images.fileList.map((file: any) => file.originFileObj)
 
-        const { quantity, ...roomPattern } = values
-        dispatch(generateRoom({ roomPattern: roomPattern as IRoom, quantity: quantity }))
-        navigate("/mod/props/generate-rooms")
+            const { quantity, ...roomPattern } = values
+            dispatch(generateRoom({ roomPattern: roomPattern as IRoom, quantity: quantity }))
+            navigate("/mod/props/generate-rooms")
+        }
     }
 
     return (
-        <div>
-            <Spin spinning={false}>
+        
+            <Spin spinning={isLoading}>
                 <ModalTitle />
                 <Form
                     form={form}
@@ -76,6 +126,15 @@ const Modal = () => {
                     className="flex w-full flex-col items-center"
                     initialValues={initialValues}
                 >
+                    {type === MODAL.UPDATE && (
+                        <Form.Item
+                            className="w-full"
+                            name="roomName"
+                            rules={[{ required: true, message: "Please input room name!" }]}
+                        >
+                            <Input className="w-full" placeholder="Room name" />
+                        </Form.Item>
+                    )}
                     <div className="flex w-full gap-8">
                         <Form.Item
                             className="w-full"
@@ -92,7 +151,25 @@ const Modal = () => {
                             <TypedInputNumber className="w-full" placeholder="Price" />
                         </Form.Item>
                     </div>
-                    <div className="flex gap-8">
+                    {type === MODAL.ADD ? (
+                        <div className="flex gap-8">
+                            <Form.Item
+                                className="w-full"
+                                name="depositAmount"
+                                rules={[{ required: true, message: "Please input deposit amount" }]}
+                            >
+                                <TypedInputNumber className="w-full" placeholder="Deposit amount" />
+                            </Form.Item>
+
+                            <Form.Item
+                                className="w-full"
+                                name="quantity"
+                                rules={[{ required: true, message: "Please input quantity!" }]}
+                            >
+                                <TypedInputNumber className="w-full" placeholder="Quantity" />
+                            </Form.Item>
+                        </div>
+                    ) : (
                         <Form.Item
                             className="w-full"
                             name="depositAmount"
@@ -100,14 +177,7 @@ const Modal = () => {
                         >
                             <TypedInputNumber className="w-full" placeholder="Deposit amount" />
                         </Form.Item>
-                        <Form.Item
-                            className="w-full"
-                            name="quantity"
-                            rules={[{ required: true, message: "Please input quantity!" }]}
-                        >
-                            <TypedInputNumber className="w-full" placeholder="Quantity" />
-                        </Form.Item>
-                    </div>
+                    )}
 
                     <div className="relative mb-6 w-full rounded-md border focus-within:border-primary hover:border-primary">
                         <Autocomplete
@@ -165,7 +235,7 @@ const Modal = () => {
                     </Form.Item>
                 </Form>
             </Spin>
-        </div>
+       
     )
 }
 
