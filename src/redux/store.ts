@@ -1,15 +1,17 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 // features
-import { userApi } from "@/redux/services/user/user.service"
 import { authApi } from "@/redux/services/auth/auth.service"
+import { userApi } from "@/redux/services/user/user.service"
+import { roomBlockApi } from "@/redux/services/block/block.service"
 // slices
 import authSlice from "@/redux/features/auth/auth.slice"
 import searchSlice from "@/redux/features/search/search.slice"
 import modalSlice from "./features/modal/modal.slice"
 
 const rootReducer = combineReducers({
-    [userApi.reducerPath]: userApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
+    [roomBlockApi.reducerPath]: roomBlockApi.reducer,
     search: searchSlice,
     modal: modalSlice,
     auth: authSlice.reducer
@@ -17,7 +19,8 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware, authApi.middleware)
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(authApi.middleware, userApi.middleware, roomBlockApi.middleware)
 })
 
 export type RootState = ReturnType<typeof store.getState>

@@ -5,12 +5,12 @@ const ModalTitle = () => {
     const type = useAppSelector((state) => state.modal.type)
     const data = useAppSelector((state) => state.modal.data)
 
-    const MODAL_TITLES = {
-        [MODAL.ADD]: "Register New Account",
-        [MODAL.UPDATE]: "Edit Account Information",
-        [MODAL.DELETE]: "Remove Account",
-        [MODAL.DISABLE]: data?.status === STATUS.ACTIVE ? "Deactivate Account" : "Activate Account",
-        [MODAL.VIEW]: "Account Overview"
+    const MODAL_TITLES: { [key: string]: string } = {
+        [MODAL.ADD.USER]: "Register New Account",
+        [MODAL.UPDATE.USER]: "Edit Account Information",
+        [MODAL.DELETE.USER]: "Remove Account",
+        [MODAL.DISABLE.USER]: data?.status === STATUS.ACTIVE ? "Deactivate Account" : "Activate Account",
+        [MODAL.VIEW.USER]: "Account Overview"
     }
 
     if (!type) return

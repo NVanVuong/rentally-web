@@ -12,13 +12,13 @@ const ModalUser = () => {
 
     const getModalContent = () => {
         switch (type) {
-            case MODAL.ADD:
+            case MODAL.ADD.USER:
                 return <ModalAdd />
-            case MODAL.UPDATE:
+            case MODAL.UPDATE.USER:
                 return <ModalUpdate data={userData} />
-            case MODAL.VIEW:
+            case MODAL.VIEW.USER:
                 return <ModalView data={userData} />
-            case MODAL.DISABLE:
+            case MODAL.DISABLE.USER:
                 return <ModalDisable data={userData} />
             default:
                 return null

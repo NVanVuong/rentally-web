@@ -1,17 +1,17 @@
-import { MODAL } from "@/utils/constants/GlobalConst"
+// import { MODAL } from "@/utils/constants/GlobalConst"
 import { IUser } from "./user.interface"
 
-export type IModalTypes = MODAL.ADD | MODAL.UPDATE | MODAL.DELETE | MODAL.DISABLE | MODAL.VIEW
+// export type IModalTypes = MODAL.ADD. | MODAL.UPDATE | MODAL.DELETE | MODAL.DISABLE | MODAL.VIEW
 
 export interface IModal {
     isOpen?: boolean
-    type?: IModalTypes | null
+    type?: any
     id?: string | null
-    data?: IUser | null
+    data?: any
 }
 
 export interface IOpenModalPayload {
-    type?: IModalTypes
+    type?: any
     id?: string
-    data?: IUser
+    data?: any
 }
