@@ -2,18 +2,18 @@ import ModalTitle from "@/components/Modal/ModalTitle"
 import useServerMessage from "@/hooks/useServerMessage"
 import { IRoom } from "@/interfaces/room.interface"
 import { useAppSelector } from "@/redux/hook"
-import { useDeleteModRoomMutation } from "@/redux/services/room/modRoom.service"
+import { useDeleteRoomMutation } from "@/redux/services/room/room.service"
 import { Button, Spin } from "antd"
 
 const DeleteModal = () => {
     const roomData = useAppSelector((state) => state.modal.data) as IRoom
-
-    const [deleteModRoom, { data, error, isLoading }] = useDeleteModRoomMutation()
+    const role = useAppSelector((state) => state.auth.userInfo?.role)
+    const [deleteModRoom, { data, error, isLoading }] = useDeleteRoomMutation()
 
     useServerMessage({ data: data!, error: error })
 
     const handleClick = async () => {
-        await deleteModRoom({ id: roomData?.id })
+        await deleteModRoom({ role, id: roomData?.id })
     }
 
     return (

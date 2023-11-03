@@ -8,22 +8,30 @@ import { generateRoom, saveSrcImage } from "@/redux/features/generateRoom/genera
 import { IRoom } from "@/interfaces/room.interface"
 import { useNavigate } from "react-router-dom"
 import { closeModal } from "@/redux/features/modal/modal.slice"
-import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
+import { useGetUtilitiesQuery, useUploadImagesMutation } from "@/redux/services/help/help.service"
 import { IUtiltity } from "@/interfaces/utility.interface"
 
 import { MODAL } from "@/utils/constants/GlobalConst"
 import TypedInputNumber from "antd/es/input-number"
 import ModalTitle from "@/components/Modal/ModalTitle"
-import { useUpdateModRoomMutation, useUpdateRoomImagesMutation } from "@/redux/services/room/modRoom.service"
+import {
+    useUpdateRoomMutation,
+    useUpdateImagesMutation,
+    useCreateRoomsMutation
+} from "@/redux/services/room/room.service"
 import useServerMessage from "@/hooks/useServerMessage"
 const Modal = () => {
     const type = useAppSelector((state) => state.modal.type)
     const roomData = useAppSelector((state) => state.modal.data) as IRoom
+    const role = useAppSelector((state) => state.auth.userInfo?.role)
+
     const imageList = roomData?.images as string[]
     const { data } = useGetUtilitiesQuery("")
 
-    const [updateRoomImages] = useUpdateRoomImagesMutation()
-    const [updateRoom, updateRoomResult] = useUpdateModRoomMutation()
+    const [updateRoomImages] = useUpdateImagesMutation()
+    const [updateRoom, updateRoomResult] = useUpdateRoomMutation()
+    const [UploadImages] = useUploadImagesMutation()
+    const [createRooms, createRoomsResult] = useCreateRoomsMutation()
 
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
@@ -62,6 +70,7 @@ const Modal = () => {
     }, [selectedOptions, form])
 
     useServerMessage({ data: updateRoomResult.data!, error: updateRoomResult.data })
+    useServerMessage({ data: createRoomsResult.data!, error: createRoomsResult.data })
 
     const handleChange = (event: any, value: any) => {
         setSelectedOptions(value)
@@ -86,6 +95,7 @@ const Modal = () => {
                             return response.blob()
                         })
                         .then((blob) => {
+                            // console.log(blob)
                             formData.append("files", blob)
                         })
                         .catch((error) => {
@@ -104,20 +114,53 @@ const Modal = () => {
             values.area = parseInt(values.area, 10)
             values.price = parseInt(values.price, 10)
             values.depositAmount = parseInt(values.depositAmount, 10)
-            await updateRoom({ id: roomData?.id || "", body: values })
+            await updateRoom({ role, id: roomData?.id || "", body: values })
             setIsloading(false)
             dispatch(closeModal())
         } else {
-            dispatch(closeModal())
-            const srcImage = values.images.fileList[0].thumbUrl
+            if (role === "MOD") {
+                dispatch(closeModal())
+                const srcImage = values.images.fileList[0].thumbUrl
 
-            dispatch(saveSrcImage({ srcImage: JSON.stringify(srcImage) }))
+                dispatch(saveSrcImage({ srcImage: JSON.stringify(srcImage) }))
 
-            values.images = values.images.fileList.map((file: any) => file.originFileObj)
+                values.images = values.images.fileList.map((file: any) => file.originFileObj)
 
-            const { quantity, ...roomPattern } = values
-            dispatch(generateRoom({ roomPattern: roomPattern as IRoom, quantity: quantity }))
-            navigate("/mod/props/generate-rooms")
+                const { quantity, ...roomPattern } = values
+                dispatch(generateRoom({ roomPattern: roomPattern as IRoom, quantity: quantity }))
+                navigate("/mod/props/generate-rooms")
+            } else if (role === "ADMIN") {
+                setIsloading(true)
+
+                values.images = values.images.fileList.map((file: any) => file.originFileObj)
+                const { quantity, ...roomPattern } = values
+                const rooms: IRoom[] = []
+                roomPattern.id = "0"
+                roomPattern.roomName = "F0"
+                for (let i = 0; i < quantity; i++) {
+                    const room = { ...roomPattern }
+                    room.id = `${i}`
+                    room.roomName = `F${i}`
+                    rooms.push(room)
+                }
+                for (const [, room] of rooms.entries()) {
+                    const formData = new FormData()
+                    room.images?.forEach((image) => {
+                        formData.append("files", image)
+                    })
+                    const res = await UploadImages(formData).unwrap()
+                    if (res.status === "success" && res.data) {
+                        room.images = res.data
+                    } else {
+                        console.log("upload error")
+                    }
+                }
+                console.log(rooms)
+                await createRooms({ role, body: { roomBlockId: "34", rooms } })
+
+                setIsloading(false)
+                dispatch(closeModal())
+            }
         }
     }
 

@@ -7,7 +7,7 @@ import { addRoom, changeImagesRoom, saveRoom } from "@/redux/features/generateRo
 import { FaPlus } from "react-icons/fa"
 import { useNavigate } from "react-router-dom"
 import { useUploadImagesMutation } from "@/redux/services/help/help.service"
-import { useCreateModRoomsMutation } from "@/redux/services/room/modRoom.service"
+import { useCreateRoomsMutation } from "@/redux/services/room/room.service"
 import { useEffect, useState } from "react"
 import { Spin, message } from "antd"
 import useServerMessage from "@/hooks/useServerMessage"
@@ -15,8 +15,9 @@ import useServerMessage from "@/hooks/useServerMessage"
 const GenerateRooms = () => {
     const dispatch = useAppDispatch()
     const rooms = useAppSelector((state) => state.generateRoom.rooms)
+    const role = useAppSelector((state) => state.auth.userInfo?.role)
     const [UploadImages, uploadImagesResult] = useUploadImagesMutation()
-    const [createModRooms, { data, error, isLoading }] = useCreateModRoomsMutation()
+    const [createRooms, { data, error, isLoading }] = useCreateRoomsMutation()
     const navigate = useNavigate()
     const [isSave, setIsSave] = useState(false)
 
@@ -25,7 +26,7 @@ const GenerateRooms = () => {
     useEffect(() => {
         const fetchData = async () => {
             if (isSave) {
-                await createModRooms({ roomBlockId: "34", rooms })
+                await createRooms({ role, body: { roomBlockId: "34", rooms } })
                 setIsSave(false)
                 navigate("/mod/props/rooms")
                 dispatch(saveRoom())

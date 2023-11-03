@@ -2,7 +2,7 @@ import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/
 
 import { userApi } from "@/redux/services/user/user.service"
 import { authApi } from "@/redux/services/auth/auth.service"
-import { modRoomApi } from "./services/room/modRoom.service"
+import { roomApi } from "./services/room/room.service"
 import { helpApi } from "./services/help/help.service"
 import { modRoomBlockApi } from "./services/roomBlock/roomBlock.service"
 
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
     [userApi.reducerPath]: userApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [helpApi.reducerPath]: helpApi.reducer,
-    [modRoomApi.reducerPath]: modRoomApi.reducer,
+    [roomApi.reducerPath]: roomApi.reducer,
     [modRoomBlockApi.reducerPath]: modRoomBlockApi.reducer,
 
     search: searchSlice,
@@ -32,7 +32,7 @@ export const store = configureStore({
     reducer: rootReducer,
     middleware: customizedMiddleware.concat(
         userApi.middleware,
-        modRoomApi.middleware,
+        roomApi.middleware,
         modRoomBlockApi.middleware,
         authApi.middleware,
         helpApi.middleware

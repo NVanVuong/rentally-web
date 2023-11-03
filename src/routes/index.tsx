@@ -16,6 +16,8 @@ const ForgotPassword = lazy(() => import("../pages/auth/ForgotPassword"))
 const ResetPassword = lazy(() => import("../pages/auth/ResetPassword"))
 const GenerateRooms = lazy(() => import("../pages/mod/props/room/GenerateRooms"))
 const RoomsManagement = lazy(() => import("../pages/mod/props/room/Rooms"))
+const AdminRoomsManagement = lazy(() => import("../pages/admin/props/room/Rooms"))
+
 const MainRoute = () => {
     return (
         <Suspense fallback={<div>Loading...</div>}>
@@ -28,8 +30,7 @@ const MainRoute = () => {
                             <Route path={SITE_MAP.USERS_MANAGEMENT} element={<UsersPage />} />
                             <Route path={SITE_MAP.MODS_MANAGEMENT} element={<ModsPage />} />
                             <Route path={SITE_MAP.PROPS_MANAGEMENT} element={<AdminPropsPage />}>
-                                <Route path={SITE_MAP.ROOMS_GENERATION} element={<GenerateRooms />} />
-                                <Route path={SITE_MAP.ROOMS_MANAGEMENT} element={<RoomsManagement />} />
+                                <Route path={SITE_MAP.ROOMS_MANAGEMENT} element={<AdminRoomsManagement />} />
                             </Route>
                         </Route>
                     </Route>
