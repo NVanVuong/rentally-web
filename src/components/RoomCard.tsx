@@ -21,9 +21,12 @@ const RoomCard = ({ room }: Props) => {
     const [roomName, setRoomName] = useState(room.roomName)
     const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>([])
 
-    const handleChange = (event: any, value: IUtiltity[]) => {
-        setSelectedOptions(value)
-        dispatch(changeUtilitiesRoom({ id: `${id}`, utilities: value.map((selectedOption) => selectedOption.id) }))
+    const handleChange = (event: any, value: (IUtiltity | undefined)[]) => {
+        const validValues = value.filter((item): item is IUtiltity => item !== undefined)
+        setSelectedOptions(validValues)
+        dispatch(
+            changeUtilitiesRoom({ id: `${id}`, utilities: validValues.map((selectedOption) => selectedOption.id) })
+        )
     }
 
     return (
@@ -82,7 +85,7 @@ const RoomCard = ({ room }: Props) => {
                         }}
                         options={data || []}
                         getOptionLabel={(option) => option.name}
-                        defaultValue={utilities?.map((value: string) => data?.find((utility) => utility.id === value))}
+                        value={utilities?.map((value: string) => data?.find((utility) => utility.id === value))}
                         filterSelectedOptions
                         renderInput={(params) => (
                             <TextField

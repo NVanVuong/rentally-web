@@ -15,11 +15,7 @@ const ViewModal = () => {
             <ModalTitle />
             <Carousel autoplay dotPosition={"top"} effect="fade">
                 {images?.map((image, index) => {
-                    return (
-                        <div>
-                            <Image key={index} height={200} width={400} src={image as string} />
-                        </div>
-                    )
+                    return <Image key={index} height={200} width={400} src={image as string} />
                 })}
             </Carousel>
             <Descriptions column={1} className="mt-2">
