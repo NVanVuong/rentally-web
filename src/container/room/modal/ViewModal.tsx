@@ -9,6 +9,7 @@ const ViewModal = () => {
     const roomData = (useAppSelector((state) => state.modal.data) as IRoom) || []
 
     const { data } = useGetUtilitiesQuery("")
+
     const { id, area, depositAmount, price, roomName, utilities, images } = roomData
     return (
         <div className="flex w-full flex-col items-center">

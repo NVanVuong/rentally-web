@@ -2,7 +2,7 @@ import ModalTitle from "@/components/Modal/ModalTitle"
 import useServerMessage from "@/hooks/useServerMessage"
 import { IRoom } from "@/interfaces/room.interface"
 import { useAppSelector } from "@/redux/hook"
-import { useDeleteModRoomMutation } from "@/redux/services/room/room.service"
+import { useDeleteModRoomMutation } from "@/redux/services/room/modRoom.service"
 import { Button, Spin } from "antd"
 
 const DeleteModal = () => {

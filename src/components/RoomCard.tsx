@@ -14,8 +14,8 @@ interface Props {
 }
 const RoomCard = ({ room }: Props) => {
     const dispatch = useAppDispatch()
-    const { area, price, depositAmount, utilities, id } = room
     const srcImage = JSON.parse(useAppSelector((state) => state.generateRoom.srcImage))
+    const { area, price, depositAmount, utilities, id } = room
     const { data } = useGetUtilitiesQuery("")
 
     const [roomName, setRoomName] = useState(room.roomName)

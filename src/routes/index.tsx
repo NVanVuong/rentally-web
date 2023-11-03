@@ -27,7 +27,10 @@ const MainRoute = () => {
                             <Route index element={<Navigate to={SITE_MAP.USERS_MANAGEMENT} replace />} />
                             <Route path={SITE_MAP.USERS_MANAGEMENT} element={<UsersPage />} />
                             <Route path={SITE_MAP.MODS_MANAGEMENT} element={<ModsPage />} />
-                            <Route path={SITE_MAP.PROPS_MANAGEMENT} element={<AdminPropsPage />} />
+                            <Route path={SITE_MAP.PROPS_MANAGEMENT} element={<AdminPropsPage />}>
+                                <Route path={SITE_MAP.ROOMS_GENERATION} element={<GenerateRooms />} />
+                                <Route path={SITE_MAP.ROOMS_MANAGEMENT} element={<RoomsManagement />} />
+                            </Route>
                         </Route>
                     </Route>
                     <Route element={<RequireAuth />}>

@@ -2,7 +2,7 @@ import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/
 
 import { userApi } from "@/redux/services/user/user.service"
 import { authApi } from "@/redux/services/auth/auth.service"
-import { modRoomApi } from "./services/room/room.service"
+import { modRoomApi } from "./services/room/modRoom.service"
 import { helpApi } from "./services/help/help.service"
 import { modRoomBlockApi } from "./services/roomBlock/roomBlock.service"
 
