@@ -2,9 +2,11 @@ import TableAntd from "@/components/Table"
 import { ColumnsType } from "antd/es/table"
 import { AlignType } from "rc-table/lib/interface"
 import { FaEllipsis } from "react-icons/fa6"
-import { Dropdown, Space } from "antd"
+import { Badge, Dropdown, Space } from "antd"
 import { useMenuActions } from "@/hooks/useMenuActions"
 import { IRoom } from "@/interfaces/room.interface"
+import { ROOM_STATUS, ROOM_STATUS_COLORS, RoomStatusType } from "@/utils/constants/GlobalConst"
+import { formatStatus } from "@/utils/helpers"
 
 const TableManageRooms = ({ rooms }: { rooms: IRoom[] }) => {
     const getMenuActions = useMenuActions({ isDelete: true })
@@ -57,6 +59,24 @@ const TableManageRooms = ({ rooms }: { rooms: IRoom[] }) => {
             sortDirections: ["ascend", "descend"],
             sorter: (a, b) => a.depositAmount - b.depositAmount,
             render: (depositAmount: number) => <span className="text-sm font-medium">{depositAmount}</span>
+        },
+        {
+            title: <span className="font-bold">Status</span>,
+            key: "status",
+            dataIndex: "status",
+            width: "15%",
+            filters: [
+                { text: "Empty", value: ROOM_STATUS.EMPTY },
+                { text: "Occupied", value: ROOM_STATUS.OCCUPIED }
+            ],
+            onFilter: (value, record) => record.status === value,
+            render: (status: RoomStatusType) => (
+                <Badge
+                    color={ROOM_STATUS_COLORS[status]}
+                    className="flex items-center text-xs font-medium"
+                    text={formatStatus(status)}
+                ></Badge>
+            )
         },
         {
             title: <span className="text-center font-bold">Action</span>,

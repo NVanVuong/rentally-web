@@ -59,7 +59,6 @@ const GenerateRooms = () => {
                         onClick={() => {
                             dispatch(addRoom())
                             message.success(`Added room`)
-
                         }}
                         className="flex items-center space-x-2 rounded-xl bg-secondary px-3 py-2 text-white"
                     >

@@ -63,7 +63,6 @@ const generateRoomSlice = createSlice({
             state.rooms.push(newRoom)
         },
         saveRoom: (state) => {
-            
             state.rooms = []
         }
     }

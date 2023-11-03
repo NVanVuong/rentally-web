@@ -7,6 +7,17 @@ export enum ROLE {
     ADMIN = "ADMIN"
 }
 
+export enum ROOM_STATUS {
+    EMPTY = "Empty",
+    OCCUPIED = "Occupied"
+}
+
+export enum STATUS {
+    ACTIVE = "ACTIVE",
+    DISABLED = "DISABLED",
+    REGISTING = "REGISTING"
+}
+
 export const ROLE_COLORS = {
     [ROLE.USER]: "#2C839A",
     [ROLE.MOD]: "#1D5868",
@@ -15,12 +26,6 @@ export const ROLE_COLORS = {
 
 export type RoleType = keyof typeof ROLE_COLORS
 
-export enum STATUS {
-    ACTIVE = "ACTIVE",
-    DISABLED = "DISABLED",
-    REGISTING = "REGISTING"
-}
-
 export const STATUS_COLORS = {
     [STATUS.ACTIVE]: "green",
     [STATUS.DISABLED]: "red",
@@ -28,6 +33,13 @@ export const STATUS_COLORS = {
 }
 
 export type StatusType = keyof typeof STATUS_COLORS
+
+export const ROOM_STATUS_COLORS = {
+    [ROOM_STATUS.OCCUPIED]: "green",
+    [ROOM_STATUS.EMPTY]: "red"
+}
+
+export type RoomStatusType = keyof typeof ROOM_STATUS_COLORS
 
 export enum MODAL {
     ADD = "ADD",

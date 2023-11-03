@@ -30,7 +30,6 @@ export const useMenuActions = ({ isDelete = false }: MenuActionsProps) => {
                 label: (
                     <div
                         onClick={() => {
-                    
                             dispacth(openModal({ type: MODAL.UPDATE, data: record }))
                         }}
                         className="flex justify-between font-medium text-yellow-500"

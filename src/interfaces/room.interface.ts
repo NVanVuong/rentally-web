@@ -6,6 +6,7 @@ export interface IRoom {
     depositAmount: number
     images?: File[] | string[]
     utilities?: string[]
+    status?: string
 }
 export interface IRoomQuery {
     keyword: string
