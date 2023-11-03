@@ -198,11 +198,18 @@ const Modal = () => {
                                     height: "80px",
                                     width: "full",
                                     fontSize: "12px",
-                                    zIndex: "10"
+                                    zIndex: "10",
+                                    "&.Mui-focused fieldset": {
+                                        border: "0px solid #fff"
+
+                                    }
                                 },
-                                "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-                                    border: "0px solid #fff"
-                                }
+                                "& .MuiOutlinedInput-root ": {
+                                    "& .MuiOutlinedInput-notchedOutline":{
+                                        border: "0px solid #fff"
+                                    }
+                                },  
+
                             }}
                             options={data || []}
                             getOptionLabel={(option) => option.name}
