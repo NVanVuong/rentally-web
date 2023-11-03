@@ -21,6 +21,9 @@ const Modal = () => {
     const roomData = useAppSelector((state) => state.modal.data) as IRoom
     const [updateRoomImages] = useUpdateRoomImagesMutation()
     const [updateRoom, updateRoomResult] = useUpdateModRoomMutation()
+    const navigate = useNavigate()
+    const [form] = Form.useForm()
+    const dispatch = useAppDispatch()
     const imageList = roomData?.images as string[]
     let initialValues = {}
     if (type === MODAL.UPDATE) {
@@ -33,19 +36,28 @@ const Modal = () => {
         }
     }
 
-    const [form] = Form.useForm()
-    const dispatch = useAppDispatch()
-    const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>([])
-    const navigate = useNavigate()
     const { data } = useGetUtilitiesQuery("")
+    const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>([])
 
     const [isLoading, setIsloading] = useState<boolean>(false)
 
     useServerMessage({ data: updateRoomResult.data!, error: updateRoomResult.data })
 
     useEffect(() => {
+        if (type === MODAL.UPDATE) {
+            if (roomData?.utilities && data) {
+                const selectedUtilities = roomData.utilities
+                    .map((value: string) => data.find((utility) => utility.id === value))
+                    .filter((option) => option !== undefined) as IUtiltity[]
+
+                setSelectedOptions(selectedUtilities)
+            }
+        }
+    }, [])
+
+    useEffect(() => {
         form.setFieldsValue({
-            utilities: selectedOptions.map((selectedOption) => selectedOption.id)
+            utilities: selectedOptions.map((selectedOption: IUtiltity) => selectedOption.id)
         })
     }, [selectedOptions, form])
 
@@ -174,50 +186,50 @@ const Modal = () => {
                 )}
 
                 <div className="relative mb-6 w-full rounded-md border focus-within:border-primary hover:border-primary">
-                    <Autocomplete
-                        onChange={handleChange}
-                        multiple
-                        id=""
-                        sx={{
-                            "& .MuiAutocomplete-popper": { fontSize: "12px" },
-                            "& .MuiOutlinedInput-root": {
-                                border: "px solid #d9d9d9",
-                                lineHeight: "0px",
-                                height: "80px",
-                                width: "full",
-                                fontSize: "12px"
-                            },
-                            "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-                                border: "0px solid #fff"
-                            }
-                        }}
-                        options={data || []}
-                        getOptionLabel={(option) => option.name}
-                        defaultValue={roomData?.utilities?.map(
-                            (value: string) => data?.find((utility) => utility.id === value)
-                        )}
-                        filterSelectedOptions
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                sx={{
-                                    "& .MuiButtonBase-root": {
-                                        lineHeight: "20px",
-                                        fontSize: "12px"
-                                    }
-                                }}
-                                label=""
-                                placeholder="New util"
-                            />
-                        )}
-                    />
+                    <div className="z-10 w-full">
+                        <Autocomplete
+                            onChange={handleChange}
+                            multiple
+                            id=""
+                            sx={{
+                                "& .MuiOutlinedInput-root": {
+                                    border: "px solid #d9d9d9",
+                                    lineHeight: "0px",
+                                    height: "80px",
+                                    width: "full",
+                                    fontSize: "12px",
+                                    zIndex: "10"
+                                },
+                                "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                                    border: "0px solid #fff"
+                                }
+                            }}
+                            options={data || []}
+                            getOptionLabel={(option) => option.name}
+                            value={selectedOptions}
+                            filterSelectedOptions
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    sx={{
+                                        "& .MuiButtonBase-root": {
+                                            lineHeight: "20px",
+                                            fontSize: "12px"
+                                        }
+                                    }}
+                                    label=""
+                                    placeholder="New util"
+                                />
+                            )}
+                        />
+                    </div>
 
                     <Form.Item
-                        className=" absolute top-0 z-[-100] w-full"
+                        className=" absolute top-12  w-full border-none text-opacity-0 "
                         name="utilities"
                         rules={[{ required: true, message: "Please input utilities!" }]}
                     >
-                        <Input className="hidden " />
+                        <Input className="  border-none hidden" />
                     </Form.Item>
                 </div>
 

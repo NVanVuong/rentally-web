@@ -55,7 +55,16 @@ const UploadImage = ({ imageList }: { imageList: string[] }) => {
 
     return (
         <div className="w-full rounded-lg border-[1px] border-[#d9d9d9] bg-white px-[34px] py-4">
-            <Form.Item className="w-full" name="images" rules={[{ required: true, message: "Please input images!" }]}>
+            <Form.Item
+                className="w-full"
+                name="images"
+                rules={[
+                    {
+                        validator: () =>
+                            fileList.length ? Promise.resolve() : Promise.reject(new Error("Please upload images!"))
+                    }
+                ]}
+            >
                 <Upload
                     listType="picture-card"
                     onRemove={onRemove}

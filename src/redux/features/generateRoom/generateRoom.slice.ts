@@ -64,6 +64,14 @@ const generateRoomSlice = createSlice({
         },
         saveRoom: (state) => {
             state.rooms = []
+            state.roomPattern = {
+                area: 0,
+                roomName: "",
+                price: 0,
+                depositAmount: 0
+            }
+            state.count = 0
+            state.srcImage = ""
         }
     }
 })

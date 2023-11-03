@@ -19,11 +19,9 @@ const RoomCard = ({ room }: Props) => {
     const { data } = useGetUtilitiesQuery("")
 
     const [roomName, setRoomName] = useState(room.roomName)
-    const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>([])
 
     const handleChange = (event: any, value: (IUtiltity | undefined)[]) => {
         const validValues = value.filter((item): item is IUtiltity => item !== undefined)
-        setSelectedOptions(validValues)
         dispatch(
             changeUtilitiesRoom({ id: `${id}`, utilities: validValues.map((selectedOption) => selectedOption.id) })
         )
@@ -84,8 +82,11 @@ const RoomCard = ({ room }: Props) => {
                             }
                         }}
                         options={data || []}
-                        getOptionLabel={(option) => option.name}
-                        value={utilities?.map((value: string) => data?.find((utility) => utility.id === value))}
+                        getOptionLabel={(option) => option?.name || ""}
+                        value={utilities?.map((value: string) => {
+                            const utility = data?.find((u) => u.id === value)
+                            return utility || null
+                        })}
                         filterSelectedOptions
                         renderInput={(params) => (
                             <TextField
