@@ -3,6 +3,7 @@ import { useAppSelector } from "@/redux/hook"
 import ModalAntd from "@/components/Modal"
 import ModalAdd from "./modalAdd"
 import ModalUpdate from "./modalUpdate"
+import ModalDelete from "./modalDelete"
 
 const ModalProps = () => {
     const type = useAppSelector((state) => state.modal.type)
@@ -14,6 +15,8 @@ const ModalProps = () => {
                 return <ModalAdd />
             case MODAL.UPDATE.BLOCK:
                 return <ModalUpdate data={blockData} />
+            case MODAL.DELETE.BLOCK:
+                return <ModalDelete data={blockData} />
             default:
                 return null
         }

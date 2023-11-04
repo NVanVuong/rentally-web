@@ -8,7 +8,7 @@ interface MapProps {
     markerText?: string
 }
 
-const Map: React.FC<MapProps> = ({ center, zoom = 16, markerText }) => {
+const Map: React.FC<MapProps> = ({ center, zoom = 15, markerText }) => {
     const CenteredMap = () => {
         const map = useMap()
         map.invalidateSize()

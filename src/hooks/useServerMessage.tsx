@@ -3,9 +3,10 @@ import { message } from "antd"
 import { useAppDispatch } from "@/redux/hook"
 import { closeModal } from "@/redux/features/modal/modal.slice"
 import { IUsersResponse } from "@/interfaces/user.interface"
+import { IRoomBlockRespone } from "@/interfaces/block.interface"
 
 type IServerMessage = {
-    data: IUsersResponse
+    data: IUsersResponse | IRoomBlockRespone | any
     error: any
 }
 

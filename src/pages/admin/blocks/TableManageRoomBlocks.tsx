@@ -40,29 +40,25 @@ const TableManageRoomBlocks = () => {
         {
             title: <span className="font-bold">Address</span>,
             key: "address",
-            width: "16%",
-            render: (record: IRoomBlock) => (
-                <>
-                    <>{console.log(record)}</>
-                    <span className="text-sm font-medium">{record?.city + ", " + record?.country}</span>
-                </>
-            )
+            dataIndex: "address",
+            width: "12%",
+            render: (address: string) => <span className="text-sm font-medium">{address}</span>
         },
         {
             title: <span className="font-bold">Quantity Room</span>,
-            key: "quantityRoom",
-            dataIndex: "quantityRoom",
+            key: "quantityRooms",
+            dataIndex: "quantityRooms",
             width: "10%",
             align: "center" as AlignType,
-            render: () => <span className="text-sm font-medium">{10}</span>
+            render: (quantityRooms: number) => <span className="text-sm font-medium">{quantityRooms}</span>
         },
         {
             title: <span className="font-bold">Empty Room</span>,
-            key: "emptyRoom",
-            dataIndex: "emptyRoom",
+            key: "emptyRooms",
+            dataIndex: "emptyRooms",
             width: "10%",
             align: "center" as AlignType,
-            render: () => <span className="text-sm font-medium">{10}</span>
+            render: (emptyRooms: number) => <span className="text-sm font-medium">{emptyRooms}</span>
         },
         {
             title: <span className="text-center font-bold">Action</span>,
