@@ -9,6 +9,6 @@ export const SITE_MAP = {
     },
     ADMIN: "/admin",
     USERS_MANAGEMENT: "users",
-    MODS_MANAGEMENT: "mods",
-    PROPS_MANAGEMENT: "props"
+    ROOMS_MANAGEMENT: "rooms",
+    BLOCKS_MANAGEMENT: "blocks"
 }

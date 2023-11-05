@@ -2,8 +2,14 @@ import { ConfigProvider, Modal } from "antd"
 import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { closeModal } from "@/redux/features/modal/modal.slice"
 import "./style.css"
+import { resetPlaceInfo } from "@/redux/features/search-map/search-map.slice"
 
-const ModalAntd = (props: any) => {
+interface IModal {
+    title?: string
+    children: React.ReactNode
+}
+
+const ModalAntd = (props: IModal) => {
     const dispatch = useAppDispatch()
     const isOpen = useAppSelector((state) => state.modal.isOpen)
 
@@ -15,8 +21,16 @@ const ModalAntd = (props: any) => {
                 }
             }}
         >
-            <Modal open={isOpen} onCancel={() => dispatch(closeModal())} footer={null} destroyOnClose>
-                {props.children}
+            <Modal
+                open={isOpen}
+                onCancel={() => {
+                    dispatch(closeModal())
+                    dispatch(resetPlaceInfo())
+                }}
+                footer={null}
+                destroyOnClose
+            >
+                <>{props.children}</>
             </Modal>
         </ConfigProvider>
     )

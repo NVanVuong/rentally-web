@@ -52,7 +52,7 @@ const baseQuery = fetchBaseQuery({
 //     return result
 // }
 
-export const creatApiWithAuth = (reducerPath: string, tagTypes: Array<string>) =>
+export const createApiWithAuth = (reducerPath: string, tagTypes: Array<string>) =>
     createApi({
         baseQuery: baseQuery,
         endpoints: () => ({}),

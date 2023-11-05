@@ -10,10 +10,13 @@ const searchSlice = createSlice({
     reducers: {
         setKeyword: (state, action) => {
             state.keyword = action.payload
+        },
+        resetKeyword: (state) => {
+            state.keyword = initialState.keyword
         }
     }
 })
 
-export const { setKeyword } = searchSlice.actions
+export const { setKeyword, resetKeyword } = searchSlice.actions
 
 export default searchSlice.reducer

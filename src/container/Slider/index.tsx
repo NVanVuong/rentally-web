@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom"
 import { SITE_MAP } from "@/utils/constants/Path"
 import { FaRegUser } from "react-icons/fa"
 import { BiHomeAlt } from "react-icons/bi"
-import { GrUserSettings } from "react-icons/gr"
+import { MdOutlineBedroomChild } from "react-icons/md"
 
 type MenuItem = Required<MenuProps>["items"][number]
 
@@ -37,8 +37,8 @@ const Slider = () => {
         { type: "divider" },
 
         getItem(`${isExpanding ? "Accounts" : ""}`, "users", <FaRegUser className="h-5 w-5" />),
-        getItem(`${isExpanding ? "Mods" : ""}`, "mods", <GrUserSettings className="h-5 w-5" />),
-        getItem(`${isExpanding ? "Properties" : ""}`, "props", <BiHomeAlt className="h-5 w-5" />),
+        getItem(`${isExpanding ? "Room Blocks" : ""}`, "blocks", <BiHomeAlt className="h-5 w-5" />),
+        getItem(`${isExpanding ? "Rooms" : ""}`, "rooms", <MdOutlineBedroomChild className="h-5 w-5" />),
         getItem(`${isExpanding ? "xx" : ""}`, "sub1.3", <AppstoreOutlined className="ml-0.5" />),
         getItem(`${isExpanding ? "xx" : ""}`, "sub1.4", <AppstoreOutlined className="ml-0.5" />),
 
@@ -61,11 +61,11 @@ const Slider = () => {
             case "users":
                 navigate(SITE_MAP.USERS_MANAGEMENT)
                 break
-            case "mods":
-                navigate(SITE_MAP.MODS_MANAGEMENT)
+            case "blocks":
+                navigate(SITE_MAP.BLOCKS_MANAGEMENT)
                 break
-            case "props":
-                navigate(SITE_MAP.PROPS_MANAGEMENT)
+            case "rooms":
+                navigate(SITE_MAP.ROOMS_MANAGEMENT)
                 break
             default:
                 break

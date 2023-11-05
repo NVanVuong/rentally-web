@@ -6,13 +6,12 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 const HomePage = lazy(() => import("../pages/home"))
 const AdminPage = lazy(() => import("../pages/admin"))
 const UsersPage = lazy(() => import("../pages/admin/users"))
-const ModsPage = lazy(() => import("../pages/admin/mods"))
-const PropsPage = lazy(() => import("../pages/admin/props"))
+const RoomsPage = lazy(() => import("../pages/admin/rooms"))
+const BlocksPage = lazy(() => import("../pages/admin/blocks"))
 const Login = lazy(() => import("../pages/auth/Login"))
 const Register = lazy(() => import("../pages/auth/Register"))
 const ForgotPassword = lazy(() => import("../pages/auth/ForgotPassword"))
 const ResetPassword = lazy(() => import("../pages/auth/ResetPassword"))
-
 
 const MainRoute = () => {
     return (
@@ -24,8 +23,8 @@ const MainRoute = () => {
                         <Route path={SITE_MAP.ADMIN} element={<AdminPage />}>
                             <Route index element={<Navigate to={SITE_MAP.USERS_MANAGEMENT} replace />} />
                             <Route path={SITE_MAP.USERS_MANAGEMENT} element={<UsersPage />} />
-                            <Route path={SITE_MAP.MODS_MANAGEMENT} element={<ModsPage />} />
-                            <Route path={SITE_MAP.PROPS_MANAGEMENT} element={<PropsPage />} />
+                            <Route path={SITE_MAP.ROOMS_MANAGEMENT} element={<RoomsPage />} />
+                            <Route path={SITE_MAP.BLOCKS_MANAGEMENT} element={<BlocksPage />} />
                         </Route>
                     </Route>
 

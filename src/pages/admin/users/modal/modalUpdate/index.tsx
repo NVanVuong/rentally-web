@@ -4,16 +4,16 @@ import { AiOutlineUpload } from "react-icons/ai"
 import { useUpdateUserMutation } from "@/redux/services/user/user.service"
 import { createUserFormData, normFile } from "@/utils/helpers"
 import useServerMessage from "@/hooks/useServerMessage"
-import ModalTitle from "@/components/Modal/ModalTitle"
+import Title from "@/components/Modal/Title"
 import { IModal } from "@/interfaces/modal.interface"
 
 const ModalUpdate = (props: IModal) => {
-    const userData = props?.data
+    const { title, data: user } = props
     const [updateUser, { data, error, isLoading }] = useUpdateUserMutation()
 
     useServerMessage({ data: data!, error: error })
 
-    const handleChange = async (info: any) => {
+    const handleFileChange = async (info: any) => {
         if (info.file.status === "done") {
             message.success(`${info.file.name} file uploaded successfully`)
         } else if (info.file.status === "error") {
@@ -23,31 +23,25 @@ const ModalUpdate = (props: IModal) => {
 
     const onFinish = async (values: any) => {
         const formData = createUserFormData(values)
-        await updateUser({ id: userData!.id, formData: formData })
-    }
-
-    const handleValuesChange = (changedValues: any, allValues: any) => {
-        console.log("Changed Values:", changedValues)
-        console.log("All Values:", allValues)
+        await updateUser({ id: user!.id, formData: formData })
     }
 
     return (
         <Spin spinning={isLoading}>
-            <ModalTitle />
+            <Title>{title}</Title>
             <Form
-                key={userData?.id}
-                onValuesChange={handleValuesChange}
+                key={user?.id}
                 onFinish={onFinish}
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 14 }}
                 layout="horizontal"
                 initialValues={{
-                    id: userData?.id,
-                    email: userData?.email,
-                    firstName: userData?.firstName,
-                    lastName: userData?.lastName,
-                    phoneNumber: userData?.phoneNumber,
-                    role: userData?.role
+                    id: user?.id,
+                    email: user?.email,
+                    firstName: user?.firstName,
+                    lastName: user?.lastName,
+                    phoneNumber: user?.phoneNumber,
+                    role: user?.role
                 }}
                 className="flex w-full flex-col items-center"
             >
@@ -91,7 +85,7 @@ const ModalUpdate = (props: IModal) => {
                     <Upload
                         action="https://run.mocky.io/v3/932209e6-af4b-43b5-8d72-d30cf92e3027"
                         listType="picture"
-                        onChange={handleChange}
+                        onChange={handleFileChange}
                     >
                         <Button
                             icon={<AiOutlineUpload className="-mr-2 h-5 w-5" />}
@@ -101,9 +95,9 @@ const ModalUpdate = (props: IModal) => {
                         </Button>
                         <Image
                             onClick={(e) => e.stopPropagation()}
-                            src={userData?.photo}
+                            src={user?.photo}
                             alt="avatar"
-                            className="rounded-full"
+                            className="z-40 rounded-full"
                         />
                     </Upload>
                 </Form.Item>

@@ -4,14 +4,16 @@ import { AiOutlineUpload } from "react-icons/ai"
 import { useCreateUserMutation } from "@/redux/services/user/user.service"
 import { createUserFormData, normFile } from "@/utils/helpers"
 import useServerMessage from "@/hooks/useServerMessage"
-import ModalTitle from "@/components/Modal/ModalTitle"
+import { IModal } from "@/interfaces/modal.interface"
+import Title from "@/components/Modal/Title"
 
-const ModalAdd = () => {
+const ModalAdd = (props: IModal) => {
+    const { title } = props
     const [createUser, { data, error, isLoading }] = useCreateUserMutation()
 
     useServerMessage({ data: data!, error: error })
 
-    const handleChange = async (info: any) => {
+    const handleFileChange = async (info: any) => {
         if (info.file.status === "done") {
             message.success(`${info.file.name} file uploaded successfully`)
         } else if (info.file.status === "error") {
@@ -24,16 +26,10 @@ const ModalAdd = () => {
         await createUser(formData)
     }
 
-    const handleValuesChange = (changedValues: any, allValues: any) => {
-        console.log("Changed Values:", changedValues)
-        console.log("All Values:", allValues)
-    }
-
     return (
         <Spin spinning={isLoading}>
-            <ModalTitle />
+            <Title>{title}</Title>
             <Form
-                onValuesChange={handleValuesChange}
                 onFinish={onFinish}
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 14 }}
@@ -87,7 +83,7 @@ const ModalAdd = () => {
                     <Upload
                         action="https://run.mocky.io/v3/932209e6-af4b-43b5-8d72-d30cf92e3027"
                         listType="picture"
-                        onChange={handleChange}
+                        onChange={handleFileChange}
                     >
                         <Button
                             icon={<AiOutlineUpload className="-mr-2 h-5 w-5" />}

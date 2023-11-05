@@ -1,4 +1,4 @@
-import { creatApiWithAuth } from "../apiWithAuth.service"
+import { createApiWithAuth } from "../apiWithAuth.service"
 import {
     IAccountLogin,
     IAuthResponse,
@@ -7,7 +7,7 @@ import {
     INewPassword,
     IAccounRegister
 } from "@/interfaces/auth.interface"
-const creatApiAuthWithAuth = creatApiWithAuth("AuthApi", ["Auth"])
+const creatApiAuthWithAuth = createApiWithAuth("AuthApi", ["Auth"])
 
 export const authApi = creatApiAuthWithAuth.injectEndpoints({
     endpoints: (builder) => ({
