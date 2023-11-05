@@ -11,7 +11,7 @@ import { useGoogleLogin } from "@react-oauth/google"
 import logoGG from "@/assets/images/logoGG.svg"
 import { motion } from "framer-motion"
 import { IAccountLogin } from "@/interfaces/auth.interface"
-import Account from "@/layout/Account"
+import Account from "@/layouts/Account"
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()

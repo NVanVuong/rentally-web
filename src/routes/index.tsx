@@ -1,4 +1,4 @@
-import RequireAuth from "@/layout/RequireAuth"
+import RequireAuth from "@/layouts/RequireAuth"
 import { SITE_MAP } from "@/utils/constants/Path"
 import { Suspense, lazy } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
