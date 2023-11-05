@@ -23,7 +23,7 @@ import useServerMessage from "@/hooks/useServerMessage"
 const Modal = () => {
     const type = useAppSelector((state) => state.modal.type)
     const roomData = useAppSelector((state) => state.modal.data) as IRoom
-    const role = useAppSelector((state) => state.auth.userInfo?.role)
+    const role = useAppSelector((state) => state.auth.userInfo?.role)||''
 
     const imageList = roomData?.images as string[]
     const { data } = useGetUtilitiesQuery("")
@@ -56,7 +56,7 @@ const Modal = () => {
             if (roomData?.utilities && data) {
                 const selectedUtilities = roomData.utilities
                     .map((value: string) => data.find((utility) => utility.id === value))
-                    .filter((option) => option !== undefined) as IUtiltity[]
+                    .filter((option) => option !== undefined) as IUtiltity[] 
 
                 setSelectedOptions(selectedUtilities)
             }
@@ -156,7 +156,7 @@ const Modal = () => {
                     }
                 }
                 console.log(rooms)
-                await createRooms({ role, body: { roomBlockId: "34", rooms } })
+                await createRooms({ role, body: { roomBlockId: 34, rooms } })
 
                 setIsloading(false)
                 dispatch(closeModal())

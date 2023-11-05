@@ -15,7 +15,7 @@ import useServerMessage from "@/hooks/useServerMessage"
 const GenerateRooms = () => {
     const dispatch = useAppDispatch()
     const rooms = useAppSelector((state) => state.generateRoom.rooms)
-    const role = useAppSelector((state) => state.auth.userInfo?.role)
+    const role = useAppSelector((state) => state.auth.userInfo?.role) || ''
     const [UploadImages, uploadImagesResult] = useUploadImagesMutation()
     const [createRooms, { data, error, isLoading }] = useCreateRoomsMutation()
     const navigate = useNavigate()
@@ -26,7 +26,7 @@ const GenerateRooms = () => {
     useEffect(() => {
         const fetchData = async () => {
             if (isSave) {
-                await createRooms({ role, body: { roomBlockId: "34", rooms } })
+                await createRooms({ role, body: { roomBlockId: 34, rooms } })
                 setIsSave(false)
                 navigate("/mod/props/rooms")
                 dispatch(saveRoom())

@@ -7,7 +7,7 @@ import { Button, Spin } from "antd"
 
 const DeleteModal = () => {
     const roomData = useAppSelector((state) => state.modal.data) as IRoom
-    const role = useAppSelector((state) => state.auth.userInfo?.role)
+    const role = useAppSelector((state) => state.auth.userInfo?.role) || ''
     const [deleteModRoom, { data, error, isLoading }] = useDeleteRoomMutation()
 
     useServerMessage({ data: data!, error: error })
