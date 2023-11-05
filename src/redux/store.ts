@@ -4,21 +4,23 @@ import { userApi } from "@/redux/services/user/user.service"
 import { authApi } from "@/redux/services/auth/auth.service"
 import { roomApi } from "./services/room/room.service"
 import { helpApi } from "./services/help/help.service"
-import { modRoomBlockApi } from "./services/roomBlock/roomBlock.service"
+import {roomBlockApi} from "./services/block/block.service"
 
 import authSlice from "@/redux/features/auth/auth.slice"
 import searchSlice from "@/redux/features/search/search.slice"
+import searchMapSlice from "./features/search-map/search-map.slice"
 import modalSlice from "./features/modal/modal.slice"
 import generateRoomSlice from "./features/generateRoom/generateRoom.slice"
 
 const rootReducer = combineReducers({
-    [userApi.reducerPath]: userApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [helpApi.reducerPath]: helpApi.reducer,
     [roomApi.reducerPath]: roomApi.reducer,
-    [modRoomBlockApi.reducerPath]: modRoomBlockApi.reducer,
 
+    [userApi.reducerPath]: userApi.reducer,
+    [roomBlockApi.reducerPath]: roomBlockApi.reducer,
     search: searchSlice,
+    searchMap: searchMapSlice,
     modal: modalSlice,
     auth: authSlice.reducer,
     generateRoom: generateRoomSlice
@@ -33,9 +35,9 @@ export const store = configureStore({
     middleware: customizedMiddleware.concat(
         userApi.middleware,
         roomApi.middleware,
-        modRoomBlockApi.middleware,
         authApi.middleware,
-        helpApi.middleware
+        helpApi.middleware,
+        roomBlockApi.middleware
     )
 })
 

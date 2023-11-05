@@ -1,13 +1,20 @@
+import { useLocation } from "react-router-dom"
 import { useAppDispatch } from "@/redux/hook"
-import { setKeyword } from "@/redux/features/search/search.slice"
+import { useEffect } from "react"
+import { resetKeyword, setKeyword } from "@/redux/features/search/search.slice"
 
 const Search = () => {
     const dispatch = useAppDispatch()
+    const location = useLocation()
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const target = e.target as HTMLInputElement
         dispatch(setKeyword(target.value))
     }
+
+    useEffect(() => {
+        dispatch(resetKeyword())
+    }, [location])
 
     return (
         <form onSubmit={(e) => e.preventDefault()} className="w-96">

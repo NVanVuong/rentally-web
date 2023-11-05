@@ -1,4 +1,4 @@
-import ModalTitle from "@/components/Modal/ModalTitle"
+import Title from "@/components/Modal/Title"
 import useServerMessage from "@/hooks/useServerMessage"
 import { IModal } from "@/interfaces/modal.interface"
 import { IUser } from "@/interfaces/user.interface"
@@ -7,8 +7,7 @@ import { STATUS } from "@/utils/constants/GlobalConst"
 import { Button, Image, Spin } from "antd"
 
 const ModalDisable = (props: IModal) => {
-    const userData = props.data as IUser
-    const isActive = userData?.status === STATUS.ACTIVE
+    const { title, isActive, data: user } = props
     const [updateUser, { data, error, isLoading }] = useUpdateUserMutation()
 
     useServerMessage({ data: data!, error: error })
@@ -18,18 +17,18 @@ const ModalDisable = (props: IModal) => {
         if (isActive) formData.append("status", STATUS.DISABLED)
         else formData.append("status", STATUS.ACTIVE)
 
-        await updateUser({ id: userData!.id as number, formData: formData })
+        await updateUser({ id: user!.id as number, formData: formData })
     }
 
     return (
         <Spin spinning={isLoading} className="flex flex-col items-center">
-            <ModalTitle />
+            <Title>{title}</Title>
             <p className=" mb-6 text-center font-medium">
                 Are you sure you want to {isActive ? "disable" : "active"} the account of <br />
-                <span className=" font-bold">{userData?.firstName}</span>?
+                <span className=" font-bold">{user?.firstName}</span>?
             </p>
             <div className="mb-6 flex w-full justify-center">
-                <Image src={userData?.photo} width={100} height={100} className="rounded-full" />
+                <Image src={user?.photo} width={100} height={100} className="rounded-full" />
             </div>
             <div className="flex w-full justify-end">
                 <Button

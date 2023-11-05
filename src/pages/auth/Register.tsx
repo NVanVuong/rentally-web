@@ -19,7 +19,7 @@ import { motion } from "framer-motion"
 import * as Yup from "yup"
 import { Spin } from "antd"
 import { IAccounRegister } from "@/interfaces/auth.interface"
-import Account from "@/Layouts/Account"
+import Account from "@/layouts/Account"
 
 type RegisterValues = IAccounRegister & { confirmPassword?: string }
 

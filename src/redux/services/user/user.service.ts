@@ -1,7 +1,7 @@
 import { ICreateUserRequest, IUpdateUserRequest, IUser, IUserQuery, IUsersResponse } from "@/interfaces/user.interface"
-import { creatApiWithAuth } from "../apiWithAuth.service"
+import { createApiWithAuth } from "../apiWithAuth.service"
 
-const creatApiUserWithAuth = creatApiWithAuth("userApi", ["Users"])
+const creatApiUserWithAuth = createApiWithAuth("userApi", ["Users"])
 export const userApi = creatApiUserWithAuth.injectEndpoints({
     endpoints: (builder) => ({
         getUsers: builder.query<IUsersResponse, IUserQuery>({
@@ -34,8 +34,18 @@ export const userApi = creatApiUserWithAuth.injectEndpoints({
                 method: "DELETE"
             }),
             invalidatesTags: ["Users"]
+        }),
+        getLandLord: builder.query<any, void>({
+            query: () => `/users/mods`,
+            providesTags: ["Users"]
         })
     })
 })
 
-export const { useGetUsersQuery, useCreateUserMutation, useUpdateUserMutation, useDeleteUserMutation } = userApi
+export const {
+    useGetUsersQuery,
+    useCreateUserMutation,
+    useUpdateUserMutation,
+    useDeleteUserMutation,
+    useGetLandLordQuery
+} = userApi

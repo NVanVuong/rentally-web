@@ -26,6 +26,18 @@ export const ROLE_COLORS = {
 
 export type RoleType = keyof typeof ROLE_COLORS
 
+export enum STATUS {
+    ACTIVE = "ACTIVE",
+    DISABLED = "DISABLED",
+    REGISTING = "REGISTING"
+}
+
+export enum PAGE {
+    USER = "USER",
+    ROOM = "ROOM",
+    BLOCK = "BLOCK"
+}
+
 export const STATUS_COLORS = {
     [STATUS.ACTIVE]: "green",
     [STATUS.DISABLED]: "red",
@@ -41,11 +53,35 @@ export const ROOM_STATUS_COLORS = {
 
 export type RoomStatusType = keyof typeof ROOM_STATUS_COLORS
 
-export enum MODAL {
-    ADD = "ADD",
-    UPDATE = "UPDATE",
-    DELETE = "DELETE",
-    DISABLE = "DISABLE",
-    ENABLE = "ENABLE",
-    VIEW = "VIEW"
-}
+export const MODAL = {
+    ADD: {
+        USER: "ADD_USER",
+        ROOM: "ADD_ROOM",
+        BLOCK: "ADD_BLOCK"
+    },
+    UPDATE: {
+        USER: "UPDATE_USER",
+        ROOM: "UPDATE_ROOM",
+        BLOCK: "UPDATE_BLOCK"
+    },
+    DELETE: {
+        USER: "DELETE_USER",
+        ROOM: "DELETE_ROOM",
+        BLOCK: "DELETE_BLOCK"
+    },
+    DISABLE: {
+        USER: "DISABLE_USER",
+        ROOM: "DISABLE_ROOM",
+        BLOCK: "DISABLE_BLOCK"
+    },
+    ENABLE: {
+        USER: "ENABLE_USER",
+        ROOM: "ENABLE_ROOM",
+        BLOCK: "ENABLE_BLOCK"
+    },
+    VIEW: {
+        USER: "VIEW_USER",
+        ROOM: "VIEW_ROOM",
+        BLOCK: "VIEW_BLOCK"
+    }
+} as const

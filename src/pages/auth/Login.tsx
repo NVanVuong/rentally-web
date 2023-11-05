@@ -11,7 +11,7 @@ import { useGoogleLogin } from "@react-oauth/google"
 import logoGG from "@/assets/images/logoGG.svg"
 import { motion } from "framer-motion"
 import { IAccountLogin } from "@/interfaces/auth.interface"
-import Account from "@/Layouts/Account"
+import Account from "@/layouts/Account"
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
@@ -81,7 +81,7 @@ const Login = () => {
                             >
                                 {" "}
                                 {contextHolder}
-                                <h1 className="text-[40px] font-semibold text-secondary ">Login to your account</h1>
+                                <h1 className="text-4xl my-2 font-semibold text-secondary ">Login to your account</h1>
                                 <div className="mt-3">
                                     <p className="mb-1 text-[14px] text-secondary">
                                         Not a member?

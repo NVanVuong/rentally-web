@@ -1,4 +1,4 @@
-import RequireAuth from "@/Layouts/RequireAuth"
+import RequireAuth from "@/layouts/RequireAuth"
 import { SITE_MAP } from "@/utils/constants/Path"
 import { Suspense, lazy } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
@@ -7,16 +7,24 @@ const HomePage = lazy(() => import("../pages/home"))
 const AdminPage = lazy(() => import("../pages/admin"))
 const ModPage = lazy(() => import("../pages/mod"))
 const UsersPage = lazy(() => import("../pages/admin/users"))
+<<<<<<< HEAD
 const ModsPage = lazy(() => import("../pages/admin/mods"))
 const ModPropsPage = lazy(() => import("../pages/mod/props"))
 const AdminPropsPage = lazy(() => import("../pages/admin/props"))
+=======
+const RoomsPage = lazy(() => import("../pages/admin/rooms"))
+const BlocksPage = lazy(() => import("../pages/admin/blocks"))
+>>>>>>> 1dcef498f2c2f7b75fe71bdfc0e7f73675f6f961
 const Login = lazy(() => import("../pages/auth/Login"))
 const Register = lazy(() => import("../pages/auth/Register"))
 const ForgotPassword = lazy(() => import("../pages/auth/ForgotPassword"))
 const ResetPassword = lazy(() => import("../pages/auth/ResetPassword"))
+<<<<<<< HEAD
 const GenerateRooms = lazy(() => import("../pages/mod/props/room/GenerateRooms"))
 const RoomsManagement = lazy(() => import("../pages/mod/props/room/Rooms"))
 const AdminRoomsManagement = lazy(() => import("../pages/admin/props/room/Rooms"))
+=======
+>>>>>>> 1dcef498f2c2f7b75fe71bdfc0e7f73675f6f961
 
 const MainRoute = () => {
     return (

@@ -32,8 +32,8 @@ const authSlice = createSlice({
             const { accessToken } = action.payload
             state.accessToken = accessToken
             state.userInfo = jwt(accessToken as string)
-            // const user = jwt(accessToken as string);
-            // console.log(user)
+            const user = jwt(accessToken as string)
+            console.log(user)
             localStorage.setItem("jwt", accessToken as string)
         },
 
