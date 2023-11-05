@@ -38,6 +38,14 @@ const Modal = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [form] = Form.useForm()
+    // Initialize an object with an empty array
+    const imagesInit = { fileList: [{}] };
+
+    if (roomData && roomData.images && Array.isArray(roomData.images)) {
+        roomData.images.forEach((image: string | File) => {
+            imagesInit.fileList.push({ status: "done", url: image, name: "image.png"});
+        });
+    }
 
     let initialValues = {}
     if (type === MODAL.UPDATE) {
@@ -46,7 +54,8 @@ const Modal = () => {
             roomName: roomData?.roomName,
             area: roomData?.area,
             price: roomData?.price,
-            depositAmount: roomData?.depositAmount
+            depositAmount: roomData?.depositAmount,
+            images: imagesInit
         }
     }
 
@@ -70,6 +79,7 @@ const Modal = () => {
             utilities: selectedOptions.map((selectedOption: IUtiltity) => selectedOption.id)
         })
     }, [selectedOptions, form])
+    
 
     useServerMessage({ data: updateRoomResult.data!, error: updateRoomResult.data })
     useServerMessage({ data: createRoomsResult.data!, error: createRoomsResult.data })
@@ -86,6 +96,8 @@ const Modal = () => {
         if (type === MODAL.UPDATE) {
             setIsloading(true)
             const formData = new FormData()
+        
+            console.log(values.images)
             for (const value of values.images.fileList) {
                 if ("status" in value) {
                     try {

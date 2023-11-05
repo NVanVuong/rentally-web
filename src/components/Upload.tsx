@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { PlusOutlined } from "@ant-design/icons"
 import { Form, Modal, Upload } from "antd"
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface"
@@ -11,7 +11,9 @@ const UploadImage = ({ imageList }: { imageList: string[] }) => {
     const [fileList, setFileList] = useState<UploadFile[]>(
         imageList?.map((image: string, index) => ({ status: "done", url: image, name: "image.png", uid: index + "" }))
     )
-
+    // useEffect(()=>{
+    //     handleChange(fileList)
+    // },[])
     const getBase64 = (file: RcFile): Promise<string> =>
         new Promise((resolve, reject) => {
             const reader = new FileReader()
