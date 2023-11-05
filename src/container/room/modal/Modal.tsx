@@ -20,10 +20,12 @@ import {
     useCreateRoomsMutation
 } from "@/redux/services/room/room.service"
 import useServerMessage from "@/hooks/useServerMessage"
+import axios from "axios"
+
 const Modal = () => {
     const type = useAppSelector((state) => state.modal.type)
     const roomData = useAppSelector((state) => state.modal.data) as IRoom
-    const role = useAppSelector((state) => state.auth.userInfo?.role)||''
+    const role = useAppSelector((state) => state.auth.userInfo?.role) || ""
 
     const imageList = roomData?.images as string[]
     const { data } = useGetUtilitiesQuery("")
@@ -56,7 +58,7 @@ const Modal = () => {
             if (roomData?.utilities && data) {
                 const selectedUtilities = roomData.utilities
                     .map((value: string) => data.find((utility) => utility.id === value))
-                    .filter((option) => option !== undefined) as IUtiltity[] 
+                    .filter((option) => option !== undefined) as IUtiltity[]
 
                 setSelectedOptions(selectedUtilities)
             }
@@ -84,27 +86,24 @@ const Modal = () => {
         if (type === MODAL.UPDATE) {
             setIsloading(true)
             const formData = new FormData()
-
             for (const value of values.images.fileList) {
                 if ("status" in value) {
-                    fetch(value.url)
-                        .then((response) => {
-                            if (!response.ok) {
-                                throw new Error("Network response was not ok")
-                            }
-                            return response.blob()
-                        })
-                        .then((blob) => {
-                            // console.log(blob)
-                            formData.append("files", blob)
-                        })
-                        .catch((error) => {
-                            console.error("There was a problem with the fetch operation:", error)
-                        })
+                    try {
+                        const response = await axios.get(value.url, { responseType: "blob" })
+                        console.log("response: ", response)
+                        const blob = response.data
+                        const fileName = value.url.split('/').pop()
+                        const fileTransform = new File([blob], fileName, { type: blob.type })
+                        formData.append("files", fileTransform)
+                    } catch (error) {
+                        console.error("There was a problem with the fetch operation:", error)
+                    }
                 } else {
                     formData.append("files", value.originFileObj)
                 }
             }
+
+            console.log(FormData)
             const res = await updateRoomImages({ id: roomData?.id || "", body: formData }).unwrap()
             if (res.status === "success" && res.data) {
                 values.images = res.data as string[]
