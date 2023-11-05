@@ -1,11 +1,11 @@
-import { IRoomBlockRequest, IRoomBlock, IRoomBlockRespone } from "@/interfaces/block.interface"
+import { IRoomBlockRequest, IRoomBlock, IRoomBlockRespone, IRoomBlockQuery } from "@/interfaces/block.interface"
 import { createApiWithAuth } from "../apiWithAuth.service"
 
 const createApiRoomBlockWithAuth = createApiWithAuth("roomBlockApi", ["Blocks"])
 export const roomBlockApi = createApiRoomBlockWithAuth.injectEndpoints({
     endpoints: (builder) => ({
-        getRoomBlocks: builder.query<IRoomBlockRespone, any>({
-            query: () => "/admin/room-blocks",
+        getRoomBlocks: builder.query<IRoomBlockRespone, IRoomBlockQuery>({
+            query: ({ keyword = "" }) => `/admin/room-blocks?keyword=${keyword}`,
             providesTags: ["Blocks"]
         }),
         createRoomBlock: builder.mutation<IRoomBlockRespone, IRoomBlockRequest>({

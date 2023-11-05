@@ -6,6 +6,7 @@ import { roomBlockApi } from "@/redux/services/block/block.service"
 // slices
 import authSlice from "@/redux/features/auth/auth.slice"
 import searchSlice from "@/redux/features/search/search.slice"
+import searchMapSlice from "./features/search-map/search-map.slice"
 import modalSlice from "./features/modal/modal.slice"
 
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     [userApi.reducerPath]: userApi.reducer,
     [roomBlockApi.reducerPath]: roomBlockApi.reducer,
     search: searchSlice,
+    searchMap: searchMapSlice,
     modal: modalSlice,
     auth: authSlice.reducer
 })

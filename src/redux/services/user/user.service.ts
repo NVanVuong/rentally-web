@@ -34,8 +34,18 @@ export const userApi = creatApiUserWithAuth.injectEndpoints({
                 method: "DELETE"
             }),
             invalidatesTags: ["Users"]
+        }),
+        getLandLord: builder.query<any, void>({
+            query: () => `/users/mods`,
+            providesTags: ["Users"]
         })
     })
 })
 
-export const { useGetUsersQuery, useCreateUserMutation, useUpdateUserMutation, useDeleteUserMutation } = userApi
+export const {
+    useGetUsersQuery,
+    useCreateUserMutation,
+    useUpdateUserMutation,
+    useDeleteUserMutation,
+    useGetLandLordQuery
+} = userApi

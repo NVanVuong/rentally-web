@@ -8,7 +8,7 @@ import { Badge, Dropdown, Space, Spin } from "antd"
 import { useGetUsersQuery } from "@/redux/services/user/user.service"
 import { useAppSelector } from "@/redux/hook"
 import { formatStatus } from "@/utils/helpers"
-import { useMenuActions } from "./useMenuActions"
+import { useMenuActions } from "./hooks/useMenuActions"
 
 const TableManageUsers = () => {
     const keyword = useAppSelector((state) => state.search.keyword)

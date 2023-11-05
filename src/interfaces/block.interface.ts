@@ -1,3 +1,5 @@
+import { ILandlord } from "./user.interface"
+
 export interface IRoomBlock {
     id: number
     address: string
@@ -16,13 +18,6 @@ export interface ICoordinate {
     longitude: number
 }
 
-export interface ILandlord {
-    id: number
-    name: string
-    phoneNumber: string
-    photo: string
-}
-
 export interface IRoomBlockRespone {
     data: {
         roomBlocks: IRoomBlock[]
@@ -31,9 +26,13 @@ export interface IRoomBlockRespone {
     status: string
 }
 
+export interface IRoomBlockQuery {
+    keyword: string
+}
+
 export interface IRoomBlockRequest {
     address: string
-    city?: string
+    city: string
     district: string
     country: string
     coordinate: ICoordinate

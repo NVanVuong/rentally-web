@@ -5,11 +5,12 @@ import { AlignType } from "rc-table/lib/interface"
 import TableAntd from "@/components/Table"
 import { FaEllipsis } from "react-icons/fa6"
 import { Dropdown, Space, Spin } from "antd"
-import { useMenuActions } from "./useMenuActions"
+import { useMenuActions } from "./hooks/useMenuActions"
+import { useAppSelector } from "@/redux/hook"
 
 const TableManageRoomBlocks = () => {
-    const { data, isLoading } = useGetRoomBlocksQuery({})
-
+    const keyword = useAppSelector((state) => state.search.keyword)
+    const { data, isLoading } = useGetRoomBlocksQuery({ keyword: keyword })
     const roomBlocks = data?.data.roomBlocks as IRoomBlock[]
 
     const getMenuActions = useMenuActions()

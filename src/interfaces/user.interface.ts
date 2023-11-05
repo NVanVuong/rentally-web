@@ -10,12 +10,19 @@ export interface IUser {
     status?: string
 }
 
+export interface ILandlord {
+    id: number
+    name: string
+    phoneNumber: string
+    photo: string
+}
+
 export interface IUserQuery {
     keyword: string
 }
 
 export interface IUsersResponse {
-    data: IUser[]
+    data: any
     message: string
     status: string
 }
