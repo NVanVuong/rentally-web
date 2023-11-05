@@ -19,7 +19,7 @@ import { motion } from "framer-motion"
 import * as Yup from "yup"
 import { Spin } from "antd"
 import { IAccounRegister } from "@/interfaces/auth.interface"
-import Account from "@/layouts/Account"
+import Account from "@/layout/Account"
 
 type RegisterValues = IAccounRegister & { confirmPassword?: string }
 
@@ -146,10 +146,7 @@ const Register = () => {
                                     <div className="mt-3">
                                         <p className="mb-1 text-[14px] text-secondary">
                                             Already a member?
-                                            <Link
-                                                to={"/login"}
-                                                className="font-medium text-primary hover:underline"
-                                            >
+                                            <Link to={"/login"} className="font-medium text-primary hover:underline">
                                                 {" "}
                                                 Login now
                                             </Link>
