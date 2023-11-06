@@ -27,7 +27,6 @@ interface SendCodeValues {
     code: string
 }
 
-
 const Register = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
@@ -76,7 +75,7 @@ const Register = () => {
 
     const submitRegisterForm = async (values: RegisterValues) => {
         const { confirmPassword, ...body } = values
-        body.role = 'USER'
+        body.role = "USER"
         const res = await register(body).unwrap()
         if (res.status === "SUCCESS") {
             setIsPermitted(true)

@@ -17,10 +17,10 @@ const RoomCard = ({ room }: Props) => {
     const srcImage = JSON.parse(useAppSelector((state) => state.generateRoom.srcImage))
     const { area, price, depositAmount, utilities, id } = room
     const { data } = useGetUtilitiesQuery("")
-
+    // data as IUtiltity[]
     const [roomName, setRoomName] = useState(room.roomName)
 
-    const handleChange = (event: any, value: (IUtiltity | undefined)[]) => {
+    const handleChange = (_:any, value: (IUtiltity | undefined)[]) => {
         const validValues = value.filter((item): item is IUtiltity => item !== undefined)
         dispatch(
             changeUtilitiesRoom({ id: `${id}`, utilities: validValues.map((selectedOption) => selectedOption.id) })
@@ -83,10 +83,13 @@ const RoomCard = ({ room }: Props) => {
                         }}
                         options={data || []}
                         getOptionLabel={(option) => option?.name || ""}
-                        value={utilities?.map((value: string) => {
-                            const utility = data?.find((u) => u.id === value)
-                            return utility || null
-                        })}
+                        value={
+                            utilities
+                                ? (utilities
+                                      ?.map((value: string) => data?.find((utility) => utility.id === value))
+                                      .filter((option) => option !== undefined) as IUtiltity[])
+                                : []
+                        }
                         filterSelectedOptions
                         renderInput={(params) => (
                             <TextField

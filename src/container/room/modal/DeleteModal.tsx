@@ -13,7 +13,7 @@ const DeleteModal = () => {
     useServerMessage({ data: data!, error: error })
 
     const handleClick = async () => {
-        await deleteModRoom({ role, id: roomData?.id||'' })
+        await deleteModRoom({ role, id: roomData?.id || "" })
     }
 
     return (

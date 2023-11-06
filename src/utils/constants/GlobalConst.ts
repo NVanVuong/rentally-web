@@ -26,7 +26,6 @@ export const ROLE_COLORS = {
 
 export type RoleType = keyof typeof ROLE_COLORS
 
-
 export enum PAGE {
     USER = "USER",
     ROOM = "ROOM",

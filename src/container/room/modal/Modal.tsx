@@ -68,20 +68,6 @@ const Modal = () => {
     )
     const [isLoading, setIsloading] = useState<boolean>(false)
 
-    // useEffect(() => {
-    //     if (type === MODAL.UPDATE.ROOM) {
-    //     console.log(roomData?.utilities)
-
-    //         if (roomData?.utilities && data) {
-    //             const selectedUtilities = roomData.utilities
-    //                 .map((value: string) => data.find((utility) => utility.id === value))
-    //                 .filter((option) => option !== undefined) as IUtiltity[]
-
-    //             setSelectedOptions(selectedUtilities)
-    //         }
-    //     }
-    // }, [])
-
     useEffect(() => {
         form.setFieldsValue({
             utilities: selectedOptions.map((selectedOption: IUtiltity) => selectedOption.id)
@@ -91,7 +77,7 @@ const Modal = () => {
     useServerMessage({ data: updateRoomResult.data!, error: updateRoomResult.data })
     useServerMessage({ data: createRoomsResult.data!, error: createRoomsResult.data })
 
-    const handleChange = (event: any, value: any) => {
+    const handleChange = (_: any, value: any) => {
         setSelectedOptions(value)
     }
     const handleValuesChange = (changedValues: any, allValues: any) => {
@@ -181,10 +167,9 @@ const Modal = () => {
             }
         }
     }
-    console.log(selectedOptions)
     return (
         <Spin spinning={isLoading}>
-            <Title>{type === MODAL.UPDATE.ROOM?'Edit Room Information':'Remove Room'} </Title>
+            <Title>{type === MODAL.UPDATE.ROOM ? "Edit Room Information" : "Remove Room"} </Title>
             <Form
                 form={form}
                 onValuesChange={handleValuesChange}
