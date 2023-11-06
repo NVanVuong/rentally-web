@@ -30,8 +30,7 @@ const GenerateRooms = () => {
             if (isSave) {
                 await createRooms({ role, body: { roomBlockId: 34, rooms } })
                 setIsSave(false)
-                navigate(
-                    `${SITE_MAP.MOD}/${SITE_MAP.BLOCKS_MANAGEMENT}/${id}/rooms`)
+                navigate(`${SITE_MAP.MOD}/${SITE_MAP.BLOCKS_MANAGEMENT}/${id}/rooms`)
                 dispatch(saveRoom())
             }
         }
@@ -56,7 +55,7 @@ const GenerateRooms = () => {
 
     return (
         <div className="w-full">
-                <Spin spinning={isLoading || uploadImagesResult.isLoading}>
+            <Spin spinning={isLoading || uploadImagesResult.isLoading}>
                 <PageHeader title="Room Management - Block Nguyen Van Linh" />
                 <div className="mx-4 mb-4 flex justify-end gap-4">
                     <button
@@ -82,8 +81,8 @@ const GenerateRooms = () => {
                         {rooms?.map((room) => <RoomCard key={room.id} room={room} />)}
                     </div>
                 </div>
-        </Spin>
-            </div>
+            </Spin>
+        </div>
     )
 }
 

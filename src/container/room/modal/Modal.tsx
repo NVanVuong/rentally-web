@@ -21,7 +21,6 @@ import {
 } from "@/redux/services/room/room.service"
 import useServerMessage from "@/hooks/useServerMessage"
 import axios from "axios"
-import { SITE_MAP } from "@/utils/constants/Path"
 
 const Modal = () => {
     const type = useAppSelector((state) => state.modal.type)
@@ -133,7 +132,7 @@ const Modal = () => {
 
                 const { quantity, ...roomPattern } = values
                 dispatch(generateRoom({ roomPattern: roomPattern as IRoom, quantity: quantity }))
-                navigate('generate-rooms')
+                navigate("generate-rooms")
             } else if (role === "ADMIN") {
                 setIsloading(true)
 

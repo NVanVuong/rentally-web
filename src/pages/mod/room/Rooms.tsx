@@ -12,7 +12,7 @@ const RoomsManagement = () => {
     const role = useAppSelector((state) => state.auth.userInfo?.role) || ""
     const keyword = useAppSelector((state) => state.search.keyword)
     const { id } = useParams()
-    const { data, isLoading } = useGetRoomsInBlocksQuery({ role, id: id || "", keyword })  
+    const { data, isLoading } = useGetRoomsInBlocksQuery({ role, id: id || "", keyword })
     const rooms = data?.data?.roomBlocks || []
     if (!data) return
     return (
