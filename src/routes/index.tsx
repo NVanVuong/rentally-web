@@ -8,14 +8,12 @@ const AdminPage = lazy(() => import("../pages/admin"))
 const ModPage = lazy(() => import("../pages/mod"))
 const UsersPage = lazy(() => import("../pages/admin/users"))
 
-const ModPropsPage = lazy(() => import("../pages/mod/props"))
-
 const Login = lazy(() => import("../pages/auth/Login"))
 const Register = lazy(() => import("../pages/auth/Register"))
 const ForgotPassword = lazy(() => import("../pages/auth/ForgotPassword"))
 const ResetPassword = lazy(() => import("../pages/auth/ResetPassword"))
-const GenerateRooms = lazy(() => import("../pages/mod/props/room/GenerateRooms"))
-const RoomsManagement = lazy(() => import("../pages/mod/props/room/Rooms"))
+const GenerateRooms = lazy(() => import("../pages/mod/room/GenerateRooms"))
+const RoomsManagement = lazy(() => import("../pages/mod/room/Rooms"))
 const AdminRoomsManagement = lazy(() => import("../pages/admin/room/Rooms"))
 const BlocksPage = lazy(() => import("../pages/admin/blocks"))
 
@@ -35,11 +33,10 @@ const MainRoute = () => {
                     </Route>
                     <Route element={<RequireAuth />}>
                         <Route path={SITE_MAP.MOD} element={<ModPage />}>
-                            <Route index element={<Navigate to={SITE_MAP.PROPS_MANAGEMENT} replace />} />
-                            <Route path={SITE_MAP.PROPS_MANAGEMENT} element={<ModPropsPage />}>
-                                <Route path={SITE_MAP.ROOMS_GENERATION} element={<GenerateRooms />} />
-                                <Route path={SITE_MAP.ROOMS_MANAGEMENT} element={<RoomsManagement />} />
-                            </Route>
+                            <Route index element={<Navigate to={SITE_MAP.BLOCKS_MANAGEMENT} replace />} />
+                            <Route path={SITE_MAP.BLOCKS_MANAGEMENT} element={<BlocksPage />} />
+                            <Route path={SITE_MAP.ROOMS_GENERATION} element={<GenerateRooms />} />
+                            <Route path={SITE_MAP.ROOMS_MANAGEMENT} element={<RoomsManagement />} />
                         </Route>
                     </Route>
 
