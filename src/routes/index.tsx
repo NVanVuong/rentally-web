@@ -1,8 +1,7 @@
 import { SITE_MAP } from "@/utils/constants/Path"
-import RequireAuth from "@/layouts/RequireAuth"
+import {RequireAuthAdmin,RequireAuthMod  }from "@/layouts/RequireAuth"
 import { Suspense, lazy } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
-
 const HomePage = lazy(() => import("../pages/home"))
 const AdminPage = lazy(() => import("../pages/admin"))
 const ModPage = lazy(() => import("../pages/mod"))
@@ -23,7 +22,7 @@ const MainRoute = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
-                    <Route element={<RequireAuth />}>
+                    <Route element={<RequireAuthAdmin />}>
                         <Route path={SITE_MAP.ADMIN} element={<AdminPage />}>
                             <Route index element={<Navigate to={SITE_MAP.USERS_MANAGEMENT} replace />} />
                             <Route path={SITE_MAP.USERS_MANAGEMENT} element={<UsersPage />} />
@@ -31,7 +30,7 @@ const MainRoute = () => {
                             <Route path={SITE_MAP.ROOMS_MANAGEMENT} element={<AdminRoomsManagement />} />
                         </Route>
                     </Route>
-                    <Route element={<RequireAuth />}>
+                    <Route element={<RequireAuthMod />}>
                         <Route path={SITE_MAP.MOD} element={<ModPage />}>
                             <Route index element={<Navigate to={SITE_MAP.BLOCKS_MANAGEMENT} replace />} />
                             <Route path={SITE_MAP.BLOCKS_MANAGEMENT} element={<BlocksPage />} />
