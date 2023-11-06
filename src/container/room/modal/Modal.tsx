@@ -1,5 +1,5 @@
 import { Button, Form, Input, Spin } from "antd"
-import UploadImage from "@/components/Upload"
+import UploadImage from "@/components/Input/Upload"
 import { useEffect, useState } from "react"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"

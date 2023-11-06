@@ -1,3 +1,3 @@
-export { default as InputWithLabel } from "./InputLabel"
-export { default as ButtonAuth } from "./ButtonAuth"
-export { default as RoomCard } from "./RoomCard"
+export { default as InputWithLabel } from "./Input/InputLabel"
+export { default as ButtonAuth } from "./Button/ButtonAuth"
+export { default as RoomCard } from "./Card/RoomCard"
