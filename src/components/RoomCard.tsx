@@ -20,7 +20,7 @@ const RoomCard = ({ room }: Props) => {
     // data as IUtiltity[]
     const [roomName, setRoomName] = useState(room.roomName)
 
-    const handleChange = (_:any, value: (IUtiltity | undefined)[]) => {
+    const handleChange = (_: any, value: (IUtiltity | undefined)[]) => {
         const validValues = value.filter((item): item is IUtiltity => item !== undefined)
         dispatch(
             changeUtilitiesRoom({ id: `${id}`, utilities: validValues.map((selectedOption) => selectedOption.id) })

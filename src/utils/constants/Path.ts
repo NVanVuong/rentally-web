@@ -11,7 +11,7 @@ export const SITE_MAP = {
     MOD: "/mod",
     USERS_MANAGEMENT: "users",
     MODS_MANAGEMENT: "mods",
-    ROOMS_MANAGEMENT: "rooms",
+    ROOMS_MANAGEMENT: "blocks/:id/rooms",
     ROOMS_GENERATION: "generate-rooms",
     PROPS_MANAGEMENT: "props",
     BLOCKS_MANAGEMENT: "blocks"
