@@ -70,3 +70,6 @@
 .ant-image {
     @apply h-10 w-10;
 }
+.ant-carousel {
+    @apply w-full;
+}
