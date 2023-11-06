@@ -15,7 +15,7 @@ const RoomsManagement = () => {
     return (
         <Spin spinning={isLoading}>
             <PageHeader title="Rooms Management" />
-            <TableToolbar  type={PAGE.ROOM} />
+            <TableToolbar type={PAGE.ROOM} />
             <TableManageRooms rooms={rooms} />
         </Spin>
     )

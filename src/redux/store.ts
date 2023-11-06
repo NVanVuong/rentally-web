@@ -4,7 +4,7 @@ import { userApi } from "@/redux/services/user/user.service"
 import { authApi } from "@/redux/services/auth/auth.service"
 import { roomApi } from "./services/room/room.service"
 import { helpApi } from "./services/help/help.service"
-import {roomBlockApi} from "./services/block/block.service"
+import { roomBlockApi } from "./services/block/block.service"
 
 import authSlice from "@/redux/features/auth/auth.slice"
 import searchSlice from "@/redux/features/search/search.slice"

@@ -13,7 +13,7 @@ import { IUtiltity } from "@/interfaces/utility.interface"
 
 import { MODAL, ROLE } from "@/utils/constants/GlobalConst"
 import TypedInputNumber from "antd/es/input-number"
-import ModalTitle from "@/components/Modal/ModalTitle"
+import Title from "@/components/Modal/Title"
 import {
     useUpdateRoomMutation,
     useUpdateImagesMutation,
@@ -39,12 +39,12 @@ const Modal = () => {
     const dispatch = useAppDispatch()
     const [form] = Form.useForm()
     // Initialize an object with an empty array
-    const imagesInit = { fileList: [{}] };
+    const imagesInit = { fileList: [{}] }
 
     if (roomData && roomData.images && Array.isArray(roomData.images)) {
         roomData.images.forEach((image: string | File) => {
-            imagesInit.fileList.push({ status: "done", url: image, name: "image.png"});
-        });
+            imagesInit.fileList.push({ status: "done", url: image, name: "image.png" })
+        })
     }
 
     let initialValues = {}
@@ -59,27 +59,34 @@ const Modal = () => {
         }
     }
 
-    const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>([])
+    const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>(
+        roomData?.utilities
+            ? (roomData.utilities
+                  ?.map((value: string) => data?.find((utility) => utility.id === value))
+                  .filter((option) => option !== undefined) as IUtiltity[])
+            : []
+    )
     const [isLoading, setIsloading] = useState<boolean>(false)
 
-    useEffect(() => {
-        if (type === MODAL.UPDATE.ROOM) {
-            if (roomData?.utilities && data) {
-                const selectedUtilities = roomData.utilities
-                    .map((value: string) => data.find((utility) => utility.id === value))
-                    .filter((option) => option !== undefined) as IUtiltity[]
+    // useEffect(() => {
+    //     if (type === MODAL.UPDATE.ROOM) {
+    //     console.log(roomData?.utilities)
 
-                setSelectedOptions(selectedUtilities)
-            }
-        }
-    }, [])
+    //         if (roomData?.utilities && data) {
+    //             const selectedUtilities = roomData.utilities
+    //                 .map((value: string) => data.find((utility) => utility.id === value))
+    //                 .filter((option) => option !== undefined) as IUtiltity[]
+
+    //             setSelectedOptions(selectedUtilities)
+    //         }
+    //     }
+    // }, [])
 
     useEffect(() => {
         form.setFieldsValue({
             utilities: selectedOptions.map((selectedOption: IUtiltity) => selectedOption.id)
         })
     }, [selectedOptions, form])
-    
 
     useServerMessage({ data: updateRoomResult.data!, error: updateRoomResult.data })
     useServerMessage({ data: createRoomsResult.data!, error: createRoomsResult.data })
@@ -96,7 +103,7 @@ const Modal = () => {
         if (type === MODAL.UPDATE.ROOM) {
             setIsloading(true)
             const formData = new FormData()
-        
+
             console.log(values.images)
             for (const value of values.images.fileList) {
                 if ("status" in value) {
@@ -104,7 +111,7 @@ const Modal = () => {
                         const response = await axios.get(value.url, { responseType: "blob" })
                         console.log("response: ", response)
                         const blob = response.data
-                        const fileName = value.url.split('/').pop()
+                        const fileName = value.url.split("/").pop()
                         const fileTransform = new File([blob], fileName, { type: blob.type })
                         formData.append("files", fileTransform)
                     } catch (error) {
@@ -174,10 +181,10 @@ const Modal = () => {
             }
         }
     }
-
+    console.log(selectedOptions)
     return (
         <Spin spinning={isLoading}>
-            <ModalTitle />
+            <Title>{type === MODAL.UPDATE.ROOM?'Edit Room Information':'Remove Room'} </Title>
             <Form
                 form={form}
                 onValuesChange={handleValuesChange}
@@ -246,7 +253,7 @@ const Modal = () => {
                         <Autocomplete
                             onChange={handleChange}
                             multiple
-                            id=""
+                            id="tags-outlined"
                             sx={{
                                 "& .MuiOutlinedInput-root": {
                                     border: "px solid #d9d9d9",

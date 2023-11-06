@@ -1,4 +1,4 @@
-import ModalTitle from "@/components/Modal/ModalTitle"
+import Title from "@/components/Modal/Title"
 import "./style.css"
 import { Carousel, Descriptions, Image } from "antd"
 import { IRoom } from "@/interfaces/room.interface"
@@ -13,7 +13,7 @@ const ViewModal = () => {
     const { id, area, depositAmount, price, roomName, utilities, images } = roomData
     return (
         <div className="flex w-full flex-col items-center">
-            <ModalTitle />
+            <Title>Room Overview</Title>
             <Carousel autoplay dotPosition={"top"} effect="fade">
                 {images?.map((image, index) => {
                     return <Image key={index} height={200} width={400} src={image as string} />

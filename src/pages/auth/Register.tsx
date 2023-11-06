@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { ButtonAuth, InputWithLabel } from "@/components"
-import Select from "react-select"
+
 import mail from "@/assets/images/mailsvg.svg"
-import { Formik, Form, ErrorMessage } from "formik"
+import { Formik, Form } from "formik"
 import { Link, useNavigate } from "react-router-dom"
 import {
     useRegisterMutation,
@@ -12,25 +12,21 @@ import {
 } from "@/redux/services/auth/auth.service"
 import { useGoogleLogin } from "@react-oauth/google"
 import logoGG from "@/assets/images/logoGG.svg"
-import { ROLE } from "@/utils/constants/GlobalConst"
+
 import { useAppDispatch } from "@/redux/hook"
 import { setCredentials } from "@/redux/features/auth/auth.slice"
 import { motion } from "framer-motion"
 import * as Yup from "yup"
 import { Spin } from "antd"
-import { IAccounRegister } from "@/interfaces/auth.interface"
-import Account from "@/Layouts/Account"
+import { IAccountRegister } from "@/interfaces/auth.interface"
+import Account from "@/layouts/Account"
 
-type RegisterValues = IAccounRegister & { confirmPassword?: string }
+type RegisterValues = IAccountRegister & { confirmPassword?: string }
 
 interface SendCodeValues {
     code: string
 }
 
-const options = [
-    { value: ROLE.USER, label: "renter" },
-    { value: ROLE.MOD, label: "Landlord" }
-]
 
 const Register = () => {
     const navigate = useNavigate()
@@ -80,6 +76,7 @@ const Register = () => {
 
     const submitRegisterForm = async (values: RegisterValues) => {
         const { confirmPassword, ...body } = values
+        body.role = 'USER'
         const res = await register(body).unwrap()
         if (res.status === "SUCCESS") {
             setIsPermitted(true)
@@ -198,55 +195,6 @@ const Register = () => {
                                                 value={values.phoneNumber}
                                                 onChange={handleChange}
                                             />
-
-                                            <div>
-                                                <p className="mb-1 text-[14px] font-medium text-primary">
-                                                    Which describes best your role?
-                                                </p>
-                                                <Select
-                                                    name="role"
-                                                    placeholder="Role"
-                                                    styles={{
-                                                        control: (provided, state) => ({
-                                                            ...provided,
-                                                            height: "40px",
-                                                            width: "360px",
-                                                            borderRadius: "0.5rem",
-                                                            borderWidth: "2px",
-                                                            borderColor: state.isFocused ? "#E3641C" : "#D1D5DB",
-                                                            backgroundColor: state.isFocused ? "#FFFFFF" : "#E5E7EB",
-
-                                                            outline: "none"
-                                                        }),
-                                                        placeholder: (provided) => ({
-                                                            ...provided,
-                                                            fontSize: "18px",
-                                                            fontWeight: "normal",
-                                                            color: "rgba(60,64,67,0.8)"
-                                                        }),
-                                                        option: (styles, { isFocused, isSelected }) => {
-                                                            return {
-                                                                ...styles,
-                                                                backgroundColor: isSelected
-                                                                    ? "rgba(227, 100, 28, 1)"
-                                                                    : isFocused
-                                                                    ? "rgba(227, 100, 28,0.6 )"
-                                                                    : undefined
-                                                            }
-                                                        }
-                                                    }}
-                                                    value={options.find((option) => option.value === values.role)}
-                                                    onChange={(selectedOption) => {
-                                                        handleChange("role")(selectedOption ? selectedOption.value : "")
-                                                    }}
-                                                    options={options}
-                                                />
-                                                <ErrorMessage
-                                                    component="div"
-                                                    name={"role"}
-                                                    className="absolute text-[12px] text-red-700"
-                                                />
-                                            </div>
 
                                             <ButtonAuth text="Register" type="submit" />
                                         </Form>

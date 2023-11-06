@@ -1,4 +1,4 @@
-import ModalTitle from "@/components/Modal/ModalTitle"
+import Title from "@/components/Modal/Title"
 import useServerMessage from "@/hooks/useServerMessage"
 import { IRoom } from "@/interfaces/room.interface"
 import { useAppSelector } from "@/redux/hook"
@@ -13,12 +13,12 @@ const DeleteModal = () => {
     useServerMessage({ data: data!, error: error })
 
     const handleClick = async () => {
-        await deleteModRoom({ role, id: roomData?.id })
+        await deleteModRoom({ role, id: roomData?.id||'' })
     }
 
     return (
         <Spin spinning={isLoading} className="flex flex-col items-center">
-            <ModalTitle />
+            <Title>Remove Room </Title>
             <p className=" mb-6 text-center font-medium">
                 Are you sure you want to delete the room <br />
                 <span className=" font-bold">{roomData?.roomName}</span>?

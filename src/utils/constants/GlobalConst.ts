@@ -26,11 +26,6 @@ export const ROLE_COLORS = {
 
 export type RoleType = keyof typeof ROLE_COLORS
 
-export enum STATUS {
-    ACTIVE = "ACTIVE",
-    DISABLED = "DISABLED",
-    REGISTING = "REGISTING"
-}
 
 export enum PAGE {
     USER = "USER",

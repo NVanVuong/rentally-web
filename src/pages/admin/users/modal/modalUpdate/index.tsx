@@ -7,7 +7,6 @@ import useServerMessage from "@/hooks/useServerMessage"
 import Title from "@/components/Modal/Title"
 import { IModal } from "@/interfaces/modal.interface"
 
-
 const ModalUpdate = (props: IModal) => {
     const { title, data: user } = props
     const [updateUser, { data, error, isLoading }] = useUpdateUserMutation()

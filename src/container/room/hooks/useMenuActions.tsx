@@ -14,9 +14,10 @@ export const useMenuActions = () => {
         [
             {
                 label: (
-                    <div 
-                    onClick={() => dispatch(openModal({ type: MODAL.VIEW.ROOM, data: record }))}
-                    className="flex justify-between font-medium text-gray-500" >
+                    <div
+                        onClick={() => dispatch(openModal({ type: MODAL.VIEW.ROOM, data: record }))}
+                        className="flex justify-between font-medium text-gray-500"
+                    >
                         View room <HiOutlineViewfinderCircle className="ml-2.5 h-5 w-5" />
                     </div>
                 ),

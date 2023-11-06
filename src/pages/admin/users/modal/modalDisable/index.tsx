@@ -1,7 +1,6 @@
 import Title from "@/components/Modal/Title"
 import useServerMessage from "@/hooks/useServerMessage"
 import { IModal } from "@/interfaces/modal.interface"
-import { IUser } from "@/interfaces/user.interface"
 import { useUpdateUserMutation } from "@/redux/services/user/user.service"
 import { STATUS } from "@/utils/constants/GlobalConst"
 import { Button, Image, Spin } from "antd"
