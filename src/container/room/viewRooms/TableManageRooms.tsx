@@ -37,7 +37,7 @@ const TableManageRooms = ({ rooms }: { rooms: IRoom[] }) => {
             title: <span className="font-bold">Area</span>,
             dataIndex: "area",
             key: "area",
-            width: "15%",
+            width: "10%",
             sortDirections: ["ascend", "descend"],
             sorter: (a, b) => a.area - b.area,
             render: (area: number) => <span className="text-sm font-medium">{area}</span>

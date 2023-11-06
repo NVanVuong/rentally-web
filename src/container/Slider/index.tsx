@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom"
 import { SITE_MAP } from "@/utils/constants/Path"
 import { FaRegUser } from "react-icons/fa"
 import { BiHomeAlt } from "react-icons/bi"
-import { MdOutlineBedroomChild } from "react-icons/md"
+// import { MdOutlineBedroomChild } from "react-icons/md"
 
 type MenuItem = Required<MenuProps>["items"][number]
 
@@ -38,7 +38,7 @@ const Slider = () => {
 
         getItem(`${isExpanding ? "Accounts" : ""}`, "users", <FaRegUser className="h-5 w-5" />),
         getItem(`${isExpanding ? "Room Blocks" : ""}`, "blocks", <BiHomeAlt className="h-5 w-5" />),
-        getItem(`${isExpanding ? "Rooms" : ""}`, "rooms", <MdOutlineBedroomChild className="h-5 w-5" />),
+        // getItem(`${isExpanding ? "Rooms" : ""}`, "rooms", <MdOutlineBedroomChild className="h-5 w-5" />),
         getItem(`${isExpanding ? "xx" : ""}`, "sub1.3", <AppstoreOutlined className="ml-0.5" />),
         getItem(`${isExpanding ? "xx" : ""}`, "sub1.4", <AppstoreOutlined className="ml-0.5" />),
 
@@ -64,9 +64,9 @@ const Slider = () => {
             case "blocks":
                 navigate(SITE_MAP.BLOCKS_MANAGEMENT)
                 break
-            case "rooms":
-                navigate(SITE_MAP.ROOMS_MANAGEMENT)
-                break
+            // case "rooms":
+            //     navigate(SITE_MAP.ROOMS_MANAGEMENT)
+            //     break
             default:
                 break
         }

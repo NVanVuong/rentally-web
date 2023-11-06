@@ -132,7 +132,7 @@ const Modal = () => {
 
                 const { quantity, ...roomPattern } = values
                 dispatch(generateRoom({ roomPattern: roomPattern as IRoom, quantity: quantity }))
-                navigate("/mod/props/generate-rooms")
+                navigate("generate-rooms")
             } else if (role === "ADMIN") {
                 setIsloading(true)
 

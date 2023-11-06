@@ -5,12 +5,13 @@ import { BsSave } from "react-icons/bs"
 import { useAppSelector } from "@/redux/hook"
 import { addRoom, changeImagesRoom, saveRoom } from "@/redux/features/generateRoom/generateRoom.slice"
 import { FaPlus } from "react-icons/fa"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useUploadImagesMutation } from "@/redux/services/help/help.service"
 import { useCreateRoomsMutation } from "@/redux/services/room/room.service"
 import { useEffect, useState } from "react"
 import { Spin, message } from "antd"
 import useServerMessage from "@/hooks/useServerMessage"
+import { SITE_MAP } from "@/utils/constants/Path"
 
 const GenerateRooms = () => {
     const dispatch = useAppDispatch()
@@ -20,6 +21,7 @@ const GenerateRooms = () => {
     const [createRooms, { data, error, isLoading }] = useCreateRoomsMutation()
     const navigate = useNavigate()
     const [isSave, setIsSave] = useState(false)
+    const { id } = useParams()
 
     useServerMessage({ data: data!, error: error })
 
@@ -28,7 +30,7 @@ const GenerateRooms = () => {
             if (isSave) {
                 await createRooms({ role, body: { roomBlockId: 34, rooms } })
                 setIsSave(false)
-                navigate("/mod/props/rooms")
+                navigate(`${SITE_MAP.MOD}/${SITE_MAP.BLOCKS_MANAGEMENT}/${id}/rooms`)
                 dispatch(saveRoom())
             }
         }
@@ -52,8 +54,8 @@ const GenerateRooms = () => {
     }
 
     return (
-        <Spin spinning={isLoading || uploadImagesResult.isLoading}>
-            <div className="w-full">
+        <div className="w-full">
+            <Spin spinning={isLoading || uploadImagesResult.isLoading}>
                 <PageHeader title="Room Management - Block Nguyen Van Linh" />
                 <div className="mx-4 mb-4 flex justify-end gap-4">
                     <button
@@ -79,8 +81,8 @@ const GenerateRooms = () => {
                         {rooms?.map((room) => <RoomCard key={room.id} room={room} />)}
                     </div>
                 </div>
-            </div>
-        </Spin>
+            </Spin>
+        </div>
     )
 }
 
