@@ -10,12 +10,12 @@ const ModalProps = () => {
 
     const getModalContent = () => {
         switch (type) {
-            case MODAL.ADD:
-            case MODAL.UPDATE:
+            case MODAL.ADD.ROOM:
+            case MODAL.UPDATE.ROOM:
                 return <Modal />
-            case MODAL.VIEW:
+            case MODAL.VIEW.ROOM:
                 return <ViewModal />
-            case MODAL.DELETE:
+            case MODAL.DELETE.ROOM:
                 return <DeleteModal />
             default:
                 return null

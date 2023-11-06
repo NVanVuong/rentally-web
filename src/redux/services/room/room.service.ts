@@ -1,7 +1,7 @@
 import { IRoom } from "@/interfaces/room.interface"
-import { creatApiWithAuth } from "../apiWithAuth.service"
+import { createApiWithAuth } from "../apiWithAuth.service"
 
-const createRoomWithAuth = creatApiWithAuth("roomApi", ["Rooms"])
+const createRoomWithAuth = createApiWithAuth("roomApi", ["Rooms"])
 
 export const roomApi = createRoomWithAuth.injectEndpoints({
     endpoints: (builder) => ({

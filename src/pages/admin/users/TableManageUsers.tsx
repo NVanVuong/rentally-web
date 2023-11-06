@@ -16,7 +16,7 @@ const TableManageUsers = () => {
 
     const users = data?.data as IUser[]
 
-    const getMenuActions = useMenuActions({ isDelete: false })
+    const getMenuActions = useMenuActions()
 
     const columns: ColumnsType<IUser> = [
         {

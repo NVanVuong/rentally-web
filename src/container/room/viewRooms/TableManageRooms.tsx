@@ -3,13 +3,13 @@ import { ColumnsType } from "antd/es/table"
 import { AlignType } from "rc-table/lib/interface"
 import { FaEllipsis } from "react-icons/fa6"
 import { Badge, Dropdown, Space } from "antd"
-import { useMenuActions } from "@/hooks/useMenuActions"
+import { useMenuActions } from "../hooks/useMenuActions"
 import { IRoom } from "@/interfaces/room.interface"
 import { ROOM_STATUS, ROOM_STATUS_COLORS, RoomStatusType } from "@/utils/constants/GlobalConst"
 import { formatStatus } from "@/utils/helpers"
 
 const TableManageRooms = ({ rooms }: { rooms: IRoom[] }) => {
-    const getMenuActions = useMenuActions({ isDelete: true })
+    const getMenuActions = useMenuActions()
     const columns: ColumnsType<IRoom> = [
         {
             title: <span className=" font-bold">ID</span>,

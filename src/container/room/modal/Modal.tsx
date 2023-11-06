@@ -11,7 +11,7 @@ import { closeModal } from "@/redux/features/modal/modal.slice"
 import { useGetUtilitiesQuery, useUploadImagesMutation } from "@/redux/services/help/help.service"
 import { IUtiltity } from "@/interfaces/utility.interface"
 
-import { MODAL } from "@/utils/constants/GlobalConst"
+import { MODAL, ROLE } from "@/utils/constants/GlobalConst"
 import TypedInputNumber from "antd/es/input-number"
 import ModalTitle from "@/components/Modal/ModalTitle"
 import {
@@ -48,7 +48,7 @@ const Modal = () => {
     }
 
     let initialValues = {}
-    if (type === MODAL.UPDATE) {
+    if (type === MODAL.UPDATE.ROOM) {
         initialValues = {
             id: roomData?.id,
             roomName: roomData?.roomName,
@@ -63,7 +63,7 @@ const Modal = () => {
     const [isLoading, setIsloading] = useState<boolean>(false)
 
     useEffect(() => {
-        if (type === MODAL.UPDATE) {
+        if (type === MODAL.UPDATE.ROOM) {
             if (roomData?.utilities && data) {
                 const selectedUtilities = roomData.utilities
                     .map((value: string) => data.find((utility) => utility.id === value))
@@ -93,7 +93,7 @@ const Modal = () => {
     }
 
     const onFinish = async (values: any) => {
-        if (type === MODAL.UPDATE) {
+        if (type === MODAL.UPDATE.ROOM) {
             setIsloading(true)
             const formData = new FormData()
         
@@ -129,7 +129,7 @@ const Modal = () => {
             setIsloading(false)
             dispatch(closeModal())
         } else {
-            if (role === "MOD") {
+            if (role === ROLE.MOD) {
                 dispatch(closeModal())
                 const srcImage = values.images.fileList[0].thumbUrl
 
@@ -213,7 +213,7 @@ const Modal = () => {
                         <TypedInputNumber className="w-full" placeholder="Price" />
                     </Form.Item>
                 </div>
-                {type === MODAL.ADD ? (
+                {type === MODAL.ADD.ROOM ? (
                     <div className="flex gap-8">
                         <Form.Item
                             className="w-full"

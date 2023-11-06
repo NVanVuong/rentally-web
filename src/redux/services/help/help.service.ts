@@ -1,7 +1,7 @@
 import { IUtiltity, IUtiltityResponse } from "@/interfaces/utility.interface"
-import { creatApiWithAuth } from "../apiWithAuth.service"
+import { createApiWithAuth } from "../apiWithAuth.service"
 
-const creatApiAuthWithAuth = creatApiWithAuth("helpApi", ["Help"])
+const creatApiAuthWithAuth = createApiWithAuth("helpApi", ["Help"])
 
 export const helpApi = creatApiAuthWithAuth.injectEndpoints({
     endpoints: (builder) => ({
