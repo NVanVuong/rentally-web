@@ -1,5 +1,5 @@
 import { SITE_MAP } from "@/utils/constants/Path"
-import RequireAuth from "@/layouts/RequireAuth"
+import RequireAuth from "@/Layouts/RequireAuth"
 import { Suspense, lazy } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 

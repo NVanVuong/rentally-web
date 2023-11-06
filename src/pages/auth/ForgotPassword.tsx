@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import { Form, Formik } from "formik"
 import { Spin } from "antd"
 import { IEmail } from "@/interfaces/auth.interface"
-import Account from "@/layouts/Account"
+import Account from "@/Layouts/Account"
 
 const ForgotPassword = () => {
     const navigate = useNavigate()

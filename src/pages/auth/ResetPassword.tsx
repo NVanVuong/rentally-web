@@ -10,7 +10,7 @@ import {
 } from "@/redux/services/auth/auth.service"
 import { motion } from "framer-motion"
 import { Spin } from "antd"
-import Account from "@/layouts/Account"
+import Account from "@/Layouts/Account"
 
 interface ResetPasswordValues {
     password: string
