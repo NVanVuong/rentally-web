@@ -7,7 +7,7 @@ const HomePage = lazy(() => import("../pages/home"))
 const AdminPage = lazy(() => import("../pages/admin"))
 const ModPage = lazy(() => import("../pages/mod"))
 const UsersPage = lazy(() => import("../pages/admin/users"))
-// const ModsPage = lazy(() => import("../pages/admin/props"))
+
 const ModPropsPage = lazy(() => import("../pages/mod/props"))
 const AdminPropsPage = lazy(() => import("../pages/admin/props"))
 const Login = lazy(() => import("../pages/auth/Login"))
@@ -30,7 +30,6 @@ const MainRoute = () => {
                             <Route index element={<Navigate to={SITE_MAP.USERS_MANAGEMENT} replace />} />
                             <Route path={SITE_MAP.USERS_MANAGEMENT} element={<UsersPage />} />
                             <Route path={SITE_MAP.BLOCKS_MANAGEMENT} element={<BlocksPage />} />
-                            {/* <Route path={SITE_MAP.MODS_MANAGEMENT} element={<ModsPage />} /> */}
                             <Route path={SITE_MAP.PROPS_MANAGEMENT} element={<AdminPropsPage />}>
                                 <Route path={SITE_MAP.ROOMS_MANAGEMENT} element={<AdminRoomsManagement />} />
                             </Route>
