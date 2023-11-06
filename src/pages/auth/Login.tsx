@@ -81,7 +81,7 @@ const Login = () => {
                             >
                                 {" "}
                                 {contextHolder}
-                                <h1 className="text-4xl my-2 font-semibold text-secondary ">Login to your account</h1>
+                                <h1 className="my-2 text-4xl font-semibold text-secondary ">Login to your account</h1>
                                 <div className="mt-3">
                                     <p className="mb-1 text-[14px] text-secondary">
                                         Not a member?
