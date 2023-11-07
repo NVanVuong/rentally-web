@@ -18,7 +18,8 @@ const NavBar = () => {
             ) : null}
 
             {role !== "" ? (
-                <p className="cursor-pointer"
+                <p
+                    className="cursor-pointer"
                     onClick={() => {
                         dispatch(logOut())
                     }}

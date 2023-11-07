@@ -1,5 +1,5 @@
 import { SITE_MAP } from "@/utils/constants/Path"
-import {RequireAuthAdmin,RequireAuthMod  }from "@/layouts/RequireAuth"
+import { RequireAuthAdmin, RequireAuthMod } from "@/layouts/RequireAuth"
 import { Suspense, lazy } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 const HomePage = lazy(() => import("../pages/home"))
