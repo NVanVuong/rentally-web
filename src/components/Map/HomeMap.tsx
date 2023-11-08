@@ -36,9 +36,9 @@ const HomeMap: React.FC<MapProps> = ({ locations, zoom = 15 }) => {
 
         return null
     }
-    const customDivIcon = (text: string) =>
+    const customDivIcon = (text: string, isClick:boolean) =>
         L.divIcon({
-            className: "custom-div-icon",
+            className: `custom-div-icon${isClick?'-white':''}`,
             html: `<div>${text}<div>`
         })
 
@@ -50,7 +50,7 @@ const HomeMap: React.FC<MapProps> = ({ locations, zoom = 15 }) => {
                 return (
                     <Marker
                         position={location}
-                        icon={customDivIcon("$200")}
+                        icon={customDivIcon("$200",true)}
                         eventHandlers={{
                             click: () => {
                                 setCenter(location)
