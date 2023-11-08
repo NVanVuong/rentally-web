@@ -1,0 +1,21 @@
+.ant-carousel {
+    @apply h-full w-full;
+}
+.slick-list {
+    @apply h-full w-full;
+}
+.slick-track {
+    @apply h-full  w-full;
+}
+.slick-slide {
+    @apply h-full  w-full;
+}
+.slick-slide div {
+    @apply h-full w-full;
+}
+.ant-carousel .slick-prev {
+    @apply start-2 z-50 rounded-full bg-white hover:bg-slate-200;
+}
+.ant-carousel .slick-next {
+    @apply end-2 z-50 rounded-full bg-white hover:bg-slate-200;
+}

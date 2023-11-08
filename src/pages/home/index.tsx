@@ -1,10 +1,23 @@
 import ListingCard from "@/components/Card/ListingCard"
 import NavBar from "@/components/Navbar"
+import { useAppSelector } from "@/redux/hook"
+import HomeMap from "@/components/Map/HomeMap"
+
+const locations = [
+    [63.5955, 130.3269],
+    [65.5955, 120.3269]
+]
 
 const Home = () => {
+    const placeInfo = useAppSelector((state) => state.searchMap.placeInfo)
+    const { lat, lng } = placeInfo.latlng
+    locations.push([lat, lng])
+
     return (
-        <div>
+        <div className="h-screen w-full">
             <NavBar />
+
+            <HomeMap locations={locations} />
             <div
                 className="
         mx-auto
