@@ -14,8 +14,8 @@
     @apply h-full w-full;
 }
 .ant-carousel .slick-slider .slick-prev {
-    @apply !hidden group-hover:!block start-2 z-50 h-6 w-6 p-[2px] transition rounded-full bg-white/70 hover:bg-white hover:scale-110;
+    @apply start-2 z-50 !hidden h-6 w-6 rounded-full bg-white/70 p-[2px] transition hover:scale-110 hover:bg-white group-hover:!block;
 }
 .ant-carousel .slick-slider .slick-next {
-    @apply !hidden group-hover:!block end-2 z-50  h-6 w-6 p-[2px] transition rounded-full bg-white/70 hover:bg-white hover:scale-110;
+    @apply end-2 z-50 !hidden h-6  w-6 rounded-full bg-white/70 p-[2px] transition hover:scale-110 hover:bg-white group-hover:!block;
 }
