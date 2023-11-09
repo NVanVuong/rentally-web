@@ -17,7 +17,7 @@ const Home = () => {
         <div className="h-screen w-full">
             <NavBar />
 
-            <HomeMap locations={locations} />
+            {/* <HomeMap locations={locations} /> */}
             <div
                 className="
         mx-auto
@@ -28,7 +28,7 @@ const Home = () => {
         xl:px-20
       "
             >
-                <div className="md:grid-cols-3lg:grid-cols-4 grid grid-cols-1  gap-8 pt-24  sm:grid-cols-2 xl:grid-cols-5 2xl:grid-cols-6">
+                <div className="md:grid-cols-2 lg:grid-cols-3 grid grid-cols-1  gap-8 pt-24  sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5">
                     <ListingCard />
                     <ListingCard />
                     <ListingCard />

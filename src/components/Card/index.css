@@ -13,9 +13,9 @@
 .slick-slide div {
     @apply h-full w-full;
 }
-.ant-carousel .slick-prev {
-    @apply start-2 z-50 rounded-full bg-white hover:bg-slate-200;
+.ant-carousel .slick-slider .slick-prev {
+    @apply !hidden group-hover:!block start-2 z-50 h-6 w-6 p-[2px] transition rounded-full bg-white/70 hover:bg-white hover:scale-110;
 }
-.ant-carousel .slick-next {
-    @apply end-2 z-50 rounded-full bg-white hover:bg-slate-200;
+.ant-carousel .slick-slider .slick-next {
+    @apply !hidden group-hover:!block end-2 z-50  h-6 w-6 p-[2px] transition rounded-full bg-white/70 hover:bg-white hover:scale-110;
 }

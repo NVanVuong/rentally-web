@@ -16,7 +16,7 @@ const ListingCard: React.FC<ListingCardProps> = () => {
 
     return (
         <div className="group col-span-1 cursor-pointer">
-            <div className="flex w-full flex-col gap-2">
+            <div className="flex w-full flex-col ">
                 <div className=" relative aspect-square w-full overflow-hidden rounded-xl">
                     <Carousel
                         dotPosition={"bottom"}
@@ -59,18 +59,18 @@ const ListingCard: React.FC<ListingCardProps> = () => {
                         <HeartButton />
                     </div>
                 </div>
-                <div className="flex flex-row justify-between gap-4">
+                <div className="flex flex-row justify-between">
                     {" "}
-                    <h4 className="text-lg font-semibold">123 Nguyen Van Linh, Hai Chau</h4>
-                    <div className="flex flex-1 flex-row items-center font-normal ">
-                        <BsStarFill />
+                    <h4 className="text-[16px] font-semibold">123 Nguyen Van Linh, Hai Chau</h4>
+                    <div className="flex flex-1 flex-row items-center justify-end font-normal gap-[2px] text-[14px]">
+                        <BsStarFill size={12}/>
                         <span>4.91</span>
                     </div>
                 </div>
-                <h4 className="font-bold text-[#128E07]">
+                <h4 className="font-bold text-[#128E07] text-[14px]">
                     Vacant<span className="font-light text-neutral-500"> at Oct23 - 28</span>
                 </h4>
-                <div className="flex flex-row items-center gap-1">
+                <div className="flex flex-row items-center gap-1 text-[14px] mt-2">
                     <h4 className="font-semibold">2M3/month</h4>
                 </div>
             </div>
