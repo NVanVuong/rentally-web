@@ -1,8 +1,9 @@
 import ListingCard from "@/components/Card/ListingCard"
 import Header from "@/container/Header"
 import { useAppSelector } from "@/redux/hook"
-import { useEffect } from "react";
-import { useSearchParams } from 'react-router-dom';
+import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
+import { useEffect } from "react"
+import { useSearchParams } from "react-router-dom"
 // import HomeMap from "@/components/Map/HomeMap"
 
 // const locations = [
@@ -13,28 +14,29 @@ import { useSearchParams } from 'react-router-dom';
 const Home = () => {
     // const placeInfo = useAppSelector((state) => state.searchMap.placeInfo)
     // const { lat, lng } = placeInfo.latlng
-    const [searchParams] = useSearchParams();
+    const [searchParams] = useSearchParams()
+    useGetUtilitiesQuery("")
 
     useEffect(() => {
-        const params: [string, string][] = [];
+        const params: [string, string][] = []
         for (const entry of searchParams.entries()) {
-          params.push(entry as [string, string]);
+            params.push(entry as [string, string])
         }
-    
-        let searchParamsObject: Record<string, string[]> = {};
-    
-        params?.forEach((i) => {
-          if (Object.keys(searchParamsObject).some((item) => item === i[0])) {
-            searchParamsObject[i[0]] = [...searchParamsObject[i[0]], i[1]];
-          } else {
-            searchParamsObject = { ...searchParamsObject, [i[0]]: [i[1]] };
-          }
-        });
-    
-        console.log(searchParamsObject);
-      }, [searchParams]);
 
-    console.log(searchParams);
+        let searchParamsObject: Record<string, string[]> = {}
+
+        params?.forEach((i) => {
+            if (Object.keys(searchParamsObject).some((item) => item === i[0])) {
+                searchParamsObject[i[0]] = [...searchParamsObject[i[0]], i[1]]
+            } else {
+                searchParamsObject = { ...searchParamsObject, [i[0]]: [i[1]] }
+            }
+        })
+
+        console.log(searchParamsObject)
+    }, [searchParams])
+
+    console.log(searchParams)
 
     return (
         <div className="h-screen w-full">

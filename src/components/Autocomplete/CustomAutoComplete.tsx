@@ -17,9 +17,9 @@ export default function CustomAutoComplete<T>({
     }
 
     return (
-        <Autocomplete className="w-full"
+        <Autocomplete
+            className="w-full"
             id="country-select-demo"
-            sx={{ width: 300 }}
             options={options}
             autoHighlight
             value={selectedOption}
@@ -31,26 +31,24 @@ export default function CustomAutoComplete<T>({
                     width: "full",
                     fontSize: "12px",
                     zIndex: "10",
-                    padding:"0",
+                    padding: "0",
                     "&.Mui-focused fieldset": {
                         border: "0px solid #fff"
                     },
-                    "MuiAutocomplete-input":{
-                        padding:'0'
+                    "MuiAutocomplete-input": {
+                        padding: "0"
                     }
-
                 },
-               
-        
+
                 "& .MuiOutlinedInput-root ": {
                     "& .MuiOutlinedInput-notchedOutline": {
                         border: "0px solid #fff"
                     }
                 },
-                "& .MuiInputLabel-root":{
-                    display: 'none'
+                "& .MuiInputLabel-root": {
+                    display: "none"
                 },
-                "& .MuiSvgIcon-root":{
+                "& .MuiSvgIcon-root": {
                     display: "none"
                 }
             }}

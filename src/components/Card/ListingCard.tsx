@@ -9,7 +9,7 @@ interface ListingCardProps {}
 const settings = {
     nextArrow: <GrFormNext />,
     prevArrow: <GrFormPrevious />
-} 
+}
 
 const ListingCard: React.FC<ListingCardProps> = () => {
     const [currentSlide, setCurrentSlide] = useState(0)
