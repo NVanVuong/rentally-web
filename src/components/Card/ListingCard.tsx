@@ -9,7 +9,7 @@ interface ListingCardProps {}
 const settings = {
     nextArrow: <GrFormNext />,
     prevArrow: <GrFormPrevious />
-}
+} 
 
 const ListingCard: React.FC<ListingCardProps> = () => {
     const [currentSlide, setCurrentSlide] = useState(0)
@@ -28,8 +28,8 @@ const ListingCard: React.FC<ListingCardProps> = () => {
                     >
                         <img
                             className={`h-full object-cover transition ${
-                                currentSlide == 0 ? "group-hover" : ""
-                            }:scale-110 `}
+                                currentSlide == 0 ? "group-hover:scale-110" : ""
+                            } `}
                             src={
                                 "https://media.vov.vn/sites/default/files/styles/large/public/2021-02/7_ansesourcedargent_ladigue_seychelles_shutterstock_303523277.jpg"
                             }
@@ -37,8 +37,8 @@ const ListingCard: React.FC<ListingCardProps> = () => {
                         />
                         <img
                             className={`h-full object-cover transition ${
-                                currentSlide == 1 ? "group-hover" : ""
-                            }:scale-110 `}
+                                currentSlide == 1 ? "group-hover:scale-110" : ""
+                            } `}
                             src={
                                 "https://chupanhkhachsan.com/wp-content/uploads/2013/12/chup-anh-khach-san_home-26.jpg"
                             }
@@ -46,8 +46,8 @@ const ListingCard: React.FC<ListingCardProps> = () => {
                         />
                         <img
                             className={`h-full object-cover transition ${
-                                currentSlide == 2 ? "group-hover" : ""
-                            }:scale-110 `}
+                                currentSlide == 2 ? "group-hover:scale-110" : ""
+                            } `}
                             src={
                                 "https://4.bp.blogspot.com/-kA-ZpYCOQ0s/ULZ_5YHbH1I/AAAAAAAAAHQ/cSa2KCI0MJc/s1600/hotel+paramount+2.jpg"
                             }
@@ -55,8 +55,8 @@ const ListingCard: React.FC<ListingCardProps> = () => {
                         />
                         <img
                             className={`h-full object-cover transition ${
-                                currentSlide == 3 ? "group-hover" : ""
-                            }:scale-110 `}
+                                currentSlide == 3 ? "group-hover:scale-110" : ""
+                            } `}
                             src={
                                 "https://a0.muscache.com/im/pictures/miso/Hosting-788066030410832017/original/3ebdd732-2966-4ddf-8a6d-3294d3035d6a.jpeg?im_w=720"
                             }
