@@ -41,7 +41,7 @@ const Home = () => {
                 <Header />
             </div>
 
-            <HomeMap locations={locations} />
+            {/* <HomeMap locations={locations} /> */}
             <div className="mx-auto max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-20 ">
                 <div className="grid grid-cols-1 gap-8 pt-10 sm:grid-cols-2 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
                     <ListingCard />

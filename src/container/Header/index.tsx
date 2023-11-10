@@ -1,16 +1,15 @@
-
 import Filters from "@/components/Input/Filters"
 import { useAppDispatch } from "@/redux/hook"
 import { openModal } from "@/redux/features/modal/modal.slice"
 import { VscSettings } from "react-icons/vsc"
-import SearchRoom from '@/components/Input/SearchRoom'
+import SearchRoom from "@/components/Input/SearchRoom"
 const Header = () => {
     const dispacth = useAppDispatch()
 
     return (
         <>
             <div className="flex items-center justify-center gap-4">
-                <SearchRoom/>
+                <SearchRoom />
                 <div
                     className="flex h-12 cursor-pointer items-center justify-center rounded-lg border border-[#717171] p-3 px-4"
                     onClick={() => dispacth(openModal({}))}
