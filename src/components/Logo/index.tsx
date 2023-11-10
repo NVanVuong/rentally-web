@@ -12,9 +12,14 @@ const Logo = (props: ILogo) => {
 
     const navigate = useNavigate()
 
+    const handleClick = (e: any) => {
+        e.stopPropagation()
+        navigate(SITE_MAP.INDEX)
+    }
+
     return (
         <img
-            onClick={() => navigate(SITE_MAP.INDEX)}
+            onClick={(e) => handleClick(e)}
             className={`${isOpen ? "h-full" : "h-8"} cursor-pointer transition duration-100`}
             src={isOpen ? RetallyLogoFull : RetallyLogo}
             alt="Rentally Logo"

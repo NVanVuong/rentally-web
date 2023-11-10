@@ -4,6 +4,7 @@ import { Suspense, lazy } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { useGetProvincesQuery, useGetUtilitiesQuery } from "@/redux/services/help/help.service"
 import RoomDetail from "../pages/room-detail"
+import HomeLayout from "@/layouts/Home"
 
 const HomePage = lazy(() => import("../pages/home"))
 const AdminPage = lazy(() => import("../pages/admin"))
@@ -27,7 +28,8 @@ const MainRoute = () => {
         <Suspense fallback={<div>Loading...</div>}>
             <BrowserRouter>
                 <Routes>
-                    <Route path={SITE_MAP.INDEX} element={<HomePage />}>
+                    <Route path={SITE_MAP.INDEX} element={<HomeLayout />}>
+                        <Route path={SITE_MAP.INDEX} element={<HomePage />}/>
                         <Route path={SITE_MAP.ROOMS_DETAIL} element={<RoomDetail />} />
                     </Route>
                     <Route element={<RequireAuthAdmin />}>
