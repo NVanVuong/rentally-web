@@ -3,16 +3,18 @@ import { IRoomFinding } from './src/interfaces/roomfiding.interface';
 
 export const dataRooms:IRoomFinding[]= [
     {
-        "id": "1ca92c2f-3771-4180-8806-144ded4684af",
-        "price": "31",
+        "id": "013a5db2-4b1f-410d-8908-b8e82c4f4c41",
+        "price": "99",
         "images": [
-            "Aequus beatae deprimo texo."
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/437.jpg",
+            "https://avatars.githubusercontent.com/u/57250120",
+            "https://avatars.githubusercontent.com/u/85642502"
         ],
-        "address": "1357 Ankunding Dam",
-        "district": "Michigan",
+        "address": "86186 Jordyn Light",
+        "district": "Wyoming",
         "coordinate": {
-            "latitude": 30.3422,
-            "longitude": 86.624
+            "latitude": -2.2194,
+            "longitude": -126.9739
         },
         "utilities": [
             {
@@ -24,38 +26,18 @@ export const dataRooms:IRoomFinding[]= [
         ]
     },
     {
-        "id": "25bd06ac-f4a7-4f79-9619-62a435d628be",
-        "price": "39",
+        "id": "19519471-005b-4943-b76c-aaa8be915f91",
+        "price": "77",
         "images": [
-            "Valetudo soluta administratio textor decerno perferendis."
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/716.jpg",
+            "https://avatars.githubusercontent.com/u/25783666",
+            "https://avatars.githubusercontent.com/u/2293584"
         ],
-        "address": "7359 Nat Rapid",
-        "district": "West Virginia",
+        "address": "449 Kreiger Isle",
+        "district": "Nevada",
         "coordinate": {
-            "latitude": -81.2174,
-            "longitude": 129.1452
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ],
-        "avgRate": 2.5
-    },
-    {
-        "id": "31d3fdfc-6261-42b5-b912-cdc9974e8c18",
-        "price": "38",
-        "images": [
-            "Subiungo bestia sulum."
-        ],
-        "address": "551 Prosacco Passage",
-        "district": "Alabama",
-        "coordinate": {
-            "latitude": -85.2315,
-            "longitude": -80.031
+            "latitude": -15.0936,
+            "longitude": 148.2849
         },
         "utilities": [
             {
@@ -67,79 +49,18 @@ export const dataRooms:IRoomFinding[]= [
         ]
     },
     {
-        "id": "3b347d2f-a06e-4d95-ab17-a84ca2962665",
-        "price": "32",
+        "id": "1bc5edb4-dea9-48eb-badd-aa34e788536f",
+        "price": "81",
         "images": [
-            "Consequatur statim aegrotatio armarium vulgus solvo crastinus vulnero inflammatio argumentum."
+            "https://avatars.githubusercontent.com/u/89875319",
+            "https://avatars.githubusercontent.com/u/19878020",
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/913.jpg"
         ],
-        "address": "45187 Stamm Common",
-        "district": "Virginia",
-        "coordinate": {
-            "latitude": -73.6395,
-            "longitude": -169.2852
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "5a58593d-a492-433c-83f4-ec21dc0106cf",
-        "price": "7",
-        "images": [
-            "Dens amo vulpes voluptates confido."
-        ],
-        "address": "760 Ruecker Prairie",
-        "district": "Connecticut",
-        "coordinate": {
-            "latitude": -78.0218,
-            "longitude": 156.5652
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "5b581398-db02-4b00-8886-99c331ff2d49",
-        "price": "16",
-        "images": [
-            "Triumphus adnuo alias."
-        ],
-        "address": "279 Jaskolski Lights",
-        "district": "Utah",
-        "coordinate": {
-            "latitude": 74.8178,
-            "longitude": -123.2245
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "63ecd0ee-4eaf-4706-b5b1-2f8020eaf320",
-        "price": "30",
-        "images": [
-            "Coepi nam demoror agnitio adhuc centum custodia iusto vociferor decipio."
-        ],
-        "address": "89649 Sporer Crossing",
+        "address": "85729 Volkman Green",
         "district": "Pennsylvania",
         "coordinate": {
-            "latitude": 11.1621,
-            "longitude": -67.3355
+            "latitude": 84.5273,
+            "longitude": -171.0746
         },
         "utilities": [
             {
@@ -151,332 +72,18 @@ export const dataRooms:IRoomFinding[]= [
         ]
     },
     {
-        "id": "64d6816f-13c0-4648-95fa-0d7315d3ce80",
-        "price": "13",
+        "id": "234e174f-3ac8-4fcb-9349-f243cc363af2",
+        "price": "82",
         "images": [
-            "Optio varietas argentum aliquid decretum maxime tabernus."
+            "https://avatars.githubusercontent.com/u/34283172",
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1130.jpg",
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/100.jpg"
         ],
-        "address": "61796 Huel Flats",
-        "district": "Montana",
-        "coordinate": {
-            "latitude": 29.3171,
-            "longitude": 104.8831
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "663affff-1549-41d3-87aa-4917586bb2aa",
-        "price": "14",
-        "images": [
-            "Comis degero curvo maxime quam appositus."
-        ],
-        "address": "436 Yoshiko Burgs",
-        "district": "Massachusetts",
-        "coordinate": {
-            "latitude": -30.3401,
-            "longitude": -175.0155
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "7433b543-66e7-40bf-82be-8d167eea224c",
-        "price": "22",
-        "images": [
-            "Abbas assentator sol."
-        ],
-        "address": "99762 Danny Branch",
-        "district": "North Dakota",
-        "coordinate": {
-            "latitude": -56.4618,
-            "longitude": -1.3114
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "86414396-d9e2-4de0-a3d3-ca6ff6600610",
-        "price": "48",
-        "images": [
-            "Usus vis praesentium consequuntur quo."
-        ],
-        "address": "9906 Williamson Lake",
-        "district": "Georgia",
-        "coordinate": {
-            "latitude": -62.3712,
-            "longitude": 41.8688
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "8c144904-9878-4bd1-a864-83ab7731568e",
-        "price": "29",
-        "images": [
-            "Coepi sonitus thorax decet caste."
-        ],
-        "address": "77778 Emard Dam",
-        "district": "Oregon",
-        "coordinate": {
-            "latitude": -27.6961,
-            "longitude": 59.9727
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "8d25e6de-4fab-4519-871c-e95a86e618bc",
-        "price": "9",
-        "images": [
-            "Circumvenio cultura stella tersus deduco adiuvo conculco amaritudo."
-        ],
-        "address": "656 Carlie Run",
-        "district": "Connecticut",
-        "coordinate": {
-            "latitude": 9.3087,
-            "longitude": -50.7196
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "9015c06b-96b2-45bc-8fe7-05abba008a04",
-        "price": "18",
-        "images": [
-            "Advoco absorbeo et hic sumo avaritia."
-        ],
-        "address": "760 Ruecker Prairie",
-        "district": "Connecticut",
-        "coordinate": {
-            "latitude": -78.0218,
-            "longitude": 156.5652
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "97ba3649-ff1f-4b28-a6ea-23054d042073",
-        "price": "50",
-        "images": [
-            "Volva explicabo copiose itaque tego abutor peior caries."
-        ],
-        "address": "121 Rogahn Squares",
-        "district": "Minnesota",
-        "coordinate": {
-            "latitude": 73.9236,
-            "longitude": -88.0212
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "a16c95d9-8182-470d-ad5b-563c462cd9d1",
-        "price": "36",
-        "images": [
-            "Depopulo adopto varietas talis cognatus confugo cubitum tener adversus cariosus."
-        ],
-        "address": "331 White Fall",
-        "district": "New York",
-        "coordinate": {
-            "latitude": 43.0013,
-            "longitude": 24.1104
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "b3ae304e-8b5f-4254-8890-0468b36059a3",
-        "price": "44",
-        "images": [
-            "Desidero debilito eius."
-        ],
-        "address": "827 Zora Mission",
-        "district": "Florida",
-        "coordinate": {
-            "latitude": 59.6574,
-            "longitude": 69.4994
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "b50691a3-dcf3-43e0-94ef-cc428e55d067",
-        "price": "37",
-        "images": [
-            "Adulescens sulum defero deprecator antepono aedificium conor."
-        ],
-        "address": "2167 Lind Highway",
-        "district": "Missouri",
-        "coordinate": {
-            "latitude": -71.93,
-            "longitude": -61.5176
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "cc1b28f8-7fd6-46f1-a081-360e75deb052",
-        "price": "20",
-        "images": [
-            "Validus tactus minus canis contego vigilo vito aestus."
-        ],
-        "address": "7720 Swift River",
-        "district": "New Jersey",
-        "coordinate": {
-            "latitude": 26.6413,
-            "longitude": 50.2401
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "cd1a08f0-8fbd-4495-b2bb-e331c6e5de7e",
-        "price": "19",
-        "images": [
-            "Pecco caelum stella vobis."
-        ],
-        "address": "331 White Fall",
-        "district": "New York",
-        "coordinate": {
-            "latitude": 43.0013,
-            "longitude": 24.1104
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "e7e0212f-39e4-4688-9bfe-d117d21d352f",
-        "price": "9",
-        "images": [
-            "Paulatim ocer uterque adsidue cogito causa vitium."
-        ],
-        "address": "45187 Stamm Common",
-        "district": "Virginia",
-        "coordinate": {
-            "latitude": -73.6395,
-            "longitude": -169.2852
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ]
-    },
-    {
-        "id": "f3bb0da5-cf84-4619-b66d-3caf04c68d6d",
-        "price": "26",
-        "images": [
-            "Similique trepide celo."
-        ],
-        "address": "83613 Schoen Field",
+        "address": "624 Zaria Forges",
         "district": "Kansas",
         "coordinate": {
-            "latitude": 23.2706,
-            "longitude": -50.5106
-        },
-        "utilities": [
-            {
-                "id": 1,
-                "name": "Electricity",
-                "note": "Power supply for the property",
-                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
-            }
-        ],
-        "avgRate": 1.8
-    },
-    {
-        "id": "f8b62eea-0894-47dd-87e8-5a6faaa56c6b",
-        "price": "37",
-        "images": [
-            "Adduco curto creber."
-        ],
-        "address": "7720 Swift River",
-        "district": "New Jersey",
-        "coordinate": {
-            "latitude": 26.6413,
-            "longitude": 50.2401
+            "latitude": 53.2245,
+            "longitude": 62.0626
         },
         "utilities": [
             {
@@ -488,16 +95,271 @@ export const dataRooms:IRoomFinding[]= [
         ]
     },
     {
-        "id": "ff98bf95-93ef-4900-9128-8fc113862d28",
-        "price": "13",
+        "id": "23c47e5c-4e58-4981-932b-29a7fe78ed74",
+        "price": "98",
         "images": [
-            "Esse thesaurus cena decimus supplanto ago tego venio coruscus."
+            "https://avatars.githubusercontent.com/u/74940283",
+            "https://avatars.githubusercontent.com/u/6654348",
+            "https://avatars.githubusercontent.com/u/80319421"
         ],
-        "address": "367 Mertie Fields",
-        "district": "Georgia",
+        "address": "88210 Henriette Brooks",
+        "district": "Tennessee",
         "coordinate": {
-            "latitude": 56.7436,
-            "longitude": -137.7636
+            "latitude": -36.6094,
+            "longitude": -111.9925
+        },
+        "utilities": [
+            {
+                "id": 1,
+                "name": "Electricity",
+                "note": "Power supply for the property",
+                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
+            }
+        ]
+    },
+    {
+        "id": "27b4fb2b-c1e2-405f-9c3c-ce63791271b6",
+        "price": "75",
+        "images": [
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1208.jpg",
+            "https://avatars.githubusercontent.com/u/88314502",
+            "https://avatars.githubusercontent.com/u/9548589"
+        ],
+        "address": "429 Schimmel Extension",
+        "district": "Illinois",
+        "coordinate": {
+            "latitude": -36.5998,
+            "longitude": 93.5608
+        },
+        "utilities": [
+            {
+                "id": 1,
+                "name": "Electricity",
+                "note": "Power supply for the property",
+                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
+            }
+        ]
+    },
+    {
+        "id": "5a0d6e87-3f5c-48c2-a2df-fd419532fd7a",
+        "price": "99",
+        "images": [
+            "https://avatars.githubusercontent.com/u/87994967",
+            "https://avatars.githubusercontent.com/u/58805168",
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1146.jpg"
+        ],
+        "address": "666 Lavada Park",
+        "district": "Massachusetts",
+        "coordinate": {
+            "latitude": 58.442,
+            "longitude": 96.9914
+        },
+        "utilities": [
+            {
+                "id": 1,
+                "name": "Electricity",
+                "note": "Power supply for the property",
+                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
+            }
+        ]
+    },
+    {
+        "id": "6a5e6644-b315-4c6a-af96-c4024651920f",
+        "price": "92",
+        "images": [
+            "https://avatars.githubusercontent.com/u/7046570",
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/845.jpg",
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/599.jpg"
+        ],
+        "address": "165 Queenie Vista",
+        "district": "Washington",
+        "coordinate": {
+            "latitude": -61.0094,
+            "longitude": -124.9604
+        },
+        "utilities": [
+            {
+                "id": 1,
+                "name": "Electricity",
+                "note": "Power supply for the property",
+                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
+            }
+        ]
+    },
+    {
+        "id": "82c2b1d7-87b1-4804-a7b3-745aff4aad10",
+        "price": "71",
+        "images": [
+            "https://avatars.githubusercontent.com/u/61130625",
+            "https://avatars.githubusercontent.com/u/9051395",
+            "https://avatars.githubusercontent.com/u/38925719"
+        ],
+        "address": "770 Cartwright Hollow",
+        "district": "New Jersey",
+        "coordinate": {
+            "latitude": 54.2522,
+            "longitude": 51.761
+        },
+        "utilities": [
+            {
+                "id": 1,
+                "name": "Electricity",
+                "note": "Power supply for the property",
+                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
+            }
+        ]
+    },
+    {
+        "id": "9f20ca62-4750-4020-aa4f-2ac530c38349",
+        "price": "99",
+        "images": [
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/961.jpg",
+            "https://avatars.githubusercontent.com/u/96264678",
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/888.jpg"
+        ],
+        "address": "6569 Aric Lodge",
+        "district": "Massachusetts",
+        "coordinate": {
+            "latitude": -69.6356,
+            "longitude": 3.3284
+        },
+        "utilities": [
+            {
+                "id": 1,
+                "name": "Electricity",
+                "note": "Power supply for the property",
+                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
+            }
+        ]
+    },
+    {
+        "id": "9f9ec484-1755-4c20-8605-8544309c4360",
+        "price": "97",
+        "images": [
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/594.jpg",
+            "https://avatars.githubusercontent.com/u/73537308",
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/712.jpg"
+        ],
+        "address": "666 Lavada Park",
+        "district": "Massachusetts",
+        "coordinate": {
+            "latitude": 58.442,
+            "longitude": 96.9914
+        },
+        "utilities": [
+            {
+                "id": 1,
+                "name": "Electricity",
+                "note": "Power supply for the property",
+                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
+            }
+        ]
+    },
+    {
+        "id": "b2c35713-9208-45ec-bb5a-27aba8d61ea2",
+        "price": "86",
+        "images": [
+            "https://avatars.githubusercontent.com/u/6285542",
+            "https://avatars.githubusercontent.com/u/23185823",
+            "https://avatars.githubusercontent.com/u/83432832"
+        ],
+        "address": "9446 Hegmann Crescent",
+        "district": "Maryland",
+        "coordinate": {
+            "latitude": 8.5939,
+            "longitude": -36.3093
+        },
+        "utilities": [
+            {
+                "id": 1,
+                "name": "Electricity",
+                "note": "Power supply for the property",
+                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
+            }
+        ]
+    },
+    {
+        "id": "b79447c1-125a-4f16-9819-bbcbc9927fa2",
+        "price": "83",
+        "images": [
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/900.jpg",
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1207.jpg",
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/2.jpg"
+        ],
+        "address": "55896 Deckow Green",
+        "district": "Vermont",
+        "coordinate": {
+            "latitude": 29.6951,
+            "longitude": -133.2939
+        },
+        "utilities": [
+            {
+                "id": 1,
+                "name": "Electricity",
+                "note": "Power supply for the property",
+                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
+            }
+        ]
+    },
+    {
+        "id": "ca8c380d-e8d9-4d96-8d2d-900e7cf35000",
+        "price": "72",
+        "images": [
+            "https://avatars.githubusercontent.com/u/80686220",
+            "https://avatars.githubusercontent.com/u/25420204",
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1230.jpg"
+        ],
+        "address": "4723 Shane Forest",
+        "district": "Ohio",
+        "coordinate": {
+            "latitude": 68.9372,
+            "longitude": 79.9625
+        },
+        "utilities": [
+            {
+                "id": 1,
+                "name": "Electricity",
+                "note": "Power supply for the property",
+                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
+            }
+        ]
+    },
+    {
+        "id": "dd38cfd2-6d32-40df-b437-647982751ded",
+        "price": "87",
+        "images": [
+            "https://avatars.githubusercontent.com/u/65087555",
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/228.jpg",
+            "https://avatars.githubusercontent.com/u/98119739"
+        ],
+        "address": "735 Yvonne Wells",
+        "district": "Oregon",
+        "coordinate": {
+            "latitude": -54.115,
+            "longitude": 137.8255
+        },
+        "utilities": [
+            {
+                "id": 1,
+                "name": "Electricity",
+                "note": "Power supply for the property",
+                "icon": "https://image-user-public.s3.ap-southeast-2.amazonaws.com/utilities/Electricity.png"
+            }
+        ]
+    },
+    {
+        "id": "f8b65fe8-69b5-4d91-9ba6-fa85c9a698c4",
+        "price": "97",
+        "images": [
+            "https://avatars.githubusercontent.com/u/34686308",
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/123.jpg",
+            "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/511.jpg"
+        ],
+        "address": "6569 Aric Lodge",
+        "district": "Massachusetts",
+        "coordinate": {
+            "latitude": -69.6356,
+            "longitude": 3.3284
         },
         "utilities": [
             {

@@ -54,7 +54,7 @@ const Home = () => {
                 onClick={() => {
                     setSwitchScreen((state) => !state)
                 }}
-                className="fixed bottom-20 right-1/2 z-50 flex translate-x-1/2 items-center justify-center gap-2 rounded-full bg-secondary px-6 py-4 font-semibold text-white transition hover:scale-110  "
+                className="fixed bottom-20 right-1/2 z-50 flex translate-x-1/2 items-center justify-center gap-2 rounded-full bg-secondary px-4 py-3 font-semibold text-white transition hover:scale-110  "
             >
                 {!switchScreen ? "Show map" : "Show list"}{" "}
                 <span>{!switchScreen ? <BsMapFill /> : <AiOutlineUnorderedList />}</span>

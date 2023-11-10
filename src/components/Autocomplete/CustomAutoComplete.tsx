@@ -46,7 +46,13 @@ export default function CustomAutoComplete<T>({
                     }
                 },
                 "& .MuiInputLabel-root": {
+                    display: "block",
+                    top: '-8px',
+                    fontSize: '12px'
+                },
+                "& .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root":{
                     display: "none"
+
                 },
                 "& .MuiSvgIcon-root": {
                     display: "none"
