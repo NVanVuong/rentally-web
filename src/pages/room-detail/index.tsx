@@ -15,7 +15,7 @@ const RoomDetail = () => {
     const coordinate = roomblock.coordinate
 
     return (
-        <div className="mt-16 h-full px-36 pb-20 pt-4">
+        <div className="h-full px-36 pb-20 pt-4">
             <address className="font-bold not-italic">{getAddress(roomblock)}</address>
             <div className="mt-2 flex justify-between">
                 <AverageRating />
@@ -31,7 +31,7 @@ const RoomDetail = () => {
                 <Contract price={price} />
             </div>
 
-            <div className="mt-6 pl-2">
+            <div className="z-0 mt-6 pl-2">
                 <h1 className="mb-4 text-lg font-bold">Where you will go</h1>
                 <Map
                     markerText="This is where you will go"
