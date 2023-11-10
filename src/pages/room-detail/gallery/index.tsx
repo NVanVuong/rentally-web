@@ -26,7 +26,7 @@ const Gallery = ({ images }: IGallery) => {
             >
                 {gridLayout.map((layout, index) => (
                     <div key={index} className={`${layout}`}>
-                        <Image src={images[index]} alt={`Gallery-Image-${index}`} />
+                        <Image className="detail" src={images[index]} alt={`Gallery-Image-${index}`} />
                     </div>
                 ))}
             </Image.PreviewGroup>
