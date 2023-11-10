@@ -2,6 +2,7 @@ import { SITE_MAP } from "@/utils/constants/Path"
 import { RequireAuthAdmin, RequireAuthMod } from "@/layouts/RequireAuth"
 import { Suspense, lazy } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import { useGetProvincesQuery, useGetUtilitiesQuery } from "@/redux/services/help/help.service"
 import RoomDetail from "../pages/room-detail"
 
 const HomePage = lazy(() => import("../pages/home"))
@@ -19,6 +20,9 @@ const AdminRoomsManagement = lazy(() => import("../pages/admin/room/Rooms"))
 const BlocksPage = lazy(() => import("../pages/admin/blocks"))
 
 const MainRoute = () => {
+    useGetUtilitiesQuery("")
+    useGetProvincesQuery("")
+
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <BrowserRouter>

@@ -1,5 +1,6 @@
 import { IUtiltity, IUtiltityResponse } from "@/interfaces/utility.interface"
 import { createApiWithAuth } from "../apiWithAuth.service"
+import { IProvince, IDistrict } from "@/interfaces/location.interface"
 
 const creatApiAuthWithAuth = createApiWithAuth("helpApi", ["Help"])
 
@@ -24,6 +25,16 @@ export const helpApi = creatApiAuthWithAuth.injectEndpoints({
                 return uniqueUtilities
             }
         }),
+        getProvinces: builder.query<IProvince[], string>({
+            query: () => ({
+                url: "/provinces"
+            })
+        }),
+        getDistricts: builder.query<IDistrict[], {province_code:string}>({
+            query: ({province_code}) => ({
+                url: `/provinces/${province_code}/districts`
+            })
+        }),
 
         UploadImages: builder.mutation<{ status: string; message: string; data: string[] }, FormData>({
             query: (body) => ({
@@ -35,4 +46,4 @@ export const helpApi = creatApiAuthWithAuth.injectEndpoints({
     })
 })
 
-export const { useGetUtilitiesQuery, useUploadImagesMutation } = helpApi
+export const { useGetUtilitiesQuery, useUploadImagesMutation, useGetDistrictsQuery, useGetProvincesQuery } = helpApi

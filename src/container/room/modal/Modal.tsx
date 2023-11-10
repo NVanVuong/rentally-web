@@ -62,7 +62,7 @@ const Modal = () => {
     const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>(
         roomData?.utilities
             ? (roomData.utilities
-                  ?.map((value: string) => data?.find((utility) => utility.id === value))
+                  ?.map((value: string) => data?.find((utility) => String(utility.id) === value))
                   .filter((option) => option !== undefined) as IUtiltity[])
             : []
     )

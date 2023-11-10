@@ -23,7 +23,10 @@ const RoomCard = ({ room }: Props) => {
     const handleChange = (_: any, value: (IUtiltity | undefined)[]) => {
         const validValues = value.filter((item): item is IUtiltity => item !== undefined)
         dispatch(
-            changeUtilitiesRoom({ id: `${id}`, utilities: validValues.map((selectedOption) => selectedOption.id) })
+            changeUtilitiesRoom({
+                id: `${id}`,
+                utilities: validValues.map((selectedOption) => String(selectedOption.id))
+            })
         )
     }
 
@@ -86,7 +89,7 @@ const RoomCard = ({ room }: Props) => {
                         value={
                             utilities
                                 ? (utilities
-                                      ?.map((value: string) => data?.find((utility) => utility.id === value))
+                                      ?.map((value: string) => data?.find((utility) => String(utility.id) === value))
                                       .filter((option) => option !== undefined) as IUtiltity[])
                                 : []
                         }

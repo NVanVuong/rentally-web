@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router-dom"
 import { useAppSelector } from "@/redux/hook"
 import { ROLE } from "@/utils/constants/GlobalConst"
 
-export  const RequireAuthAdmin = () => {
+export const RequireAuthAdmin = () => {
     const role = useAppSelector((state) => state.auth.userInfo?.role) || ""
 
     switch (role) {
@@ -13,7 +13,7 @@ export  const RequireAuthAdmin = () => {
     }
 }
 
-export  const RequireAuthMod = () => {
+export const RequireAuthMod = () => {
     const role = useAppSelector((state) => state.auth.userInfo?.role) || ""
 
     switch (role) {
@@ -23,4 +23,3 @@ export  const RequireAuthMod = () => {
             return <Navigate to="/" />
     }
 }
-
