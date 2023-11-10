@@ -17,7 +17,7 @@ const settings = {
 const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
     const [currentSlide, setCurrentSlide] = useState(0)
 
-    const { images, address, district, price, avgRate } = dataRoom
+    const { images, address, district, price, avgRate, utilities } = dataRoom
 
     return (
         <div className="group col-span-1 cursor-pointer">
@@ -56,6 +56,9 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
                         <BsStarFill size={12} />
                         <span>{avgRate}</span>
                     </div>
+                </div>
+                <div>
+                    {utilities.map((utility)=> <img key={utility.id} alt={utility.note} className="h-7 p-1 rounded-xl bg-slate-300" src={utility.icon}/>)}
                 </div>
                 <h4 className="text-[14px] font-bold text-[#128E07]">
                     Vacant<span className="font-light text-neutral-500"> at Oct23 - 28</span>
