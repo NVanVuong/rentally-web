@@ -30,11 +30,10 @@ const TableManageRoomBlocks = () => {
             title: <span className="font-bold">Landlord</span>,
             key: "name",
             width: "18%",
-            sorter: (a, b) => a.landlord.name?.localeCompare(b.landlord.name),
             render: (record: IRoomBlock) => (
                 <div className="flex items-center">
-                    <img className="h-8 w-8 rounded-full" src={record.landlord.photo} alt={record.landlord.name} />
-                    <span className="ml-2 text-sm font-semibold">{record.landlord.name}</span>
+                    <img className="h-8 w-8 rounded-full" src={record.landlord?.photo} alt={record.landlord?.name} />
+                    <span className="ml-2 text-sm font-semibold">{record.landlord?.name}</span>
                 </div>
             )
         },
