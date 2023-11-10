@@ -49,7 +49,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
                 </div>
                 <div className="mt-2 flex flex-row justify-between">
                     {" "}
-                    <h4 className="text-[16px] font-semibold">
+                    <h4 className="text-[14px] font-semibold">
                         {address}, {district}
                     </h4>
                     <div className="flex flex-1 flex-row items-center justify-end gap-[2px] text-[14px] font-normal">
@@ -62,16 +62,16 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
                         <img
                             key={utility.id}
                             alt={utility.note}
-                            className="h-7 rounded-xl bg-slate-300 p-1"
+                            className="h-7 rounded-xl bg-gray-300 p-1"
                             src={utility.icon}
                         />
                     ))}
                 </div>
                 <h4 className="text-[14px] font-bold text-[#128E07]">
-                    Vacant<span className="font-light text-neutral-500"> at Oct23 - 28</span>
+                    Vacant<span className="font-light text-gray-500"> at Oct23 - 28</span>
                 </h4>
                 <div className="mt-2 flex flex-row items-center gap-1 text-[14px]">
-                    <h4 className="font-semibold">{price}/month</h4>
+                    <h4 className="font-medium">{price}/month</h4>
                 </div>
             </div>
         </div>
