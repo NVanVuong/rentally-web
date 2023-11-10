@@ -39,7 +39,7 @@ const Home = () => {
     // console.log(searchParams)
 
     return (
-        <div className="h-screen w-full relative" >
+        <div className="relative h-screen w-full">
             <div>
                 <Header />
             </div>
@@ -57,14 +57,15 @@ const Home = () => {
                     </div>
                 </div>
             )}
-              <button
-                    onClick={() => {
-                        setSwitchScreen(state => !state)
-                    }}
-                    className="rounded-xl bg-secondary px-6 py-3 flex items-center justify-center gap-2 font-semibold text-white absolute bottom-10 z-50 right-1/2 translate-x-1/2 "
-                >
-                    {!switchScreen?'Show map':'Show list' } <span>{!switchScreen?<BsMapFill/>:<AiOutlineUnorderedList/>}</span>
-                </button>
+            <button
+                onClick={() => {
+                    setSwitchScreen((state) => !state)
+                }}
+                className="absolute bottom-10 right-1/2 z-50 flex translate-x-1/2 items-center justify-center gap-2 rounded-full bg-secondary px-4 py-2 font-semibold text-white hover:scale-110 transition  "
+            >
+                {!switchScreen ? "Show map" : "Show list"}{" "}
+                <span>{!switchScreen ? <BsMapFill /> : <AiOutlineUnorderedList />}</span>
+            </button>
         </div>
     )
 }

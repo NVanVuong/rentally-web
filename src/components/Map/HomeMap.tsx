@@ -42,7 +42,7 @@ const HomeMap: React.FC<MapProps> = ({ locations, zoom = 15 }) => {
         })
 
     return (
-        <MapContainer center={locations[3]} zoom={zoom} style={{ width: "100%", height: "100%", zIndex:0 }}>
+        <MapContainer center={locations[3]} zoom={zoom} style={{ width: "100%", height: "100%", zIndex: 0 }}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <MyMap />
             {locations.map((location) => {
