@@ -47,20 +47,17 @@ export default function CustomAutoComplete<T>({
                 },
                 "& .MuiInputLabel-root": {
                     display: "block",
-                    top: '-8px',
-                    fontSize: '12px'
+                    top: "-8px",
+                    fontSize: "12px"
                 },
-                "& .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root":{
+                "& .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root": {
                     display: "none"
-
                 },
                 "& .MuiSvgIcon-root": {
                     display: "none"
                 }
             }}
-            getOptionLabel={(option: any) =>
-                "province_name" in option ? option.province_name : option.district_name || ""
-            }
+            getOptionLabel={(option: any) => ("province_name" in option ? option.name : option.name || "")}
             renderInput={(params) => (
                 <TextField
                     {...params}

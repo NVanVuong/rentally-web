@@ -1,58 +1,39 @@
 import CustomAutoComplete from "@/components/Autocomplete/CustomAutoComplete"
-import { apiGetPublicDistricts, apiGetPublicProvinces } from "@/redux/services/help/help.service"
 import { useEffect, useState } from "react"
 import { IDistrict, IProvince } from "@/interfaces/location.interface"
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
+import { useGetDistrictsQuery, useGetProvincesQuery } from "@/redux/services/help/help.service"
+import { Spin } from "antd"
 
 const SearchRoom = () => {
-    const [searchParams] = useSearchParams()
+    const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
-    const navigate = useNavigate()
+  const districtParam = searchParams.get("province");
+  const queryArgs = districtParam !== null ? { province_code: districtParam } : { province_code: '' };
+  const { data: provincesData, isLoading: isLoadingProvinces } = useGetProvincesQuery("");
+  const { data: districtsData, isLoading} = useGetDistrictsQuery(queryArgs);
+  const [provinces, setProvinces] = useState<IProvince[]>(provincesData || []);
+  const [districts, setDistricts] = useState<IDistrict[]>(districtsData||[]);
+  const [province, setProvince] = useState<IProvince | null>(provincesData?.find((province)=>province.code===searchParams.get("province")) || null);
+  const [district, setDistrict] = useState<IDistrict | null>(districtsData?.find((district)=>district.code===searchParams.get("district")) || null);
+  const [keyword, setKeyword] = useState<string>(searchParams.get("keyword") || "");
+  const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({});
 
-    const [provinces, setProvinces] = useState<IProvince[]>([])
-    const [districts, setDistricts] = useState<IDistrict[]>([])
-    const [province, setProvince] = useState<IProvince | null>(null)
-    const [district, setDistrict] = useState<IDistrict | null>(null)
-    const [keyword, setKeyword] = useState<string>(searchParams.get("province") || "")
-    const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
-
-    useEffect(() => {
-        const fetchPublicProvince = async () => {
-            try {
-                const response = await apiGetPublicProvinces()
-                if (response) {
-                    setProvinces(response)
-                    setProvince(
-                        response.find((province) => province.province_id === searchParams.get("province")) || null
-                    )
-                }
-            } catch (error) {
-                console.error(error)
-            }
-        }
-
-        fetchPublicProvince()
-    }, [])
 
     useEffect(() => {
-        const fetchPublicDistricts = async () => {
-            try {
-                if (province?.province_id) {
-                    const response = await apiGetPublicDistricts(province?.province_id || "")
-                    if (response) {
-                        setDistricts(response)
-                        setDistrict(null)
-                        setDistrict(
-                            response.find((district) => district.district_id === searchParams.get("district")) || null
-                        )
-                    }
-                }
-            } catch (error) {
-                console.error(error)
-            }
-        }
+        setDistricts(districtsData || []);
+        setDistrict(districtsData?.find((district)=>district.code===searchParams.get("district"))||null)
+    }, [districtsData]);
 
-        fetchPublicDistricts()
+    useEffect(() => {
+        setProvinces(provincesData || []);
+        setProvince(provincesData?.find((province)=>province.code===searchParams.get("province"))||null)
+    }, [districtsData]);
+
+
+    useEffect(() => {
+    setDistrict(null)
     }, [province])
 
     useEffect(() => {
@@ -94,9 +75,9 @@ const SearchRoom = () => {
         })
 
         // Append additional parameters if they exist
-        if (province) appendKeyValuePair("province", province.province_id)
+        if (province) appendKeyValuePair("province", province.code)
         if (district) {
-            appendKeyValuePair("district", district.district_id)
+            appendKeyValuePair("district", district.code)
         } else {
             queryCodesObj.delete("district")
         }
@@ -112,7 +93,8 @@ const SearchRoom = () => {
     }
 
     return (
-        <div className="flex justify-center ">
+        <Spin spinning={isLoading|isLoadingProvinces}>
+            <div className="flex justify-center ">
             <div className=" flex h-16 w-[800px] flex-row items-center gap-1 rounded-full border border-[#717171]">
                 <div className="flex w-60 flex-col justify-center border-r pl-4 focus:rounded-full focus:border">
                     <label className="pl-4 text-[16px] font-bold">Province</label>
@@ -159,6 +141,7 @@ const SearchRoom = () => {
                 </div>
             </div>
         </div>
+        </Spin>
     )
 }
 

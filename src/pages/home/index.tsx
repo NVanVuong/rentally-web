@@ -13,7 +13,6 @@ import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 const Home = () => {
     const [searchParams] = useSearchParams()
     useGetUtilitiesQuery("")
-    console.log(dataRooms)
     const [switchScreen, setSwitchScreen] = useState(false)
     useEffect(() => {
         const params: [string, string][] = []
