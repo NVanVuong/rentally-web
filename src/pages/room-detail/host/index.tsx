@@ -8,15 +8,17 @@ const HostInformation = ({ landlord }: IHostInformation) => {
     const { name, email, photo, phoneNumber } = landlord
 
     return (
-        <div className="mt-6 flex w-fit items-center gap-20 border-b border-gray-300 pb-2">
+        <div className="flex gap-20 border-b border-gray-300 pb-4 pl-2 pr-2">
             <div className="flex flex-col gap-2">
-                <h2 className="font-bold">Host information</h2>
-                <div className="justify- flex items-center gap-4 text-sm font-medium">
+                <h1 className="text-lg font-bold">Host information</h1>
+                <div className="flex items-center gap-4 text-sm">
                     <span>{name}</span>
                     <span className="text-xs">•</span>
                     <span>Tel +{phoneNumber}</span>
                     <span className="text-xs">•</span>
-                    <a href={`mailto:${email}`}>Mail</a>
+                    <a className="transition duration-150 hover:text-primary hover:underline" href={`mailto:${email}`}>
+                        Mail
+                    </a>
                 </div>
             </div>
             <div>

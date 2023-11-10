@@ -2,7 +2,7 @@ import { useState } from "react"
 import { BsFillGrid3X3GapFill } from "react-icons/bs"
 import Button from "../components/Button"
 import { Image } from "antd"
-import "./style.css"
+import "../style.css"
 
 interface IGallery {
     images: string[]

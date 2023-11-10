@@ -28,8 +28,6 @@ const ModalAdd = (props: IModal) => {
     const landlords = landLordData?.data.modList as ILandlord[]
 
     const onFinish = async (values: any) => {
-        console.log(values)
-
         const roomBlockRequest: IRoomBlockRequest = {
             address: placeInfo.address.replace(/, \d{5},/g, ","),
             district: placeInfo.city,
@@ -77,7 +75,7 @@ const ModalAdd = (props: IModal) => {
                 </Form.Item>
 
                 <Form.Item className="w-full">
-                    <Map center={[lat, lng]} markerText="This is your address" />
+                    <Map center={[lat, lng]} />
                 </Form.Item>
 
                 <Form.Item className="w-full">

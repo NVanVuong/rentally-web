@@ -8,7 +8,7 @@ const Header = () => {
     const role = useAppSelector((state) => state.auth.userInfo?.role)
 
     return (
-        <div className="fixed inset-0 top-0 z-50 flex h-16 items-center justify-between border-b border-gray-100 bg-white px-28 py-3 shadow-sm">
+        <div className="fixed inset-0 top-0 z-50 flex h-16 items-center justify-between border-b border-gray-100 bg-white px-36 py-3 shadow-sm">
             <Logo />
 
             <div className="flex h-full grow justify-center">
