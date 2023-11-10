@@ -54,7 +54,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
                     </h4>
                     <div className="flex flex-1 flex-row items-center justify-end gap-[2px] text-[14px] font-normal">
                         <BsStarFill size={12} />
-                        <span>{avgRate}</span>
+                        <span>{avgRate||'4.8'}</span>
                     </div>
                 </div>
                 <div>
