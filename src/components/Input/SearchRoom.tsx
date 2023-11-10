@@ -96,7 +96,7 @@ const SearchRoom = () => {
     }
 
     return (
-        <Spin spinning={isLoading|isLoadingProvinces}>
+        <Spin spinning={isLoading||isLoadingProvinces}>
             <div className="flex justify-center ">
             <div className=" flex h-16 w-[800px] flex-row items-center gap-1 rounded-full border border-[#717171]">
                 <div className="flex w-60 flex-col justify-center border-r pl-4 focus:rounded-full focus:border">
