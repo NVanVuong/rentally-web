@@ -22,9 +22,9 @@ const Filters = () => {
     ])
 
     const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>(
-        searchParams.getAll("utility")
+        searchParams.getAll("utilities")
             ? (searchParams
-                  .getAll("utility")
+                  .getAll("utilities")
                   .map((value: string) => (data ? data.find((utility) => String(utility.id) === value) : undefined))
                   .filter((option) => option !== undefined) as IUtiltity[])
             : []
@@ -60,7 +60,7 @@ const Filters = () => {
 
         // Function to append key-value pairs to the URLSearchParams object
         const appendKeyValuePair = (key: string, value: string | string[]) => {
-            if (key !== "utility") queryCodesObj.set(key, String(value))
+            if (key !== "utilities") queryCodesObj.set(key, String(value))
         }
 
         // Append each key-value pair from searchParamsObject
@@ -72,7 +72,7 @@ const Filters = () => {
 
         appendKeyValuePair("minPrice", String(values[0]))
         appendKeyValuePair("maxPrice", String(values[1]))
-        selectedOptions.forEach((option) => queryCodesObj.append("utility", String(option.id)))
+        selectedOptions.forEach((option) => queryCodesObj.append("utilities", String(option.id)))
 
         navigate({
             pathname: "/",

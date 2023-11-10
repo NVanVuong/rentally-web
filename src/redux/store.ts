@@ -11,12 +11,13 @@ import searchSlice from "@/redux/features/search/search.slice"
 import searchMapSlice from "./features/search-map/search-map.slice"
 import modalSlice from "./features/modal/modal.slice"
 import generateRoomSlice from "./features/generateRoom/generateRoom.slice"
+import { findingRoomApi } from "./services/findingRoom/findingRoom.service"
 
 const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
     [helpApi.reducerPath]: helpApi.reducer,
     [roomApi.reducerPath]: roomApi.reducer,
-
+    [findingRoomApi.reducerPath]: findingRoomApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [roomBlockApi.reducerPath]: roomBlockApi.reducer,
     search: searchSlice,
@@ -37,7 +38,8 @@ export const store = configureStore({
         roomApi.middleware,
         authApi.middleware,
         helpApi.middleware,
-        roomBlockApi.middleware
+        roomBlockApi.middleware,
+        findingRoomApi.middleware
     )
 })
 
