@@ -33,7 +33,7 @@ const Home = () => {
     }, [searchParams])
 
     return (
-        <div className="relative mt-12 h-screen w-full">
+        <div className="relative h-screen w-full">
             {switchScreen ? (
                 <HomeMap dataRooms={dataRooms} />
             ) : (
