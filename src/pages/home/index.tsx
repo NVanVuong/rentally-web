@@ -1,5 +1,6 @@
-import ListingCard from "@/components/Card/ListingCard"
 import Header from "@/container/Header"
+import { Outlet } from "react-router-dom"
+import ListingCard from "@/components/Card/ListingCard"
 import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
@@ -37,6 +38,7 @@ const Home = () => {
         <div className="relative h-screen w-full">
             <div>
                 <Header />
+                <Outlet />
             </div>
             {switchScreen ? (
                 <HomeMap dataRooms={dataRooms} />

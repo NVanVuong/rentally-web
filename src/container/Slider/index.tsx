@@ -4,13 +4,11 @@ import { Menu } from "antd"
 import "./style.css"
 import { useState } from "react"
 import ArrowCircle from "../../assets/icons/ArrowCircle"
-import RetallyLogo from "../../assets/images/rentally_logo.png"
-import RetallyLogoFull from "../../assets/images/rentally_logo_full.png"
 import { useNavigate } from "react-router-dom"
 import { SITE_MAP } from "@/utils/constants/Path"
 import { FaRegUser } from "react-icons/fa"
 import { BiHomeAlt } from "react-icons/bi"
-// import { MdOutlineBedroomChild } from "react-icons/md"
+import Logo from "@/components/Logo"
 
 type MenuItem = Required<MenuProps>["items"][number]
 
@@ -38,7 +36,6 @@ const Slider = () => {
 
         getItem(`${isExpanding ? "Accounts" : ""}`, "users", <FaRegUser className="h-5 w-5" />),
         getItem(`${isExpanding ? "Room Blocks" : ""}`, "blocks", <BiHomeAlt className="h-5 w-5" />),
-        // getItem(`${isExpanding ? "Rooms" : ""}`, "rooms", <MdOutlineBedroomChild className="h-5 w-5" />),
         getItem(`${isExpanding ? "xx" : ""}`, "sub1.3", <AppstoreOutlined className="ml-0.5" />),
         getItem(`${isExpanding ? "xx" : ""}`, "sub1.4", <AppstoreOutlined className="ml-0.5" />),
 
@@ -64,9 +61,6 @@ const Slider = () => {
             case "blocks":
                 navigate(SITE_MAP.BLOCKS_MANAGEMENT)
                 break
-            // case "rooms":
-            //     navigate(SITE_MAP.ROOMS_MANAGEMENT)
-            //     break
             default:
                 break
         }
@@ -78,11 +72,9 @@ const Slider = () => {
                 isExpanding ? "w-60" : "w-20"
             } trasition relative flex h-screen flex-col items-center rounded-br-3xl rounded-tr-3xl border border-gray-200 bg-white duration-200 peer-hover:bg-red-500`}
         >
-            <img
-                className={`${isExpanding ? "h-12" : "h-8"} my-4  transition duration-100`}
-                src={isExpanding ? RetallyLogoFull : RetallyLogo}
-                alt=""
-            />
+            <div className="h-20 py-4">
+                <Logo isOpen={isExpanding} />
+            </div>
 
             <Menu
                 onClick={onClick}

@@ -91,7 +91,7 @@ const ModalUpdate = (props: IModal) => {
                 </Form.Item>
 
                 <Form.Item className="w-full">
-                    <Map center={center} markerText="This is your address" />
+                    <Map center={center} />
                 </Form.Item>
 
                 <Form.Item className="w-full">

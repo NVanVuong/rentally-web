@@ -46,3 +46,7 @@ export function getCurrentLocation(dispatch: any) {
         console.error("Geolocation is not available in this browser.")
     }
 }
+
+export const getAddress = (roomblock: any) => {
+    return roomblock.address + " | " + roomblock.district + ", " + roomblock.city
+}

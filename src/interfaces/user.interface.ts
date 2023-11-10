@@ -14,6 +14,7 @@ export interface ILandlord {
     id: number
     name: string
     phoneNumber: string
+    email?: string
     photo: string
 }
 

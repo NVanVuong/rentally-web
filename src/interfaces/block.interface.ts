@@ -8,9 +8,11 @@ export interface IRoomBlock {
     country: string
     coordinate: ICoordinate
     description: string
-    landlord: ILandlord
-    quantityRooms: number
-    emptyRooms: number
+    landlord?: ILandlord
+    quantityRooms?: number
+    emptyRooms?: number
+    created_at?: string
+    updated_at?: string
 }
 
 export interface ICoordinate {
