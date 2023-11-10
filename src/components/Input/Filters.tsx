@@ -11,25 +11,25 @@ import { closeModal } from "@/redux/features/modal/modal.slice"
 
 const Filters = () => {
     const [searchParams] = useSearchParams()
-
     const navigate = useNavigate()
     const dispacth = useAppDispatch()
 
     const { data } = useGetUtilitiesQuery("")
 
-    const [values, setValues] = React.useState([parseInt(searchParams.get('minPrice') || '0', 10),parseInt(searchParams.get('maxPrice') || '100', 10)])
-    console.log(data)
+    const [values, setValues] = React.useState([
+        parseInt(searchParams.get("minPrice") || "0", 10),
+        parseInt(searchParams.get("maxPrice") || "100", 10)
+    ])
+
     const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>(
         searchParams.getAll("utility")
-          ? searchParams
-              .getAll("utility")
-              .map((value: string) => (data ? data.find((utility) => String(utility.id) === value) : undefined))
-              .filter((option) => option !== undefined) as IUtiltity[]
-          : []
-      )
-      
-      
-    console.log(selectedOptions)
+            ? (searchParams
+                  .getAll("utility")
+                  .map((value: string) => (data ? data.find((utility) => String(utility.id) === value) : undefined))
+                  .filter((option) => option !== undefined) as IUtiltity[])
+            : []
+    )
+
     const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
 
     useEffect(() => {
@@ -49,7 +49,6 @@ const Filters = () => {
         })
 
         setSearchParamsObject(newSearchParamsObject)
-        console.log(newSearchParamsObject)
     }, [searchParams])
 
     const handleChange = (_: any, value: any) => {

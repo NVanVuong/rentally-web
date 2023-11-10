@@ -72,11 +72,9 @@ const SearchRoom = () => {
         })
 
         setSearchParamsObject(newSearchParamsObject)
-        console.log(newSearchParamsObject)
     }, [searchParams])
 
     const handleSearch = () => {
-        console.log(searchParamsObject)
         const queryCodesObj = new URLSearchParams()
 
         // Function to append key-value pairs to the URLSearchParams object
@@ -97,8 +95,16 @@ const SearchRoom = () => {
 
         // Append additional parameters if they exist
         if (province) appendKeyValuePair("province", province.province_id)
-        if (district) appendKeyValuePair("district", district.district_id)
-        if (keyword) appendKeyValuePair("keyword", keyword)
+        if (district) {
+            appendKeyValuePair("district", district.district_id)
+        } else {
+            queryCodesObj.delete("district")
+        }
+        if (keyword) {
+            appendKeyValuePair("keyword", keyword)
+        } else {
+            queryCodesObj.delete("keyword")
+        }
         navigate({
             pathname: "/",
             search: createSearchParams(queryCodesObj).toString()
