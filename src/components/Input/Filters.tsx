@@ -5,8 +5,15 @@ import * as React from "react"
 import { useState } from "react"
 import { Range } from "react-range"
 import ModalAntd from "@/components/Modal"
+import { createSearchParams, useNavigate } from "react-router-dom"
+import { useAppDispatch } from "@/redux/hook"
+import { closeModal } from "@/redux/features/modal/modal.slice"
 
-const TwoPointSlider = () => {
+
+const Filters = () => {
+    const navigate = useNavigate()
+    const dispacth = useAppDispatch()
+
     const { data } = useGetUtilitiesQuery("")
 
     const [values, setValues] = React.useState([25, 75])
@@ -14,6 +21,18 @@ const TwoPointSlider = () => {
     const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>([])
     const handleChange = (_: any, value: any) => {
         setSelectedOptions(value)
+    }
+
+    const handleFilters = () => {
+        const queryCodesObj = new URLSearchParams()
+        queryCodesObj.append("minPrice", String(values[0]))
+        queryCodesObj.append("maxPrice", String(values[1]))
+        selectedOptions.forEach((option) => queryCodesObj.append("utility", option.id))
+
+        navigate({
+            pathname: "/",
+            search: createSearchParams(queryCodesObj).toString()
+        })
     }
 
     return (
@@ -84,7 +103,7 @@ const TwoPointSlider = () => {
                                 {children}
                             </div>
                         )}
-                        renderThumb={({ props, index }) => (
+                        renderThumb={({ props }) => (
                             <div
                                 className="h-8 w-8 rounded-full border bg-white shadow-lg  active:h-9 active:w-9 active:bg-slate-100 "
                                 {...props}
@@ -121,13 +140,25 @@ const TwoPointSlider = () => {
                 </div>
             </div>
             <div className="mt-4 flex justify-between border-t pt-3">
-                <button className="rounded-xl bg-white px-3 py-2 font-semibold text-black underline hover:bg-slate-200 ">
+                <button onClick={()=>{
+                    setValues([0,100])
+                    setSelectedOptions([])
+                }} 
+                className="rounded-xl bg-white px-3 py-2 font-semibold text-black underline hover:bg-slate-200 ">
                     Clear All
                 </button>
-                <button className="rounded-xl bg-black px-6 py-3 font-semibold text-white ">Show places</button>
+                <button
+                    onClick={() => {
+                        dispacth(closeModal())
+                        handleFilters()
+                    }}
+                    className="rounded-xl bg-black px-6 py-3 font-semibold text-white "
+                >
+                    Show places
+                </button>
             </div>
         </ModalAntd>
     )
 }
 
-export default TwoPointSlider
+export default Filters
