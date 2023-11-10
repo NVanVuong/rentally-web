@@ -47,7 +47,7 @@ const HomeMap: React.FC<MapProps> = ({ zoom = 20, dataRooms }) => {
         })
 
     return (
-        <MapContainer zoom={zoom} style={{ width: "100%", height: "90%", zIndex: 0 }}>
+        <MapContainer zoom={zoom} style={{ width: "100%", height: "100%", zIndex: 0 }}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <MyMap />
             {dataRooms.map((dataRoom) => {

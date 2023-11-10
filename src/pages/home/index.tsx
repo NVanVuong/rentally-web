@@ -35,11 +35,7 @@ const Home = () => {
     }, [searchParams])
 
     return (
-        <div className="relative h-screen w-full">
-            <div>
-                <Header />
-                <Outlet />
-            </div>
+        <div className="relative mt-12 h-screen w-full">
             {switchScreen ? (
                 <HomeMap dataRooms={dataRooms} />
             ) : (
