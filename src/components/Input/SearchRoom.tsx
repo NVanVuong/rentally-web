@@ -8,15 +8,18 @@ import { Spin } from "antd"
 const SearchRoom = () => {
     const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-
-  const districtParam = searchParams.get("province");
-  const queryArgs = districtParam !== null ? { province_code: districtParam } : { province_code: '' };
+  //province
   const { data: provincesData, isLoading: isLoadingProvinces } = useGetProvincesQuery("");
-  const { data: districtsData, isLoading} = useGetDistrictsQuery(queryArgs);
-  const [provinces, setProvinces] = useState<IProvince[]>(provincesData || []);
-  const [districts, setDistricts] = useState<IDistrict[]>(districtsData||[]);
   const [province, setProvince] = useState<IProvince | null>(provincesData?.find((province)=>province.code===searchParams.get("province")) || null);
+  const [provinces, setProvinces] = useState<IProvince[]>(provincesData || []);
+
+ //district
+  const queryArgs = province !== null ? { province_code: province.code } : { province_code: '' };
+  const { data: districtsData, isLoading} = useGetDistrictsQuery(queryArgs);
+  const [districts, setDistricts] = useState<IDistrict[]>(districtsData||[]);
   const [district, setDistrict] = useState<IDistrict | null>(districtsData?.find((district)=>district.code===searchParams.get("district")) || null);
+
+  // keyword
   const [keyword, setKeyword] = useState<string>(searchParams.get("keyword") || "");
   const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({});
 
@@ -29,7 +32,7 @@ const SearchRoom = () => {
     useEffect(() => {
         setProvinces(provincesData || []);
         setProvince(provincesData?.find((province)=>province.code===searchParams.get("province"))||null)
-    }, [districtsData]);
+    }, [provincesData]);
 
 
     useEffect(() => {
@@ -93,7 +96,7 @@ const SearchRoom = () => {
     }
 
     return (
-        <Spin spinning={isLoading|isLoadingProvinces}>
+        <Spin spinning={isLoading||isLoadingProvinces}>
             <div className="flex justify-center ">
             <div className=" flex h-16 w-[800px] flex-row items-center gap-1 rounded-full border border-[#717171]">
                 <div className="flex w-60 flex-col justify-center border-r pl-4 focus:rounded-full focus:border">
