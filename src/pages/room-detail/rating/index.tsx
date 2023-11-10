@@ -60,7 +60,7 @@ const RatingDashboard = () => {
             <div className="flex">
                 {averageRating.map((rating) => (
                     <div key={rating.title} className="mr-6 mt-2 flex w-32 flex-col border-r last:border-none">
-                        <span className="text-sm font-medium">{rating.title}</span>
+                        <span className="text-sm font-medium text-gray-600">{rating.title}</span>
                         <span className="mt-1 text-lg font-bold">{rating.value}</span>
                         <span className="mt-4">{rating.icon}</span>
                     </div>

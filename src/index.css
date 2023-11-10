@@ -1,12 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 :root {
     --primary-color: #e36414;
     --secondary-color: #1d5868;
     --white-color: #ffffff;
     --gray-color: #e0e0e0;
     --black-color: #000000;
+}
+
+.leaflet-top.leaflet-left {
+    z-index: 998;
 }
 
 .grid_product {
@@ -16,7 +21,6 @@
 }
 
 .MuiAutocomplete-inputRoot {
-    /* flex-wrap: nowrap !important; */
     overflow-x: hidden;
     overflow: auto;
     width: 100%;
@@ -25,15 +29,11 @@
     scrollbar-width: none;
 }
 .MuiAutocomplete-inputRoot::-webkit-scrollbar {
-    /* flex-wrap: nowrap !important; */
     display: none;
 }
 
 .MuiAutocomplete-inputRoot:focus {
     border: none;
-}
-.scrollbar-hide::-webkit-scrollbar {
-    /* display: none; */
 }
 
 .scrollbar-hide {
