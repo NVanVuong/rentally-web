@@ -65,7 +65,7 @@ const SearchRoom = () => {
 
         // Function to append key-value pairs to the URLSearchParams object
         const appendKeyValuePair = (key: string, value: string | string[]) => {
-            if (key !== "utility") {
+            if (key !== "utilities") {
                 queryCodesObj.set(key, String(value))
             } else {
                 queryCodesObj.append(key, String(value))
@@ -127,7 +127,7 @@ const SearchRoom = () => {
                             value={keyword}
                             onChange={(e) => setKeyword(e.target.value)}
                             placeholder="Search"
-                            className="font-inherit h-7 bg-white text-[13px] text-slate-800 placeholder:text-[13px] placeholder:font-normal placeholder:text-secondaryBlack/80  focus:outline-none focus:ring-0"
+                            className="h-7 bg-white font-inherit text-[13px] text-slate-800 placeholder:text-[13px] placeholder:font-normal placeholder:text-secondaryBlack/80  focus:outline-none focus:ring-0"
                         />
                     </div>
                     <div

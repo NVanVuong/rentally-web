@@ -2,8 +2,7 @@ import Header from "@/container/Header"
 import { Outlet } from "react-router-dom"
 
 const HomeLayout = () => {
-
-    return(
+    return (
         <div>
             <Header />
             <Outlet />
