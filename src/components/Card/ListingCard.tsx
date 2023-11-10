@@ -58,7 +58,14 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
                     </div>
                 </div>
                 <div>
-                    {utilities.map((utility)=> <img key={utility.id} alt={utility.note} className="h-7 p-1 rounded-xl bg-slate-300" src={utility.icon}/>)}
+                    {utilities.map((utility) => (
+                        <img
+                            key={utility.id}
+                            alt={utility.note}
+                            className="h-7 rounded-xl bg-slate-300 p-1"
+                            src={utility.icon}
+                        />
+                    ))}
                 </div>
                 <h4 className="text-[14px] font-bold text-[#128E07]">
                     Vacant<span className="font-light text-neutral-500"> at Oct23 - 28</span>
