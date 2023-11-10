@@ -8,7 +8,7 @@ const Header = () => {
 
     return (
         <>
-            <div className="flex items-center justify-center gap-4">
+            <div className="my-6 flex items-center justify-center gap-4">
                 <SearchRoom />
                 <div
                     className="flex h-12 cursor-pointer items-center justify-center rounded-lg border border-[#717171] p-3 px-4"

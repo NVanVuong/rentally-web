@@ -4,22 +4,27 @@ import "leaflet/dist/leaflet.css"
 import "./index.css"
 import ListingCard from "../Card/ListingCard"
 import L from "leaflet"
+import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 
 interface MapProps {
-    center: [number, number]
-    locations: [number, number][]
+    dataRooms: IRoomFinding[]
     zoom?: number
     markerText?: string
 }
 
-const HomeMap: React.FC<MapProps> = ({ locations, zoom = 15 }) => {
-    const [center, setCenter] = useState(locations[0])
-
+const HomeMap: React.FC<MapProps> = ({ zoom = 20, dataRooms }) => {
+    const [center, setCenter] = useState([dataRooms[0].coordinate.latitude, dataRooms[0].coordinate.longitude])
     function MyMap() {
         const map = useMap()
 
         React.useEffect(() => {
-            const group = new L.FeatureGroup<any>(locations.map((location) => L.marker(location)))
+            const group = new L.FeatureGroup<any>(
+                dataRooms.map((dataRoom) => {
+                    const { latitude, longitude } = dataRoom.coordinate
+
+                    return L.marker([latitude, longitude])
+                })
+            )
             map.fitBounds(group.getBounds().pad(0.5))
         }, [])
 
@@ -30,7 +35,7 @@ const HomeMap: React.FC<MapProps> = ({ locations, zoom = 15 }) => {
         map.invalidateSize()
 
         useEffect(() => {
-            map.flyTo(center)
+            map.flyTo(new L.LatLng(center[0], center[1]), map.getZoom())
         }, [center, map])
 
         return null
@@ -42,22 +47,22 @@ const HomeMap: React.FC<MapProps> = ({ locations, zoom = 15 }) => {
         })
 
     return (
-        <MapContainer center={locations[3]} zoom={zoom} style={{ width: "100%", height: "100%", zIndex: 0 }}>
+        <MapContainer zoom={zoom} style={{ width: "100%", height: "90%", zIndex: 0 }}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <MyMap />
-            {locations.map((location) => {
+            {dataRooms.map((dataRoom) => {
                 return (
                     <Marker
-                        position={location}
-                        icon={customDivIcon("$200", true)}
+                        position={[dataRoom.coordinate.latitude, dataRoom.coordinate.longitude]}
+                        icon={customDivIcon("$" + `${dataRoom.price}`, true)}
                         eventHandlers={{
                             click: () => {
-                                setCenter(location)
+                                setCenter([dataRoom.coordinate.latitude, dataRoom.coordinate.longitude])
                             }
                         }}
                     >
                         <Popup>
-                            <ListingCard />
+                            <ListingCard dataRoom={dataRoom} />
                         </Popup>
                     </Marker>
                 )

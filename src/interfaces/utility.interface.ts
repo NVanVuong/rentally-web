@@ -1,7 +1,8 @@
 export interface IUtiltity {
     name: string
     note: string
-    id: string
+    id: number
+    icon: string
 }
 export interface IUtiltityResponse {
     data: {

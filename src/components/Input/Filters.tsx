@@ -72,7 +72,7 @@ const Filters = () => {
 
         appendKeyValuePair("minPrice", String(values[0]))
         appendKeyValuePair("maxPrice", String(values[1]))
-        selectedOptions.forEach((option) => queryCodesObj.append("utility", option.id))
+        selectedOptions.forEach((option) => queryCodesObj.append("utility", String(option.id)))
 
         navigate({
             pathname: "/",

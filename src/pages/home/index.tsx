@@ -7,15 +7,13 @@ import HomeMap from "@/components/Map/HomeMap"
 import { BsMapFill } from "react-icons/bs"
 import { AiOutlineUnorderedList } from "react-icons/ai"
 
-const locations = [
-    [63.5955, 130.3269],
-    [65.5955, 120.3269]
-]
+import { dataRooms } from "../../../mockdata"
+import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 
 const Home = () => {
     const [searchParams] = useSearchParams()
     useGetUtilitiesQuery("")
-
+    console.log(dataRooms)
     const [switchScreen, setSwitchScreen] = useState(false)
     useEffect(() => {
         const params: [string, string][] = []
@@ -36,24 +34,19 @@ const Home = () => {
         console.log(searchParamsObject)
     }, [searchParams])
 
-    // console.log(searchParams)
-
     return (
         <div className="relative h-screen w-full">
             <div>
                 <Header />
             </div>
             {switchScreen ? (
-                <HomeMap locations={locations} />
+                <HomeMap dataRooms={dataRooms} />
             ) : (
                 <div className="mx-auto max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-20 ">
                     <div className="grid grid-cols-1 gap-8 pt-10 sm:grid-cols-2 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-                        <ListingCard />
-                        <ListingCard />
-                        <ListingCard />
-                        <ListingCard />
-                        <ListingCard />
-                        <ListingCard />
+                        {dataRooms.map((dataRoom: IRoomFinding) => (
+                            <ListingCard key={dataRoom.id} dataRoom={dataRoom} />
+                        ))}
                     </div>
                 </div>
             )}
@@ -61,7 +54,7 @@ const Home = () => {
                 onClick={() => {
                     setSwitchScreen((state) => !state)
                 }}
-                className="absolute bottom-10 right-1/2 z-50 flex translate-x-1/2 items-center justify-center gap-2 rounded-full bg-secondary px-4 py-2 font-semibold text-white hover:scale-110 transition  "
+                className="fixed bottom-20 right-1/2 z-50 flex translate-x-1/2 items-center justify-center gap-2 rounded-full bg-secondary px-6 py-4 font-semibold text-white transition hover:scale-110  "
             >
                 {!switchScreen ? "Show map" : "Show list"}{" "}
                 <span>{!switchScreen ? <BsMapFill /> : <AiOutlineUnorderedList />}</span>

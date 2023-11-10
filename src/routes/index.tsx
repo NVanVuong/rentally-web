@@ -18,7 +18,7 @@ const AdminRoomsManagement = lazy(() => import("../pages/admin/room/Rooms"))
 const BlocksPage = lazy(() => import("../pages/admin/blocks"))
 
 const MainRoute = () => {
-    const { data } = useGetUtilitiesQuery("")
+    useGetUtilitiesQuery("")
 
     return (
         <Suspense fallback={<div>Loading...</div>}>
