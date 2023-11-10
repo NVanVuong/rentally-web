@@ -3,6 +3,8 @@ import { RequireAuthAdmin, RequireAuthMod } from "@/layouts/RequireAuth"
 import { Suspense, lazy } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { useGetProvincesQuery, useGetUtilitiesQuery } from "@/redux/services/help/help.service"
+import RoomDetail from "../pages/room-detail"
+
 const HomePage = lazy(() => import("../pages/home"))
 const AdminPage = lazy(() => import("../pages/admin"))
 const ModPage = lazy(() => import("../pages/mod"))
@@ -20,14 +22,14 @@ const BlocksPage = lazy(() => import("../pages/admin/blocks"))
 const MainRoute = () => {
     useGetUtilitiesQuery("")
     useGetProvincesQuery("")
- 
-    
 
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<HomePage />} />
+                    <Route path={SITE_MAP.INDEX} element={<HomePage />}>
+                        <Route path={SITE_MAP.ROOMS_DETAIL} element={<RoomDetail />} />
+                    </Route>
                     <Route element={<RequireAuthAdmin />}>
                         <Route path={SITE_MAP.ADMIN} element={<AdminPage />}>
                             <Route index element={<Navigate to={SITE_MAP.USERS_MANAGEMENT} replace />} />
@@ -49,6 +51,7 @@ const MainRoute = () => {
                     <Route path={SITE_MAP.AUTH.REGISTER} element={<Register />} />
                     <Route path={SITE_MAP.AUTH.FORGOTPASSWORD} element={<ForgotPassword />} />
                     <Route path={SITE_MAP.AUTH.RESETPASSWORD} element={<ResetPassword />} />
+
                     <Route path="*" element={<Login />} />
                 </Routes>
             </BrowserRouter>

@@ -1,0 +1,11 @@
+.ant-image {
+    @apply h-full w-full;
+}
+
+.ant-image .ant-image-img {
+    @apply h-full w-full object-cover;
+}
+
+.ant-picker .ant-picker-input > input {
+    @apply font-normal;
+}
