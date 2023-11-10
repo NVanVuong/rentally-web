@@ -46,6 +46,13 @@ export const roomDetail: IRoomDetail = {
         },
         description: "Eligendi ara expedita sordeo astrum thema tunc."
     },
+    landlord: {
+        id: 1,
+        photo: "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/761.jpg",
+        phoneNumber: "251-999-2521 x66518",
+        email: "admin@gmail.com",
+        name: "Nguyen Van Admin"
+    },
     avgRate: 2.3,
     ratings: [
         {

@@ -1,4 +1,5 @@
 import { IRoomBlock } from "./block.interface"
+import { ILandlord } from "./user.interface"
 
 export interface IRoomDetail {
     id: string
@@ -6,6 +7,7 @@ export interface IRoomDetail {
     images: string[]
     utilities: IUtility[]
     roomblock: IRoomBlock
+    landlord: ILandlord
     avgRate: number
     ratings: IRating[]
 }

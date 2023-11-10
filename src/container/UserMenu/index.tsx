@@ -13,7 +13,8 @@ import { useNavigate } from "react-router-dom"
 
 const UserMenu = () => {
     const userInfo = useAppSelector((state) => state.auth.userInfo) as IUser
-    const { role } = userInfo
+    const role = userInfo?.role
+
     const navigate = useNavigate()
 
     const [isOpen, setIsOpen] = useState(false)
@@ -69,9 +70,9 @@ const UserMenu = () => {
             className={`flex items-center justify-center gap-2 rounded-full border border-gray-200 py-1 pl-3 pr-2 transition duration-200 hover:shadow-xl ${
                 isOpen ? "shadow-xl" : "shadow-none"
             }`}
+            placement="bottomRight"
             menu={{ items, onClick }}
             trigger={["click"]}
-            placement="bottomLeft"
             arrow
             onOpenChange={() => setIsOpen(!isOpen)}
         >

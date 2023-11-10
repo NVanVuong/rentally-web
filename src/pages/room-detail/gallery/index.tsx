@@ -2,6 +2,7 @@ import { useState } from "react"
 import { BsFillGrid3X3GapFill } from "react-icons/bs"
 import Button from "../components/Button"
 import { Image } from "antd"
+import "./style.css"
 
 interface IGallery {
     images: string[]
@@ -9,9 +10,6 @@ interface IGallery {
 
 const Gallery = ({ images }: IGallery) => {
     const [showPreview, setShowPreview] = useState(false)
-
-    const firstImage = images[0]
-    const otherImages = images.slice(1)
 
     const gridLayout = [
         "col-span-2 row-span-2",
@@ -23,14 +21,12 @@ const Gallery = ({ images }: IGallery) => {
 
     return (
         <div className="relative my-2 grid grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-lg">
-            <Image.PreviewGroup preview={{ visible: showPreview }}>
+            <Image.PreviewGroup
+                preview={{ visible: showPreview, onVisibleChange: (visible) => setShowPreview(visible) }}
+            >
                 {gridLayout.map((layout, index) => (
-                    <div key={index} className={layout}>
-                        <Image
-                            src={index === 0 ? firstImage : otherImages[index - 1]}
-                            alt={`Gallery-Image-${index}`}
-                            className="h-full w-full object-cover"
-                        />
+                    <div key={index} className={`${layout}`}>
+                        <Image src={images[index]} alt={`Gallery-Image-${index}`} />
                     </div>
                 ))}
             </Image.PreviewGroup>

@@ -3,9 +3,10 @@ import { AiFillStar, AiOutlineHeart } from "react-icons/ai"
 import { PiShareFat } from "react-icons/pi"
 import Button from "./components/Button"
 import Gallery from "./gallery"
+import HostInformation from "./host"
 
 const RoomDetail = () => {
-    const { price, images, utilities, roomblock, avgRate, ratings } = roomDetail
+    const { images, roomblock, avgRate, ratings, landlord } = roomDetail
 
     const address = roomblock.address + " | " + roomblock.district + ", " + roomblock.city
 
@@ -30,6 +31,7 @@ const RoomDetail = () => {
                 </div>
             </div>
             <Gallery images={images} />
+            <HostInformation landlord={landlord} />
         </div>
     )
 }
