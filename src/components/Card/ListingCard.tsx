@@ -5,8 +5,11 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr"
 import "./index.css"
 import { useState } from "react"
 import { IRoomFinding } from "@/interfaces/roomfiding.interface"
+import { useNavigate } from "react-router-dom"
+import { SITE_MAP } from "@/utils/constants/Path"
 interface ListingCardProps {
     dataRoom: IRoomFinding
+    onClick?: () => void
 }
 
 const settings = {
@@ -18,6 +21,12 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
     const [currentSlide, setCurrentSlide] = useState(0)
 
     const { images, address, district, price, avgRate, utilities } = dataRoom
+
+    const navigate = useNavigate()
+
+    const handleClick = () => {
+        navigate(`/${SITE_MAP.ROOM_DETAIL}/${dataRoom.id}`)
+    }
 
     return (
         <div className="group col-span-1 cursor-pointer">
@@ -33,6 +42,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
                     >
                         {images?.map((image, index) => (
                             <img
+                                onClick={handleClick}
                                 key={index}
                                 className={`h-full object-cover transition ${
                                     currentSlide == index ? "group-hover:scale-110" : ""
@@ -54,7 +64,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
                     </h4>
                     <div className="flex flex-1 flex-row items-center justify-end gap-[2px] text-[14px] font-normal">
                         <BsStarFill size={12} />
-                        <span>{avgRate||'4.8'}</span>
+                        <span>{avgRate || "4.8"}</span>
                     </div>
                 </div>
                 <div>

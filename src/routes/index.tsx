@@ -29,8 +29,8 @@ const MainRoute = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path={SITE_MAP.INDEX} element={<HomeLayout />}>
-                        <Route path={SITE_MAP.INDEX} element={<HomePage />}/>
-                        <Route path={SITE_MAP.ROOMS_DETAIL} element={<RoomDetail />} />
+                        <Route index element={<HomePage />} />
+                        <Route path={SITE_MAP.ROOM_DETAIL} element={<RoomDetail />} />
                     </Route>
                     <Route element={<RequireAuthAdmin />}>
                         <Route path={SITE_MAP.ADMIN} element={<AdminPage />}>
