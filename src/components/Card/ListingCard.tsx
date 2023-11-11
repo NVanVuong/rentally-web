@@ -25,7 +25,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
     const navigate = useNavigate()
 
     const handleClick = () => {
-        navigate(`/${SITE_MAP.ROOM_DETAIL}/${dataRoom.id}`)
+        navigate(`/room/${dataRoom.id}`)
     }
 
     return (
