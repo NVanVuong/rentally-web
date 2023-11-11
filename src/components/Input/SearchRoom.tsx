@@ -65,7 +65,7 @@ const SearchRoom = () => {
 
         // Function to append key-value pairs to the URLSearchParams object
         const appendKeyValuePair = (key: string, value: string | string[]) => {
-            if (key !== "utility") {
+            if (key !== "utilities") {
                 queryCodesObj.set(key, String(value))
             } else {
                 queryCodesObj.append(key, String(value))
