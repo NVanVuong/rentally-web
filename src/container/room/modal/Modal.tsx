@@ -104,8 +104,7 @@ const Modal = () => {
                             const fileTransform = new File([blob], fileName, { type: blob.type })
                             formData.append("files", fileTransform)
                         } catch (error) {
-                            setIsloading(false)
-                            dispatch(closeModal())
+                           
                             console.error("There was a problem with the fetch operation:", error)
                         }
                     } else {
@@ -144,34 +143,41 @@ const Modal = () => {
             } else if (role === "ADMIN") {
                 setIsloading(true)
 
-                values.images = values.images.fileList.map((file: any) => file.originFileObj)
-                const { quantity, ...roomPattern } = values
-                const rooms: IRoom[] = []
-                roomPattern.id = "0"
-                roomPattern.roomName = "F0"
-                for (let i = 0; i < quantity; i++) {
-                    const room = { ...roomPattern }
-                    room.id = `${i}`
-                    room.roomName = `F${i}`
-                    rooms.push(room)
-                }
-                for (const [, room] of rooms.entries()) {
-                    const formData = new FormData()
-                    room.images?.forEach((image) => {
-                        formData.append("files", image)
-                    })
-                    const res = await UploadImages(formData).unwrap()
-                    if (res.status === "success" && res.data) {
-                        room.images = res.data
-                    } else {
-                        console.log("upload error")
+                try {
+                    values.images = values.images.fileList.map((file: any) => file.originFileObj)
+                    const { quantity, ...roomPattern } = values
+                    const rooms: IRoom[] = []
+                    roomPattern.id = "0"
+                    roomPattern.roomName = "F0"
+                    for (let i = 0; i < quantity; i++) {
+                        const room = { ...roomPattern }
+                        room.id = `${i}`
+                        room.roomName = `F${i}`
+                        rooms.push(room)
                     }
+                    for (const [, room] of rooms.entries()) {
+                        const formData = new FormData()
+                        room.images?.forEach((image) => {
+                            formData.append("files", image)
+                        })
+                        const res = await UploadImages(formData).unwrap()
+                        if (res.status === "success" && res.data) {
+                            room.images = res.data
+                        } else {
+                            console.log("upload error")
+                        }
+                    }
+                    console.log(rooms)
+                    await createRooms({ role, body: { roomBlockId: +(BlockId || 0), rooms } })
+                    setIsloading(false)
+                    dispatch(closeModal())
+                } catch (error:any) {
+                    message.error(error.data.message)
+                    setIsloading(false)
+                    dispatch(closeModal())
                 }
-                console.log(rooms)
-                await createRooms({ role, body: { roomBlockId: +(BlockId || 0), rooms } })
 
-                setIsloading(false)
-                dispatch(closeModal())
+                
             }
         }
     }

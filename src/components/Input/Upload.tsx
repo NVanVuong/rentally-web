@@ -74,6 +74,7 @@ const UploadImage = ({ imageList }: { imageList: string[] }) => {
                     fileList={fileList}
                     onPreview={handlePreview}
                     onChange={handleChange}
+                    multiple={true}
                 >
                     {fileList.length >= 9 ? null : uploadButton}
                 </Upload>
