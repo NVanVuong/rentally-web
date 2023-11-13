@@ -88,7 +88,7 @@ const Rental = () => {
                                         className="text-sm"
                                         rules={[{ required: true, message }]}
                                     >
-                                        <Input />
+                                        <Input disabled />
                                     </Form.Item>
                                     <Form.Item
                                         label="Lastname"
@@ -96,7 +96,7 @@ const Rental = () => {
                                         className="text-sm"
                                         rules={[{ required: true, message }]}
                                     >
-                                        <Input />
+                                        <Input disabled />
                                     </Form.Item>
                                     <Form.Item
                                         label="Email"
@@ -110,7 +110,7 @@ const Rental = () => {
                                             { required: true, message }
                                         ]}
                                     >
-                                        <Input />
+                                        <Input disabled />
                                     </Form.Item>
                                     <Form.Item
                                         label="Phone"

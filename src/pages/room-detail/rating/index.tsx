@@ -12,6 +12,11 @@ interface IRating {
 }
 
 const AverageRating = (props: IRating) => {
+    const { avgRate = 0, ratings = [] } = props.ratingDetail ?? {
+        avgRate: 0,
+        ratings: []
+    }
+
     return (
         <div
             className={`${
@@ -19,10 +24,10 @@ const AverageRating = (props: IRating) => {
             } flex items-center gap-2 `}
         >
             <span className="flex items-center gap-1 font-bold">
-                <AiFillStar /> {props.ratingDetail?.avgRate}
+                <AiFillStar /> {avgRate}
             </span>
             <span className="text-xs">•</span>
-            <span>{props.ratingDetail?.ratings.length} reviews</span>
+            <span>{ratings.length} reviews</span>
         </div>
     )
 }
