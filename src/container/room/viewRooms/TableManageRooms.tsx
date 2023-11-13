@@ -17,7 +17,7 @@ const TableManageRooms = ({ rooms }: { rooms: IRoom[] }) => {
             align: "center" as AlignType,
             key: "id",
             width: "20%",
-            render: (id: string, record: any, index: number) => <span className=" text-sm font-semibold">#{index + 1}</span>
+            render: (_: any, __: any, index: number) => <span className=" text-sm font-semibold">#{index + 1}</span>
         },
         {
             title: <span className="font-bold">Room_ID</span>,
