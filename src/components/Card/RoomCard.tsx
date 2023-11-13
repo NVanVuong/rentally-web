@@ -89,7 +89,7 @@ const RoomCard = ({ room }: Props) => {
                         value={
                             utilities
                                 ? (utilities
-                                      ?.map((value: string) => data?.find((utility) => String(utility.id) === value))
+                                      ?.map((value: string) => data?.find((utility) => String(utility.id) == value))
                                       .filter((option) => option !== undefined) as IUtiltity[])
                                 : []
                         }

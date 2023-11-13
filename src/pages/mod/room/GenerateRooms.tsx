@@ -27,8 +27,8 @@ const GenerateRooms = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            if (isSave) {
-                await createRooms({ role, body: { roomBlockId: 34, rooms } })
+            if (isSave && id) {
+                await createRooms({ role, body: { roomBlockId: +(id||0), rooms } })
                 setIsSave(false)
                 navigate(`${SITE_MAP.MOD}/${SITE_MAP.BLOCKS_MANAGEMENT}/${id}/rooms`)
                 dispatch(saveRoom())
