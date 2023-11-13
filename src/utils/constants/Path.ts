@@ -15,5 +15,8 @@ export const SITE_MAP = {
     ROOMS_GENERATION: "blocks/:id/rooms/generate-rooms",
     PROPS_MANAGEMENT: "props",
     BLOCKS_MANAGEMENT: "blocks",
-    ROOM_DETAIL: "room/:id"
+    ROOM: "room",
+    ROOM_DETAIL: "room/:id",
+    RENT: "rental",
+    RENT_DETAIL: "rental/:id"
 }

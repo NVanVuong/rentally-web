@@ -14,7 +14,9 @@ const RoomsManagement = () => {
     const { id } = useParams()
     const { data, isLoading } = useGetRoomsInBlocksQuery({ role, id: id || "", keyword })
     const rooms = data?.data?.roomBlocks || []
-    if (!data) return
+
+    if (!rooms) return
+
     return (
         <div className="flex-1 px-6 py-4">
             <Spin spinning={isLoading}>

@@ -10,6 +10,7 @@ import Title from "@/components/Modal/Title"
 import "../style.css"
 import { useGetLandLordQuery } from "@/redux/services/user/user.service"
 import { ILandlord } from "@/interfaces/user.interface"
+import { ROLE } from "@/utils/constants/GlobalConst"
 
 export const formRoomBlockRules = {
     description: [{ required: true, message: "Please input description!" }],
@@ -19,6 +20,7 @@ export const formRoomBlockRules = {
 
 const ModalAdd = (props: IModal) => {
     const { title } = props
+    const role = useAppSelector((state) => state.auth.userInfo!.role)
     const placeInfo = useAppSelector((state) => state.searchMap.placeInfo)
     const { lat, lng } = placeInfo.latlng
 
@@ -41,7 +43,7 @@ const ModalAdd = (props: IModal) => {
             landlordId: values.landlordId
         }
 
-        await createRoomBlock(roomBlockRequest)
+        await createRoomBlock({ role, data: roomBlockRequest })
     }
 
     useServerMessage({ data: data!, error: error })
@@ -56,28 +58,26 @@ const ModalAdd = (props: IModal) => {
                 layout="horizontal"
                 className="flex w-full flex-col items-center"
             >
-                <Form.Item className="w-full" name="landlordId" rules={formRoomBlockRules.landlord}>
-                    <Select placeholder="Landlord" loading={isLandLordLoading}>
-                        {landlords?.map((landlord: ILandlord) => (
-                            <Select.Option key={landlord.id} value={landlord.id}>
-                                {landlord.name} - {landlord.phoneNumber}
-                            </Select.Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-
+                {role === ROLE.ADMIN && (
+                    <Form.Item className="w-full" name="landlordId" rules={formRoomBlockRules.landlord}>
+                        <Select placeholder="Landlord" loading={isLandLordLoading}>
+                            {landlords?.map((landlord: ILandlord) => (
+                                <Select.Option key={landlord.id} value={landlord.id}>
+                                    {landlord.name} - {landlord.phoneNumber}
+                                </Select.Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
+                )}
                 <Form.Item className="w-full" name="description" rules={formRoomBlockRules.description}>
                     <Input placeholder="Description" />
                 </Form.Item>
-
-                <Form.Item className=" w-full" rules={formRoomBlockRules.address}>
+                <Form.Item className="w-full" rules={formRoomBlockRules.address}>
                     <SearchMap />
                 </Form.Item>
-
                 <Form.Item className="w-full">
                     <Map center={[lat, lng]} />
                 </Form.Item>
-
                 <Form.Item className="w-full">
                     <Button type="primary" htmlType="submit" className="h-10 bg-primary text-white">
                         Save

@@ -9,6 +9,8 @@ import { SITE_MAP } from "@/utils/constants/Path"
 import { FaRegUser } from "react-icons/fa"
 import { BiHomeAlt } from "react-icons/bi"
 import Logo from "@/components/Logo"
+import { useAppSelector } from "@/redux/hook"
+import { ROLE } from "@/utils/constants/GlobalConst"
 
 type MenuItem = Required<MenuProps>["items"][number]
 
@@ -29,9 +31,10 @@ function getItem(
 }
 
 const Slider = () => {
+    const role = useAppSelector((state) => state.auth.userInfo?.role)
     const [isExpanding, setIsExpanding] = useState(false)
 
-    const items: MenuProps["items"] = [
+    let items: MenuProps["items"] = [
         { type: "divider" },
 
         getItem(`${isExpanding ? "Accounts" : ""}`, "users", <FaRegUser className="h-5 w-5" />),
@@ -50,6 +53,10 @@ const Slider = () => {
             getItem(`${isExpanding ? "xx" : ""}`, "12")
         ])
     ]
+
+    if (role === ROLE.MOD) {
+        items = items.filter((item) => item!.key !== "users")
+    }
 
     const navigate = useNavigate()
 
@@ -78,7 +85,7 @@ const Slider = () => {
 
             <Menu
                 onClick={onClick}
-                defaultSelectedKeys={["users"]}
+                defaultSelectedKeys={["users", "blocks"]}
                 mode="inline"
                 items={items}
                 className={`w-full rounded-br-3xl rounded-tr-3xl`}

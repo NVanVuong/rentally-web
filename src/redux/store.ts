@@ -11,7 +11,10 @@ import searchSlice from "@/redux/features/search/search.slice"
 import searchMapSlice from "./features/search-map/search-map.slice"
 import modalSlice from "./features/modal/modal.slice"
 import generateRoomSlice from "./features/generateRoom/generateRoom.slice"
+import contractSlice from "./features/contract/contract.slice"
 import { findingRoomApi } from "./services/findingRoom/findingRoom.service"
+import { roomDetailApi } from "./services/room-detail/room-detail.service"
+import { rentalApi } from "./services/rental/rental.service"
 
 const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
@@ -20,10 +23,13 @@ const rootReducer = combineReducers({
     [findingRoomApi.reducerPath]: findingRoomApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [roomBlockApi.reducerPath]: roomBlockApi.reducer,
+    [roomDetailApi.reducerPath]: roomDetailApi.reducer,
+    [rentalApi.reducerPath]: rentalApi.reducer,
+    auth: authSlice.reducer,
     search: searchSlice,
     searchMap: searchMapSlice,
+    contract: contractSlice,
     modal: modalSlice,
-    auth: authSlice.reducer,
     generateRoom: generateRoomSlice
 })
 
@@ -39,7 +45,9 @@ export const store = configureStore({
         authApi.middleware,
         helpApi.middleware,
         roomBlockApi.middleware,
-        findingRoomApi.middleware
+        findingRoomApi.middleware,
+        roomDetailApi.middleware,
+        rentalApi.middleware
     )
 })
 

@@ -169,7 +169,7 @@ const Modal = () => {
     }
     return (
         <Spin spinning={isLoading}>
-            <Title>{type === MODAL.UPDATE.ROOM ? "Edit Room Information" : "Remove Room"} </Title>
+            <Title>{type === MODAL.UPDATE.ROOM ? "Edit Room Information" : "Add Room"} </Title>
             <Form
                 form={form}
                 onValuesChange={handleValuesChange}

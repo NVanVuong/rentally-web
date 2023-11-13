@@ -39,7 +39,7 @@ const Home = () => {
         setSearchParamsObject(newSearchParamsObject)
     }, [searchParams])
 
-    if (!data || data?.status === 400 || data?.data?.length === 0) return <p>Enty</p>
+    if (!data || data?.status === 400 || data?.data?.length === 0) return <p>Empty</p>
 
     return (
         <Spin spinning={isLoading}>
@@ -49,7 +49,7 @@ const Home = () => {
                 ) : (
                     <div className="mx-auto max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-20 ">
                         <div className="grid grid-cols-1 gap-8  sm:grid-cols-2 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-                            {dataRooms.map((dataRoom: IRoomFinding) => (
+                            {data?.data?.map((dataRoom: IRoomFinding) => (
                                 <ListingCard key={dataRoom.id} dataRoom={dataRoom} />
                             ))}
                         </div>
@@ -59,7 +59,7 @@ const Home = () => {
                     onClick={() => {
                         setSwitchScreen((state) => !state)
                     }}
-                    className="fixed bottom-20 right-1/2 z-50 flex translate-x-1/2 items-center justify-center gap-2 rounded-full bg-secondary px-4 py-3 font-semibold text-white transition hover:scale-110  "
+                    className="fixed bottom-10 right-1/2 z-50 flex translate-x-1/2 items-center justify-center gap-2 rounded-full bg-secondary px-4 py-3 font-semibold text-white transition hover:scale-110  "
                 >
                     {!switchScreen ? "Show map" : "Show list"}{" "}
                     <span>{!switchScreen ? <BsMapFill /> : <AiOutlineUnorderedList />}</span>

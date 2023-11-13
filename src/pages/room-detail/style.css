@@ -1,5 +1,5 @@
 .ant-image {
-    @apply h-full w-full !important;
+    @apply h-full w-full  !important;
 }
 
 .ant-image .ant-image-img {
@@ -8,4 +8,12 @@
 
 .ant-picker .ant-picker-input > input {
     @apply font-normal;
+}
+
+.header-skeleton .ant-skeleton-paragraph {
+    @apply mt-2 !important;
+}
+
+.ant-spin-nested-loading > div > .ant-spin {
+    @apply h-64 !important;
 }

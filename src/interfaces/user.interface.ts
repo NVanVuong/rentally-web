@@ -16,6 +16,7 @@ export interface ILandlord {
     phoneNumber: string
     email?: string
     photo: string
+    deletedAt?: string | null
 }
 
 export interface IUserQuery {

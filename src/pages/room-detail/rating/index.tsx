@@ -1,35 +1,50 @@
-import { roomDetail } from "@/mock/RoomDetail"
 import { AiFillStar } from "react-icons/ai"
 import { MdOutlineCleanHands, MdSecurity } from "react-icons/md"
 import { GrLocation } from "react-icons/gr"
 import { BiSupport } from "react-icons/bi"
+import { IRatingDetail } from "@/interfaces/room-detail.interface"
 
-type TSize = "big" | "small"
+type TSize = "big" | "normal" | "small"
 
 interface IRating {
     size?: TSize
+    ratingDetail?: IRatingDetail
 }
 
-const AverageRating = ({ size = "small" }: IRating) => {
-    const { ratingDetail } = roomDetail
-
+const AverageRating = (props: IRating) => {
     return (
-        <div className={`${size === "big" ? "text-lg font-bold" : ""} flex items-center gap-2`}>
-            <span className="flex items-center gap-1">
-                <AiFillStar /> {ratingDetail.avgRate}
+        <div
+            className={`${
+                props.size === "big" ? "text-lg font-bold" : props.size === "small" ? "text-sm" : "text-base"
+            } flex items-center gap-2 `}
+        >
+            <span className="flex items-center gap-1 font-bold">
+                <AiFillStar /> {props.ratingDetail?.avgRate}
             </span>
             <span className="text-xs">•</span>
-            <span>{ratingDetail.ratings.length} reviews</span>
+            <span>{props.ratingDetail?.ratings.length} reviews</span>
         </div>
     )
 }
 
 export { AverageRating }
 
-const RatingDashboard = () => {
-    const { ratingDetail } = roomDetail
+interface IRatingDashboard {
+    ratingDetail?: IRatingDetail
+}
 
-    const { avgClean, avgLocation, avgSecurity, avgSupport } = ratingDetail
+const RatingDashboard = (props: IRatingDashboard) => {
+    const {
+        avgClean = 0,
+        avgLocation = 0,
+        avgSecurity = 0,
+        avgSupport = 0
+    } = props.ratingDetail ?? {
+        avgClean: 0,
+        avgLocation: 0,
+        avgSecurity: 0,
+        avgSupport: 0
+    }
 
     const averageRating = [
         {
@@ -56,7 +71,7 @@ const RatingDashboard = () => {
 
     return (
         <div className="flex flex-col border-b pb-4 pl-2">
-            <AverageRating size="big" />
+            <AverageRating size="big" ratingDetail={props.ratingDetail} />
             <div className="flex">
                 {averageRating.map((rating) => (
                     <div key={rating.title} className="mr-6 mt-2 flex w-32 flex-col border-r last:border-none">
