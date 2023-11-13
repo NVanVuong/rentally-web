@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useForgotPasswordMutation } from "@/redux/services/auth/auth.service"
 import { motion } from "framer-motion"
 import { Form, Formik } from "formik"
-import { Spin } from "antd"
+import { Spin, message } from "antd"
 import { IEmail } from "@/interfaces/auth.interface"
 import Account from "@/layouts/Account"
 
@@ -27,10 +27,15 @@ const ForgotPassword = () => {
     }
 
     const submitForm = async (values: IEmail) => {
-        const res = await forgotPassword({ email: values.email }).unwrap()
+        try {
+            const res = await forgotPassword({ email: values.email }).unwrap()
 
         if (res.status === "SUCCESS") {
             navigate(`/reset-password/${values.email}`)
+        }
+        } catch (error: any) {
+            console.log(error)
+            message.error(error.data.message)
         }
     }
 

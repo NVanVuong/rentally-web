@@ -33,7 +33,10 @@ export const roomApi = createRoomWithAuth.injectEndpoints({
             invalidatesTags: ["Rooms"]
         }),
 
-        UpdateRoom: builder.mutation<{ status: string; message: string, statusCode?:number }, { role: string; body: IRoom; id: string }>({
+        UpdateRoom: builder.mutation<
+            { status: string; message: string; statusCode?: number },
+            { role: string; body: IRoom; id: string }
+        >({
             query: ({ role, id, body }) => ({
                 url: `/${role}/rooms/${id}`,
                 method: "PUT",
@@ -42,7 +45,7 @@ export const roomApi = createRoomWithAuth.injectEndpoints({
             invalidatesTags: ["Rooms"]
         }),
         UpdateImages: builder.mutation<
-            { status: string; message: string; data?: string[], statusCode?:number },
+            { status: string; message: string; data?: string[]; statusCode?: number },
             { id: string; body: FormData }
         >({
             query: ({ body, id }) => ({

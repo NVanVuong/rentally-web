@@ -9,7 +9,7 @@ import {
     useResendEmailMutation
 } from "@/redux/services/auth/auth.service"
 import { motion } from "framer-motion"
-import { Spin } from "antd"
+import { Spin, message } from "antd"
 import Account from "@/layouts/Account"
 
 interface ResetPasswordValues {
@@ -60,20 +60,34 @@ const ResetPassword = () => {
     }
 
     const submitResetPasswordForm = async (values: ResetPasswordValues) => {
-        const res = await resetPassword({ email: email || "", password: values.password, code: "R-" + code }).unwrap()
-        if (res.status === "SUCCESS") {
-            navigate("/login")
+        try {
+            const res = await resetPassword({
+                email: email || "",
+                password: values.password,
+                code: "R-" + code
+            }).unwrap()
+            if (res.status === "SUCCESS") {
+                navigate("/login")
+            }
+        } catch (error: any) {
+            console.log(error)
+            message.error(error.data.message)
         }
     }
     const submitCodeForm = async (values: SendCodeValues) => {
-        const res = await forgotPasswordVerify({
-            email: email || "",
-            code: "R-" + values.code
-        }).unwrap()
-        console.log(res)
-        if (res.status === "SUCCESS") {
-            SetIsPermitted(true)
-            setCode(values.code)
+        try {
+            const res = await forgotPasswordVerify({
+                email: email || "",
+                code: "R-" + values.code
+            }).unwrap()
+            console.log(res)
+            if (res.status === "SUCCESS") {
+                SetIsPermitted(true)
+                setCode(values.code)
+            }
+        } catch (error: any) {
+            console.log(error)
+            message.error(error.data.message)
         }
     }
 

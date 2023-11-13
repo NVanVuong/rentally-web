@@ -17,7 +17,7 @@ import { useAppDispatch } from "@/redux/hook"
 import { setCredentials } from "@/redux/features/auth/auth.slice"
 import { motion } from "framer-motion"
 import * as Yup from "yup"
-import { Spin } from "antd"
+import { Spin, message } from "antd"
 import { IAccountRegister } from "@/interfaces/auth.interface"
 import Account from "@/layouts/Account"
 
@@ -45,7 +45,7 @@ const Register = () => {
         password: "",
         confirmPassword: "",
         phoneNumber: "",
-        role: ""
+        role: "USER"
     }
     const initialSendCodeValues: SendCodeValues = {
         code: ""
@@ -75,11 +75,16 @@ const Register = () => {
 
     const submitRegisterForm = async (values: RegisterValues) => {
         const { confirmPassword, ...body } = values
-        body.role = "USER"
-        const res = await register(body).unwrap()
-        if (res.status === "SUCCESS") {
-            setIsPermitted(true)
-            setEmail(body.email)
+
+        try {
+            const res = await register(body).unwrap()
+            if (res.status === "SUCCESS") {
+                setIsPermitted(true)
+                setEmail(body.email)
+            }
+        } catch (error: any) {
+            console.log(error.data.message)
+            message.error(error.data.message)
         }
     }
     const submitCodeForm = async (values: SendCodeValues) => {
@@ -87,16 +92,20 @@ const Register = () => {
             email: email,
             code: "R-" + values.code
         }
-        const res = await registerVerification(body).unwrap()
-        console.log(res)
-        if (res.status === "SUCCESS" && res.data) {
-            dispatch(setCredentials({ accessToken: res.data.token }))
-            navigate("/")
+        try {
+            const res = await registerVerification(body).unwrap()
+
+            if (res.status === "SUCCESS" && res.data) {
+                dispatch(setCredentials({ accessToken: res.data.token }))
+                navigate("/")
+            }
+        } catch (error: any) {
+            console.log(error.data.message)
+            message.error("")
         }
     }
     const handleResetPassword = async () => {
-        const res = await resendEmail({ email: email }).unwrap()
-        console.log(res)
+        await resendEmail({ email: email }).unwrap()
     }
 
     const registerWithGG = useGoogleLogin({

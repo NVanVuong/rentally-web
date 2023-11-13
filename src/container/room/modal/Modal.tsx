@@ -23,7 +23,7 @@ import useServerMessage from "@/hooks/useServerMessage"
 import axios from "axios"
 
 const Modal = () => {
-    const { id:BlockId } = useParams()
+    const { id: BlockId } = useParams()
 
     const type = useAppSelector((state) => state.modal.type)
     const roomData = useAppSelector((state) => state.modal.data) as IRoom
@@ -61,7 +61,6 @@ const Modal = () => {
         }
     }
 
-
     const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>(
         roomData?.utilities
             ? (roomData.utilities
@@ -94,45 +93,42 @@ const Modal = () => {
             try {
                 const formData = new FormData()
 
-            console.log(values.images)
-            for (const value of values.images.fileList) {
-                if ("status" in value) {
-                    try {
-                        const response = await axios.get(value.url, { responseType: "blob" })
-                        console.log("response: ", response)
-                        const blob = response.data
-                        const fileName = value.url.split("/").pop()
-                        const fileTransform = new File([blob], fileName, { type: blob.type })
-                        formData.append("files", fileTransform)
-                    } catch (error) {
-                        setIsloading(false)
-                        dispatch(closeModal())
-                        console.error("There was a problem with the fetch operation:", error)
+                console.log(values.images)
+                for (const value of values.images.fileList) {
+                    if ("status" in value) {
+                        try {
+                            const response = await axios.get(value.url, { responseType: "blob" })
+                            console.log("response: ", response)
+                            const blob = response.data
+                            const fileName = value.url.split("/").pop()
+                            const fileTransform = new File([blob], fileName, { type: blob.type })
+                            formData.append("files", fileTransform)
+                        } catch (error) {
+                            setIsloading(false)
+                            dispatch(closeModal())
+                            console.error("There was a problem with the fetch operation:", error)
+                        }
+                    } else {
+                        formData.append("files", value.originFileObj)
                     }
-                } else {
-                    formData.append("files", value.originFileObj)
                 }
-            }
 
-        
-            const res = await updateRoomImages({ id: roomData?.id || "", body: formData }).unwrap()
-            if (res.status === "success" && res.data) {
-                values.images = res.data as string[]
-                values.area = parseInt(values.area, 10)
-                values.price = parseInt(values.price, 10)
-                values.depositAmount = parseInt(values.depositAmount, 10)
-                await updateRoom({ role, id: roomData?.id || "", body: values })
-                setIsloading(false)
-                dispatch(closeModal())
-            }
-            } catch (error:any) {
+                const res = await updateRoomImages({ id: roomData?.id || "", body: formData }).unwrap()
+                if (res.status === "success" && res.data) {
+                    values.images = res.data as string[]
+                    values.area = parseInt(values.area, 10)
+                    values.price = parseInt(values.price, 10)
+                    values.depositAmount = parseInt(values.depositAmount, 10)
+                    await updateRoom({ role, id: roomData?.id || "", body: values })
+                    setIsloading(false)
+                    dispatch(closeModal())
+                }
+            } catch (error: any) {
                 message.error(error.data.message)
                 console.log(error)
                 setIsloading(false)
                 dispatch(closeModal())
-            } 
-          
-            
+            }
         } else {
             if (role === ROLE.MOD) {
                 dispatch(closeModal())
@@ -172,7 +168,7 @@ const Modal = () => {
                     }
                 }
                 console.log(rooms)
-                await createRooms({ role, body: { roomBlockId: +(BlockId||0), rooms } })
+                await createRooms({ role, body: { roomBlockId: +(BlockId || 0), rooms } })
 
                 setIsloading(false)
                 dispatch(closeModal())
