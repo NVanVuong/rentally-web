@@ -29,7 +29,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
     }
 
     return (
-        <div className="group col-span-1 mb-16 cursor-pointer">
+        <div className="group col-span-1 mb-4 cursor-pointer">
             <div className="flex w-full flex-col ">
                 <div className=" relative aspect-square w-full overflow-hidden rounded-xl">
                     <Carousel
@@ -67,7 +67,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
                         <span>{avgRate || "4.8"}</span>
                     </div>
                 </div>
-                <div>
+                <div className="flex gap-2 ">
                     {utilities.map((utility) => (
                         <img
                             key={utility.id}
