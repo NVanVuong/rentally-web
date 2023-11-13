@@ -6,7 +6,6 @@ import HomeMap from "@/components/Map/HomeMap"
 import { BsMapFill } from "react-icons/bs"
 import { AiOutlineUnorderedList } from "react-icons/ai"
 
-import { dataRooms } from "../../../mockdata"
 import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 import { useGetFindingRoomsQuery } from "@/redux/services/findingRoom/findingRoom.service"
 import { Spin } from "antd"
@@ -46,7 +45,7 @@ const Home = () => {
             <div className="relative mt-6 h-screen w-full">
                 {switchScreen ? (
                     data?.data?.length !== 0 ? (
-                        <HomeMap dataRooms={data?.data} />
+                        <HomeMap dataRooms={data?.data||[]} />
                     ) : (
                         <p>No</p>
                     )
