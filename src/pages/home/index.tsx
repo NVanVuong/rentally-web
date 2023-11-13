@@ -44,11 +44,7 @@ const Home = () => {
             <div className="relative mt-6 h-screen w-full">
                 {switchScreen ? (
                     data?.data?.length !== 0 ? (
-<<<<<<< HEAD
                         <HomeMap dataRooms={dataRooms} />
-=======
-                        <HomeMap dataRooms={data?.data||[]} />
->>>>>>> 29369055b1c21ee651ad1a12479157e198a5f18e
                     ) : (
                         <p>No</p>
                     )
