@@ -17,7 +17,7 @@ const Login = () => {
     const dispatch = useAppDispatch()
     const [login, { isLoading: isLoginLoading }] = useLoginMutation()
     const [continueWithGG, { isLoading: isContinueWithGGLoading }] = useContinueWithGGMutation()
-    const [messageApi, contextHolder] = message.useMessage()
+    const [contextHolder] = message.useMessage()
     const initialValues: IAccountLogin = {
         email: "",
         password: ""
