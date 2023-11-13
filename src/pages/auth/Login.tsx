@@ -38,20 +38,18 @@ const Login = () => {
 
     const submitForm = async (values: IAccountLogin) => {
         console.log(values)
-        const res = await login(values).unwrap()
-        messageApi.open({
-            type: "error",
-            content: "This is an error message"
-        })
 
-        if (res.status === "SUCCESS" && res.data) {
-            dispatch(setCredentials({ accessToken: res.data.token }))
-            navigate("/")
-        } else {
-            console.log("Login Failed")
-            // messageApi.error(res)
+        try {
+            const res = await login(values).unwrap()
+            if (res.status === "SUCCESS" && res.data) {
+                dispatch(setCredentials({ accessToken: res.data.token }))
+                navigate("/")
+            }
+        } catch (error: any) {
+            message.error(error.data.message)
         }
     }
+
     const loginWithGG = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
             console.log(tokenResponse.access_token || "")
