@@ -78,7 +78,7 @@ const Login = () => {
                                 className="flex w-full flex-col items-center justify-center"
                             >
                                 {" "}
-                                {contextHolder}
+                                <>{contextHolder}</>
                                 <h1 className="my-2 text-4xl font-semibold text-secondary ">Login to your account</h1>
                                 <div className="mt-3">
                                     <p className="mb-1 text-[14px] text-secondary">
