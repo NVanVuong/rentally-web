@@ -10,14 +10,14 @@ import { formatStatus } from "@/utils/helpers"
 
 const TableManageRooms = ({ rooms }: { rooms: IRoom[] }) => {
     const getMenuActions = useMenuActions()
+    
     const columns: ColumnsType<IRoom> = [
         {
             title: <span className=" font-bold">ID</span>,
             align: "center" as AlignType,
-            dataIndex: "id",
             key: "id",
             width: "20%",
-            render: (id: string) => <span className=" text-sm font-semibold">#{id}</span>
+            render: (id: string, record: any, index: number) => <span className=" text-sm font-semibold">#{index + 1}</span>
         },
         {
             title: <span className="font-bold">Room_ID</span>,
