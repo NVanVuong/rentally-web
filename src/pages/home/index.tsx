@@ -18,7 +18,7 @@ const Home = () => {
 
     const [switchScreen, setSwitchScreen] = useState(false)
     const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
-    const { data, isLoading } = useGetFindingRoomsQuery(searchParamsObject)
+    const { data, isLoading, isFetching } = useGetFindingRoomsQuery(searchParamsObject)
 
     useEffect(() => {
         const params: [string, string][] = []
@@ -39,13 +39,17 @@ const Home = () => {
         setSearchParamsObject(newSearchParamsObject)
     }, [searchParams])
 
-    if (!data || data?.status === 400 || data?.data?.length === 0) return <p>Empty</p>
+    // if (!data || data?.status === 400 || data?.data?.length === 0) return <p>Empty</p>
 
     return (
-        <Spin spinning={isLoading}>
+        <Spin spinning={isLoading||isFetching}>
             <div className="relative mt-6 h-screen w-full">
                 {switchScreen ? (
-                    <HomeMap dataRooms={dataRooms} />
+                    data?.data?.length !== 0 ? (
+                        <HomeMap dataRooms={data?.data} />
+                    ) : (
+                        <p>No</p>
+                    )
                 ) : (
                     <div className="mx-auto max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-36">
                         <div className="grid grid-cols-1 gap-8  sm:grid-cols-2 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
