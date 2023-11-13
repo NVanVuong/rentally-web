@@ -34,6 +34,7 @@ const Home = () => {
                 newSearchParamsObject[i[0]] = [i[1]]
             }
         })
+        console.log(newSearchParamsObject["utilities"])
 
         setSearchParamsObject(newSearchParamsObject)
     }, [searchParams])
@@ -41,11 +42,11 @@ const Home = () => {
     // if (!data || data?.status === 400 || data?.data?.length === 0) return <p>Empty</p>
 
     return (
-        <Spin spinning={isLoading||isFetching}>
+        <Spin spinning={isLoading || isFetching}>
             <div className="relative mt-6 h-screen w-full">
                 {switchScreen ? (
                     data?.data?.length !== 0 ? (
-                        <HomeMap dataRooms={data?.data||[]} />
+                        <HomeMap dataRooms={data?.data || []} />
                     ) : (
                         <p>No</p>
                     )

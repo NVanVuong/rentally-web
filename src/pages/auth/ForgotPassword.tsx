@@ -30,9 +30,9 @@ const ForgotPassword = () => {
         try {
             const res = await forgotPassword({ email: values.email }).unwrap()
 
-        if (res.status === "SUCCESS") {
-            navigate(`/reset-password/${values.email}`)
-        }
+            if (res.status === "SUCCESS") {
+                navigate(`/reset-password/${values.email}`)
+            }
         } catch (error: any) {
             console.log(error)
             message.error(error.data.message)

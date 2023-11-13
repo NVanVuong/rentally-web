@@ -10,7 +10,7 @@ import { formatStatus } from "@/utils/helpers"
 
 const TableManageRooms = ({ rooms }: { rooms: IRoom[] }) => {
     const getMenuActions = useMenuActions()
-    
+
     const columns: ColumnsType<IRoom> = [
         {
             title: <span className=" font-bold">ID</span>,

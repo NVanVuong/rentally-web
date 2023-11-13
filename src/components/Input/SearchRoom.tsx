@@ -10,6 +10,7 @@ const SearchRoom = () => {
     const navigate = useNavigate()
     //province
     const { data: provincesData, isLoading: isLoadingProvinces } = useGetProvincesQuery("")
+
     const [province, setProvince] = useState<IProvince | null>(
         provincesData?.find((province) => province.code === searchParams.get("province")) || null
     )
@@ -22,7 +23,7 @@ const SearchRoom = () => {
     const [district, setDistrict] = useState<IDistrict | null>(
         districtsData?.find((district) => district.code === searchParams.get("district")) || null
     )
-
+    console.log(province)
     // keyword
     const [keyword, setKeyword] = useState<string>(searchParams.get("keyword") || "")
     const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
@@ -39,6 +40,7 @@ const SearchRoom = () => {
 
     useEffect(() => {
         setDistrict(null)
+        setDistricts([])
     }, [province])
 
     useEffect(() => {
@@ -81,6 +83,9 @@ const SearchRoom = () => {
 
         // Append additional parameters if they exist
         if (province) appendKeyValuePair("province", province.code)
+        else {
+            queryCodesObj.delete("province")
+        }
         if (district) {
             appendKeyValuePair("district", district.code)
         } else {
