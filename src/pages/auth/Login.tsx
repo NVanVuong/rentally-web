@@ -75,7 +75,7 @@ const Login = () => {
                                 animate={{ x: 0, opacity: 1 }}
                                 exit={{ x: -30, opacity: 0 }}
                                 className="flex w-full flex-col items-center justify-center"
-                            >                           
+                            >
                                 <h1 className="my-2 text-4xl font-semibold text-secondary ">Login to your account</h1>
                                 <div className="mt-3">
                                     <p className="mb-1 text-[14px] text-secondary">
