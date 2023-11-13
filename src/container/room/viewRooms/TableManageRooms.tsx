@@ -20,7 +20,7 @@ const TableManageRooms = ({ rooms }: { rooms: IRoom[] }) => {
             render: (_: any, __: any, index: number) => <span className=" text-sm font-semibold">#{index + 1}</span>
         },
         {
-            title: <span className="font-bold">Room_ID</span>,
+            title: <span className="font-bold">Room Name</span>,
             key: "roomName",
             width: "15%",
             render: (record: IRoom) => {
