@@ -10,6 +10,10 @@ import { ROLE } from "@/utils/constants/GlobalConst"
 import { IUser } from "@/interfaces/user.interface"
 import { SITE_MAP } from "@/utils/constants/Path"
 import { useNavigate } from "react-router-dom"
+import { VscSignIn } from "react-icons/vsc"
+import { HiLogin } from "react-icons/hi"
+import { AvatarDefault } from "@/assets/images"
+import { ItemType } from "antd/es/menu/hooks/useItems"
 
 const UserMenu = () => {
     const userInfo = useAppSelector((state) => state.auth.userInfo) as IUser
@@ -33,12 +37,18 @@ const UserMenu = () => {
             case "logout":
                 dispatch(logOut())
                 break
+            case "signup":
+                navigate(SITE_MAP.AUTH.REGISTER)
+                break
+            case "login":
+                navigate(SITE_MAP.AUTH.LOGIN)
+                break
             default:
                 break
         }
     }
 
-    const items: MenuProps["items"] = [
+    const itemsUser: ItemType[] = [
         {
             key: "propfile",
             label: "My Profile",
@@ -50,11 +60,13 @@ const UserMenu = () => {
                   label: "Admin",
                   icon: <MdOutlineAdminPanelSettings className="mr-4 h-4 w-4" />
               }
-            : {
+            : role === ROLE.MOD
+            ? {
                   key: "mod",
                   label: "Mod",
                   icon: <MdOutlineAdminPanelSettings className="mr-4 h-4 w-4" />
-              },
+              }
+            : undefined,
         {
             type: "divider"
         },
@@ -63,7 +75,21 @@ const UserMenu = () => {
             label: "Logout",
             icon: <MdLogout className="mr-4 h-4 w-4" />
         }
+    ].filter(Boolean) as ItemType[]
+
+    const itemGuest: MenuProps["items"] = [
+        { key: "signup", label: "Sign Up", icon: <VscSignIn className="mr-4 h-4 w-4" /> },
+        {
+            type: "divider"
+        },
+        {
+            key: "login",
+            label: "Login",
+            icon: <HiLogin className="mr-4 h-4 w-4" />
+        }
     ]
+
+    const items = userInfo ? itemsUser : itemGuest
 
     return (
         <Dropdown
@@ -78,7 +104,7 @@ const UserMenu = () => {
         >
             <div>
                 <MdOutlineMenu className="h-5 w-5" />
-                <Avatar className="cursor-pointer" src={userInfo?.photo} size={36} />
+                <Avatar className="cursor-pointer" src={userInfo ? userInfo.photo : AvatarDefault} size={36} />
             </div>
         </Dropdown>
     )

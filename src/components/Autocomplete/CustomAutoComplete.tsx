@@ -2,12 +2,14 @@ import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
 
 interface CustomAutoCompleteProps<T> {
+    type: "city" | "district"
     selectedOption: T | null
     options: T[]
     setSelectedOption: React.Dispatch<React.SetStateAction<T | null>>
 }
 
 export default function CustomAutoComplete<T>({
+    type,
     options,
     selectedOption,
     setSelectedOption
@@ -26,7 +28,7 @@ export default function CustomAutoComplete<T>({
             onChange={handleChange}
             sx={{
                 "& .MuiOutlinedInput-root": {
-                    border: "px solid #d9d9d9",
+                    border: "0px solid #d9d9d9",
                     height: "24px",
                     width: "full",
                     fontSize: "12px",
@@ -61,7 +63,7 @@ export default function CustomAutoComplete<T>({
             renderInput={(params) => (
                 <TextField
                     {...params}
-                    label="Search province"
+                    label={`Search ${type}`}
                     inputProps={{
                         ...params.inputProps,
                         autoComplete: "new-password" // disable autocomplete and autofill

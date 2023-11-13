@@ -99,25 +99,32 @@ const SearchRoom = () => {
 
     return (
         <Spin spinning={isLoading || isLoadingProvinces}>
-            <div className="flex justify-center ">
-                <div className=" flex h-16 w-[800px] flex-row items-center gap-1 rounded-full border border-[#717171]">
-                    <div className="flex w-60 flex-col justify-center border-r pl-4 focus:rounded-full focus:border">
-                        <label className="pl-4 text-[16px] font-bold">Province</label>
+            <div
+                onClick={(e) => {
+                    e.stopPropagation()
+                }}
+                className="flex justify-center"
+            >
+                <div className=" flex h-14 w-[34rem] flex-row items-center gap-1 rounded-full border border-[#717171]">
+                    <div className="flex w-40 flex-col justify-center border-r pl-4 focus:rounded-full focus:border">
+                        <label className="pl-4 text-[16px] font-bold">City</label>
                         <CustomAutoComplete
+                            type={"city"}
                             options={provinces}
                             selectedOption={province}
                             setSelectedOption={setProvince}
                         />
                     </div>
-                    <div className="flex w-60 flex-col justify-center border-r pl-4 focus:rounded-full focus:border">
+                    <div className="flex w-40 flex-col justify-center border-r pl-4 focus:rounded-full focus:border">
                         <label className="pl-4 text-[16px] font-bold">District</label>
                         <CustomAutoComplete
+                            type={"district"}
                             options={districts}
                             selectedOption={district}
                             setSelectedOption={setDistrict}
                         />
                     </div>
-                    <div className="flex w-60 flex-1 flex-col justify-center px-4 pb-1 pt-3 focus:rounded-full focus:border">
+                    <div className="flex w-40 flex-1 flex-col justify-center pb-1 pl-4 focus:rounded-full focus:border">
                         <label htmlFor={"headerSearch"} className="pl-4 text-[16px] font-bold">
                             Search
                         </label>
@@ -127,14 +134,15 @@ const SearchRoom = () => {
                             value={keyword}
                             onChange={(e) => setKeyword(e.target.value)}
                             placeholder="Search"
-                            className="h-7 bg-white font-inherit text-[13px] text-slate-800 placeholder:text-[13px] placeholder:font-normal placeholder:text-secondaryBlack/80  focus:outline-none focus:ring-0"
+                            className="mt-2 h-4 bg-white pl-4 font-inherit text-[13px] text-slate-800 placeholder:text-[13px] placeholder:font-normal placeholder:text-secondaryBlack/80  focus:outline-none focus:ring-0"
                         />
                     </div>
                     <div
-                        onClick={() => {
+                        onClick={(e) => {
+                            e.stopPropagation()
                             handleSearch()
                         }}
-                        className="mr-2 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-primary text-white transition-all duration-100 hover:scale-110"
+                        className="mr-2 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-primary text-white transition-all duration-100 hover:scale-110"
                     >
                         <svg
                             className="h-4 w-4 transition-all duration-100 hover:scale-110"

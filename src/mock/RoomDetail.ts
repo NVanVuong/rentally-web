@@ -34,8 +34,6 @@ export const roomDetail: IRoomDetail = {
     ],
     roomblock: {
         id: 1,
-        created_at: "2023-11-08T05:21:19.106Z",
-        updated_at: "2023-11-08T05:21:19.106Z",
         address: "8 Hà Văn Tính",
         city: "Đà Nẵng",
         district: "Liên Chiểu",
