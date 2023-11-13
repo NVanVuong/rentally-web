@@ -17,18 +17,11 @@ const Filters = () => {
     const { data } = useGetUtilitiesQuery("")
 
     const [values, setValues] = React.useState([
-        parseInt(searchParams.get("minPrice") || "0", 10),
-        parseInt(searchParams.get("maxPrice") || "100", 10)
+       0,
+        100
     ])
 
-    const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>(
-        searchParams.getAll("utilities")
-            ? (searchParams
-                  .getAll("utilities")
-                  .map((value: string) => (data ? data.find((utility) => String(utility.id) == value) : undefined))
-                  .filter((option) => option !== undefined) as IUtiltity[])
-            : []
-    )
+    const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>([])
 
     const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
 
