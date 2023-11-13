@@ -15,7 +15,7 @@ const Map: React.FC<MapProps> = ({
     center,
     zoom = 15,
     markerText = "This is your selected location",
-    isView = true,
+    isView = false,
     width = "100%",
     height = "200px"
 }) => {
@@ -35,8 +35,8 @@ const Map: React.FC<MapProps> = ({
             center={center}
             zoom={zoom}
             style={{ width, height }}
+            scrollWheelZoom={false}
             dragging={!isView}
-            scrollWheelZoom={!isView}
             tap={!isView}
         >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

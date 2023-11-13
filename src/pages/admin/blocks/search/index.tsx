@@ -22,13 +22,15 @@ export const SearchMap = (props: ISearchMap) => {
 
         if (searchMap) {
             const search = window.placeSearch({
-                key: import.meta.env.VITE_PLACE_SEARCH_API_KEY,
+                key: import.meta.env.VITE_PLACE_SEARCH_KEY,
                 container: searchMap,
                 useDeviceLocation: true,
                 collection: ["poi", "airport", "address", "adminArea", "city", "country"]
             })
 
             search.on("change", (e: any) => {
+                console.log(e)
+
                 if (e.result) {
                     dispatch(setPlaceInfo(e.result))
                     setAddress(e.result.name)

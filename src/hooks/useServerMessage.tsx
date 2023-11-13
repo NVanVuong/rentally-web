@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { message } from "antd"
-import { useAppDispatch } from "@/redux/hook"
+import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { closeModal } from "@/redux/features/modal/modal.slice"
 type IServerMessage = {
     error: any
@@ -9,15 +9,16 @@ type IServerMessage = {
 
 function useServerMessage({ data, error }: IServerMessage) {
     const dispatch = useAppDispatch()
+    const isOpen = useAppSelector((state) => state.modal.isOpen)
 
     useEffect(() => {
-        if (data && data.status === "success") {
+        if (data && (data.status === "success" || data.success === true)) {
             message.success(data.message)
-            dispatch(closeModal())
+            isOpen && dispatch(closeModal())
         } else if (error) {
             message.error(error.data?.message)
         }
-    }, [data, error, dispatch])
+    }, [data, error, isOpen, dispatch])
 }
 
 export default useServerMessage

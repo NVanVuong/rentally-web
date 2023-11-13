@@ -25,11 +25,11 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
     const navigate = useNavigate()
 
     const handleClick = () => {
-        navigate(`/room/${dataRoom.id}`)
+        navigate(`/${SITE_MAP.ROOM}/${dataRoom.id}`)
     }
 
     return (
-        <div className="group col-span-1 cursor-pointer">
+        <div className="group col-span-1 mb-16 cursor-pointer">
             <div className="flex w-full flex-col ">
                 <div className=" relative aspect-square w-full overflow-hidden rounded-xl">
                     <Carousel

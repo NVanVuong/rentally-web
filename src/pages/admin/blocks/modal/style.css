@@ -15,11 +15,11 @@
 }
 
 .mq-result {
-    @apply grid grid-cols-10 grid-rows-2 gap-1 overflow-hidden rounded-xl p-2 !important;
+    @apply grid grid-cols-10 grid-rows-2 items-center gap-1 overflow-hidden rounded-lg p-2 !important;
 }
 
 .mq-result-icon {
-    @apply col-span-1 row-span-2 flex w-fit items-center justify-center text-center !important;
+    @apply col-span-1 row-span-2 flex w-fit items-center justify-center pb-1 pl-1 text-center !important;
 }
 
 .mq-name {

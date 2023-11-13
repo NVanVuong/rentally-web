@@ -1,7 +1,7 @@
 interface IButton {
     isDisabled?: boolean
     children?: React.ReactNode
-    onClick?: () => void
+    onClick?: any
     className?: string
 }
 

@@ -14,6 +14,7 @@ import { setPlaceInfo } from "@/redux/features/search-map/search-map.slice"
 
 const ModalUpdate = (props: IModal) => {
     const { title, data: block } = props
+    const role = useAppSelector((state) => state.auth.userInfo!.role)
     const { id, address, coordinate, city, country, district, description, landlord } = block as IRoomBlock
     const [center, setCenter] = useState<[number, number]>([coordinate.latitude, coordinate.longitude])
 
@@ -61,7 +62,7 @@ const ModalUpdate = (props: IModal) => {
             landlordId: landlord?.id
         }
 
-        await updateRoomBlock({ id, data: roomBlockRequest })
+        await updateRoomBlock({ role, id, data: roomBlockRequest })
     }
 
     useServerMessage({ data: data!, error: error })

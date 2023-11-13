@@ -8,15 +8,17 @@ export interface IRoomDetail {
     utilities: IUtility[]
     roomblock: IRoomBlock
     landlord: ILandlord
-    ratingDetail: {
-        ratings: IRating[]
-        avgRate: number
-        avgClean: number
-        avgLocation: number
-        avgSecurity: number
-        avgSupport: number
-        totalRating: number
-    }
+    ratingDetail: IRatingDetail
+}
+
+export interface IRatingDetail {
+    ratings: IRating[]
+    totalRating: number
+    avgRate?: number
+    avgClean?: number
+    avgLocation?: number
+    avgSecurity?: number
+    avgSupport?: number
 }
 
 export interface IUtility {
@@ -37,4 +39,10 @@ export interface IRating {
     avgRate: string
     renterName: string
     renterPhoto: string
+}
+
+export interface IRoomDetailResponse {
+    data: IRoomDetail
+    message: string
+    status: string
 }

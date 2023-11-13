@@ -5,6 +5,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { useGetProvincesQuery, useGetUtilitiesQuery } from "@/redux/services/help/help.service"
 import RoomDetail from "../pages/room-detail"
 import HomeLayout from "@/layouts/Home"
+import Rental from "@/pages/room-detail/rental"
 
 const HomePage = lazy(() => import("../pages/home"))
 const AdminPage = lazy(() => import("../pages/admin"))
@@ -31,6 +32,7 @@ const MainRoute = () => {
                     <Route path={SITE_MAP.INDEX} element={<HomeLayout />}>
                         <Route index element={<HomePage />} />
                         <Route path={SITE_MAP.ROOM_DETAIL} element={<RoomDetail />} />
+                        <Route path={SITE_MAP.RENT_DETAIL} element={<Rental />} />
                     </Route>
                     <Route element={<RequireAuthAdmin />}>
                         <Route path={SITE_MAP.ADMIN} element={<AdminPage />}>

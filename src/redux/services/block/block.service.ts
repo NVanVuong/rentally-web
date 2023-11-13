@@ -1,34 +1,44 @@
-import { IRoomBlockRequest, IRoomBlock, IRoomBlockRespone, IRoomBlockQuery } from "@/interfaces/block.interface"
+import {
+    IRoomBlockRequest,
+    IRoomBlock,
+    IRoomBlocksRespone,
+    IRoomBlockQuery,
+    IRoomBlockRespone
+} from "@/interfaces/block.interface"
 import { createApiWithAuth } from "../apiWithAuth.service"
 
 const createApiRoomBlockWithAuth = createApiWithAuth("roomBlockApi", ["Blocks"])
 export const roomBlockApi = createApiRoomBlockWithAuth.injectEndpoints({
     endpoints: (builder) => ({
-        getRoomBlocks: builder.query<IRoomBlockRespone, IRoomBlockQuery>({
-            query: ({ keyword = "" }) => `/admin/room-blocks?keyword=${keyword}`,
+        getRoomBlocks: builder.query<IRoomBlocksRespone, IRoomBlockQuery>({
+            query: ({ role, keyword = "" }) => `/${role}/room-blocks?keyword=${keyword}`,
             providesTags: ["Blocks"]
         }),
-        createRoomBlock: builder.mutation<IRoomBlockRespone, IRoomBlockRequest>({
-            query: (body) => ({
-                url: `/admin/room-blocks`,
+        getRoomBlock: builder.query<IRoomBlockRespone, { role: string; id: string | number }>({
+            query: ({ role, id }) => `/${role}/room-blocks/${id}`
+        }),
+        createRoomBlock: builder.mutation<IRoomBlocksRespone, { role: string; data: IRoomBlockRequest }>({
+            query: ({ role, data }) => ({
+                url: `/${role}/room-blocks`,
                 method: "POST",
-                body
+                body: data
             }),
             invalidatesTags: ["Blocks"]
         }),
-        updateRoomBlock: builder.mutation<IRoomBlockRequest, { id: number; data: IRoomBlockRequest }>({
-            query: ({ id, data }) => {
-                return {
-                    url: `/admin/room-blocks/${id}`,
-                    method: "PUT",
-                    body: data
-                }
-            },
+        updateRoomBlock: builder.mutation<
+            IRoomBlockRequest,
+            { role: string; id: string | number; data: IRoomBlockRequest }
+        >({
+            query: ({ role, id, data }) => ({
+                url: `/${role}/room-blocks/${id}`,
+                method: "PUT",
+                body: data
+            }),
             invalidatesTags: ["Blocks"]
         }),
-        deleteRoomBlock: builder.mutation<void, { id: Pick<IRoomBlock, "id"> }>({
-            query: (id) => ({
-                url: `/admin/room-blocks/${id}`,
+        deleteRoomBlock: builder.mutation<void, { role: string; id: Pick<IRoomBlock, "id"> }>({
+            query: ({ role, id }) => ({
+                url: `/${role}/room-blocks/${id}`,
                 method: "DELETE"
             }),
             invalidatesTags: ["Blocks"]
@@ -38,6 +48,7 @@ export const roomBlockApi = createApiRoomBlockWithAuth.injectEndpoints({
 
 export const {
     useGetRoomBlocksQuery,
+    useGetRoomBlockQuery,
     useCreateRoomBlockMutation,
     useUpdateRoomBlockMutation,
     useDeleteRoomBlockMutation

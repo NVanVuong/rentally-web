@@ -7,17 +7,19 @@ import { FaEllipsis } from "react-icons/fa6"
 import { Dropdown, Space, Spin } from "antd"
 import { useMenuActions } from "./hooks/useMenuActions"
 import { useAppSelector } from "@/redux/hook"
+import { ROLE } from "@/utils/constants/GlobalConst"
 
 const TableManageRoomBlocks = () => {
+    const role = useAppSelector((state) => state.auth.userInfo!.role)
     const keyword = useAppSelector((state) => state.search.keyword)
-    const { data, isLoading } = useGetRoomBlocksQuery({ keyword: keyword })
-    const roomBlocks = data?.data.roomBlocks as IRoomBlock[]
+    const { data, isLoading } = useGetRoomBlocksQuery({ role, keyword: keyword })
+    const roomBlocks = data?.data.roomBlocks.filter((block) => block.deletedAt === null) as IRoomBlock[]
 
     const getMenuActions = useMenuActions()
 
     if (!roomBlocks) return null
 
-    const columns: ColumnsType<IRoomBlock> = [
+    let columns: ColumnsType<IRoomBlock> = [
         {
             title: <span className=" font-bold">ID</span>,
             align: "center" as AlignType,
@@ -78,6 +80,10 @@ const TableManageRoomBlocks = () => {
             }
         }
     ]
+
+    if (role === ROLE.MOD) {
+        columns = columns.filter((column) => column.key !== "name")
+    }
 
     return (
         <Spin spinning={isLoading}>

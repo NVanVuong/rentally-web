@@ -1,7 +1,7 @@
 import { ILandlord } from "./user.interface"
 
 export interface IRoomBlock {
-    id: number
+    id: number | string
     address: string
     city: string
     district: string
@@ -11,8 +11,7 @@ export interface IRoomBlock {
     landlord?: ILandlord
     quantityRooms?: number
     emptyRooms?: number
-    created_at?: string
-    updated_at?: string
+    deletedAt?: string | null
 }
 
 export interface ICoordinate {
@@ -20,7 +19,7 @@ export interface ICoordinate {
     longitude: number
 }
 
-export interface IRoomBlockRespone {
+export interface IRoomBlocksRespone {
     data: {
         roomBlocks: IRoomBlock[]
     }
@@ -28,8 +27,17 @@ export interface IRoomBlockRespone {
     status: string
 }
 
+export interface IRoomBlockRespone {
+    data: {
+        roomBlock: IRoomBlock
+    }
+    message: string
+    status: string
+}
+
 export interface IRoomBlockQuery {
     keyword: string
+    role: string
 }
 
 export interface IRoomBlockRequest {
