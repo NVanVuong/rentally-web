@@ -1,8 +1,8 @@
 import { Navigate } from "react-router-dom"
 import Logo from "@/assets/images/Logo.svg"
 import Cloud from "@/assets/images/cloud.png"
-import logoRentally from "@/assets/images/rentally_logo.png"
 import { useAppSelector } from "@/redux/hook"
+import { RentallyLogo } from "@/assets/images"
 
 type Props = {
     children: string | JSX.Element
@@ -29,7 +29,7 @@ const Account = ({ children }: Props) => {
                 </div>
                 <div className="relative flex-1 rounded-r-[20px] bg-white  pb-10">
                     <div className="flex h-full w-full flex-col items-center justify-center  ">
-                        <img src={logoRentally} alt="" className="w-[60px]" />
+                        <img src={RentallyLogo} alt="" className="w-[60px]" />
                         {children}
                     </div>
                 </div>

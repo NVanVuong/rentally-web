@@ -20,6 +20,10 @@
     gap: 60px;
 }
 
+.MuiAutocomplete-input {
+    padding: 0 !important;
+}
+
 .MuiAutocomplete-inputRoot {
     overflow-x: hidden;
     overflow: auto;

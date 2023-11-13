@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom"
-import RetallyLogo from "../../assets/images/rentally_logo.png"
-import RetallyLogoFull from "../../assets/images/rentally_logo_full.png"
 import { SITE_MAP } from "@/utils/constants/Path"
+import { RentallyLogo, RentallyLogoFull } from "@/assets/images"
 
 interface ILogo {
     isOpen?: boolean
@@ -20,8 +19,8 @@ const Logo = (props: ILogo) => {
     return (
         <img
             onClick={(e) => handleClick(e)}
-            className={`${isOpen ? "h-full" : "h-8"} cursor-pointer transition duration-100`}
-            src={isOpen ? RetallyLogoFull : RetallyLogo}
+            className={`${isOpen ? "h-full" : "h-8"} max-h-12 cursor-pointer transition duration-100`}
+            src={isOpen ? RentallyLogoFull : RentallyLogo}
             alt="Rentally Logo"
         />
     )
