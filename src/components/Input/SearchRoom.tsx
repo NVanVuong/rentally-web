@@ -100,8 +100,8 @@ const SearchRoom = () => {
     return (
         <Spin spinning={isLoading || isLoadingProvinces}>
             <div className="flex justify-center ">
-                <div className=" flex h-16 w-[800px] flex-row items-center gap-1 rounded-full border border-[#717171]">
-                    <div className="flex w-60 flex-col justify-center border-r pl-4 focus:rounded-full focus:border">
+                <div className=" flex h-16 w-[700px] flex-row items-center gap-1 rounded-full border border-[#717171]">
+                    <div className="flex w-56  flex-col justify-center border-r pl-4 focus:rounded-full focus:border">
                         <label className="pl-4 text-[16px] font-bold">Province</label>
                         <CustomAutoComplete
                             options={provinces}
@@ -109,7 +109,7 @@ const SearchRoom = () => {
                             setSelectedOption={setProvince}
                         />
                     </div>
-                    <div className="flex w-60 flex-col justify-center border-r pl-4 focus:rounded-full focus:border">
+                    <div className="flex w-56 flex-col justify-center border-r pl-4 focus:rounded-full focus:border">
                         <label className="pl-4 text-[16px] font-bold">District</label>
                         <CustomAutoComplete
                             options={districts}

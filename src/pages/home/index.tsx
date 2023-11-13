@@ -17,37 +17,45 @@ const Home = () => {
     useGetUtilitiesQuery("")
 
     const [switchScreen, setSwitchScreen] = useState(false)
-    const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
-    const { data, isLoading } = useGetFindingRoomsQuery(searchParamsObject)
-    console.log(data)
-    useEffect(() => {
-        const params: [string, string][] = []
-        for (const entry of searchParams.entries()) {
-            params.push(entry as [string, string])
-        }
+    const [searchParamsObject, setSearchParamsObject] = useState<Record<string, any>>({})
+    const { data, isLoading, isFetching } = useGetFindingRoomsQuery(searchParamsObject)
 
-        const newSearchParamsObject: Record<string, string[]> = {}
-
-        params?.forEach((i) => {
-            if (Object.keys(newSearchParamsObject).some((item) => item === i[0])) {
-                newSearchParamsObject[i[0]] = [...newSearchParamsObject[i[0]], i[1]]
-            } else {
-                newSearchParamsObject[i[0]] = [i[1]]
+        useEffect(() => {
+            const params: [string, string][] = []
+            for (const entry of searchParams.entries()) {
+                params.push(entry as [string, string])
             }
-        })
 
-        setSearchParamsObject(newSearchParamsObject)
-    }, [searchParams])
+            const newSearchParamsObject: Record<string, any[]> = {}
 
-    if (!data || data?.status === 400 || data?.data?.length === 0) return <p>Empty</p>
+            params?.forEach((i) => {
+                if (Object.keys(newSearchParamsObject).some((item) => item === i[0])) {
+                    if (i[0] === "utilities") {
+                        newSearchParamsObject[i[0]] = [...newSearchParamsObject[i[0]], +i[1]]
+                    } else newSearchParamsObject[i[0]] = [...newSearchParamsObject[i[0]], i[1]]
+                } else {
+                    if (i[0] === "utilities") {
+                        newSearchParamsObject[i[0]] = [+i[1]]
+                    } else newSearchParamsObject[i[0]] = [i[1]]
+                }
+            })
+
+            setSearchParamsObject(newSearchParamsObject)
+        }, [searchParams])
+
+    // if (!data || data?.status === 400 || data?.data?.length === 0) return <p>Empty</p>
 
     return (
-        <Spin spinning={isLoading}>
+        <Spin spinning={isLoading || isFetching}>
             <div className="relative h-screen w-full">
                 {switchScreen ? (
-                    <HomeMap dataRooms={dataRooms} />
+                    data?.data?.length !== 0 ? (
+                        <HomeMap dataRooms={data?.data} />
+                    ) : (
+                        <p>No</p>
+                    )
                 ) : (
-                    <div className="mx-auto max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-20 ">
+                    <div className="mx-auto max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-20">
                         <div className="grid grid-cols-1 gap-8  sm:grid-cols-2 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
                             {data?.data?.map((dataRoom: IRoomFinding) => (
                                 <ListingCard key={dataRoom.id} dataRoom={dataRoom} />
@@ -59,7 +67,7 @@ const Home = () => {
                     onClick={() => {
                         setSwitchScreen((state) => !state)
                     }}
-                    className="fixed bottom-10 right-1/2 z-50 flex translate-x-1/2 items-center justify-center gap-2 rounded-full bg-secondary px-4 py-3 font-semibold text-white transition hover:scale-110  "
+                    className="fixed bottom-10 right-1/2 z-50 flex translate-x-1/2 items-center justify-center gap-2 rounded-full bg-secondary px-4 py-3 font-semibold text-white transition hover:scale-110"
                 >
                     {!switchScreen ? "Show map" : "Show list"}{" "}
                     <span>{!switchScreen ? <BsMapFill /> : <AiOutlineUnorderedList />}</span>
