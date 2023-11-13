@@ -5,8 +5,6 @@ import { useSearchParams } from "react-router-dom"
 import HomeMap from "@/components/Map/HomeMap"
 import { BsMapFill } from "react-icons/bs"
 import { AiOutlineUnorderedList } from "react-icons/ai"
-
-import { dataRooms } from "../../../mockdata"
 import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 import { useGetFindingRoomsQuery } from "@/redux/services/findingRoom/findingRoom.service"
 import { Spin } from "antd"
@@ -19,6 +17,8 @@ const Home = () => {
     const [switchScreen, setSwitchScreen] = useState(false)
     const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
     const { data, isLoading, isFetching } = useGetFindingRoomsQuery(searchParamsObject)
+
+    const dataRooms = data?.data as IRoomFinding[]
 
     useEffect(() => {
         const params: [string, string][] = []
@@ -39,14 +39,12 @@ const Home = () => {
         setSearchParamsObject(newSearchParamsObject)
     }, [searchParams])
 
-    // if (!data || data?.status === 400 || data?.data?.length === 0) return <p>Empty</p>
-
     return (
-        <Spin spinning={isLoading||isFetching}>
+        <Spin spinning={isLoading || isFetching}>
             <div className="relative mt-6 h-screen w-full">
                 {switchScreen ? (
                     data?.data?.length !== 0 ? (
-                        <HomeMap dataRooms={data?.data} />
+                        <HomeMap dataRooms={dataRooms} />
                     ) : (
                         <p>No</p>
                     )

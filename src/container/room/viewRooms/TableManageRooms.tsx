@@ -10,19 +10,19 @@ import { formatStatus } from "@/utils/helpers"
 
 const TableManageRooms = ({ rooms }: { rooms: IRoom[] }) => {
     const getMenuActions = useMenuActions()
-    
+
     const columns: ColumnsType<IRoom> = [
         {
-            title: <span className=" font-bold">ID</span>,
+            title: <span className=" font-bold">Index</span>,
             align: "center" as AlignType,
             key: "id",
-            width: "20%",
-            render: (_: any, __: any, index: number) => <span className=" text-sm font-semibold">#{index + 1}</span>
+            width: "8%",
+            render: (_: any, __: any, index: number) => <span className=" text-sm font-semibold">{index + 1}</span>
         },
         {
             title: <span className="font-bold">Room_ID</span>,
             key: "roomName",
-            width: "15%",
+            width: "18%",
             render: (record: IRoom) => {
                 const firstImage = record.images?.[0] as string
                 return (
@@ -37,7 +37,7 @@ const TableManageRooms = ({ rooms }: { rooms: IRoom[] }) => {
             title: <span className="font-bold">Area</span>,
             dataIndex: "area",
             key: "area",
-            width: "10%",
+            width: "15%",
             sortDirections: ["ascend", "descend"],
             sorter: (a, b) => a.area - b.area,
             render: (area: number) => <span className="text-sm font-medium">{area}</span>

@@ -6,9 +6,9 @@ import { useNavigate, useParams } from "react-router-dom"
 import { IUser } from "@/interfaces/user.interface"
 import Rule from "./rule"
 import Contract from "./contract"
-import "./style.css"
 import { useCreateRentalMutation } from "@/redux/services/rental/rental.service"
 import useServerMessage from "@/hooks/useServerMessage"
+import "../style.module.css"
 
 const Rental = () => {
     const navigate = useNavigate()

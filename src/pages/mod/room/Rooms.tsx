@@ -21,8 +21,6 @@ const RoomsManagement = () => {
     const address = roomBlock?.address
     const rooms = data?.data?.roomBlocks || []
 
-    if (!rooms) return
-
     return (
         <div className="flex-1 px-6 py-4">
             <Spin spinning={isLoading}>

@@ -24,8 +24,8 @@ const TableManageUsers = () => {
             align: "center" as AlignType,
             dataIndex: "id",
             key: "id",
-            width: "8%",
-            render: (id: string) => <span className=" text-sm font-semibold">#{id}</span>
+            width: "6%",
+            render: (_, __, index) => <span className=" text-sm font-semibold">{index + 1}</span>
         },
         {
             title: <span className="font-bold">Name</span>,
@@ -43,7 +43,7 @@ const TableManageUsers = () => {
             title: <span className="font-bold">Email</span>,
             dataIndex: "email",
             key: "email",
-            width: "16%",
+            width: "18%",
             sorter: (a, b) => a.email?.localeCompare(b.email),
             render: (email: string) => <span className="text-sm font-medium">{email}</span>
         },
@@ -112,8 +112,6 @@ const TableManageUsers = () => {
             }
         }
     ]
-
-    if (!data) return
 
     return (
         <Spin spinning={isLoading}>

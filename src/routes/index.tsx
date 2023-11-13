@@ -56,7 +56,7 @@ const MainRoute = () => {
                     <Route path={SITE_MAP.AUTH.FORGOTPASSWORD} element={<ForgotPassword />} />
                     <Route path={SITE_MAP.AUTH.RESETPASSWORD} element={<ResetPassword />} />
 
-                    <Route path="*" element={<Login />} />
+                    {/* <Route path="*" element={<Login />} /> */}
                 </Routes>
             </BrowserRouter>
         </Suspense>

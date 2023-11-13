@@ -17,3 +17,19 @@
 .ant-spin-nested-loading > div > .ant-spin {
     @apply h-64 !important;
 }
+
+.ant-form-item {
+    @apply mb-3;
+}
+
+.ant-form-item-explain-error {
+    @apply text-sm;
+}
+
+.ant-form-item-required:before {
+    content: none !important;
+}
+
+.ant-form-item-label {
+    @apply font-bold;
+}
