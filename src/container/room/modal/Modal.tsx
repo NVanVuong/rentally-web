@@ -1,4 +1,4 @@
-import { Button, Form, Input, Spin } from "antd"
+import { Button, Form, Input, Spin, message } from "antd"
 import UploadImage from "@/components/Input/Upload"
 import { useEffect, useState } from "react"
 import TextField from "@mui/material/TextField"
@@ -6,7 +6,7 @@ import Autocomplete from "@mui/material/Autocomplete"
 import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { generateRoom, saveSrcImage } from "@/redux/features/generateRoom/generateRoom.slice"
 import { IRoom } from "@/interfaces/room.interface"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { closeModal } from "@/redux/features/modal/modal.slice"
 import { useGetUtilitiesQuery, useUploadImagesMutation } from "@/redux/services/help/help.service"
 import { IUtiltity } from "@/interfaces/utility.interface"
@@ -23,6 +23,8 @@ import useServerMessage from "@/hooks/useServerMessage"
 import axios from "axios"
 
 const Modal = () => {
+    const { id:BlockId } = useParams()
+
     const type = useAppSelector((state) => state.modal.type)
     const roomData = useAppSelector((state) => state.modal.data) as IRoom
     const role = useAppSelector((state) => state.auth.userInfo?.role) || ""
@@ -59,10 +61,11 @@ const Modal = () => {
         }
     }
 
+
     const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>(
         roomData?.utilities
             ? (roomData.utilities
-                  ?.map((value: string) => data?.find((utility) => String(utility.id) === value))
+                  ?.map((value: string) => data?.find((utility) => String(utility.id) == value))
                   .filter((option) => option !== undefined) as IUtiltity[])
             : []
     )
@@ -88,7 +91,8 @@ const Modal = () => {
     const onFinish = async (values: any) => {
         if (type === MODAL.UPDATE.ROOM) {
             setIsloading(true)
-            const formData = new FormData()
+            try {
+                const formData = new FormData()
 
             console.log(values.images)
             for (const value of values.images.fileList) {
@@ -101,6 +105,8 @@ const Modal = () => {
                         const fileTransform = new File([blob], fileName, { type: blob.type })
                         formData.append("files", fileTransform)
                     } catch (error) {
+                        setIsloading(false)
+                        dispatch(closeModal())
                         console.error("There was a problem with the fetch operation:", error)
                     }
                 } else {
@@ -108,19 +114,25 @@ const Modal = () => {
                 }
             }
 
-            console.log(FormData)
+        
             const res = await updateRoomImages({ id: roomData?.id || "", body: formData }).unwrap()
             if (res.status === "success" && res.data) {
                 values.images = res.data as string[]
-            } else {
-                console.log("upload error")
+                values.area = parseInt(values.area, 10)
+                values.price = parseInt(values.price, 10)
+                values.depositAmount = parseInt(values.depositAmount, 10)
+                await updateRoom({ role, id: roomData?.id || "", body: values })
+                setIsloading(false)
+                dispatch(closeModal())
             }
-            values.area = parseInt(values.area, 10)
-            values.price = parseInt(values.price, 10)
-            values.depositAmount = parseInt(values.depositAmount, 10)
-            await updateRoom({ role, id: roomData?.id || "", body: values })
-            setIsloading(false)
-            dispatch(closeModal())
+            } catch (error:any) {
+                message.error(error.data.message)
+                console.log(error)
+                setIsloading(false)
+                dispatch(closeModal())
+            } 
+          
+            
         } else {
             if (role === ROLE.MOD) {
                 dispatch(closeModal())
@@ -160,7 +172,7 @@ const Modal = () => {
                     }
                 }
                 console.log(rooms)
-                await createRooms({ role, body: { roomBlockId: 34, rooms } })
+                await createRooms({ role, body: { roomBlockId: +(BlockId||0), rooms } })
 
                 setIsloading(false)
                 dispatch(closeModal())

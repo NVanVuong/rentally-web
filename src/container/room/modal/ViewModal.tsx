@@ -30,7 +30,7 @@ const ViewModal = () => {
                 <Descriptions.Item label="Utilities">
                     <div>
                         {utilities
-                            ?.map((value: string) => data?.find((utility) => String(utility.id) === value)?.name)
+                            ?.map((value: string) => data?.find((utility) => String(utility.id) == value)?.name)
                             .join(", ")}
                     </div>
                 </Descriptions.Item>
