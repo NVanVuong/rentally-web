@@ -11,27 +11,22 @@ const SearchRoom = () => {
     //province
     const { data: provincesData, isLoading: isLoadingProvinces } = useGetProvincesQuery("")
 
-    const [province, setProvince] = useState<IProvince | null>(
-       null
-    )
+    const [province, setProvince] = useState<IProvince | null>(null)
     const [provinces, setProvinces] = useState<IProvince[]>(provincesData || [])
 
     //district
     const queryArgs = province !== null ? { province_code: province.code } : { province_code: "" }
     const { data: districtsData, isLoading } = useGetDistrictsQuery(queryArgs)
     const [districts, setDistricts] = useState<IDistrict[]>(districtsData || [])
-    const [district, setDistrict] = useState<IDistrict | null>(
-       null
-    )
+    const [district, setDistrict] = useState<IDistrict | null>(null)
     // keyword
     const [keyword, setKeyword] = useState<string>(searchParams.get("keyword") || "")
     const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
-    
 
-    useEffect(()=>{
+    useEffect(() => {
         setProvince(provincesData?.find((province) => province.code === searchParams.get("province")) || null)
-        setDistrict( districtsData?.find((district) => district.code === searchParams.get("district")) || null)
-    },[searchParams])
+        setDistrict(districtsData?.find((district) => district.code === searchParams.get("district")) || null)
+    }, [searchParams])
 
     useEffect(() => {
         setDistricts(districtsData || [])
@@ -44,9 +39,8 @@ const SearchRoom = () => {
     }, [provincesData])
 
     useEffect(() => {
-        if(province===null) setDistricts([])
+        if (province === null) setDistricts([])
         setDistrict(null)
-        
     }, [province])
 
     useEffect(() => {
