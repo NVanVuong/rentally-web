@@ -104,7 +104,6 @@ const Modal = () => {
                             const fileTransform = new File([blob], fileName, { type: blob.type })
                             formData.append("files", fileTransform)
                         } catch (error) {
-                           
                             console.error("There was a problem with the fetch operation:", error)
                         }
                     } else {
@@ -171,13 +170,11 @@ const Modal = () => {
                     await createRooms({ role, body: { roomBlockId: +(BlockId || 0), rooms } })
                     setIsloading(false)
                     dispatch(closeModal())
-                } catch (error:any) {
+                } catch (error: any) {
                     message.error(error.data.message)
                     setIsloading(false)
                     dispatch(closeModal())
                 }
-
-                
             }
         }
     }

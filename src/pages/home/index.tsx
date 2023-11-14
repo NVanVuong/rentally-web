@@ -8,6 +8,7 @@ import { AiOutlineUnorderedList } from "react-icons/ai"
 import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 import { useGetFindingRoomsQuery } from "@/redux/services/findingRoom/findingRoom.service"
 import { Spin } from "antd"
+import {Empty }from '@/assets/images'
 
 const Home = () => {
     const [searchParams] = useSearchParams()
@@ -18,7 +19,6 @@ const Home = () => {
     const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
     const { data, isLoading, isFetching } = useGetFindingRoomsQuery(searchParamsObject)
 
-    const dataRooms = data?.data as IRoomFinding[]
 
     useEffect(() => {
         const params: [string, string][] = []
@@ -35,19 +35,21 @@ const Home = () => {
                 newSearchParamsObject[i[0]] = [i[1]]
             }
         })
+        console.log(newSearchParamsObject["utilities"])
 
         setSearchParamsObject(newSearchParamsObject)
     }, [searchParams])
 
     return (
         <Spin spinning={isLoading || isFetching}>
-            <div className="relative mt-6 h-screen w-full">
-                {switchScreen ? (
-                    data?.data?.length !== 0 ? (
-                        <HomeMap dataRooms={dataRooms} />
-                    ) : (
-                        <p>No</p>
-                    )
+            { (data?.data?.length === 0 )?(<div className="flex flex-col gap-4 h-[600px] items-center justify-center">
+                <img src={Empty} className="h-40" alt='empty'/>
+                <p className="text-[30px] font-bold">No Room matches with your search  </p>     
+            </div>):(
+                <div className="relative mt-6 h-screen w-full ">
+                {switchScreen ? (    
+                        <HomeMap dataRooms={data?.data || []} /> 
+                               
                 ) : (
                     <div className="mx-auto max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-36">
                         <div className="grid grid-cols-1 gap-8  sm:grid-cols-2 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
@@ -67,6 +69,7 @@ const Home = () => {
                     <span>{!switchScreen ? <BsMapFill /> : <AiOutlineUnorderedList />}</span>
                 </button>
             </div>
+            )}
         </Spin>
     )
 }
