@@ -7,7 +7,6 @@ import RatingDashboard, { AverageRating } from "./rating"
 import { getAddress } from "@/utils/helpers"
 import Map from "@/components/Map"
 import Reviews from "./reviews"
-import ScrollToTop from "./components/ScrollToTop"
 import { useParams } from "react-router-dom"
 import { useGetRoomDetailQuery } from "@/redux/services/room-detail/room-detail.service"
 import { IRoomDetail } from "@/interfaces/room-detail.interface"
@@ -15,6 +14,7 @@ import { IRoomBlock } from "@/interfaces/block.interface"
 import { ILandlord } from "@/interfaces/user.interface"
 import { Skeleton } from "antd"
 import "./style.css"
+import ScrollToTop from "@/components/ScrollToTop"
 
 export const gridLayout = ["2fr 1fr 1fr 1fr 1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr"]
 
