@@ -1,5 +1,5 @@
 import type { MenuProps } from "antd"
-import { Menu } from "antd"
+import { Divider, Menu } from "antd"
 import { useState } from "react"
 import ArrowCircle from "../../assets/icons/ArrowCircle"
 import { useNavigate } from "react-router-dom"
@@ -10,6 +10,8 @@ import Logo from "@/components/Logo"
 import { useAppSelector } from "@/redux/hook"
 import { ROLE } from "@/utils/constants/GlobalConst"
 import "./style.css"
+import { MdLogout } from "react-icons/md"
+import Button from "@/pages/room-detail/components/Button"
 
 type MenuItem = Required<MenuProps>["items"][number]
 
@@ -76,8 +78,18 @@ const Slider = () => {
                 defaultSelectedKeys={role === ROLE.MOD ? ["blocks"] : ["users"]}
                 mode="inline"
                 items={items}
-                className={`w-full rounded-br-3xl rounded-tr-3xl`}
+                style={{ borderInlineEnd: "none" }}
+                className={`w-full rounded-br-3xl rounded-tr-3xl border-none`}
             />
+
+            <div className="absolute bottom-4 w-full px-2">
+                <Button
+                    onClick={() => navigate(SITE_MAP.INDEX)}
+                    className="w-full rounded-xl bg-primary py-2.5 text-white shadow-md shadow-primary/60 transition duration-150 hover:shadow-md hover:shadow-primary/90"
+                >
+                    <MdLogout className="h-5 w-5" /> {isExpanding ? "Logout" : ""}
+                </Button>
+            </div>
 
             <ArrowCircle isExpanding={isExpanding} onClick={() => setIsExpanding(!isExpanding)} />
         </div>

@@ -1,6 +1,6 @@
 import { FaArrowUp } from "react-icons/fa"
-import Button from "./Button"
 import { useEffect, useState } from "react"
+import Button from "@/pages/room-detail/components/Button"
 
 const ScrollToTop = () => {
     const [showButton, setShowButton] = useState(false)
