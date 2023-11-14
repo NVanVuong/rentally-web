@@ -16,10 +16,7 @@ const Filters = () => {
 
     const { data } = useGetUtilitiesQuery("")
 
-    const [values, setValues] = React.useState([
-       0,
-        100
-    ])
+    const [values, setValues] = React.useState([0, 100])
 
     const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>([])
 
