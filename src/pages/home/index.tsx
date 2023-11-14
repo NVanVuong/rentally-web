@@ -5,7 +5,6 @@ import { useSearchParams } from "react-router-dom"
 import HomeMap from "@/components/Map/HomeMap"
 import { BsMapFill } from "react-icons/bs"
 import { AiOutlineUnorderedList } from "react-icons/ai"
-
 import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 import { useGetFindingRoomsQuery } from "@/redux/services/findingRoom/findingRoom.service"
 import { Spin } from "antd"
@@ -19,6 +18,7 @@ const Home = () => {
     const [switchScreen, setSwitchScreen] = useState(false)
     const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
     const { data, isLoading, isFetching } = useGetFindingRoomsQuery(searchParamsObject)
+
 
     useEffect(() => {
         const params: [string, string][] = []
@@ -40,11 +40,9 @@ const Home = () => {
         setSearchParamsObject(newSearchParamsObject)
     }, [searchParams])
 
-    // if (!data || data?.status === 400 || data?.data?.length === 0) return <p>Empty</p>
-
     return (
         <Spin spinning={isLoading || isFetching}>
-            { data?.data?.length === 0 ?(<div className="flex flex-col gap-4 h-[600px] items-center justify-center">
+            { (data?.data?.length === 0 )?(<div className="flex flex-col gap-4 h-[600px] items-center justify-center">
                 <img src={Empty} className="h-40" alt='empty'/>
                 <p className="text-[30px] font-bold">No Room matches with your search  </p>     
             </div>):(

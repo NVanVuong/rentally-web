@@ -5,7 +5,6 @@ import { logOut } from "@/redux/features/auth/auth.slice"
 import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { MdOutlineMenu } from "react-icons/md"
 import { useState } from "react"
-import "./style.css"
 import { ROLE } from "@/utils/constants/GlobalConst"
 import { IUser } from "@/interfaces/user.interface"
 import { SITE_MAP } from "@/utils/constants/Path"
@@ -14,6 +13,7 @@ import { VscSignIn } from "react-icons/vsc"
 import { HiLogin } from "react-icons/hi"
 import { AvatarDefault } from "@/assets/images"
 import { ItemType } from "antd/es/menu/hooks/useItems"
+import "./style.module.css"
 
 const UserMenu = () => {
     const userInfo = useAppSelector((state) => state.auth.userInfo) as IUser

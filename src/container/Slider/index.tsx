@@ -1,7 +1,5 @@
-import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons"
 import type { MenuProps } from "antd"
 import { Menu } from "antd"
-import "./style.css"
 import { useState } from "react"
 import ArrowCircle from "../../assets/icons/ArrowCircle"
 import { useNavigate } from "react-router-dom"
@@ -11,6 +9,7 @@ import { BiHomeAlt } from "react-icons/bi"
 import Logo from "@/components/Logo"
 import { useAppSelector } from "@/redux/hook"
 import { ROLE } from "@/utils/constants/GlobalConst"
+import "./style.css"
 
 type MenuItem = Required<MenuProps>["items"][number]
 
@@ -39,19 +38,8 @@ const Slider = () => {
 
         getItem(`${isExpanding ? "Accounts" : ""}`, "users", <FaRegUser className="h-5 w-5" />),
         getItem(`${isExpanding ? "Room Blocks" : ""}`, "blocks", <BiHomeAlt className="h-5 w-5" />),
-        getItem(`${isExpanding ? "xx" : ""}`, "sub1.3", <AppstoreOutlined className="ml-0.5" />),
-        getItem(`${isExpanding ? "xx" : ""}`, "sub1.4", <AppstoreOutlined className="ml-0.5" />),
 
-        getItem(`${isExpanding ? "xx" : ""}`, "sub2", <AppstoreOutlined className="ml-0.5" />),
-
-        { type: "divider" },
-
-        getItem(`${isExpanding ? "xx" : ""}`, "sub4", <SettingOutlined className="ml-0.5" />, [
-            getItem(`${isExpanding ? "xx" : ""}`, "9"),
-            getItem(`${isExpanding ? "xx" : ""}`, "10"),
-            getItem(`${isExpanding ? "xx" : ""}`, "11"),
-            getItem(`${isExpanding ? "xx" : ""}`, "12")
-        ])
+        { type: "divider" }
     ]
 
     if (role === ROLE.MOD) {
@@ -85,7 +73,7 @@ const Slider = () => {
 
             <Menu
                 onClick={onClick}
-                defaultSelectedKeys={["users", "blocks"]}
+                defaultSelectedKeys={role === ROLE.MOD ? ["blocks"] : ["users"]}
                 mode="inline"
                 items={items}
                 className={`w-full rounded-br-3xl rounded-tr-3xl`}

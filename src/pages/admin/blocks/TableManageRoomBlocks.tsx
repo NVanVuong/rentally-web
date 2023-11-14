@@ -13,20 +13,18 @@ const TableManageRoomBlocks = () => {
     const role = useAppSelector((state) => state.auth.userInfo!.role)
     const keyword = useAppSelector((state) => state.search.keyword)
     const { data, isLoading } = useGetRoomBlocksQuery({ role, keyword: keyword })
-    const roomBlocks = data?.data.roomBlocks.filter((block) => block.deletedAt === null) as IRoomBlock[]
+    const roomBlocks = data?.data.roomBlocks as IRoomBlock[]
 
     const getMenuActions = useMenuActions()
 
-    if (!roomBlocks) return null
-
     let columns: ColumnsType<IRoomBlock> = [
         {
-            title: <span className=" font-bold">ID</span>,
+            title: <span className=" font-bold">Index</span>,
             align: "center" as AlignType,
             dataIndex: "id",
             key: "id",
-            width: "8%",
-            render: (id: string) => <span className=" text-sm font-semibold">#{id}</span>
+            width: "6%",
+            render: (_, __, index) => <span className=" text-sm font-semibold">{index + 1}</span>
         },
         {
             title: <span className="font-bold">Landlord</span>,
