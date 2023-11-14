@@ -52,7 +52,7 @@ const TableManageRooms = ({ rooms }: { rooms: IRoom[] }) => {
             render: (price: number) => <span className="text-sm font-medium">{price}</span>
         },
         {
-            title: <span className="font-bold">Deposit qmount</span>,
+            title: <span className="font-bold">Deposit amount</span>,
             key: "depositAmount",
             dataIndex: "depositAmount",
             width: "15%",
