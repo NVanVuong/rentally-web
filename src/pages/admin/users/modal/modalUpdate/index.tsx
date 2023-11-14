@@ -1,4 +1,4 @@
-import { Button, Form, Input, Select, Upload, message, Image, Spin } from "antd"
+import { Button, Form, Input, Select, Upload, Image, Spin } from "antd"
 import { ROLE } from "@/utils/constants/GlobalConst"
 import { AiOutlineUpload } from "react-icons/ai"
 import { useUpdateUserMutation } from "@/redux/services/user/user.service"
@@ -13,13 +13,13 @@ const ModalUpdate = (props: IModal) => {
 
     useServerMessage({ data: data!, error: error })
 
-    const handleFileChange = async (info: any) => {
-        if (info.file.status === "done") {
-            message.success(`${info.file.name} file uploaded successfully`)
-        } else if (info.file.status === "error") {
-            message.error(`${info.file.name} file upload failed.`)
-        }
-    }
+    // const handleFileChange = async (info: any) => {
+    //     if (info.file.status === "done") {
+    //         message.success(`${info.file.name} file uploaded successfully`)
+    //     } else if (info.file.status === "error") {
+    //         message.error(`${info.file.name} file upload failed.`)
+    //     }
+    // }
 
     const onFinish = async (values: any) => {
         const formData = createUserFormData(values)
@@ -43,7 +43,7 @@ const ModalUpdate = (props: IModal) => {
                     phoneNumber: user?.phoneNumber,
                     role: user?.role
                 }}
-                className="flex w-full flex-col items-center"
+                className="flex w-full flex-col items-center gap-2"
             >
                 <Form.Item className="w-full" name="id">
                     <Input disabled />
@@ -62,7 +62,7 @@ const ModalUpdate = (props: IModal) => {
                         }
                     ]}
                 >
-                    <Input className="w-full" placeholder="Email" />
+                    <Input disabled className="w-full" placeholder="Email" />
                 </Form.Item>
                 <Form.Item
                     className="w-full"
@@ -82,11 +82,7 @@ const ModalUpdate = (props: IModal) => {
                     <Input placeholder="Phone" />
                 </Form.Item>
                 <Form.Item className="w-full" name="photo" valuePropName="fileList" getValueFromEvent={normFile}>
-                    <Upload
-                        action="https://run.mocky.io/v3/932209e6-af4b-43b5-8d72-d30cf92e3027"
-                        listType="picture"
-                        onChange={handleFileChange}
-                    >
+                    <Upload action="https://run.mocky.io/v3/932209e6-af4b-43b5-8d72-d30cf92e3027" listType="picture">
                         <Button
                             icon={<AiOutlineUpload className="-mr-2 h-5 w-5" />}
                             className="flex flex-row-reverse items-center justify-between gap-2"

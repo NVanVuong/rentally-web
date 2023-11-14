@@ -8,7 +8,6 @@ import Rule from "./rule"
 import Contract from "./contract"
 import { useCreateRentalMutation } from "@/redux/services/rental/rental.service"
 import useServerMessage from "@/hooks/useServerMessage"
-import "../style.module.css"
 
 const Rental = () => {
     const navigate = useNavigate()

@@ -2,7 +2,6 @@ import { useState } from "react"
 import { BsFillGrid3X3GapFill } from "react-icons/bs"
 import Button from "../components/Button"
 import { Image } from "antd"
-import "../style.module.css"
 import { NoImage } from "@/assets/images"
 
 interface IGallery {
@@ -21,7 +20,7 @@ const Gallery = ({ images }: IGallery) => {
     const [showPreview, setShowPreview] = useState(false)
 
     return (
-        <div className="relative my-2 grid h-96 grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-lg">
+        <div className="gallery relative my-2 grid h-96 grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-lg">
             <Image.PreviewGroup
                 preview={{ visible: showPreview, onVisibleChange: (visible) => setShowPreview(visible) }}
             >

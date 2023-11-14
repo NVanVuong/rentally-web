@@ -13,7 +13,7 @@ import { VscSignIn } from "react-icons/vsc"
 import { HiLogin } from "react-icons/hi"
 import { AvatarDefault } from "@/assets/images"
 import { ItemType } from "antd/es/menu/hooks/useItems"
-import "./style.module.css"
+import "./style.css"
 
 const UserMenu = () => {
     const userInfo = useAppSelector((state) => state.auth.userInfo) as IUser
@@ -36,6 +36,7 @@ const UserMenu = () => {
                 break
             case "logout":
                 dispatch(logOut())
+                navigate(SITE_MAP.INDEX)
                 break
             case "signup":
                 navigate(SITE_MAP.AUTH.REGISTER)

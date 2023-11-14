@@ -50,3 +50,17 @@ export function getCurrentLocation(dispatch: any) {
 export const getAddress = (roomblock: any) => {
     return roomblock.address + " | " + roomblock.district + ", " + roomblock.city
 }
+
+export function convertDateDeleteAt(deletedAt: any) {
+    if (!deletedAt) return "-----"
+
+    const originalDate = new Date(deletedAt)
+
+    const year = originalDate.getFullYear()
+    const month = (originalDate.getMonth() + 1).toString().padStart(2, "0")
+    const day = originalDate.getDate().toString().padStart(2, "0")
+
+    const formattedDateString = [year, month, day].join("-")
+
+    return formattedDateString
+}

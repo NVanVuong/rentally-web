@@ -26,6 +26,7 @@ const HomeMap: React.FC<MapProps> = ({ zoom = 20, dataRooms }) => {
                 })
             )
             map.fitBounds(group.getBounds().pad(0.5))
+            // eslint-disable-next-line
         }, [])
 
         return null
@@ -36,6 +37,7 @@ const HomeMap: React.FC<MapProps> = ({ zoom = 20, dataRooms }) => {
 
         useEffect(() => {
             map.flyTo(new L.LatLng(center[0], center[1]), map.getZoom())
+            // eslint-disable-next-line
         }, [center, map])
 
         return null

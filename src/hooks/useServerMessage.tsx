@@ -18,7 +18,8 @@ function useServerMessage({ data, error }: IServerMessage) {
         } else if (error) {
             message.error(error.data?.message)
         }
-    }, [data, error, isOpen, dispatch])
+        // eslint-disable-next-line
+    }, [data, error, dispatch])
 }
 
 export default useServerMessage
