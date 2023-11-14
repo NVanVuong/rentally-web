@@ -6,7 +6,7 @@ import { Badge, Dropdown, Space } from "antd"
 import { useMenuActions } from "../hooks/useMenuActions"
 import { IRoom } from "@/interfaces/room.interface"
 import { ROOM_STATUS, ROOM_STATUS_COLORS, RoomStatusType } from "@/utils/constants/GlobalConst"
-import { formatStatus } from "@/utils/helpers"
+import { convertDateDeleteAt, formatStatus } from "@/utils/helpers"
 
 const TableManageRooms = ({ rooms }: { rooms: IRoom[] }) => {
     const getMenuActions = useMenuActions()
@@ -77,6 +77,14 @@ const TableManageRooms = ({ rooms }: { rooms: IRoom[] }) => {
                     text={formatStatus(status)}
                 ></Badge>
             )
+        },
+        {
+            title: <span className="font-bold">Delete at</span>,
+            key: "deletedAt",
+            dataIndex: "deletedAt",
+            width: "12%",
+            align: "center" as AlignType,
+            render: (deletedAt: string) => <span className="text-sm font-medium">{convertDateDeleteAt(deletedAt)}</span>
         },
         {
             title: <span className="text-center font-bold">Action</span>,

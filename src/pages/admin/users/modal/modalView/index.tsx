@@ -13,8 +13,8 @@ const ModalView = (props: IModal) => {
     return (
         <div className="flex flex-col items-center">
             <Title>{title}</Title>
-            <Image width={120} className="rounded-full" src={photo} />
-            <Descriptions column={1} className="mt-28">
+            <Image width={120} height={120} className="rounded-full" src={photo} />
+            <Descriptions column={1} className="mt-6">
                 <Descriptions.Item className="text-red-500" label="ID">
                     {id}
                 </Descriptions.Item>

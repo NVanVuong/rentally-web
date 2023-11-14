@@ -3,7 +3,7 @@ import { FiShieldOff } from "react-icons/fi"
 import { HiOutlineViewfinderCircle } from "react-icons/hi2"
 import { useAppDispatch } from "@/redux/hook"
 import { openModal } from "@/redux/features/modal/modal.slice"
-import { MODAL } from "@/utils/constants/GlobalConst"
+import { MODAL, STATUS } from "@/utils/constants/GlobalConst"
 import { MenuProps } from "antd"
 
 export const useMenuActions = () => {
@@ -49,7 +49,8 @@ export const useMenuActions = () => {
                         }
                         className="flex justify-between font-medium text-orange-500"
                     >
-                        Disable <FiShieldOff className="ml-2.5 h-5 w-5" />
+                        {record.status === STATUS.DISABLED ? "Active" : "Disable"}{" "}
+                        <FiShieldOff className="ml-2.5 h-5 w-5" />
                     </div>
                 ),
                 key: "2"

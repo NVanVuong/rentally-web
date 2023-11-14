@@ -14,6 +14,7 @@ import { IRoomDetail } from "@/interfaces/room-detail.interface"
 import { IRoomBlock } from "@/interfaces/block.interface"
 import { ILandlord } from "@/interfaces/user.interface"
 import { Skeleton } from "antd"
+import "./style.css"
 
 export const gridLayout = ["2fr 1fr 1fr 1fr 1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr"]
 

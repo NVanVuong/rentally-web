@@ -1,5 +1,5 @@
-.ant-image {
-    @apply h-full w-full  !important;
+.gallery .ant-image {
+    @apply h-full w-full !important;
 }
 
 .ant-image .ant-image-img {
