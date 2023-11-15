@@ -64,3 +64,7 @@ export function convertDateDeleteAt(deletedAt: any) {
 
     return formattedDateString
 }
+
+export const formatNumberWithCommas = (number: any) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
