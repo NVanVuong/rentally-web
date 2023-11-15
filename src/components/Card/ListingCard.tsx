@@ -7,6 +7,7 @@ import { useState } from "react"
 import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 import { useNavigate } from "react-router-dom"
 import { SITE_MAP } from "@/utils/constants/Path"
+import { formatNumberWithCommas } from "@/utils/helpers"
 interface ListingCardProps {
     dataRoom: IRoomFinding
     onClick?: () => void
@@ -81,7 +82,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
                     Vacant<span className="font-light text-gray-500"> at Oct23 - 28</span>
                 </h4>
                 <div className="mt-2 flex flex-row items-center gap-1 text-[14px]">
-                    <h4 className="font-medium">{price}/month</h4>
+                    <h4 className="font-medium">{formatNumberWithCommas(price)} VND/month</h4>
                 </div>
             </div>
         </div>

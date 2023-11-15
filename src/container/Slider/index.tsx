@@ -1,5 +1,5 @@
 import type { MenuProps } from "antd"
-import { Divider, Menu } from "antd"
+import { Menu } from "antd"
 import { useState } from "react"
 import ArrowCircle from "../../assets/icons/ArrowCircle"
 import { useNavigate } from "react-router-dom"

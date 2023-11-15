@@ -56,7 +56,7 @@ const HomeMap: React.FC<MapProps> = ({ zoom = 20, dataRooms }) => {
                 return (
                     <Marker
                         position={[dataRoom.coordinate.latitude, dataRoom.coordinate.longitude]}
-                        icon={customDivIcon("$" + `${dataRoom.price}`, true)}
+                        icon={customDivIcon(`${(Number(dataRoom.price) / 1000000).toFixed(1)}` + "m", true)}
                         eventHandlers={{
                             click: () => {
                                 setCenter([dataRoom.coordinate.latitude, dataRoom.coordinate.longitude])
