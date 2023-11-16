@@ -53,7 +53,7 @@ const RoomCard = ({ room }: Props) => {
                             dispatch(changeRoomName({ id: id || "", roomName: e.target.value }))
                         }}
                         placeholder="Room ID"
-                        className="h-full w-[100px] text-[14px] outline-none  placeholder:text-[14px] placeholder:font-normal "
+                        className="h-full w-[100px] text-[14px] outline-none placeholder:text-[14px] placeholder:font-normal "
                     />
                 </div>
                 <div className="mb-1 border-b pb-1">

@@ -1,11 +1,11 @@
-import { IRoomFinding } from "@/interfaces/roomfiding.interface"
+import { IRoomFindingResponse } from "@/interfaces/roomfiding.interface"
 import { createApiWithAuth } from "../apiWithAuth.service"
 
 const createApifindingRoomWithAuth = createApiWithAuth("findingRoomApi", ["findingRoom"])
 
 export const findingRoomApi = createApifindingRoomWithAuth.injectEndpoints({
     endpoints: (builder) => ({
-        getFindingRooms: builder.query<{ message: string; status: number; data?: IRoomFinding[] }, any>({
+        getFindingRooms: builder.query<IRoomFindingResponse, any>({
             query: (params) => {
                 return {
                     url: "/finding",

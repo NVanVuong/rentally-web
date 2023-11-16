@@ -9,6 +9,7 @@ import { openModal } from "@/redux/features/modal/modal.slice"
 import { VscSettings } from "react-icons/vsc"
 import SearchRoom from "@/components/Input/SearchRoom"
 import { useState } from "react"
+import { styleOrEmpty } from "@/utils/helpers"
 
 const Header = () => {
     const dispacth = useAppDispatch()
@@ -26,9 +27,9 @@ const Header = () => {
             onClick={() => setIsOpen(false)}
             className={`${
                 isOpen ? "h-24" : "h-16"
-            } sticky inset-0 top-0 z-[999] flex items-center justify-between border-b border-gray-100 bg-white px-36 py-3 shadow-sm transition-all duration-300 `}
+            } sticky top-0 z-[999] flex items-center justify-between border-b border-gray-100 bg-white px-4 py-3 shadow-sm transition-all duration-300 sm:px-6 md:px-10 xl:px-28`}
         >
-            <div className={`${isOpen ? "py-4" : ""}`}>
+            <div className={styleOrEmpty(isOpen, "px-4")}>
                 <Logo />
             </div>
 
@@ -47,18 +48,18 @@ const Header = () => {
                     </div>
                     <Filters />
                 </div>
-                <div className={` ${isOpen ? "hidden" : "block"}`}>
+                <div className={`${isOpen ? "hidden" : "block"} cursor-pointer`}>
                     <div
                         onClick={handleOnClick}
                         className={`flex w-fit items-center justify-center gap-4 rounded-3xl border border-gray-100 py-1 pl-4 pr-2 text-sm font-bold shadow-md `}
                     >
-                        <button className="border-r border-gray-100 pr-4">City</button>
+                        <span className="border-r border-gray-100 pr-4">City</span>
 
-                        <button className="border-r border-gray-100 pr-4">District</button>
+                        <span className="border-r border-gray-100 pr-4">District</span>
 
-                        <button className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white">
+                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white">
                             <AiOutlineSearch className="h-4 w-4" />
-                        </button>
+                        </span>
                     </div>
                 </div>
             </div>

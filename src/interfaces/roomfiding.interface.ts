@@ -14,3 +14,14 @@ export interface IRoomFinding {
     utilities: IUtiltity[]
     avgRate?: number
 }
+
+export interface IRoomFindingResponse {
+    message: string
+    status: string
+    data: {
+        numberOfPage: number
+        currentPage: number
+        totalRoom: number
+        rooms: IRoomFinding[]
+    }
+}

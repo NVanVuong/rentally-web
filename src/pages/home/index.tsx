@@ -9,13 +9,17 @@ import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 import { useGetFindingRoomsQuery } from "@/redux/services/findingRoom/findingRoom.service"
 import { Skeleton } from "antd"
 import { Empty } from "@/assets/images"
+import ScrollToTop from "@/components/ScrollToTop"
 
 const Home = () => {
     useGetUtilitiesQuery("")
+
     const [searchParams] = useSearchParams()
     const [switchScreen, setSwitchScreen] = useState(false)
     const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
     const { data, isLoading, isFetching } = useGetFindingRoomsQuery(searchParamsObject)
+
+    const rooms = data?.data?.rooms || []
 
     useEffect(() => {
         const params: [string, string][] = []
@@ -38,36 +42,38 @@ const Home = () => {
 
     if (isLoading || isFetching) {
         return (
-            <div className="mx-auto max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-36 mt-4">
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-              {Array.from({ length: 10 }).map((_, index) => (
-                <div style={{ width: "280px" }} key={index}>
-                  <Skeleton.Image style={{ width: "280px", height: "280px" }} active/>
-                  <Skeleton active />
+            <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-36">
+                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    {Array.from({ length: 10 }).map((_, index) => (
+                        <div style={{ width: "280px" }} key={index}>
+                            <Skeleton.Image style={{ width: "280px", height: "280px" }} active />
+                            <Skeleton active style={{ marginTop: "10px" }} />
+                        </div>
+                    ))}
                 </div>
-              ))}
             </div>
-          </div>
         )
     }
 
-    if (data?.data?.length === 0) {
+    if (rooms.length === 0) {
         return (
             <div className="flex h-[600px] flex-col items-center justify-center gap-4">
-                <img src={Empty} className="h-40" alt="empty" />
-                <p className="text-[30px] font-bold">No Room matches with your search</p>
+                <img src={Empty} className="h-32" alt="empty" />
+                <p className="text-3xl font-bold">No Room matches with your search</p>
             </div>
         )
     }
 
     return (
-        <div className="relative mt-6 h-screen w-full">
+        <div className="relative mt-6 h-full w-full">
             {switchScreen ? (
-                <HomeMap dataRooms={data?.data || []} />
+                <div className="h-full">
+                    <HomeMap dataRooms={rooms || []} />
+                </div>
             ) : (
-                <div className="mx-auto max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-36">
-                    <div className="grid grid-cols-1 gap-8  sm:grid-cols-2 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-                        {data?.data?.map((dataRoom: IRoomFinding) => (
+                <div className="mx-auto max-w-[2520px] px-4 sm:px-6 md:px-10 xl:px-28">
+                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                        {rooms.map((dataRoom: IRoomFinding) => (
                             <ListingCard key={dataRoom.id} dataRoom={dataRoom} />
                         ))}
                     </div>
@@ -82,6 +88,8 @@ const Home = () => {
                 {!switchScreen ? "Show map" : "Show list"}{" "}
                 <span>{!switchScreen ? <BsMapFill /> : <AiOutlineUnorderedList />}</span>
             </button>
+
+            <ScrollToTop />
         </div>
     )
 }
