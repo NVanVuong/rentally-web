@@ -5,11 +5,14 @@ const createApifindingRoomWithAuth = createApiWithAuth("findingRoomApi", ["findi
 
 export const findingRoomApi = createApifindingRoomWithAuth.injectEndpoints({
     endpoints: (builder) => ({
-        getFindingRooms: builder.query<IRoomFindingResponse, any>({
-            query: (params) => {
+        getFindingRooms: builder.query<IRoomFindingResponse, { page: number; params: any }>({
+            query: ({ page = 1, params }) => {
                 return {
                     url: "/finding",
-                    params: params
+                    params: {
+                        page,
+                        ...params
+                    }
                 }
             }
         })
