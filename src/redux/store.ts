@@ -15,12 +15,14 @@ import contractSlice from "./features/contract/contract.slice"
 import { findingRoomApi } from "./services/findingRoom/findingRoom.service"
 import { roomDetailApi } from "./services/room-detail/room-detail.service"
 import { rentalApi } from "./services/rental/rental.service"
+import { getChecklistApi } from "./services/checklist/checklist.service"
 
 const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
     [helpApi.reducerPath]: helpApi.reducer,
     [roomApi.reducerPath]: roomApi.reducer,
     [findingRoomApi.reducerPath]: findingRoomApi.reducer,
+    [getChecklistApi.reducerPath]: getChecklistApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [roomBlockApi.reducerPath]: roomBlockApi.reducer,
     [roomDetailApi.reducerPath]: roomDetailApi.reducer,
@@ -46,6 +48,7 @@ export const store = configureStore({
         helpApi.middleware,
         roomBlockApi.middleware,
         findingRoomApi.middleware,
+        getChecklistApi.middleware,
         roomDetailApi.middleware,
         rentalApi.middleware
     )

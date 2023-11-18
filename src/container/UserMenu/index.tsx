@@ -1,6 +1,6 @@
 import { Avatar, Dropdown, MenuProps } from "antd"
 import { MdOutlineAdminPanelSettings, MdLogout } from "react-icons/md"
-import { BiUser } from "react-icons/bi"
+import { BiMapPin, BiUser } from "react-icons/bi"
 import { logOut } from "@/redux/features/auth/auth.slice"
 import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { MdOutlineMenu } from "react-icons/md"
@@ -28,6 +28,9 @@ const UserMenu = () => {
         switch (key) {
             case "propfile":
                 break
+            case "checklist":
+                navigate(SITE_MAP.MY_CHECKLIST)
+                break
             case "admin":
                 navigate(SITE_MAP.ADMIN)
                 break
@@ -54,6 +57,11 @@ const UserMenu = () => {
             key: "propfile",
             label: "My Profile",
             icon: <BiUser className="mr-4 h-4 w-4" />
+        },
+        {
+            key: "checklist",
+            label: "My Checklist",
+            icon: <BiMapPin className="mr-4 h-4 w-4" />
         },
         role === ROLE.ADMIN
             ? {

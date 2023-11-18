@@ -1,5 +1,5 @@
 import { SITE_MAP } from "@/utils/constants/Path"
-import { RequireAuthAdmin, RequireAuthMod } from "@/layouts/RequireAuth"
+import { RequireAuth, RequireAuthAdmin, RequireAuthMod } from "@/layouts/RequireAuth"
 import { Suspense, lazy } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { useGetProvincesQuery, useGetUtilitiesQuery } from "@/redux/services/help/help.service"
@@ -20,6 +20,8 @@ const GenerateRooms = lazy(() => import("../pages/mod/room/GenerateRooms"))
 const RoomsManagement = lazy(() => import("../pages/mod/room/Rooms"))
 const AdminRoomsManagement = lazy(() => import("../pages/admin/room/Rooms"))
 const BlocksPage = lazy(() => import("../pages/admin/blocks"))
+
+const Checklist = lazy(() => import("../pages/checklist"))
 
 const MainRoute = () => {
     useGetUtilitiesQuery("")
@@ -49,6 +51,10 @@ const MainRoute = () => {
                             <Route path={SITE_MAP.ROOMS_GENERATION} element={<GenerateRooms />} />
                             <Route path={SITE_MAP.ROOMS_MANAGEMENT} element={<RoomsManagement />} />
                         </Route>
+                    </Route>
+
+                    <Route element={<RequireAuth />}>
+                        <Route path={SITE_MAP.MY_CHECKLIST} element={<Checklist />}></Route>
                     </Route>
 
                     <Route path={SITE_MAP.AUTH.LOGIN} element={<Login />} />
