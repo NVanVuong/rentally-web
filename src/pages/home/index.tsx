@@ -10,12 +10,13 @@ import { useGetFindingRoomsQuery } from "@/redux/services/findingRoom/findingRoo
 import { Button, Skeleton } from "antd"
 import { Empty } from "@/assets/images"
 import ScrollToTop from "@/components/ScrollToTop"
+import Footer from "@/container/Footer"
 
 const Home = () => {
     useGetUtilitiesQuery("")
 
     const [searchParams] = useSearchParams()
-    const [switchScreen, setSwitchScreen] = useState(false)
+    const [isShowMap, setIsShowMap] = useState(false)
     const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
 
     const [currentPage, setCurrentPage] = useState(1)
@@ -76,23 +77,23 @@ const Home = () => {
         )
     }
 
-    if (currentRooms.length === 0) {
+    if (currentRooms.length === 0 && !isLoading) {
         return (
             <div className="flex h-[600px] flex-col items-center justify-center gap-4">
                 <img src={Empty} className="h-32" alt="empty" />
-                <p className="text-3xl font-bold">No Room matches with your search</p>
+                <p className="text-3xl font-bold">No room matches with your search.</p>
             </div>
         )
     }
 
     return (
-        <div className="relative mt-6 h-full w-full">
-            {switchScreen ? (
-                <div className="h-full">
+        <div className="relative h-full w-full">
+            {isShowMap ? (
+                <div className="absolute inset-0 h-screen">
                     <HomeMap dataRooms={currentRooms || []} />
                 </div>
             ) : (
-                <>
+                <div className="my-6">
                     <div className="mx-auto max-w-[2520px] px-4 sm:px-6 md:px-10 xl:px-28">
                         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                             {currentRooms.map((dataRoom: IRoomFinding) => (
@@ -125,20 +126,22 @@ const Home = () => {
                             All rooms loaded.
                         </p>
                     )}
-                </>
+                </div>
             )}
 
             <button
                 onClick={() => {
-                    setSwitchScreen((state) => !state)
+                    setIsShowMap((state) => !state)
                 }}
                 className="fixed bottom-8 right-1/2 z-50 flex translate-x-1/2 items-center justify-center gap-2 rounded-full bg-secondary px-4 py-3 font-semibold text-white transition hover:scale-110  "
             >
-                {!switchScreen ? "Show map" : "Show list"}{" "}
-                <span>{!switchScreen ? <BsMapFill /> : <AiOutlineUnorderedList />}</span>
+                {!isShowMap ? "Show map" : "Show list"}{" "}
+                <span>{!isShowMap ? <BsMapFill /> : <AiOutlineUnorderedList />}</span>
             </button>
 
             <ScrollToTop />
+
+            {!isShowMap && <Footer />}
         </div>
     )
 }

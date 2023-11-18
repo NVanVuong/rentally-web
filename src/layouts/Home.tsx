@@ -1,4 +1,3 @@
-import Footer from "@/container/Footer"
 import Header from "@/container/Header"
 import { Outlet } from "react-router-dom"
 
@@ -7,7 +6,6 @@ const HomeLayout = () => {
         <>
             <Header />
             <Outlet />
-            <Footer />
         </>
     )
 }
