@@ -8,6 +8,7 @@ import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 import { useNavigate } from "react-router-dom"
 import { SITE_MAP } from "@/utils/constants/Path"
 import { formatNumberWithCommas } from "@/utils/helpers"
+import { Tooltip } from "antd"
 interface ListingCardProps {
     dataRoom: IRoomFinding
     onClick?: () => void
@@ -30,21 +31,21 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
     }
 
     return (
-        <div className="group col-span-1 mb-4 cursor-pointer">
-            <div className="flex w-full flex-col ">
-                <div className=" relative aspect-square w-full overflow-hidden rounded-xl">
+        <div className="group col-span-1 mb-2 cursor-pointer">
+            <div className="flex w-full flex-col gap-2">
+                <div className="relative aspect-square w-full overflow-hidden rounded-xl">
                     <Carousel
                         dotPosition={"bottom"}
                         effect="scrollx"
                         arrows={true}
-                        {...settings}
                         style={{ height: "100%" }}
                         beforeChange={(_, to) => setCurrentSlide(to)}
+                        {...settings}
                     >
                         {images?.map((image, index) => (
                             <img
-                                onClick={handleClick}
                                 key={index}
+                                onClick={handleClick}
                                 className={`h-full object-cover transition ${
                                     currentSlide == index ? "group-hover:scale-110" : ""
                                 } `}
@@ -58,32 +59,25 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
                         <HeartButton />
                     </div>
                 </div>
-                <div className="mt-2 flex flex-row justify-between">
-                    {" "}
-                    <h4 className="text-[14px] font-semibold">
+                <div className="flex justify-between gap-1 overflow-hidden">
+                    <h4 className="overflow-hidden text-ellipsis whitespace-nowrap text-sm font-semibold">
                         {address}, {district}
                     </h4>
-                    <div className="flex flex-1 flex-row items-center justify-end gap-[2px] text-[14px] font-normal">
+                    <div className="flex items-center gap-1 text-sm font-normal">
                         <BsStarFill size={12} />
-                        <span>{avgRate || "4.8"}</span>
+                        {avgRate || 4.8}
                     </div>
                 </div>
-                <div className="flex gap-2 ">
+                <div className="flex gap-2">
                     {utilities.map((utility) => (
-                        <img
-                            key={utility.id}
-                            alt={utility.note}
-                            className="h-7 rounded-xl bg-gray-300 p-1"
-                            src={utility.icon}
-                        />
+                        <Tooltip key={utility.id} title={utility.name}>
+                            <img alt={utility.note} className="h-7 rounded-xl bg-gray-200 p-1" src={utility.icon} />
+                        </Tooltip>
                     ))}
                 </div>
-                <h4 className="text-[14px] font-bold text-[#128E07]">
-                    Vacant<span className="font-light text-gray-500"> at Oct23 - 28</span>
+                <h4 className="mt-0.5 flex items-center gap-1 text-sm">
+                    <span className="font-medium">{formatNumberWithCommas(price)}</span> VND/month
                 </h4>
-                <div className="mt-2 flex flex-row items-center gap-1 text-[14px]">
-                    <h4 className="font-medium">{formatNumberWithCommas(price)} VND/month</h4>
-                </div>
             </div>
         </div>
     )
