@@ -13,8 +13,6 @@ interface MapProps {
 }
 
 const HomeMap: React.FC<MapProps> = ({ zoom = 20, dataRooms }) => {
-    console.log(dataRooms)
-
     const [center, setCenter] = useState([dataRooms[0].coordinate.latitude, dataRooms[0].coordinate.longitude])
     function MyMap() {
         const map = useMap()
