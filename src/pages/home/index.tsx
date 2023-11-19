@@ -32,10 +32,14 @@ const Home = () => {
 
     const isFull = currentRooms.length === totalRoom
 
+    const handleLoadMore = () => {
+        setCurrentPage((prev) => prev + 1)
+    }
+
     useEffect(() => {
         setCurrentRooms((prevRooms) => {
             const newRooms = data?.data?.rooms || []
-            return Array.from(new Set([...prevRooms, ...newRooms]))
+            return Array.from(new Set([...prevRooms, ...newRooms])).slice(0, 2)
         })
     }, [data, currentPage])
 
@@ -58,25 +62,6 @@ const Home = () => {
         setSearchParamsObject(newSearchParamsObject)
     }, [searchParams])
 
-    const handleLoadMore = () => {
-        setCurrentPage((prev) => prev + 1)
-    }
-
-    if (isLoading) {
-        return (
-            <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-28">
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {Array.from({ length: 10 }).map((_, index) => (
-                        <div style={{ width: "280px" }} key={index}>
-                            <Skeleton.Image style={{ width: "280px", height: "280px" }} active />
-                            <Skeleton active style={{ marginTop: "10px" }} />
-                        </div>
-                    ))}
-                </div>
-            </div>
-        )
-    }
-
     if (currentRooms.length === 0 && !isLoading) {
         return (
             <div className="flex h-[600px] flex-col items-center justify-center gap-4">
@@ -93,39 +78,60 @@ const Home = () => {
                     <HomeMap dataRooms={currentRooms || []} />
                 </div>
             ) : (
-                <div className="my-6">
-                    <div className="mx-auto max-w-[2520px] px-4 sm:px-6 md:px-10 xl:px-28">
-                        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                            {currentRooms.map((dataRoom: IRoomFinding) => (
-                                <ListingCard key={dataRoom.id} dataRoom={dataRoom} />
-                            ))}
-                        </div>
-                    </div>
-                    {isFetching && (
-                        <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-28">
-                            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                                {Array.from({ length: 10 }).map((_, index) => (
-                                    <div style={{ width: "280px" }} key={index}>
-                                        <Skeleton.Image style={{ width: "280px", height: "280px" }} active />
-                                        <Skeleton active style={{ marginTop: "10px" }} />
-                                    </div>
-                                ))}
+                <div className="flex h-full flex-col">
+                    <div className="my-6 grow">
+                        {isLoading ? (
+                            <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-28">
+                                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                                    {Array.from({ length: 10 }).map((_, index) => (
+                                        <div style={{ width: "280px" }} key={index}>
+                                            <Skeleton.Image style={{ width: "280px", height: "280px" }} active />
+                                            <Skeleton active style={{ marginTop: "10px" }} />
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    )}
-                    {!isFull ? (
-                        <Button
-                            loading={isFetching}
-                            onClick={handleLoadMore}
-                            className="mx-auto my-8 flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-white hover:text-white hover:shadow-md hover:shadow-primary/80"
-                        >
-                            Load more
-                        </Button>
-                    ) : (
-                        <p className="mx-auto my-8 flex h-10 items-center justify-center text-lg font-bold">
-                            All rooms loaded.
-                        </p>
-                    )}
+                        ) : (
+                            <>
+                                <div className="mx-auto max-w-[2520px] px-4 sm:px-6 md:px-10 xl:px-28">
+                                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                                        {currentRooms.map((dataRoom: IRoomFinding, index) => (
+                                            <ListingCard key={dataRoom.id + index} dataRoom={dataRoom} />
+                                        ))}
+                                    </div>
+                                </div>
+                                {isFetching && (
+                                    <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-28">
+                                        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                                            {Array.from({ length: 10 }).map((_, index) => (
+                                                <div style={{ width: "280px" }} key={index}>
+                                                    <Skeleton.Image
+                                                        style={{ width: "280px", height: "280px" }}
+                                                        active
+                                                    />
+                                                    <Skeleton active style={{ marginTop: "10px" }} />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                                {!isFull ? (
+                                    <Button
+                                        loading={isFetching}
+                                        onClick={handleLoadMore}
+                                        className="mx-auto my-8 flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-white hover:text-white hover:shadow-md hover:shadow-primary/80"
+                                    >
+                                        Load more
+                                    </Button>
+                                ) : (
+                                    <p className="mx-auto my-8 flex h-10 items-center justify-center text-lg font-bold">
+                                        All rooms loaded.
+                                    </p>
+                                )}
+                            </>
+                        )}
+                    </div>
+                    <Footer />
                 </div>
             )}
 
@@ -140,8 +146,6 @@ const Home = () => {
             </button>
 
             <ScrollToTop />
-
-            {!isShowMap && <Footer />}
         </div>
     )
 }
