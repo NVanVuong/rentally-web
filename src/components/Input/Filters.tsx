@@ -6,8 +6,9 @@ import { useEffect, useState } from "react"
 import { Range } from "react-range"
 import ModalAntd from "@/components/Modal"
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
-import { useAppDispatch } from "@/redux/hook"
+import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { closeModal } from "@/redux/features/modal/modal.slice"
+import { MODAL } from "@/utils/constants/GlobalConst"
 
 const Filters = () => {
     const [searchParams] = useSearchParams()
@@ -21,6 +22,8 @@ const Filters = () => {
     const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>([])
 
     const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
+
+    const type = useAppSelector((state) => state.modal.type)
 
     useEffect(() => {
         //set value when user change url
@@ -84,6 +87,8 @@ const Filters = () => {
             search: createSearchParams(queryCodesObj).toString()
         })
     }
+
+    if (type !== MODAL.FILTER.ROOM_FINDING) return null
 
     return (
         <ModalAntd>

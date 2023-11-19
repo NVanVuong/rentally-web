@@ -1,6 +1,6 @@
 import { IUtiltity } from "./utility.interface"
 
-export interface IRoomFinding {
+export interface IChecklist {
     id: string
     price: string
     images: string[]
@@ -13,16 +13,13 @@ export interface IRoomFinding {
     }
     utilities: IUtiltity[]
     avgRate?: number
-    isInCheckList: boolean
 }
 
-export interface IRoomFindingResponse {
+export interface IChecklistRequest {
+    roomId: string
+}
+
+export interface IChecklistCreateResponse {
+    success: string
     message: string
-    status: string
-    data: {
-        numberOfPage: number
-        currentPage: number
-        totalRoom: number
-        rooms: IRoomFinding[]
-    }
 }

@@ -57,7 +57,7 @@ const RoomDetail = () => {
             <address className="font-bold not-italic">{getAddress(roomblock)}</address>
             <div className="mt-2 flex justify-between">
                 <AverageRating ratingDetail={ratingDetail} />
-                <RoomAction />
+                <RoomAction dataRoom={roomDetail} />
             </div>
             <Gallery images={images} />
             <div className="mt-6 flex flex-row justify-between">

@@ -23,3 +23,13 @@ export const RequireAuthMod = () => {
             return <Navigate to="/" />
     }
 }
+
+export const RequireAuth = () => {
+    const userInfo = useAppSelector((state) => state.auth.userInfo) || ""
+
+    if (userInfo) {
+        return <Outlet />
+    } else {
+        return <Navigate to="/" />
+    }
+}

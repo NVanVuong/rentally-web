@@ -1,5 +1,5 @@
 import { SITE_MAP } from "@/utils/constants/Path"
-import { RequireAuthAdmin, RequireAuthMod } from "@/layouts/RequireAuth"
+import { RequireAuth, RequireAuthAdmin, RequireAuthMod } from "@/layouts/RequireAuth"
 import { Suspense, lazy } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { useGetProvincesQuery, useGetUtilitiesQuery } from "@/redux/services/help/help.service"
@@ -21,6 +21,8 @@ const RoomsManagement = lazy(() => import("../pages/mod/room/Rooms"))
 const AdminRoomsManagement = lazy(() => import("../pages/admin/room/Rooms"))
 const BlocksPage = lazy(() => import("../pages/admin/blocks"))
 
+const Checklist = lazy(() => import("../pages/checklist"))
+
 const MainRoute = () => {
     useGetUtilitiesQuery("")
     useGetProvincesQuery("")
@@ -33,6 +35,9 @@ const MainRoute = () => {
                         <Route index element={<HomePage />} />
                         <Route path={SITE_MAP.ROOM_DETAIL} element={<RoomDetail />} />
                         <Route path={SITE_MAP.RENT_DETAIL} element={<Rental />} />
+                        <Route element={<RequireAuth />}>
+                            <Route path={SITE_MAP.MY_CHECKLIST} element={<Checklist />}></Route>
+                        </Route>
                     </Route>
                     <Route element={<RequireAuthAdmin />}>
                         <Route path={SITE_MAP.ADMIN} element={<AdminPage />}>

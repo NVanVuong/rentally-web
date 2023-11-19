@@ -9,6 +9,9 @@ import { useNavigate } from "react-router-dom"
 import { SITE_MAP } from "@/utils/constants/Path"
 import { formatNumberWithCommas } from "@/utils/helpers"
 import { Tooltip } from "antd"
+import { useCreateChecklistMutation } from "@/redux/services/checklist/checklist.service"
+import { useAppSelector } from "@/redux/hook"
+import { IUser } from "@/interfaces/user.interface"
 interface ListingCardProps {
     dataRoom: IRoomFinding
     onClick?: () => void
@@ -20,7 +23,10 @@ const settings = {
 }
 
 const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
+    const userInfo = useAppSelector((state) => state.auth.userInfo) as IUser
+
     const [currentSlide, setCurrentSlide] = useState(0)
+    const [createChecklist] = useCreateChecklistMutation()
 
     const { images, address, district, price, avgRate, utilities } = dataRoom
 
@@ -28,6 +34,18 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
 
     const handleClick = () => {
         navigate(`/${SITE_MAP.ROOM}/${dataRoom.id}`)
+    }
+
+    const handleClickHeartButton = async () => {
+        if (userInfo) {
+            await createChecklist({
+                data: {
+                    roomId: dataRoom.id
+                }
+            })
+        } else {
+            navigate("/login")
+        }
     }
 
     return (
@@ -55,8 +73,8 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
                         ))}
                     </Carousel>
 
-                    <div className="absolute right-3 top-3">
-                        <HeartButton />
+                    <div className="absolute right-3 top-3" onClick={handleClickHeartButton}>
+                        <HeartButton isInCheckList={dataRoom.isInCheckList} />
                     </div>
                 </div>
                 <div className="flex justify-between gap-1 overflow-hidden">
