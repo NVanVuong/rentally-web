@@ -13,6 +13,13 @@ export const createUserFormData = (values: any) => {
     return formData
 }
 
+export const createUtilityFormData = (values: any) => {
+    const formData = new FormData()
+    formData.append("name", values.name)
+    formData.append("note", values.note)
+    return formData
+}
+
 export const normFile = (e: any) => {
     if (Array.isArray(e)) {
         return e

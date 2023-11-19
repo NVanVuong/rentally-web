@@ -11,3 +11,20 @@ export interface IUtiltityResponse {
     message: string
     status: string
 }
+
+export interface IUtiltityCUResponse {
+    message: string
+    status: string
+}
+
+export interface ICreateUtilityRequest {
+    name: string
+    note: string
+}
+export interface IUpdateUtilityRequest {
+    id: number
+    body: {
+        name: string
+        note: string
+    }
+}
