@@ -14,7 +14,8 @@ export const findingRoomApi = createApifindingRoomWithAuth.injectEndpoints({
                         ...params
                     }
                 }
-            }
+            },
+            providesTags: ["findingRoom"]
         })
     })
 })
