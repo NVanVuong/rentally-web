@@ -14,3 +14,12 @@ export interface IChecklist {
     utilities: IUtiltity[]
     avgRate?: number
 }
+
+export interface IChecklistRequest {
+    roomId: string
+}
+
+export interface IChecklistCreateResponse {
+    success: string
+    message: string
+}

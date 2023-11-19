@@ -35,6 +35,9 @@ const MainRoute = () => {
                         <Route index element={<HomePage />} />
                         <Route path={SITE_MAP.ROOM_DETAIL} element={<RoomDetail />} />
                         <Route path={SITE_MAP.RENT_DETAIL} element={<Rental />} />
+                        <Route element={<RequireAuth />}>
+                            <Route path={SITE_MAP.MY_CHECKLIST} element={<Checklist />}></Route>
+                        </Route>
                     </Route>
                     <Route element={<RequireAuthAdmin />}>
                         <Route path={SITE_MAP.ADMIN} element={<AdminPage />}>
@@ -51,10 +54,6 @@ const MainRoute = () => {
                             <Route path={SITE_MAP.ROOMS_GENERATION} element={<GenerateRooms />} />
                             <Route path={SITE_MAP.ROOMS_MANAGEMENT} element={<RoomsManagement />} />
                         </Route>
-                    </Route>
-
-                    <Route element={<RequireAuth />}>
-                        <Route path={SITE_MAP.MY_CHECKLIST} element={<Checklist />}></Route>
                     </Route>
 
                     <Route path={SITE_MAP.AUTH.LOGIN} element={<Login />} />

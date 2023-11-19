@@ -77,5 +77,11 @@ export const MODAL = {
         USER: "VIEW_USER",
         ROOM: "VIEW_ROOM",
         BLOCK: "VIEW_BLOCK"
+    },
+    SHARE: {
+        ROOM_DETAIL: "SHARE_ROOM_DETAIL"
+    },
+    FILTER: {
+        ROOM_FINDING: "ROOM_FINDING_FILTER"
     }
 } as const

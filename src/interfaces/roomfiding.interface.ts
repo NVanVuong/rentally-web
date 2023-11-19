@@ -13,6 +13,7 @@ export interface IRoomFinding {
     }
     utilities: IUtiltity[]
     avgRate?: number
+    isInCheckList: boolean
 }
 
 export interface IRoomFindingResponse {

@@ -1,10 +1,12 @@
 import { useState } from "react"
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
 
-interface HeartButtonProps {}
+interface HeartButtonProps {
+    isInCheckList: boolean
+}
 
-const HeartButton: React.FC<HeartButtonProps> = () => {
-    const [hasFavorited, setHasFavorited] = useState(false)
+const HeartButton: React.FC<HeartButtonProps> = ({ isInCheckList }) => {
+    const [hasFavorited, setHasFavorited] = useState(isInCheckList)
 
     return (
         <div

@@ -2,7 +2,7 @@ import Logo from "@/components/Logo"
 import UserMenu from "../UserMenu"
 import { AiOutlineSearch } from "react-icons/ai"
 import { useAppSelector } from "@/redux/hook"
-import { ROLE } from "@/utils/constants/GlobalConst"
+import { MODAL, ROLE } from "@/utils/constants/GlobalConst"
 import Filters from "@/components/Input/Filters"
 import { useAppDispatch } from "@/redux/hook"
 import { openModal } from "@/redux/features/modal/modal.slice"
@@ -40,7 +40,7 @@ const Header = () => {
                         className={`flex h-12 cursor-pointer items-center justify-center rounded-lg border border-[#717171] p-3 px-4 `}
                         onClick={(e) => {
                             e.stopPropagation()
-                            dispacth(openModal({}))
+                            dispacth(openModal({ type: MODAL.FILTER.ROOM_FINDING }))
                         }}
                     >
                         <VscSettings size={24} />
