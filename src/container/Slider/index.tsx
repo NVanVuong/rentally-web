@@ -4,14 +4,15 @@ import { useState } from "react"
 import ArrowCircle from "../../assets/icons/ArrowCircle"
 import { useNavigate } from "react-router-dom"
 import { SITE_MAP } from "@/utils/constants/Path"
-import { FaRegUser } from "react-icons/fa"
-import { BiHomeAlt } from "react-icons/bi"
+import { FaAirbnb, FaRegUser } from "react-icons/fa"
+import { BiHardHat, BiHomeAlt } from "react-icons/bi"
 import Logo from "@/components/Logo"
 import { useAppSelector } from "@/redux/hook"
 import { ROLE } from "@/utils/constants/GlobalConst"
 import "./style.css"
 import { MdLogout } from "react-icons/md"
 import Button from "@/pages/room-detail/components/Button"
+import { TbHanger, TbHanger2, TbHangerOff } from "react-icons/tb"
 
 type MenuItem = Required<MenuProps>["items"][number]
 
@@ -40,7 +41,7 @@ const Slider = () => {
 
         getItem(`${isExpanding ? "Accounts" : ""}`, "users", <FaRegUser className="h-5 w-5" />),
         getItem(`${isExpanding ? "Room Blocks" : ""}`, "blocks", <BiHomeAlt className="h-5 w-5" />),
-
+        getItem(`${isExpanding ? "Utilities" : ""}`, "utilities", <TbHanger2 className="h-5 w-5" />),
         { type: "divider" }
     ]
 
@@ -57,6 +58,9 @@ const Slider = () => {
                 break
             case "blocks":
                 navigate(SITE_MAP.BLOCKS_MANAGEMENT)
+                break
+            case "utilities":
+                navigate(SITE_MAP.UTILITIES)
                 break
             default:
                 break

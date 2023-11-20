@@ -29,7 +29,8 @@ export type RoleType = keyof typeof ROLE_COLORS
 export enum PAGE {
     USER = "USER",
     ROOM = "ROOM",
-    BLOCK = "BLOCK"
+    BLOCK = "BLOCK",
+    UTILITY = "UTILITY"
 }
 
 export const STATUS_COLORS = {
@@ -51,17 +52,20 @@ export const MODAL = {
     ADD: {
         USER: "ADD_USER",
         ROOM: "ADD_ROOM",
-        BLOCK: "ADD_BLOCK"
+        BLOCK: "ADD_BLOCK",
+        UTILITY: "ADD_UTILITY"
     },
     UPDATE: {
         USER: "UPDATE_USER",
         ROOM: "UPDATE_ROOM",
-        BLOCK: "UPDATE_BLOCK"
+        BLOCK: "UPDATE_BLOCK",
+        UTILITY: "UPDATE_UTILITY"
     },
     DELETE: {
         USER: "DELETE_USER",
         ROOM: "DELETE_ROOM",
-        BLOCK: "DELETE_BLOCK"
+        BLOCK: "DELETE_BLOCK",
+        UTILITY: "DELETE_UTILITY"
     },
     DISABLE: {
         USER: "DISABLE_USER",
