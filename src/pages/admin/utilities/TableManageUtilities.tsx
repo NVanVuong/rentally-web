@@ -1,4 +1,4 @@
-import { IUtiltity, IUtiltityResponse } from "@/interfaces/utility.interface"
+import { IUtiltity } from "@/interfaces/utility.interface"
 import { useAppSelector } from "@/redux/hook"
 import { useMenuActions } from "../utilities/hooks/useMenuActions"
 import { ColumnsType } from "antd/es/table"
@@ -9,19 +9,18 @@ import { FaEllipsis } from "react-icons/fa6"
 import { useGetUtilitiesQuery } from "@/redux/services/utilities/utilities.service"
 
 const TableManageUtilities = () => {
-    const role = useAppSelector((state) => state.auth.userInfo!.role)
     const keyword = useAppSelector((state) => state.search.keyword)
     const { data, isLoading } = useGetUtilitiesQuery(keyword)
     const utilities = data as IUtiltity[]
     const getMenuActions = useMenuActions()
 
-    let columns: ColumnsType<IUtiltity> = [
+    const columns: ColumnsType<IUtiltity> = [
         {
             title: <span className=" font-bold">Index</span>,
             align: "center" as AlignType,
             dataIndex: "id",
             key: "id",
-            width: "20%",
+            width: "8%",
             render: (_, __, index) => <span className=" text-sm font-semibold">{index + 1}</span>
         },
         {
@@ -38,7 +37,7 @@ const TableManageUtilities = () => {
         {
             title: <span className="font-bold">Note</span>,
             key: "note",
-            width: "40%",
+            width: "50%",
             render: (record: IUtiltity) => <span className=" text-sm font-semibold">{record.note}</span>
         },
         {

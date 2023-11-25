@@ -58,10 +58,10 @@ export const getAddress = (roomblock: any) => {
     return roomblock.address + " | " + roomblock.district + ", " + roomblock.city
 }
 
-export function convertDateDeleteAt(deletedAt: any) {
-    if (!deletedAt) return "-----"
+export function convertDate(date: any) {
+    if (!date) return ""
 
-    const originalDate = new Date(deletedAt)
+    const originalDate = new Date(date)
 
     const year = originalDate.getFullYear()
     const month = (originalDate.getMonth() + 1).toString().padStart(2, "0")
@@ -73,7 +73,7 @@ export function convertDateDeleteAt(deletedAt: any) {
 }
 
 export const formatNumberWithCommas = (number: any) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    return number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
 
 export const styleOrEmpty = (condition: boolean, style: string) => (condition ? style : "")

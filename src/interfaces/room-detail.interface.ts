@@ -9,7 +9,7 @@ export interface IRoomDetail {
     roomblock: IRoomBlock
     landlord: ILandlord
     ratingDetail: IRatingDetail
-    isInCheckList: boolean
+    isInCheckList?: boolean
 }
 
 export interface IRatingDetail {

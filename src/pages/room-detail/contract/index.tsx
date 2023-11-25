@@ -5,6 +5,7 @@ import { Form, DatePicker, Select, Button } from "antd"
 import { useNavigate, useParams } from "react-router-dom"
 import dayjs from "dayjs"
 import { formatNumberWithCommas } from "@/utils/helpers"
+import useAuth from "@/hooks/useAuth"
 interface IContract {
     price: string
 }
@@ -17,9 +18,15 @@ const Contract = (props: IContract) => {
     const dispatch = useAppDispatch()
     const { id } = useParams()
 
+    const { isAuth } = useAuth()
+
     const onFinish = (values: any) => {
-        dispatch(setContract(values))
-        navigate(`/${SITE_MAP.RENT}/${id}`)
+        if (isAuth) {
+            dispatch(setContract(values))
+            navigate(`/${SITE_MAP.RENT}/${id}`)
+        } else {
+            navigate(`/${SITE_MAP.AUTH.LOGIN}`)
+        }
     }
 
     const date = new Date()

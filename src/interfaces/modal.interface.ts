@@ -1,7 +1,7 @@
 export interface IModal {
     isOpen?: boolean
     type?: any
-    id?: string | null
+    id?: string | null | number
     data?: any
     title?: string
     isActive?: boolean
@@ -9,6 +9,6 @@ export interface IModal {
 
 export interface IOpenModalPayload {
     type?: any
-    id?: string
+    id?: string | number
     data?: any
 }

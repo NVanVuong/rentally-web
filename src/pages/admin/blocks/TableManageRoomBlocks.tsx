@@ -8,7 +8,7 @@ import { Dropdown, Space, Spin } from "antd"
 import { useMenuActions } from "./hooks/useMenuActions"
 import { useAppSelector } from "@/redux/hook"
 import { ROLE } from "@/utils/constants/GlobalConst"
-import { convertDateDeleteAt } from "@/utils/helpers"
+import { convertDate } from "@/utils/helpers"
 
 const TableManageRoomBlocks = () => {
     const role = useAppSelector((state) => state.auth.userInfo!.role)
@@ -67,7 +67,7 @@ const TableManageRoomBlocks = () => {
             dataIndex: "deletedAt",
             width: "6%",
             align: "center" as AlignType,
-            render: (deletedAt: string) => <span className="text-sm font-medium">{convertDateDeleteAt(deletedAt)}</span>
+            render: (deletedAt: string) => <span className="text-sm font-medium">{convertDate(deletedAt)}</span>
         },
         {
             title: <span className="text-center font-bold">Action</span>,

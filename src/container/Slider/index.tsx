@@ -4,15 +4,16 @@ import { useState } from "react"
 import ArrowCircle from "../../assets/icons/ArrowCircle"
 import { useNavigate } from "react-router-dom"
 import { SITE_MAP } from "@/utils/constants/Path"
-import { FaAirbnb, FaRegUser } from "react-icons/fa"
-import { BiHardHat, BiHomeAlt } from "react-icons/bi"
+import { FaRegUser } from "react-icons/fa"
+import { BiHomeAlt } from "react-icons/bi"
 import Logo from "@/components/Logo"
-import { useAppSelector } from "@/redux/hook"
 import { ROLE } from "@/utils/constants/GlobalConst"
 import "./style.css"
 import { MdLogout } from "react-icons/md"
 import Button from "@/pages/room-detail/components/Button"
-import { TbHanger, TbHanger2, TbHangerOff } from "react-icons/tb"
+import { TbHomeCog } from "react-icons/tb"
+import { LuClipboardSignature } from "react-icons/lu"
+import useAuth from "@/hooks/useAuth"
 
 type MenuItem = Required<MenuProps>["items"][number]
 
@@ -33,7 +34,9 @@ function getItem(
 }
 
 const Slider = () => {
-    const role = useAppSelector((state) => state.auth.userInfo?.role)
+    const { userInfo } = useAuth()
+    const role = userInfo?.role
+
     const [isExpanding, setIsExpanding] = useState(false)
 
     let items: MenuProps["items"] = [
@@ -41,7 +44,8 @@ const Slider = () => {
 
         getItem(`${isExpanding ? "Accounts" : ""}`, "users", <FaRegUser className="h-5 w-5" />),
         getItem(`${isExpanding ? "Room Blocks" : ""}`, "blocks", <BiHomeAlt className="h-5 w-5" />),
-        getItem(`${isExpanding ? "Utilities" : ""}`, "utilities", <TbHanger2 className="h-5 w-5" />),
+        getItem(`${isExpanding ? "Utilities" : ""}`, "utilities", <TbHomeCog className="h-5 w-5" />),
+        getItem(`${isExpanding ? "Rentals" : ""}`, "rentals", <LuClipboardSignature className="h-5 w-5" />),
         { type: "divider" }
     ]
 
@@ -61,6 +65,9 @@ const Slider = () => {
                 break
             case "utilities":
                 navigate(SITE_MAP.UTILITIES)
+                break
+            case "rentals":
+                navigate(SITE_MAP.RENTALS)
                 break
             default:
                 break
