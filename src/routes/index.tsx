@@ -6,6 +6,8 @@ import { useGetProvincesQuery, useGetUtilitiesQuery } from "@/redux/services/hel
 import RoomDetail from "../pages/room-detail"
 import HomeLayout from "@/layouts/Home"
 import Rental from "@/pages/room-detail/rental"
+import MyRental from "@/pages/my-rental"
+import MyRentalDetail from "@/pages/my-rental/detail"
 
 const HomePage = lazy(() => import("../pages/home"))
 const AdminPage = lazy(() => import("../pages/admin"))
@@ -39,6 +41,8 @@ const MainRoute = () => {
                         <Route path={SITE_MAP.RENT_DETAIL} element={<Rental />} />
                         <Route element={<RequireAuth />}>
                             <Route path={SITE_MAP.MY_CHECKLIST} element={<Checklist />}></Route>
+                            <Route path={SITE_MAP.MY_RENTAL} element={<MyRental />}></Route>
+                            <Route path={SITE_MAP.MY_RENTAL_DETAIL} element={<MyRentalDetail />} />
                         </Route>
                     </Route>
                     <Route element={<RequireAuthAdmin />}>

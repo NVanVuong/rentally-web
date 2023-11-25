@@ -20,6 +20,8 @@ export const SITE_MAP = {
     RENT: "rental",
     RENT_DETAIL: "rental/:id",
     RENTALS: "rentals",
+    MY_RENTAL: "my-rental",
+    MY_RENTAL_DETAIL: "my-rental/:id",
     MY_CHECKLIST: "/my-checklist",
     UTILITIES: "utilities"
 }

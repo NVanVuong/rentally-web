@@ -1,5 +1,5 @@
 import { Avatar, Dropdown, MenuProps } from "antd"
-import { MdOutlineAdminPanelSettings, MdLogout } from "react-icons/md"
+import { MdOutlineAdminPanelSettings, MdLogout, MdOutlineHomeWork } from "react-icons/md"
 import { BiMapPin, BiUser } from "react-icons/bi"
 import { logOut } from "@/redux/features/auth/auth.slice"
 import { useAppDispatch, useAppSelector } from "@/redux/hook"
@@ -30,6 +30,9 @@ const UserMenu = () => {
                 break
             case "checklist":
                 navigate(SITE_MAP.MY_CHECKLIST)
+                break
+            case "my-rental":
+                navigate(SITE_MAP.MY_RENTAL)
                 break
             case "admin":
                 navigate(SITE_MAP.ADMIN)
@@ -62,6 +65,11 @@ const UserMenu = () => {
             key: "checklist",
             label: "My Checklist",
             icon: <BiMapPin className="mr-4 h-4 w-4" />
+        },
+        {
+            key: "my-rental",
+            label: "My Rental",
+            icon: <MdOutlineHomeWork className="mr-4 h-4 w-4" />
         },
         role === ROLE.ADMIN
             ? {
