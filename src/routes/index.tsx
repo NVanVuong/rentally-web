@@ -11,7 +11,9 @@ const HomePage = lazy(() => import("../pages/home"))
 const AdminPage = lazy(() => import("../pages/admin"))
 const ModPage = lazy(() => import("../pages/mod"))
 const UsersPage = lazy(() => import("../pages/admin/users"))
+const BlocksPage = lazy(() => import("../pages/admin/blocks"))
 const UtilitiesPage = lazy(() => import("../pages/admin/utilities"))
+const RentalsPage = lazy(() => import("../pages/admin/rentals"))
 
 const Login = lazy(() => import("../pages/auth/Login"))
 const Register = lazy(() => import("../pages/auth/Register"))
@@ -20,7 +22,6 @@ const ResetPassword = lazy(() => import("../pages/auth/ResetPassword"))
 const GenerateRooms = lazy(() => import("../pages/mod/room/GenerateRooms"))
 const RoomsManagement = lazy(() => import("../pages/mod/room/Rooms"))
 const AdminRoomsManagement = lazy(() => import("../pages/admin/room/Rooms"))
-const BlocksPage = lazy(() => import("../pages/admin/blocks"))
 
 const Checklist = lazy(() => import("../pages/checklist"))
 
@@ -47,6 +48,7 @@ const MainRoute = () => {
                             <Route path={SITE_MAP.BLOCKS_MANAGEMENT} element={<BlocksPage />} />
                             <Route path={SITE_MAP.ROOMS_MANAGEMENT} element={<AdminRoomsManagement />} />
                             <Route path={SITE_MAP.UTILITIES} element={<UtilitiesPage />} />
+                            <Route path={SITE_MAP.RENTALS} element={<RentalsPage />} />
                         </Route>
                     </Route>
                     <Route element={<RequireAuthMod />}>
@@ -56,6 +58,7 @@ const MainRoute = () => {
                             <Route path={SITE_MAP.ROOMS_GENERATION} element={<GenerateRooms />} />
                             <Route path={SITE_MAP.ROOMS_MANAGEMENT} element={<RoomsManagement />} />
                             <Route path={SITE_MAP.UTILITIES} element={<UtilitiesPage />} />
+                            <Route path={SITE_MAP.RENTALS} element={<RentalsPage />} />
                         </Route>
                     </Route>
 

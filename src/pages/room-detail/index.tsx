@@ -38,7 +38,7 @@ const RoomDetail = () => {
     const coordinate = roomblock?.coordinate || { latitude: 0, longitude: 0 }
 
     return isLoading ? (
-        <div className="px-36">
+        <div className="px-4 sm:px-6 md:px-10 xl:px-28">
             <br />
             <Skeleton className="header-skeleton" active paragraph={{ rows: 1 }} style={{ marginBottom: "12px" }} />
             <div style={{ display: "grid", gridTemplateColumns: gridLayout[1], gap: "8px", height: "24rem" }}>
@@ -53,15 +53,15 @@ const RoomDetail = () => {
             <Skeleton active />
         </div>
     ) : (
-        <div className="h-full px-36 pb-20 pt-4">
+        <div className="h-full px-4 pb-20 pt-4 sm:px-6 md:px-10 xl:px-28">
             <address className="font-bold not-italic">{getAddress(roomblock)}</address>
             <div className="mt-2 flex justify-between">
                 <AverageRating ratingDetail={ratingDetail} />
                 <RoomAction dataRoom={roomDetail} />
             </div>
             <Gallery images={images} />
-            <div className="mt-6 flex flex-row justify-between">
-                <div className="flex flex-col gap-4">
+            <div className="mt-6 flex flex-col justify-between gap-8 lg:flex-row">
+                <div className="flex w-full flex-col gap-4 lg:w-4/5">
                     <HostInformation landlord={landlord} />
                     <Utilities utilities={utilities} />
                     <RatingDashboard ratingDetail={ratingDetail} />

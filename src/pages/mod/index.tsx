@@ -5,9 +5,11 @@ import { Outlet } from "react-router-dom"
 const Mod = () => {
     useGetUtilitiesQuery("")
     return (
-        <div className="flex">
+        <div className="flex h-screen overflow-y-hidden">
             <Slider />
-            <Outlet />
+            <div className="scrollbar h-full w-full overflow-y-auto">
+                <Outlet />
+            </div>
         </div>
     )
 }

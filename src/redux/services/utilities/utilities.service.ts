@@ -1,4 +1,3 @@
-import { IRoom } from "@/interfaces/room.interface"
 import { createApiWithAuth } from "../apiWithAuth.service"
 import {
     ICreateUtilityRequest,
@@ -7,7 +6,6 @@ import {
     IUtiltityCUResponse,
     IUtiltityResponse
 } from "@/interfaces/utility.interface"
-import { ICreateUserRequest, IUsersResponse } from "@/interfaces/user.interface"
 
 const createUtilityWithAuth = createApiWithAuth("utilityApi", ["Utilities"])
 

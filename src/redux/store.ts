@@ -17,6 +17,7 @@ import { roomDetailApi } from "./services/room-detail/room-detail.service"
 import { rentalApi } from "./services/rental/rental.service"
 import { getChecklistApi } from "./services/checklist/checklist.service"
 import { utilityApi } from "./services/utilities/utilities.service"
+import { rentalsApi } from "./services/rentals/rentals.service"
 
 const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
     [roomDetailApi.reducerPath]: roomDetailApi.reducer,
     [rentalApi.reducerPath]: rentalApi.reducer,
     [utilityApi.reducerPath]: utilityApi.reducer,
+    [rentalsApi.reducerPath]: rentalsApi.reducer,
     auth: authSlice.reducer,
     search: searchSlice,
     searchMap: searchMapSlice,
@@ -53,7 +55,8 @@ export const store = configureStore({
         getChecklistApi.middleware,
         roomDetailApi.middleware,
         rentalApi.middleware,
-        utilityApi.middleware
+        utilityApi.middleware,
+        rentalsApi.middleware
     )
 })
 

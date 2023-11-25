@@ -39,7 +39,7 @@ const Home = () => {
     useEffect(() => {
         setCurrentRooms((prevRooms) => {
             const newRooms = data?.data?.rooms || []
-            return Array.from(new Set([...prevRooms, ...newRooms])).slice(0, 2)
+            return Array.from(new Set([...prevRooms, ...newRooms]))
         })
     }, [data, currentPage])
 
