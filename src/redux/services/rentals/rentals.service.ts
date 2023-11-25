@@ -31,6 +31,28 @@ export const rentalsApi = createApiRentalskWithAuth.injectEndpoints({
         getRental: builder.query<IRentalsResponse, { id: number }>({
             query: ({ id }) => `/rental/${id}`
         }),
+        getMyRental: builder.query<IRentalsResponse, void>({
+            query: () => `/rental/my-rental`,
+            transformResponse(baseQueryReturnValue: IRentalsResponse) {
+                return {
+                    data: baseQueryReturnValue.data.map((rental: IRentals) => ({
+                        ...rental,
+                        rentalInfo: {
+                            ...rental.rentalInfo,
+                            moveInDate: convertDate(rental.rentalInfo.moveInDate),
+                            moveOutDate: convertDate(rental.rentalInfo.moveOutDate)
+                        },
+                        renterInfo: {
+                            ...rental.renterInfo,
+                            birthday: convertDate(rental.renterInfo.birthday),
+                            identityDateOfIssue: convertDate(rental.renterInfo.identityDateOfIssue)
+                        }
+                    })),
+                    message: baseQueryReturnValue.message,
+                    status: baseQueryReturnValue.status
+                }
+            }
+        }),
         getModInfo: builder.query<IModInfoResponse, void>({
             query: () => `/rental/mod-info`,
             transformResponse(baseQueryReturnValue: IModInfoResponse) {
@@ -101,6 +123,7 @@ export const rentalsApi = createApiRentalskWithAuth.injectEndpoints({
 export const {
     useGetRentalsQuery,
     useGetRentalQuery,
+    useGetMyRentalQuery,
     useGetModInfoQuery,
     useUpdateRentalMutation,
     useApproveRentalMutation,
