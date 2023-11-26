@@ -29,15 +29,18 @@ const ModalShare: React.FC<ShareRoomDetailProp> = ({ dataRoom }) => {
             <div>
                 <div className={"mt-4 flex items-center gap-2 text-sm"}>
                     <img className="h-14 w-14 rounded-md" src={dataRoom.images[0]}></img>
-                    <address className="font-bold not-italic">{dataRoom.roomblock.address}</address>
-
-                    <span className="flex items-center gap-1 font-bold">
-                        <AiFillStar /> {dataRoom.ratingDetail.avgRate}
-                    </span>
-                    <span className="text-xs">•</span>
-                    <span>{dataRoom.ratingDetail.ratings.length} reviews</span>
-                    <span className="text-xs">•</span>
-                    <span>{dataRoom.price} VND/ month</span>
+                    <div className="flex flex-col gap-1.5">
+                        <address className="font-bold not-italic">{dataRoom.roomblock.address}</address>
+                        <div className="flex items-center gap-3">
+                            <span className="flex items-center gap-1 font-bold">
+                                <AiFillStar /> {dataRoom.ratingDetail.avgRate}
+                            </span>
+                            <span className="text-xs">•</span>
+                            <span>{dataRoom.ratingDetail.ratings.length} reviews</span>
+                            <span className="text-xs">•</span>
+                            <span>{dataRoom.price} VND /month</span>
+                        </div>
+                    </div>
                 </div>
                 <div className="flex justify-end">
                     <button

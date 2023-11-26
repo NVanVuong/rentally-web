@@ -1,6 +1,6 @@
 import { Badge, Button, Form, Input, Spin } from "antd"
 import { MdOutlineArrowBackIosNew } from "react-icons/md"
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import Rule from "./rule"
 import Contract from "./contract"
 import {
@@ -11,14 +11,21 @@ import {
 import { useEffect } from "react"
 import { RENTAL_COLORS, STATUS_RENTAL, STATUS_RENTAL_TEXT } from "@/utils/constants/GlobalConst"
 import useServerMessage from "@/hooks/useServerMessage"
+import { message } from "antd"
 
 export const dateFormat = "DD/MM/YYYY"
-export const message = "Please input this field!"
 
 const MyRentalDetail = () => {
     const { id } = useParams()
     const [form] = Form.useForm()
     const navigate = useNavigate()
+
+    const confirm = new URLSearchParams(useLocation().search).get("confirm")
+    console.log(confirm)
+
+    if (confirm) {
+        message.success("Confirm rental successfully!")
+    }
 
     const { data, isLoading } = useGetMyRentalQuery({ id: Number(id) })
     const [confirmRental, { isLoading: isConfirmLoading }] = useConfirmRentalMutation()
@@ -56,6 +63,7 @@ const MyRentalDetail = () => {
 
     const isApprove = status === STATUS_RENTAL.APPROVED
     const isComplete = status === STATUS_RENTAL.COMPLETED
+    const isHaveAction = isApprove || isComplete
 
     const onFinish = async () => {
         switch (true) {
@@ -194,19 +202,18 @@ const MyRentalDetail = () => {
                                         </div>
                                     </div>
                                 </div>
-                                {isApprove ||
-                                    (isComplete && (
-                                        <div className="mt-8 flex w-full justify-center">
-                                            <Button
-                                                loading={isConfirmLoading || isRequestBreakLoading}
-                                                type="primary"
-                                                htmlType="submit"
-                                                className="h-full w-full rounded-lg bg-primary px-10 py-2 font-bold text-white hover:shadow-md hover:shadow-primary/60"
-                                            >
-                                                {isApprove ? "Confirm" : "Request break"}
-                                            </Button>
-                                        </div>
-                                    ))}
+                                {isHaveAction && (
+                                    <div className="mt-8 flex w-full justify-center">
+                                        <Button
+                                            loading={isConfirmLoading || isRequestBreakLoading}
+                                            type="primary"
+                                            htmlType="submit"
+                                            className="h-full w-full rounded-lg bg-primary px-10 py-2 font-bold text-white hover:shadow-md hover:shadow-primary/60"
+                                        >
+                                            {isApprove ? "Confirm" : "Request break"}
+                                        </Button>
+                                    </div>
+                                )}
                             </Form>
                         </Badge.Ribbon>
                     </div>

@@ -3,7 +3,7 @@
 }
 
 .ant-modal-content {
-    @apply w-[28rem];
+    @apply w-fit min-w-[28rem];
 }
 
 .ant-col-14 {
