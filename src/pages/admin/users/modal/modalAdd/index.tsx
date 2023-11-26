@@ -13,14 +13,6 @@ const ModalAdd = (props: IModal) => {
 
     useServerMessage({ data: data!, error: error })
 
-    // const handleFileChange = async (info: any) => {
-    //     if (info.file.status === "done") {
-    //         message.success(`${info.file.name} file uploaded successfully`)
-    //     } else if (info.file.status === "error") {
-    //         message.error(`${info.file.name} file upload failed.`)
-    //     }
-    // }
-
     const onFinish = async (values: any) => {
         const formData = createUserFormData(values)
         await createUser(formData)

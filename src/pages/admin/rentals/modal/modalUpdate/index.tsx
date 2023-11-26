@@ -23,7 +23,6 @@ const ModalUpdate = (props: IModal) => {
     useEffect(() => {
         if (modInfo?.data) {
             const { data: initialValues } = modInfo
-            console.log(initialValues)
 
             form.setFieldsValue({
                 firstName: initialValues.firstName,

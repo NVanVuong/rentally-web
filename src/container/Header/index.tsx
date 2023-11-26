@@ -64,7 +64,7 @@ const Header = () => {
                 </div>
             </div>
 
-            {role === ROLE.USER && <button className="pr-4 text-sm font-bold">Become a host</button>}
+            {role === ROLE.USER && <button className="hidden pr-4 text-sm font-bold md:block">Become a host</button>}
             <UserMenu />
         </div>
     )
