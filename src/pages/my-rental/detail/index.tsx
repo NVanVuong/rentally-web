@@ -23,9 +23,11 @@ const MyRentalDetail = () => {
     const confirm = new URLSearchParams(useLocation().search).get("confirm")
     console.log(confirm)
 
-    if (confirm) {
-        message.success("Confirm rental successfully!")
-    }
+    useEffect(() => {
+        if (confirm) {
+            message.success("Confirm rental successfully!")
+        }
+    }, [confirm])
 
     const { data, isLoading } = useGetMyRentalQuery({ id: Number(id) })
     const [confirmRental, { isLoading: isConfirmLoading }] = useConfirmRentalMutation()
@@ -102,122 +104,111 @@ const MyRentalDetail = () => {
             <Spin spinning={isLoading}>
                 <div className="mt-4 flex gap-20">
                     <div className="grow">
-                        <Badge.Ribbon
-                            text={STATUS_RENTAL_TEXT[status as STATUS_RENTAL]}
-                            color={RENTAL_COLORS[status as STATUS_RENTAL]}
-                        >
-                            <Form form={form} onFinish={onFinish} layout="vertical" colon={false}>
-                                <div>
-                                    <h2 className="text-lg font-bold">Rental Information</h2>
-                                    <div className="mx-2 mt-2 flex gap-12">
-                                        <div className="flex w-full flex-col">
-                                            <Form.Item label="Move in date" name="moveInDate" className="text-sm">
-                                                <Input readOnly />
-                                            </Form.Item>
-                                            <Form.Item label="Lease term" name="leaseTerm" className="text-sm">
-                                                <Input readOnly />
-                                            </Form.Item>
-                                            <Form.Item
-                                                label="Number of tenants"
-                                                name="numberOfTenants"
-                                                className="text-sm"
-                                            >
-                                                <Input readOnly />
-                                            </Form.Item>
+                        <Form form={form} onFinish={onFinish} layout="vertical" colon={false}>
+                            <div>
+                                <h2 className="text-lg font-bold">Rental Information</h2>
+                                <div className="mx-2 mt-2 flex gap-12">
+                                    <div className="flex w-full flex-col">
+                                        <Form.Item label="Move in date" name="moveInDate" className="text-sm">
+                                            <Input readOnly />
+                                        </Form.Item>
+                                        <Form.Item label="Lease term" name="leaseTerm" className="text-sm">
+                                            <Input readOnly />
+                                        </Form.Item>
+                                        <Form.Item label="Number of tenants" name="numberOfTenants" className="text-sm">
+                                            <Input readOnly />
+                                        </Form.Item>
 
-                                            <Form.Item label="Water price" name="waterPrice" className="text-sm">
-                                                <Input readOnly />
-                                            </Form.Item>
-                                            <Form.Item label="Electric price" name="electricPrice" className="text-sm">
-                                                <Input readOnly />
-                                            </Form.Item>
-                                        </div>
-                                        <div className="flex w-full flex-col">
-                                            <Form.Item label="Monthly rent" name="monthlyRent" className="text-sm">
-                                                <Input readOnly />
-                                            </Form.Item>
-                                            <Form.Item
-                                                label="Lease termination cost"
-                                                name="leaseTerminationCost"
-                                                className="text-sm"
-                                            >
-                                                <Input readOnly />
-                                            </Form.Item>
-                                            <Form.Item label="Deposit amount" name="depositAmount" className="text-sm">
-                                                <Input readOnly />
-                                            </Form.Item>
-                                            <Form.Item
-                                                label="Additional price"
-                                                name="additionalPrice"
-                                                className="text-sm"
-                                            >
-                                                <Input readOnly />
-                                            </Form.Item>
-                                        </div>
+                                        <Form.Item label="Water price" name="waterPrice" className="text-sm">
+                                            <Input readOnly />
+                                        </Form.Item>
+                                        <Form.Item label="Electric price" name="electricPrice" className="text-sm">
+                                            <Input readOnly />
+                                        </Form.Item>
                                     </div>
-                                </div>
-                                <hr className="my-4 border-b border-gray-200" />
-                                <div>
-                                    <h2 className="text-lg font-bold">Host Information</h2>
-                                    <div className="mx-2 mt-2 flex gap-12">
-                                        <div className="flex w-full flex-col">
-                                            <Form.Item label="Firstname" name="firstName" className="text-sm">
-                                                <Input readOnly />
-                                            </Form.Item>
-                                            <Form.Item label="Lastname" name="lastName" className="text-sm">
-                                                <Input readOnly />
-                                            </Form.Item>
-                                            <Form.Item label="Email" name="email" className="text-sm">
-                                                <Input readOnly />
-                                            </Form.Item>
-                                            <Form.Item label="Phone" name="phone" className="text-sm">
-                                                <Input readOnly />
-                                            </Form.Item>
-                                        </div>
-                                        <div className="flex w-full flex-col">
-                                            <Form.Item label="Birthday" name="birthday" className="text-sm">
-                                                <Input readOnly />
-                                            </Form.Item>
-                                            <Form.Item
-                                                label="Identity number"
-                                                name="identityNumber"
-                                                className="text-sm"
-                                            >
-                                                <Input readOnly />
-                                            </Form.Item>
-                                            <Form.Item
-                                                label="Identity date of issue"
-                                                name="identityDateOfIssue"
-                                                className="text-sm"
-                                            >
-                                                <Input readOnly />
-                                            </Form.Item>
-                                            <Form.Item
-                                                label="Identity place of issue"
-                                                name="identityPlaceOfIssue"
-                                                className="text-sm"
-                                            >
-                                                <Input readOnly />
-                                            </Form.Item>
-                                        </div>
-                                    </div>
-                                </div>
-                                {isHaveAction && (
-                                    <div className="mt-8 flex w-full justify-center">
-                                        <Button
-                                            loading={isConfirmLoading || isRequestBreakLoading}
-                                            type="primary"
-                                            htmlType="submit"
-                                            className="h-full w-full rounded-lg bg-primary px-10 py-2 font-bold text-white hover:shadow-md hover:shadow-primary/60"
+                                    <div className="flex w-full flex-col">
+                                        <Form.Item label="Monthly rent" name="monthlyRent" className="text-sm">
+                                            <Input readOnly />
+                                        </Form.Item>
+                                        <Form.Item
+                                            label="Lease termination cost"
+                                            name="leaseTerminationCost"
+                                            className="text-sm"
                                         >
-                                            {isApprove ? "Confirm" : "Request break"}
-                                        </Button>
+                                            <Input readOnly />
+                                        </Form.Item>
+                                        <Form.Item label="Deposit amount" name="depositAmount" className="text-sm">
+                                            <Input readOnly />
+                                        </Form.Item>
+                                        <Form.Item label="Additional price" name="additionalPrice" className="text-sm">
+                                            <Input readOnly />
+                                        </Form.Item>
                                     </div>
-                                )}
-                            </Form>
-                        </Badge.Ribbon>
+                                </div>
+                            </div>
+                            <hr className="my-4 border-b border-gray-200" />
+                            <div>
+                                <h2 className="text-lg font-bold">Host Information</h2>
+                                <div className="mx-2 mt-2 flex gap-12">
+                                    <div className="flex w-full flex-col">
+                                        <Form.Item label="Firstname" name="firstName" className="text-sm">
+                                            <Input readOnly />
+                                        </Form.Item>
+                                        <Form.Item label="Lastname" name="lastName" className="text-sm">
+                                            <Input readOnly />
+                                        </Form.Item>
+                                        <Form.Item label="Email" name="email" className="text-sm">
+                                            <Input readOnly />
+                                        </Form.Item>
+                                        <Form.Item label="Phone" name="phone" className="text-sm">
+                                            <Input readOnly />
+                                        </Form.Item>
+                                    </div>
+                                    <div className="flex w-full flex-col">
+                                        <Form.Item label="Birthday" name="birthday" className="text-sm">
+                                            <Input readOnly />
+                                        </Form.Item>
+                                        <Form.Item label="Identity number" name="identityNumber" className="text-sm">
+                                            <Input readOnly />
+                                        </Form.Item>
+                                        <Form.Item
+                                            label="Identity date of issue"
+                                            name="identityDateOfIssue"
+                                            className="text-sm"
+                                        >
+                                            <Input readOnly />
+                                        </Form.Item>
+                                        <Form.Item
+                                            label="Identity place of issue"
+                                            name="identityPlaceOfIssue"
+                                            className="text-sm"
+                                        >
+                                            <Input readOnly />
+                                        </Form.Item>
+                                    </div>
+                                </div>
+                            </div>
+                            {isHaveAction && (
+                                <div className="mt-8 flex w-full justify-center">
+                                    <Button
+                                        loading={isConfirmLoading || isRequestBreakLoading}
+                                        type="primary"
+                                        htmlType="submit"
+                                        className="h-full w-full rounded-lg bg-primary px-10 py-2 font-bold text-white hover:shadow-md hover:shadow-primary/60"
+                                    >
+                                        {isApprove ? "Confirm" : "Request break"}
+                                    </Button>
+                                </div>
+                            )}
+                        </Form>
                     </div>
-                    <Contract hostInfo={myRental?.hostInfo} roomInfo={myRental?.roomInfo} />
+                    <Badge.Ribbon
+                        style={{ top: "-11px" }}
+                        text={STATUS_RENTAL_TEXT[status as STATUS_RENTAL]}
+                        color={RENTAL_COLORS[status as STATUS_RENTAL]}
+                    >
+                        <Contract hostInfo={myRental?.hostInfo} roomInfo={myRental?.roomInfo} />
+                    </Badge.Ribbon>
                 </div>
             </Spin>
         </div>
