@@ -6,7 +6,7 @@ import { IUpdatePassword } from "@/interfaces/user.interface"
 import { useUpdatePasswordMutation } from "@/redux/services/myProfile/my-profile.service"
 
 const ModalUpdate = (props: IModal) => {
-    const { title, data: uti } = props
+    const { title } = props
     const [updatePassword, { data, error, isLoading }] = useUpdatePasswordMutation()
 
     useServerMessage({ data: data!, error: error })

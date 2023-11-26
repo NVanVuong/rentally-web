@@ -23,9 +23,13 @@ const MyProfile = () => {
     const onFinish = async (values: any) => {
         const body = createMyInfoFormData(values)
 
-        const res = await updateInfo(body)
-        if (res!.data?.token) {
-            dispatch(setCredentials({ accessToken: res!.data?.token.token }))
+        const result = await updateInfo(body)
+
+        if ("data" in result) {
+            const { data } = result
+            if (data?.token) {
+                dispatch(setCredentials({ accessToken: data?.token.token }))
+            }
         }
     }
     const getBase64 = (img: RcFile, callback: (url: string) => void) => {
