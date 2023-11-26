@@ -1,8 +1,8 @@
 import { IMyInfoResponse, IUpdateMyInfoRequest, IUpdatePassword, IUsersResponse } from "@/interfaces/user.interface"
 import { createApiWithAuth } from "../apiWithAuth.service"
 
-const creatApiMyProfileWithAuth = createApiWithAuth("myProdileApi", ["MyInfo"])
-export const myProdileApi = creatApiMyProfileWithAuth.injectEndpoints({
+const creatApiMyProfileWithAuth = createApiWithAuth("myProfileApi", ["MyInfo"])
+export const myProfileApi = creatApiMyProfileWithAuth.injectEndpoints({
     endpoints: (builder) => ({
         updateMyInfo: builder.mutation<IMyInfoResponse, IUpdateMyInfoRequest>({
             query: (formData) => {
@@ -27,4 +27,4 @@ export const myProdileApi = creatApiMyProfileWithAuth.injectEndpoints({
     })
 })
 
-export const { useUpdateMyInfoMutation, useUpdatePasswordMutation } = myProdileApi
+export const { useUpdateMyInfoMutation, useUpdatePasswordMutation } = myProfileApi

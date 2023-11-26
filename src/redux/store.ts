@@ -18,7 +18,7 @@ import { rentalApi } from "./services/rental/rental.service"
 import { getChecklistApi } from "./services/checklist/checklist.service"
 import { utilityApi } from "./services/utilities/utilities.service"
 import { rentalsApi } from "./services/rentals/rentals.service"
-import { myProdileApi } from "./services/myProfile/my-profile.service"
+import { myProfileApi } from "./services/myProfile/my-profile.service"
 
 const rootReducer = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
@@ -31,7 +31,7 @@ const rootReducer = combineReducers({
     [roomDetailApi.reducerPath]: roomDetailApi.reducer,
     [rentalApi.reducerPath]: rentalApi.reducer,
     [utilityApi.reducerPath]: utilityApi.reducer,
-    [myProdileApi.reducerPath]: myProdileApi.reducer,
+    [myProfileApi.reducerPath]: myProfileApi.reducer,
     [rentalsApi.reducerPath]: rentalsApi.reducer,
     auth: authSlice.reducer,
     search: searchSlice,
@@ -59,7 +59,7 @@ export const store = configureStore({
         rentalApi.middleware,
         utilityApi.middleware,
         rentalsApi.middleware,
-        myProdileApi.middleware
+        myProfileApi.middleware
     )
 })
 
