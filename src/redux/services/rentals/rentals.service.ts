@@ -1,4 +1,4 @@
-import { IModInfoResponse, IRentals, IRentalsResponse } from "@/interfaces/rentals.interface"
+import { IModInfoResponse, IMyRentalResponse, IRentals, IRentalsResponse } from "@/interfaces/rentals.interface"
 import { createApiWithAuth } from "../apiWithAuth.service"
 import { convertDate } from "@/utils/helpers"
 
@@ -31,7 +31,7 @@ export const rentalsApi = createApiRentalskWithAuth.injectEndpoints({
         getRental: builder.query<IRentalsResponse, { id: number }>({
             query: ({ id }) => `/rental/${id}`
         }),
-        getMyRental: builder.query<IRentalsResponse, void>({
+        getMyRentals: builder.query<IRentalsResponse, void>({
             query: () => `/rental/my-rental`,
             transformResponse(baseQueryReturnValue: IRentalsResponse) {
                 return {
@@ -51,7 +51,31 @@ export const rentalsApi = createApiRentalskWithAuth.injectEndpoints({
                     message: baseQueryReturnValue.message,
                     status: baseQueryReturnValue.status
                 }
-            }
+            },
+            providesTags: ["MyRentals"]
+        }),
+        getMyRental: builder.query<IMyRentalResponse, { id: number }>({
+            query: ({ id }) => `/rental/my-rental/${id}`,
+            transformResponse(baseQueryReturnValue: IMyRentalResponse) {
+                return {
+                    data: {
+                        ...baseQueryReturnValue.data,
+                        rentalInfo: {
+                            ...baseQueryReturnValue.data.rentalInfo,
+                            moveInDate: convertDate(baseQueryReturnValue.data.rentalInfo.moveInDate),
+                            moveOutDate: convertDate(baseQueryReturnValue.data.rentalInfo.moveOutDate)
+                        },
+                        hostInfo: {
+                            ...baseQueryReturnValue.data.hostInfo,
+                            birthday: convertDate(baseQueryReturnValue.data.hostInfo.birthday),
+                            identityDateOfIssue: convertDate(baseQueryReturnValue.data.hostInfo.identityDateOfIssue)
+                        }
+                    },
+                    message: baseQueryReturnValue.message,
+                    status: baseQueryReturnValue.status
+                }
+            },
+            providesTags: ["MyRentals"]
         }),
         getModInfo: builder.query<IModInfoResponse, void>({
             query: () => `/rental/mod-info`,
@@ -108,14 +132,14 @@ export const rentalsApi = createApiRentalskWithAuth.injectEndpoints({
                 url: `/rental/my-rental/${id}/confirm`,
                 method: "PUT"
             }),
-            invalidatesTags: ["Rentals"]
+            invalidatesTags: ["Rentals", "MyRentals"]
         }),
         requestBreakRental: builder.mutation<IRentalsResponse, { id: number }>({
             query: ({ id }) => ({
                 url: `/rental/my-rental/${id}/request-break`,
                 method: "PUT"
             }),
-            invalidatesTags: ["Rentals"]
+            invalidatesTags: ["Rentals", "MyRentals"]
         })
     })
 })
@@ -124,6 +148,7 @@ export const {
     useGetRentalsQuery,
     useGetRentalQuery,
     useGetMyRentalQuery,
+    useGetMyRentalsQuery,
     useGetModInfoQuery,
     useUpdateRentalMutation,
     useApproveRentalMutation,

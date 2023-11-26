@@ -1,3 +1,5 @@
+import { IUtility } from "./room-detail.interface"
+
 export interface IRentals {
     status: string
     rentalInfo: IRentalInfo
@@ -68,7 +70,7 @@ export interface IRoomInfo {
     images: string[]
     price: string
     roomName: string
-    utilities: string
+    utilities: IUtility[]
     roomRatings: IRoomRatings
 }
 
@@ -89,6 +91,12 @@ export interface IRoomBlockInfo {
 
 export interface IRentalsResponse {
     data: IRentals[]
+    message: string
+    status: string
+}
+
+export interface IMyRentalResponse {
+    data: IRentals
     message: string
     status: string
 }

@@ -15,6 +15,7 @@ const ModalUpdate = (props: IModal) => {
 
     const onFinish = async (values: any) => {
         const formData = createUserFormData(values)
+
         await updateUser({ id: user!.id, formData: formData })
     }
 

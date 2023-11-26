@@ -28,6 +28,16 @@ export enum STATUS_RENTAL {
     ENDED = "ENDED"
 }
 
+export const STATUS_RENTAL_TEXT: Record<STATUS_RENTAL, string> = {
+    CREATED: "Created",
+    APPROVED: "Approved",
+    COMPLETED: "Completed",
+    CANCELED: "Canceled",
+    REQUEST_BREAK: "Request Break",
+    BROKEN: "Broken",
+    ENDED: "Ended"
+}
+
 export const STATUS_RENTAL_ORDER: STATUS_RENTAL[] = [
     STATUS_RENTAL.CREATED,
     STATUS_RENTAL.APPROVED,
@@ -45,13 +55,13 @@ export const ROLE_COLORS = {
 }
 
 export const RENTAL_COLORS: Record<STATUS_RENTAL, string> = {
-    [STATUS_RENTAL.CREATED]: "#3498db", // Blue
-    [STATUS_RENTAL.APPROVED]: "#27ae60", // Green
-    [STATUS_RENTAL.COMPLETED]: "#f39c12", // Orange
-    [STATUS_RENTAL.CANCELED]: "#e74c3c", // Red
-    [STATUS_RENTAL.REQUEST_BREAK]: "#f1c40f", // Yellow
-    [STATUS_RENTAL.BROKEN]: "#c0392b", // Dark Red
-    [STATUS_RENTAL.ENDED]: "#2ecc71" // Emerald Green
+    [STATUS_RENTAL.CREATED]: "#3498db",
+    [STATUS_RENTAL.APPROVED]: "#27ae60",
+    [STATUS_RENTAL.COMPLETED]: "#f39c12",
+    [STATUS_RENTAL.CANCELED]: "#b2b2b2",
+    [STATUS_RENTAL.REQUEST_BREAK]: "#f1c40f",
+    [STATUS_RENTAL.BROKEN]: "#c0392b",
+    [STATUS_RENTAL.ENDED]: "#e74c3c"
 }
 
 export type RoleType = keyof typeof ROLE_COLORS

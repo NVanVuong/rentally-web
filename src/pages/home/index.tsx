@@ -10,7 +10,6 @@ import { useGetFindingRoomsQuery } from "@/redux/services/findingRoom/findingRoo
 import { Button, Skeleton } from "antd"
 import { Empty } from "@/assets/images"
 import ScrollToTop from "@/components/ScrollToTop"
-import Footer from "@/container/Footer"
 
 const Home = () => {
     useGetUtilitiesQuery("")
@@ -131,7 +130,7 @@ const Home = () => {
                             </>
                         )}
                     </div>
-                    <Footer />
+                    {/* <Footer /> */}
                 </div>
             )}
 
