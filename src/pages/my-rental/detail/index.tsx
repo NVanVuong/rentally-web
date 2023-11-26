@@ -58,16 +58,20 @@ const MyRentalDetail = () => {
     const isComplete = status === STATUS_RENTAL.COMPLETED
 
     const onFinish = async () => {
-        if (isApprove) {
-            const res = await confirmRental({ id: Number(id) })
+        switch (true) {
+            case isApprove: {
+                const res = await confirmRental({ id: Number(id) })
 
-            if ("data" in res && res.data) {
-                window.open(res.data.data.toString(), "_blank")
+                if ("data" in res && res.data) {
+                    window.open(res.data.data.toString(), "_blank")
+                }
+                break
             }
-            return
-        }
-        if (isComplete) {
-            await requestBreakRental({ id: Number(id) })
+            case isComplete:
+                await requestBreakRental({ id: Number(id) })
+                break
+            default:
+                break
         }
     }
 
