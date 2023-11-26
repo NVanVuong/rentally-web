@@ -6,7 +6,7 @@ import { Spin } from "antd"
 const MyRental = () => {
     const { data, isLoading } = useGetMyRentalsQuery()
 
-    const myRentals = data?.data
+    const myRentals = data?.data.slice(1, 3)
 
     return (
         <div className="mb-8 mt-4 px-4 sm:px-6 md:px-10 xl:px-28">

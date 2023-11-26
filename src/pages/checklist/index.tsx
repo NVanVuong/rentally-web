@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
 import ListingCard from "@/components/Card/ListingCard"
 import HomeMap from "@/components/Map/HomeMap"
 import { BsMapFill } from "react-icons/bs"
@@ -7,12 +6,9 @@ import { AiOutlineUnorderedList } from "react-icons/ai"
 import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 import { Skeleton } from "antd"
 import ScrollToTop from "@/components/ScrollToTop"
-import Footer from "@/container/Footer"
 import { useGetChecklistQuery } from "@/redux/services/checklist/checklist.service"
 
 const Checklist = () => {
-    useGetUtilitiesQuery("")
-
     const [isShowMap, setIsShowMap] = useState(false)
 
     const { data, isLoading, isFetching } = useGetChecklistQuery({})
@@ -73,8 +69,6 @@ const Checklist = () => {
             </button>
 
             <ScrollToTop />
-
-            {!isShowMap && <Footer />}
         </div>
     )
 }
