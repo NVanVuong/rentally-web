@@ -1,8 +1,7 @@
-import { Button, Form, Input, Upload, UploadProps } from "antd"
+import { Button, Form, Image, Input, Upload, UploadProps } from "antd"
 import useAuth from "@/hooks/useAuth"
 import { AiOutlineUpload } from "react-icons/ai"
 import { createMyInfoFormData, normFile } from "@/utils/helpers"
-import Footer from "@/container/Footer"
 import { RcFile, UploadChangeParam, UploadFile } from "antd/es/upload"
 import { useState } from "react"
 import { useUpdateMyInfoMutation } from "@/redux/services/myProfile/my-profile.service"
@@ -52,38 +51,27 @@ const MyProfile = () => {
     return (
         <>
             <section className="pb-16 pt-16">
-                <div className="mx-auto w-full px-4 lg:w-4/12">
-                    <div className="mr-2 mt-2 flex justify-end">
+                <div className="mx-auto w-full px-4 md:w-2/3 lg:w-4/12">
+                    <div className="-mb-14 flex justify-end">
                         <Button
-                            icon={<RiLockPasswordLine className=" h-5 w-5" />}
+                            className="hover:text-primary"
+                            icon={<RiLockPasswordLine className=" h-5 w-5 " />}
                             onClick={() => dispatch(openModal({ type: MODAL.UPDATE.PASSWORD }))}
                         ></Button>
                     </div>
                     <div className="relative mt-16 flex w-full min-w-0 flex-col break-words rounded-lg bg-white shadow-xl">
                         <div className="px-6">
                             <div className="flex flex-wrap justify-center">
-                                <div className="flex w-full justify-center px-4">
-                                    <div className="relative">
-                                        {imageUrl ? (
-                                            <img
-                                                id="avata-img"
-                                                alt="..."
-                                                src={imageUrl}
-                                                className="-m-16 -ml-20 h-[150px] max-w-[150px] rounded-full border-none align-middle shadow-xl lg:-ml-16"
-                                            />
-                                        ) : (
-                                            <img
-                                                id="avata-img"
-                                                alt="..."
-                                                src={userInfo?.photo}
-                                                className="-m-16 -ml-20 h-[150px] max-w-[150px] rounded-full border-none align-middle shadow-xl lg:-ml-16"
-                                            />
-                                        )}
-                                    </div>
+                                <div className="-mt-16 flex w-full justify-center px-4">
+                                    <Image
+                                        src={imageUrl ? imageUrl : userInfo?.photo}
+                                        width={150}
+                                        height={150}
+                                        className="rounded-full"
+                                    />
                                 </div>
-
-                                <div className="mt-14 w-full px-4 text-center">
-                                    <div className="mt-6 text-center">
+                                <div className="w-full px-4 text-center">
+                                    <div className="mt-5 text-center">
                                         <h3 className="mb-2 text-xl font-semibold leading-normal text-gray-700">
                                             {userInfo?.firstName} {userInfo?.lastName}
                                         </h3>
@@ -190,8 +178,7 @@ const MyProfile = () => {
                     </div>
                 </div>
             </section>
-            <ModalUpdatePassword></ModalUpdatePassword>
-            <Footer></Footer>
+            <ModalUpdatePassword />
         </>
     )
 }
