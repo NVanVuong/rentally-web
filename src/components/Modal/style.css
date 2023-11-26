@@ -31,9 +31,9 @@
     @apply bg-primary/95 text-white shadow-2xl transition-all duration-100;
 }
 
-.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+/* .ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
     @apply text-gray-300;
-}
+} */
 
 .ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover > svg {
     @apply text-primary;
