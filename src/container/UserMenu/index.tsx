@@ -27,6 +27,7 @@ const UserMenu = () => {
     const onClick: MenuProps["onClick"] = ({ key }) => {
         switch (key) {
             case "propfile":
+                navigate(SITE_MAP.MY_PROFILE)
                 break
             case "checklist":
                 navigate(SITE_MAP.MY_CHECKLIST)

@@ -102,7 +102,8 @@ export const MODAL = {
         ROOM: "UPDATE_ROOM",
         BLOCK: "UPDATE_BLOCK",
         UTILITY: "UPDATE_UTILITY",
-        RENTAL: "UPDATE_RENTAL"
+        RENTAL: "UPDATE_RENTAL",
+        PASSWORD: "UPDATE_PASSWORD"
     },
     DELETE: {
         USER: "DELETE_USER",

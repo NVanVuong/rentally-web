@@ -8,6 +8,7 @@ import HomeLayout from "@/layouts/Home"
 import Rental from "@/pages/room-detail/rental"
 import MyRental from "@/pages/my-rental"
 import MyRentalDetail from "@/pages/my-rental/detail"
+import MyProfile from "@/pages/my-profile"
 
 const HomePage = lazy(() => import("../pages/home"))
 const AdminPage = lazy(() => import("../pages/admin"))
@@ -43,6 +44,7 @@ const MainRoute = () => {
                             <Route path={SITE_MAP.MY_CHECKLIST} element={<Checklist />}></Route>
                             <Route path={SITE_MAP.MY_RENTAL} element={<MyRental />}></Route>
                             <Route path={SITE_MAP.MY_RENTAL_DETAIL} element={<MyRentalDetail />} />
+                            <Route path={SITE_MAP.MY_PROFILE} element={<MyProfile />}></Route>
                         </Route>
                     </Route>
                     <Route element={<RequireAuthAdmin />}>

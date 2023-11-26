@@ -29,7 +29,20 @@ export interface IUsersResponse {
     status: string
 }
 
+export interface IMyInfoResponse {
+    token: any
+    message: string
+    status: string
+}
+
+export interface IUpdatePassword {
+    currentPassword: string
+    newPassword: string
+}
+
 export interface ICreateUserRequest extends FormData {}
+
+export interface IUpdateMyInfoRequest extends FormData {}
 export interface IUpdateUserRequest {
     id: number
     formData: FormData
@@ -41,3 +54,10 @@ export interface IDisableUserRequest {
 }
 
 export interface IDeleteUserRequest extends Pick<IUser, "id"> {}
+
+export interface IUpdateInfoUser {
+    firstName: string
+    lastName: string
+    phoneNumber: string
+    photo: string
+}

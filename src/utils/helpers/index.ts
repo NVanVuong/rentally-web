@@ -13,6 +13,18 @@ export const createUserFormData = (values: any) => {
     return formData
 }
 
+export const createMyInfoFormData = (values: any) => {
+    const formData = new FormData()
+    formData.append("firstName", values.firstName)
+    formData.append("lastName", values.lastName)
+    formData.append("phoneNumber", values.phoneNumber)
+    if (values.photo) formData.append("photo", values.photo[0].originFileObj)
+
+    console.log(formData)
+
+    return formData
+}
+
 export const createUtilityFormData = (values: any) => {
     const formData = new FormData()
     formData.append("name", values.name)
