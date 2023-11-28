@@ -42,7 +42,7 @@ const Login = () => {
             const res = await login(values).unwrap()
             if (res.status === "SUCCESS" && res.data) {
                 dispatch(setCredentials({ accessToken: res.data.token }))
-                navigate(-1)
+                navigate('/')
             }
         } catch (error: any) {
             message.error(error.data.message)

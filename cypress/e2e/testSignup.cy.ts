@@ -1,5 +1,5 @@
 
-  interface ITest {
+  interface ITestSignUp {
     email: string
     password:string
     confirmPassword:string
@@ -9,7 +9,7 @@
     message:string
   } 
   
-  const testCases:ITest[] = [
+  const testCaseSignups:ITestSignUp[] = [
     {
       email: 'renterxxx@hmail.com',
       password:'',
@@ -17,7 +17,7 @@
       firstName:'hoang',
       lastName:'nguyen',
       phoneNumber:'0852336247',
-      message: '1.Các thông tin không được để trống'
+      message: '1. Các thông tin không được để trống'
     },
     {
       email: 'renterxxmail.com',
@@ -26,17 +26,17 @@
       firstName:'hoang',
       lastName:'nguyen',
       phoneNumber:'0852336246',
-      message: '2.email không hợp lệ'
+      message: '2. Email không hợp lệ'
     },
   
     {
       email: 'renterxx@hmail.com',
       password:'12312',
-      confirmPassword:'123123',
+      confirmPassword:'12312',
       firstName:'hoang',
       lastName:'nguyen',
       phoneNumber:'0852336246' ,
-      message: '3.password không hợp lệ'
+      message: '3. Password không hợp lệ'
     },
     {
       email: 'renterxxx@hmail.com',
@@ -45,7 +45,7 @@
       firstName:'hoang',
       lastName:'nguyen',
       phoneNumber:'0852336242',
-      message: '4.confirm password không giống password' 
+      message: '4. Confirm password không giống password' 
     },
     {
       email: 'renterxxx@hmail.com',
@@ -54,7 +54,7 @@
       firstName:'hoang',
       lastName:'nguyen',
       phoneNumber:'085233624',
-      message: '5.số điện thoại không hợp lệ' 
+      message: '5. Số điện thoại không hợp lệ' 
     },
     {
       email: 'renter@gmail.com',
@@ -63,7 +63,7 @@
       firstName:'hoang',
       lastName:'nguyen',
       phoneNumber:'0852336246',
-      message: '6.email đã tồn tại' 
+      message: '6. Email đã tồn tại' 
     },
     {
       email: 'renterx@hmail.com',
@@ -72,7 +72,7 @@
       firstName:'hoang',
       lastName:'nguyen',
       phoneNumber:'0852336242',
-      message: '7.số điện thoại đã tồn tại' 
+      message: '7. Số điện thoại đã tồn tại' 
     },
     {
       email: 'renterxxx@hmail.com',
@@ -81,14 +81,14 @@
       firstName:'hoang',
       lastName:'nguyen',
       phoneNumber:'0852336245',
-      message: '8.Đăng kí thành công' 
+      message: '8. Đăng kí thành công' 
     },
   ]  
   
   describe("SignUp Tests", () => {
    
 
-    testCases.forEach((testCase:ITest) => {
+    testCaseSignups.forEach((testCase:ITestSignUp) => {
       it(`${testCase.message}`, () => {
         cy.viewport(1920, 1280)
         cy.visit( "http://localhost:5173/register");

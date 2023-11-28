@@ -43,7 +43,7 @@ const Slider = () => {
         { type: "divider" },
 
         getItem(`${isExpanding ? "Accounts" : ""}`, "users", <FaRegUser className="h-5 w-5" />),
-        getItem(`${isExpanding ? "Room Blocks" : ""}`, "blocks", <BiHomeAlt className="h-5 w-5" />),
+        getItem(`${isExpanding ? "Room Blocks" : ""}`, "blocks", <BiHomeAlt id='roomBlocks' className="h-5 w-5" />),
         getItem(`${isExpanding ? "Utilities" : ""}`, "utilities", <TbHomeCog className="h-5 w-5" />),
         getItem(`${isExpanding ? "Rentals" : ""}`, "rentals", <LuClipboardSignature className="h-5 w-5" />),
         { type: "divider" }
