@@ -7,8 +7,7 @@ import { BsMapFill } from "react-icons/bs"
 import { AiOutlineUnorderedList } from "react-icons/ai"
 import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 import { useGetFindingRoomsQuery } from "@/redux/services/findingRoom/findingRoom.service"
-import { Button, Skeleton } from "antd"
-import { Empty } from "@/assets/images"
+import { Empty, Skeleton } from "antd"
 import ScrollToTop from "@/components/ScrollToTop"
 
 const Home = () => {
@@ -18,21 +17,22 @@ const Home = () => {
     const [isShowMap, setIsShowMap] = useState(false)
     const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
 
-    const [currentPage, setCurrentPage] = useState(1)
+    const [currentPage, setCurrentPage] = useState(2)
+    const [perPage, setPerPage] = useState(20)
 
     const { data, isLoading, isFetching } = useGetFindingRoomsQuery({
         page: currentPage,
-        params: searchParamsObject
+        params: searchParamsObject,
+        perPage
     })
 
     const [currentRooms, setCurrentRooms] = useState<IRoomFinding[]>(data?.data?.rooms || [])
 
-    const totalRoom = data?.data?.totalRoom
-
-    const isFull = currentRooms.length === totalRoom
+    const isFull = Number(data?.data?.totalRoom) <= currentRooms.length
 
     const handleLoadMore = () => {
         setCurrentPage((prev) => prev + 1)
+        setPerPage(10)
     }
 
     useEffect(() => {
@@ -62,12 +62,7 @@ const Home = () => {
     }, [searchParams])
 
     if (currentRooms.length === 0 && !isLoading) {
-        return (
-            <div className="flex h-[600px] flex-col items-center justify-center gap-4">
-                <img src={Empty} className="h-32" alt="empty" />
-                <p className="text-3xl font-bold">No room matches with your search.</p>
-            </div>
-        )
+        return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No rooms match in list." className="mt-24" />
     }
 
     return (
@@ -83,8 +78,8 @@ const Home = () => {
                             <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-28">
                                 <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                                     {Array.from({ length: 10 }).map((_, index) => (
-                                        <div style={{ width: "280px" }} key={index}>
-                                            <Skeleton.Image style={{ width: "280px", height: "280px" }} active />
+                                        <div style={{ width: "100%" }} key={index}>
+                                            <Skeleton.Image className="!aspect-square !h-auto !w-full" active />
                                             <Skeleton active style={{ marginTop: "10px" }} />
                                         </div>
                                     ))}
@@ -97,23 +92,26 @@ const Home = () => {
                                         {currentRooms.map((dataRoom: IRoomFinding, index) => (
                                             <ListingCard key={dataRoom.id + index} dataRoom={dataRoom} />
                                         ))}
+                                        {isFetching && (
+                                            <>
+                                                {Array.from({ length: 10 }).map((_, index) => (
+                                                    <div style={{ width: "100%" }} key={index}>
+                                                        <Skeleton.Image
+                                                            className="!aspect-square !h-auto !w-full"
+                                                            active
+                                                        />
+                                                        <Skeleton
+                                                            active
+                                                            paragraph={{ rows: 2 }}
+                                                            style={{ marginTop: "10px" }}
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </>
+                                        )}
                                     </div>
                                 </div>
-                                {isFetching && (
-                                    <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-28">
-                                        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                                            {Array.from({ length: 10 }).map((_, index) => (
-                                                <div style={{ width: "280px" }} key={index}>
-                                                    <Skeleton.Image
-                                                        style={{ width: "280px", height: "280px" }}
-                                                        active
-                                                    />
-                                                    <Skeleton active style={{ marginTop: "10px" }} />
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
+
                                 {!isFull ? (
                                     <Button
                                         loading={isFetching}

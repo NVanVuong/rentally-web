@@ -61,7 +61,7 @@ const RoomDetail = () => {
             </div>
             <Gallery images={images} />
             <div className="mt-6 flex flex-col justify-between gap-8 lg:flex-row">
-                <div className="flex w-full flex-col gap-4 lg:w-4/5">
+                <div className="flex w-full flex-col gap-4 lg:w-3/5">
                     <HostInformation landlord={landlord} />
                     <Utilities utilities={utilities} />
                     <RatingDashboard ratingDetail={ratingDetail} />

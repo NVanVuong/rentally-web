@@ -12,6 +12,7 @@ import { useEffect } from "react"
 import { RENTAL_COLORS, STATUS_RENTAL, STATUS_RENTAL_TEXT } from "@/utils/constants/GlobalConst"
 import useServerMessage from "@/hooks/useServerMessage"
 import { message } from "antd"
+import { SITE_MAP } from "@/utils/constants/Path"
 
 export const dateFormat = "DD/MM/YYYY"
 
@@ -88,7 +89,7 @@ const MyRentalDetail = () => {
     return (
         <div className="mb-16 mt-4 px-4 sm:px-6 md:px-10 xl:px-28">
             <div className="flex flex-row items-center">
-                <span onClick={() => navigate(-1)}>
+                <span onClick={() => navigate(SITE_MAP.MY_RENTAL)}>
                     <MdOutlineArrowBackIosNew className="-ml-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full p-2 text-black transition duration-100 hover:scale-110 hover:bg-gray-100" />
                 </span>
                 <div className="flex w-full items-center justify-between">
