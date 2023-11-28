@@ -3,6 +3,7 @@ import { IUser } from "@/interfaces/user.interface"
 import type { PayloadAction } from "@reduxjs/toolkit"
 import { createSlice } from "@reduxjs/toolkit"
 import jwt from "jwt-decode"
+import { useAppDispatch } from "@/redux/hook"
 
 const token = localStorage.getItem("jwt")
 let decodedToken = null
@@ -41,6 +42,7 @@ const authSlice = createSlice({
             state.accessToken = null
             localStorage.setItem("jwt", "")
             state.userInfo = null
+            
         }
     }
 })

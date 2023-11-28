@@ -233,7 +233,7 @@ const Register = () => {
                                         <div className="m-8">
                                             <div className="mb-6 flex items-center justify-center gap-8">
                                                 <img src={mail} alt="" />
-                                                <h1 className="text-[24px] font-semibold text-secondary ">
+                                                <h1 id='header' className="text-[24px] font-semibold text-secondary ">
                                                     Check your email!
                                                 </h1>
                                             </div>
