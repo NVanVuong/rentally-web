@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom"
-import { useAppSelector } from "@/redux/hook"
 import { ROLE } from "@/utils/constants/GlobalConst"
+import useAuth from "@/hooks/useAuth"
 
 export const RequireAuthAdmin = () => {
-    const role = useAppSelector((state) => state.auth.userInfo?.role) || ""
+    const { role } = useAuth()
 
     switch (role) {
         case ROLE.ADMIN:
@@ -14,7 +14,7 @@ export const RequireAuthAdmin = () => {
 }
 
 export const RequireAuthMod = () => {
-    const role = useAppSelector((state) => state.auth.userInfo?.role) || ""
+    const { role } = useAuth()
 
     switch (role) {
         case ROLE.MOD:
@@ -25,7 +25,7 @@ export const RequireAuthMod = () => {
 }
 
 export const RequireAuth = () => {
-    const userInfo = useAppSelector((state) => state.auth.userInfo) || ""
+    const { userInfo } = useAuth()
 
     if (userInfo) {
         return <Outlet />

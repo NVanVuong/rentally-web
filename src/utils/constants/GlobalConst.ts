@@ -7,18 +7,25 @@ export enum ROLE {
     ADMIN = "ADMIN"
 }
 
-export enum ROOM_STATUS {
-    EMPTY = "Empty",
-    OCCUPIED = "Occupied"
+export const ROLE_COLORS = {
+    [ROLE.USER]: "#2C839A",
+    [ROLE.MOD]: "#1D5868",
+    [ROLE.ADMIN]: "#E36414"
 }
 
-export enum STATUS {
+export enum USER_STATUS {
     ACTIVE = "ACTIVE",
     DISABLED = "DISABLED",
     REGISTING = "REGISTING"
 }
 
-export enum STATUS_RENTAL {
+export const USER_STATUS_COLORS = {
+    [USER_STATUS.ACTIVE]: "green",
+    [USER_STATUS.DISABLED]: "red",
+    [USER_STATUS.REGISTING]: "blue"
+}
+
+export enum RENTAL_STATUS {
     CREATED = "CREATED",
     APPROVED = "APPROVED",
     COMPLETED = "COMPLETED",
@@ -28,7 +35,7 @@ export enum STATUS_RENTAL {
     ENDED = "ENDED"
 }
 
-export const STATUS_RENTAL_TEXT: Record<STATUS_RENTAL, string> = {
+export const RENTAL_STATUS_TEXT: Record<RENTAL_STATUS, string> = {
     CREATED: "Created",
     APPROVED: "Approved",
     COMPLETED: "Completed",
@@ -38,33 +45,30 @@ export const STATUS_RENTAL_TEXT: Record<STATUS_RENTAL, string> = {
     ENDED: "Ended"
 }
 
-export const STATUS_RENTAL_ORDER: STATUS_RENTAL[] = [
-    STATUS_RENTAL.CREATED,
-    STATUS_RENTAL.APPROVED,
-    STATUS_RENTAL.COMPLETED,
-    STATUS_RENTAL.CANCELED,
-    STATUS_RENTAL.REQUEST_BREAK,
-    STATUS_RENTAL.BROKEN,
-    STATUS_RENTAL.ENDED
-]
-
-export const ROLE_COLORS = {
-    [ROLE.USER]: "#2C839A",
-    [ROLE.MOD]: "#1D5868",
-    [ROLE.ADMIN]: "#E36414"
+export const RENTAL_STATUS_COLORS: Record<RENTAL_STATUS, string> = {
+    [RENTAL_STATUS.CREATED]: "#3498db",
+    [RENTAL_STATUS.APPROVED]: "#27ae60",
+    [RENTAL_STATUS.COMPLETED]: "#f39c12",
+    [RENTAL_STATUS.CANCELED]: "#b2b2b2",
+    [RENTAL_STATUS.REQUEST_BREAK]: "#f1c40f",
+    [RENTAL_STATUS.BROKEN]: "#c0392b",
+    [RENTAL_STATUS.ENDED]: "#e74c3c"
 }
 
-export const RENTAL_COLORS: Record<STATUS_RENTAL, string> = {
-    [STATUS_RENTAL.CREATED]: "#3498db",
-    [STATUS_RENTAL.APPROVED]: "#27ae60",
-    [STATUS_RENTAL.COMPLETED]: "#f39c12",
-    [STATUS_RENTAL.CANCELED]: "#b2b2b2",
-    [STATUS_RENTAL.REQUEST_BREAK]: "#f1c40f",
-    [STATUS_RENTAL.BROKEN]: "#c0392b",
-    [STATUS_RENTAL.ENDED]: "#e74c3c"
+export enum ROOM_STATUS {
+    EMPTY = "Empty",
+    OCCUPIED = "Occupied"
+}
+
+export const ROOM_STATUS_COLORS = {
+    [ROOM_STATUS.OCCUPIED]: "green",
+    [ROOM_STATUS.EMPTY]: "red"
 }
 
 export type RoleType = keyof typeof ROLE_COLORS
+export type UserStatusType = keyof typeof USER_STATUS_COLORS
+export type RentalStatusType = keyof typeof RENTAL_STATUS_COLORS
+export type RoomStatusType = keyof typeof ROOM_STATUS_COLORS
 
 export enum PAGE {
     USER = "USER",
@@ -73,22 +77,6 @@ export enum PAGE {
     UTILITY = "UTILITY",
     RENTAL = "RENTAL"
 }
-
-export const STATUS_COLORS = {
-    [STATUS.ACTIVE]: "green",
-    [STATUS.DISABLED]: "red",
-    [STATUS.REGISTING]: "blue"
-}
-
-export type StatusType = keyof typeof STATUS_COLORS
-export type StatusRentalType = keyof typeof RENTAL_COLORS
-
-export const ROOM_STATUS_COLORS = {
-    [ROOM_STATUS.OCCUPIED]: "green",
-    [ROOM_STATUS.EMPTY]: "red"
-}
-
-export type RoomStatusType = keyof typeof ROOM_STATUS_COLORS
 
 export const MODAL = {
     ADD: {

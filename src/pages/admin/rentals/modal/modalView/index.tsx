@@ -3,7 +3,7 @@ import { IModal } from "@/interfaces/modal.interface"
 import { Badge, Descriptions, Image } from "antd"
 import "./style.css"
 import { formatStatus } from "@/utils/helpers"
-import { RENTAL_COLORS, StatusRentalType} from "@/utils/constants/GlobalConst"
+import { RENTAL_STATUS_COLORS, RentalStatusType } from "@/utils/constants/GlobalConst"
 import { IRentals } from "@/interfaces/rentals.interface"
 
 const ModalView = (props: IModal) => {
@@ -18,7 +18,7 @@ const ModalView = (props: IModal) => {
             <Descriptions column={1}>
                 <Descriptions.Item label="Status">
                     <Badge
-                        color={RENTAL_COLORS[status as StatusRentalType]}
+                        color={RENTAL_STATUS_COLORS[status as RentalStatusType]}
                         className="flex items-center text-xs font-medium"
                         text={formatStatus(status)}
                     ></Badge>

@@ -4,7 +4,7 @@ import Contract from "./contract"
 import RoomAction from "./action"
 import Utilities from "./utilities"
 import RatingDashboard, { AverageRating } from "./rating"
-import { getAddress } from "@/utils/helpers"
+import { convertAddress } from "@/utils/helpers"
 import Map from "@/components/Map"
 import Reviews from "./reviews"
 import { useParams } from "react-router-dom"
@@ -54,7 +54,7 @@ const RoomDetail = () => {
         </div>
     ) : (
         <div className="h-full px-4 pb-20 pt-4 sm:px-6 md:px-10 xl:px-28">
-            <address className="font-bold not-italic">{getAddress(roomblock)}</address>
+            <address className="font-bold not-italic">{convertAddress(roomblock)}</address>
             <div className="mt-2 flex justify-between">
                 <AverageRating ratingDetail={ratingDetail} />
                 <RoomAction dataRoom={roomDetail} />

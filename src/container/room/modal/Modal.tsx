@@ -30,7 +30,7 @@ const Modal = () => {
     const role = useAppSelector((state) => state.auth.userInfo?.role) || ""
 
     const imageList = roomData?.images as string[]
-    const { data } = useGetUtilitiesQuery("")
+    const { data } = useGetUtilitiesQuery()
 
     const [updateRoomImages] = useUpdateImagesMutation()
     const [updateRoom, updateRoomResult] = useUpdateRoomMutation()

@@ -34,10 +34,9 @@ function getItem(
 }
 
 const Slider = () => {
-    const { userInfo } = useAuth()
-    const role = userInfo?.role
-
+    const { role } = useAuth()
     const [isExpanding, setIsExpanding] = useState(false)
+    const navigate = useNavigate()
 
     let items: MenuProps["items"] = [
         { type: "divider" },
@@ -53,8 +52,6 @@ const Slider = () => {
         items = items.filter((item) => item!.key !== "users")
     }
 
-    const navigate = useNavigate()
-
     const onClick: MenuProps["onClick"] = (e) => {
         switch (e.key) {
             case "users":
@@ -64,7 +61,7 @@ const Slider = () => {
                 navigate(SITE_MAP.BLOCKS_MANAGEMENT)
                 break
             case "utilities":
-                navigate(SITE_MAP.UTILITIES)
+                navigate(SITE_MAP.UTILITIES_MANAGEMENT)
                 break
             case "rentals":
                 navigate(SITE_MAP.RENTALS)

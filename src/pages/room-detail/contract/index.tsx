@@ -4,7 +4,7 @@ import { SITE_MAP } from "@/utils/constants/Path"
 import { Form, DatePicker, Select, Button } from "antd"
 import { useNavigate, useParams } from "react-router-dom"
 import dayjs from "dayjs"
-import { formatNumberWithCommas } from "@/utils/helpers"
+import { formatPrice } from "@/utils/helpers"
 import useAuth from "@/hooks/useAuth"
 interface IContract {
     price: string
@@ -45,7 +45,7 @@ const Contract = (props: IContract) => {
                 onFinish={onFinish}
             >
                 <span className="text-sm">
-                    <b className="text-xl font-bold">{formatNumberWithCommas(props.price)}</b> VND/month
+                    <b className="text-xl font-bold">{formatPrice(props.price)}</b> VND/month
                 </span>
                 <div className="mt-4 flex flex-col rounded-lg border border-gray-300 font-medium">
                     <div className="flex border-b">

@@ -23,7 +23,7 @@ const Account = ({ children }: Props) => {
                             Create your account and start exploration <br /> with us
                         </h4>
                     </div>
-                    <img src={Logo} alt="" className="w-[510px] " />
+                    <img src={Logo} alt="" className="w-[510px]" />
                     <h3 className="m-8 text-[21px] font-normal text-white">Since 2023</h3>
                     <img src={Cloud} alt="" className="absolute -left-[1px] bottom-0 z-0 w-[480px] rounded-l-[20px]" />
                 </div>

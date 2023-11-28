@@ -9,7 +9,7 @@ const SearchRoom = () => {
     const [searchParams] = useSearchParams()
     const navigate = useNavigate()
     //province
-    const { data: provincesData, isLoading: isLoadingProvinces } = useGetProvincesQuery("")
+    const { data: provincesData, isLoading: isLoadingProvinces } = useGetProvincesQuery()
 
     const [province, setProvince] = useState<IProvince | null>(null)
     const [provinces, setProvinces] = useState<IProvince[]>(provincesData || [])

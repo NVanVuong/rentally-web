@@ -1,6 +1,5 @@
 export const SITE_MAP = {
     INDEX: "/",
-    LOGIN_AS_ADMIN: "/administrator",
     AUTH: {
         LOGIN: "login",
         REGISTER: "register",
@@ -15,6 +14,7 @@ export const SITE_MAP = {
     ROOMS_GENERATION: "blocks/:id/rooms/generate-rooms",
     PROPS_MANAGEMENT: "props",
     BLOCKS_MANAGEMENT: "blocks",
+    UTILITIES_MANAGEMENT: "utilities",
     ROOM: "room",
     ROOM_DETAIL: "room/:id",
     RENT: "rental",
@@ -23,6 +23,5 @@ export const SITE_MAP = {
     MY_RENTAL: "my-rental",
     MY_RENTAL_DETAIL: "my-rental/:id",
     MY_CHECKLIST: "/my-checklist",
-    MY_PROFILE: "/my-profile",
-    UTILITIES: "utilities"
+    MY_PROFILE: "/my-profile"
 }

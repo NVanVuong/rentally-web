@@ -1,5 +1,5 @@
 import TableAntd from "@/components/Table"
-import { RENTAL_COLORS, ROLE, STATUS_RENTAL, StatusRentalType } from "@/utils/constants/GlobalConst"
+import { RENTAL_STATUS_COLORS, ROLE, RENTAL_STATUS, RentalStatusType } from "@/utils/constants/GlobalConst"
 import { ColumnsType } from "antd/es/table"
 import { AlignType } from "rc-table/lib/interface"
 import { FaEllipsis } from "react-icons/fa6"
@@ -102,18 +102,18 @@ const TableManageRentals = () => {
             key: "status",
             width: "8%",
             filters: [
-                { text: "Created", value: STATUS_RENTAL.CREATED },
-                { text: "Approved", value: STATUS_RENTAL.APPROVED },
-                { text: "Completed", value: STATUS_RENTAL.COMPLETED },
-                { text: "Canceled", value: STATUS_RENTAL.CANCELED },
-                { text: "Request Break", value: STATUS_RENTAL.REQUEST_BREAK },
-                { text: "Broken", value: STATUS_RENTAL.BROKEN },
-                { text: "Ended", value: STATUS_RENTAL.ENDED }
+                { text: "Created", value: RENTAL_STATUS.CREATED },
+                { text: "Approved", value: RENTAL_STATUS.APPROVED },
+                { text: "Completed", value: RENTAL_STATUS.COMPLETED },
+                { text: "Canceled", value: RENTAL_STATUS.CANCELED },
+                { text: "Request Break", value: RENTAL_STATUS.REQUEST_BREAK },
+                { text: "Broken", value: RENTAL_STATUS.BROKEN },
+                { text: "Ended", value: RENTAL_STATUS.ENDED }
             ],
             onFilter: (value, record) => record.status === value,
             render: (record: IRentals) => (
                 <Badge
-                    color={RENTAL_COLORS[record.status as StatusRentalType]}
+                    color={RENTAL_STATUS_COLORS[record.status as RentalStatusType]}
                     className="flex items-center text-xs font-medium"
                     text={record.status}
                 ></Badge>

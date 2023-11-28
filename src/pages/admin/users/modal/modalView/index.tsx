@@ -3,7 +3,7 @@ import { IModal } from "@/interfaces/modal.interface"
 import { Badge, Descriptions, Image } from "antd"
 import "./style.css"
 import { formatStatus } from "@/utils/helpers"
-import { ROLE_COLORS, RoleType, STATUS_COLORS, StatusType } from "@/utils/constants/GlobalConst"
+import { ROLE_COLORS, RoleType, USER_STATUS_COLORS, UserStatusType } from "@/utils/constants/GlobalConst"
 
 const ModalView = (props: IModal) => {
     const { title, data } = props
@@ -25,7 +25,7 @@ const ModalView = (props: IModal) => {
                 <Descriptions.Item label="Phone Number">{phoneNumber}</Descriptions.Item>
                 <Descriptions.Item label="Status">
                     <Badge
-                        color={STATUS_COLORS[status as StatusType]}
+                        color={USER_STATUS_COLORS[status as UserStatusType]}
                         className="flex items-center text-xs font-medium"
                         text={formatStatus(status)}
                     ></Badge>

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import UserMenu from "../UserMenu"
+import { styleOrEmpty } from "@/utils/helpers"
 
 interface IPageHeader {
     title: string
@@ -16,9 +17,8 @@ const PageHeader = (props: IPageHeader) => {
             <div className="flex items-end gap-2">
                 <h1
                     onClick={() => isSubTitlePresent && navigate(-1)}
-                    className={`cursor-pointer text-2xl font-medium text-secondary ${
-                        isSubTitlePresent ? "cursor-pointer" : ""
-                    }`}
+                    className={`cursor-pointer text-2xl font-medium text-secondary 
+                    ${styleOrEmpty(isSubTitlePresent, "cursor-pointer")}`}
                 >
                     {props.title}
                 </h1>

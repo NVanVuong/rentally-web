@@ -2,7 +2,7 @@ import Title from "@/components/Modal/Title"
 import useServerMessage from "@/hooks/useServerMessage"
 import { IModal } from "@/interfaces/modal.interface"
 import { useUpdateUserMutation } from "@/redux/services/user/user.service"
-import { STATUS } from "@/utils/constants/GlobalConst"
+import { USER_STATUS } from "@/utils/constants/GlobalConst"
 import { Button, Image, Spin } from "antd"
 
 const ModalDisable = (props: IModal) => {
@@ -13,8 +13,8 @@ const ModalDisable = (props: IModal) => {
 
     const handleClick = async () => {
         const formData = new FormData()
-        if (isActive) formData.append("status", STATUS.DISABLED)
-        else formData.append("status", STATUS.ACTIVE)
+        if (isActive) formData.append("status", USER_STATUS.DISABLED)
+        else formData.append("status", USER_STATUS.ACTIVE)
 
         await updateUser({ id: user!.id as number, formData: formData })
     }
