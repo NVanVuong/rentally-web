@@ -6,7 +6,7 @@ const creatApiAuthWithAuth = createApiWithAuth("helpApi", ["Help"])
 
 export const helpApi = creatApiAuthWithAuth.injectEndpoints({
     endpoints: (builder) => ({
-        getUtilities: builder.query<IUtiltity[], string>({
+        getUtilities: builder.query<IUtiltity[], void>({
             query: () => ({
                 url: "/utilities"
             }),
@@ -25,13 +25,13 @@ export const helpApi = creatApiAuthWithAuth.injectEndpoints({
                 return uniqueUtilities
             }
         }),
-        getProvinces: builder.query<IProvince[], string>({
+        getProvinces: builder.query<IProvince[], void>({
             query: () => ({
                 url: "/provinces"
             })
         }),
         getDistricts: builder.query<IDistrict[], { province_code: string }>({
-            query: ({ province_code }) => ({
+            query: ({ province_code = "" }) => ({
                 url: `/provinces/${province_code}/districts`
             })
         }),
@@ -46,4 +46,4 @@ export const helpApi = creatApiAuthWithAuth.injectEndpoints({
     })
 })
 
-export const { useGetUtilitiesQuery, useUploadImagesMutation, useGetDistrictsQuery, useGetProvincesQuery } = helpApi
+export const { useGetUtilitiesQuery, useGetDistrictsQuery, useGetProvincesQuery, useUploadImagesMutation } = helpApi

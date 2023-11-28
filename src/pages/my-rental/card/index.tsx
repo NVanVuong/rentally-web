@@ -1,7 +1,7 @@
 import { IRentals } from "@/interfaces/rentals.interface"
-import { RENTAL_COLORS, STATUS_RENTAL, STATUS_RENTAL_TEXT } from "@/utils/constants/GlobalConst"
+import { RENTAL_STATUS_COLORS, RENTAL_STATUS, RENTAL_STATUS_TEXT } from "@/utils/constants/GlobalConst"
 import { SITE_MAP } from "@/utils/constants/Path"
-import { formatNumberWithCommas } from "@/utils/helpers"
+import { formatPrice } from "@/utils/helpers"
 import { useNavigate } from "react-router-dom"
 
 interface IRentalCard {
@@ -21,27 +21,27 @@ const MyRentalCard = (props: IRentalCard) => {
 
     const getActionRental = () => {
         switch (status) {
-            case STATUS_RENTAL.CREATED:
+            case RENTAL_STATUS.CREATED:
                 return <span className="py-1.5 text-sm text-gray-400">Waiting host for approval</span>
-            case STATUS_RENTAL.APPROVED:
+            case RENTAL_STATUS.APPROVED:
                 return (
                     <button className="ml-auto w-fit rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-white hover:shadow-md hover:shadow-primary">
                         Confirm
                     </button>
                 )
-            case STATUS_RENTAL.COMPLETED:
+            case RENTAL_STATUS.COMPLETED:
                 return (
                     <button className="ml-auto w-fit rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-white hover:shadow-md hover:shadow-primary">
                         Request break
                     </button>
                 )
-            case STATUS_RENTAL.REQUEST_BREAK:
+            case RENTAL_STATUS.REQUEST_BREAK:
                 return <span className="py-1.5 text-sm text-gray-400">Waiting host for accepting break</span>
-            case STATUS_RENTAL.CANCELED:
+            case RENTAL_STATUS.CANCELED:
                 return <span className="py-1.5 text-sm text-gray-400">Booking canceled</span>
-            case STATUS_RENTAL.BROKEN:
+            case RENTAL_STATUS.BROKEN:
                 return <span className="py-1.5 text-sm text-gray-400">Your reservation has broken</span>
-            case STATUS_RENTAL.ENDED:
+            case RENTAL_STATUS.ENDED:
                 return <span className="py-1.5 text-sm text-gray-400">Your reservation has ended</span>
             default:
                 return null
@@ -62,9 +62,9 @@ const MyRentalCard = (props: IRentalCard) => {
 
                     <span
                         className="break-keep text-xs font-bold uppercase"
-                        style={{ color: RENTAL_COLORS[status as STATUS_RENTAL] }}
+                        style={{ color: RENTAL_STATUS_COLORS[status as RENTAL_STATUS] }}
                     >
-                        {STATUS_RENTAL_TEXT[status as STATUS_RENTAL]}
+                        {RENTAL_STATUS_TEXT[status as RENTAL_STATUS]}
                     </span>
                 </div>
                 <div className="my-4 grid grid-cols-2 justify-between gap-y-2">
@@ -74,7 +74,7 @@ const MyRentalCard = (props: IRentalCard) => {
                     </div>
                     <div className="flex flex-col gap-1">
                         <p className="text-sm font-medium text-secondary">Monthly rent: </p>
-                        <span className="text-sm">{formatNumberWithCommas(roomInfo.price)} VND</span>
+                        <span className="text-sm">{formatPrice(roomInfo.price)} VND</span>
                     </div>
                     <div className="flex flex-col gap-1">
                         <p className="text-sm font-medium text-secondary">Lease term: </p>
@@ -82,7 +82,7 @@ const MyRentalCard = (props: IRentalCard) => {
                     </div>
                     <div className="flex flex-col gap-1">
                         <p className="text-sm font-medium text-secondary">Deposit amount: </p>
-                        <span className="text-sm">{formatNumberWithCommas(rentalInfo.leaseTerminationCost)} VND</span>
+                        <span className="text-sm">{formatPrice(rentalInfo.leaseTerminationCost)} VND</span>
                     </div>
                 </div>
                 <hr className="border border-b-gray-50" />

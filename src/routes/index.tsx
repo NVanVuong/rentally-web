@@ -9,6 +9,7 @@ import Rental from "@/pages/room-detail/rental"
 import MyRental from "@/pages/my-rental"
 import MyRentalDetail from "@/pages/my-rental/detail"
 import MyProfile from "@/pages/my-profile"
+import Loading from "@/container/Loading"
 
 const HomePage = lazy(() => import("../pages/home"))
 const AdminPage = lazy(() => import("../pages/admin"))
@@ -29,11 +30,11 @@ const AdminRoomsManagement = lazy(() => import("../pages/admin/room/Rooms"))
 const Checklist = lazy(() => import("../pages/checklist"))
 
 const MainRoute = () => {
-    useGetUtilitiesQuery("")
-    useGetProvincesQuery("")
+    useGetUtilitiesQuery()
+    useGetProvincesQuery()
 
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
             <BrowserRouter>
                 <Routes>
                     <Route path={SITE_MAP.INDEX} element={<HomeLayout />}>
@@ -53,7 +54,7 @@ const MainRoute = () => {
                             <Route path={SITE_MAP.USERS_MANAGEMENT} element={<UsersPage />} />
                             <Route path={SITE_MAP.BLOCKS_MANAGEMENT} element={<BlocksPage />} />
                             <Route path={SITE_MAP.ROOMS_MANAGEMENT} element={<AdminRoomsManagement />} />
-                            <Route path={SITE_MAP.UTILITIES} element={<UtilitiesPage />} />
+                            <Route path={SITE_MAP.UTILITIES_MANAGEMENT} element={<UtilitiesPage />} />
                             <Route path={SITE_MAP.RENTALS} element={<RentalsPage />} />
                         </Route>
                     </Route>
@@ -63,7 +64,7 @@ const MainRoute = () => {
                             <Route path={SITE_MAP.BLOCKS_MANAGEMENT} element={<BlocksPage />} />
                             <Route path={SITE_MAP.ROOMS_GENERATION} element={<GenerateRooms />} />
                             <Route path={SITE_MAP.ROOMS_MANAGEMENT} element={<RoomsManagement />} />
-                            <Route path={SITE_MAP.UTILITIES} element={<UtilitiesPage />} />
+                            <Route path={SITE_MAP.UTILITIES_MANAGEMENT} element={<UtilitiesPage />} />
                             <Route path={SITE_MAP.RENTALS} element={<RentalsPage />} />
                         </Route>
                     </Route>

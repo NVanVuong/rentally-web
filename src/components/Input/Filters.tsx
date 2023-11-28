@@ -15,7 +15,7 @@ const Filters = () => {
     const navigate = useNavigate()
     const dispacth = useAppDispatch()
 
-    const { data } = useGetUtilitiesQuery("")
+    const { data } = useGetUtilitiesQuery()
 
     const [values, setValues] = React.useState([0, 100])
 
@@ -57,6 +57,8 @@ const Filters = () => {
         })
 
         setSearchParamsObject(newSearchParamsObject)
+
+        // eslint-disable-next-line
     }, [searchParams])
 
     const handleChange = (_: any, value: any) => {

@@ -9,7 +9,7 @@ import {
     useRequestBreakRentalMutation
 } from "@/redux/services/rentals/rentals.service"
 import { useEffect } from "react"
-import { RENTAL_COLORS, STATUS_RENTAL, STATUS_RENTAL_TEXT } from "@/utils/constants/GlobalConst"
+import { RENTAL_STATUS_COLORS, RENTAL_STATUS, RENTAL_STATUS_TEXT } from "@/utils/constants/GlobalConst"
 import useServerMessage from "@/hooks/useServerMessage"
 import { message } from "antd"
 
@@ -63,8 +63,8 @@ const MyRentalDetail = () => {
         }
     }, [data, form, myRental])
 
-    const isApprove = status === STATUS_RENTAL.APPROVED
-    const isComplete = status === STATUS_RENTAL.COMPLETED
+    const isApprove = status === RENTAL_STATUS.APPROVED
+    const isComplete = status === RENTAL_STATUS.COMPLETED
     const isHaveAction = isApprove || isComplete
 
     const onFinish = async () => {
@@ -204,8 +204,8 @@ const MyRentalDetail = () => {
                     </div>
                     <Badge.Ribbon
                         style={{ top: "-11px" }}
-                        text={STATUS_RENTAL_TEXT[status as STATUS_RENTAL]}
-                        color={RENTAL_COLORS[status as STATUS_RENTAL]}
+                        text={RENTAL_STATUS_TEXT[status as RENTAL_STATUS]}
+                        color={RENTAL_STATUS_COLORS[status as RENTAL_STATUS]}
                     >
                         <Contract hostInfo={myRental?.hostInfo} roomInfo={myRental?.roomInfo} />
                     </Badge.Ribbon>

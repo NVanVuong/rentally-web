@@ -1,5 +1,5 @@
 import { AiOutlinePhone, AiOutlineMail } from "react-icons/ai"
-import { formatNumberWithCommas } from "@/utils/helpers"
+import { formatPrice } from "@/utils/helpers"
 import Button from "@/pages/room-detail/components/Button"
 import { AverageRating } from "@/pages/room-detail/rating"
 import { IHostInfo, IRoomInfo } from "@/interfaces/rentals.interface"
@@ -27,7 +27,7 @@ const Contract = (props: IContractProps) => {
                 <>
                     <div className="flex justify-between">
                         <span className="text-xs">
-                            <b className="text-base font-bold">{formatNumberWithCommas(price)}</b> VND/month
+                            <b className="text-base font-bold">{formatPrice(price)}</b> VND/month
                         </span>
                         <AverageRating size="small" />
                     </div>

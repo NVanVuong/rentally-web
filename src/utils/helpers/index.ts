@@ -1,4 +1,13 @@
-import { setPlaceInfo } from "@/redux/features/search-map/search-map.slice"
+/** File */
+
+export const normFile = (e: any) => {
+    if (Array.isArray(e)) {
+        return e
+    }
+    return e?.fileList
+}
+
+/** Create */
 
 export const createUserFormData = (values: any) => {
     const formData = new FormData()
@@ -20,8 +29,6 @@ export const createMyInfoFormData = (values: any) => {
     formData.append("phoneNumber", values.phoneNumber)
     if (values.photo) formData.append("photo", values.photo[0].originFileObj)
 
-    console.log(formData)
-
     return formData
 }
 
@@ -29,44 +36,13 @@ export const createUtilityFormData = (values: any) => {
     const formData = new FormData()
     formData.append("name", values.name)
     formData.append("note", values.note)
+
     return formData
 }
 
-export const normFile = (e: any) => {
-    if (Array.isArray(e)) {
-        return e
-    }
-    return e?.fileList
-}
+/** Convert */
 
-export function formatStatus(status?: string): string {
-    if (!status) return ""
-    return status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()
-}
-
-export function getCurrentLocation(dispatch: any) {
-    if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const { latitude, longitude } = position.coords
-                const currentLocation = {
-                    latlng: {
-                        lat: latitude,
-                        lng: longitude
-                    }
-                }
-                dispatch(setPlaceInfo(currentLocation))
-            },
-            (error) => {
-                console.error("Error getting user location:", error)
-            }
-        )
-    } else {
-        console.error("Geolocation is not available in this browser.")
-    }
-}
-
-export const getAddress = (roomblock: any) => {
+export const convertAddress = (roomblock: any) => {
     return roomblock.address + " | " + roomblock.district + ", " + roomblock.city
 }
 
@@ -84,8 +60,17 @@ export function convertDate(date: any) {
     return formattedDateString
 }
 
-export const formatNumberWithCommas = (number: any) => {
+/** Format */
+
+export function formatStatus(status?: string): string {
+    if (!status) return ""
+    return status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()
+}
+
+export const formatPrice = (number: any) => {
     return number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
+
+/** Style */
 
 export const styleOrEmpty = (condition: boolean, style: string) => (condition ? style : "")
