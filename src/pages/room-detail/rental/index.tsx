@@ -140,7 +140,7 @@ const Rental = () => {
                                             }
                                         ]}
                                     >
-                                        <DatePicker placeholder="" className="w-full" format={dateFormat} />
+                                        <DatePicker className="w-full" format={dateFormat} />
                                     </Form.Item>
                                     <Form.Item
                                         label="Identity place of issue"
@@ -161,7 +161,7 @@ const Rental = () => {
                                         className="text-sm"
                                         rules={[{ required: true, message }]}
                                     >
-                                        <DatePicker placeholder="" className="w-full" format={dateFormat} />
+                                        <DatePicker className="w-full" format={dateFormat} />
                                     </Form.Item>
                                 </div>
                             </div>

@@ -6,7 +6,7 @@ import { useGetRoomDetailQuery } from "@/redux/services/room-detail/room-detail.
 import { IRoomDetail } from "@/interfaces/room-detail.interface"
 import { ILandlord } from "@/interfaces/user.interface"
 import { Skeleton, Spin } from "antd"
-import { formatNumberWithCommas } from "@/utils/helpers"
+import { formatPrice } from "@/utils/helpers"
 
 const Contract = () => {
     const { id } = useParams()
@@ -27,7 +27,7 @@ const Contract = () => {
                     <>
                         <div className="flex justify-between">
                             <span className="text-xs">
-                                <b className="text-base font-bold">{formatNumberWithCommas(price)}</b> VND/month
+                                <b className="text-base font-bold">{formatPrice(price)}</b> VND/month
                             </span>
                             <AverageRating size="small" />
                         </div>

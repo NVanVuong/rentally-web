@@ -1,4 +1,4 @@
-import { MODAL, STATUS } from "@/utils/constants/GlobalConst"
+import { MODAL, USER_STATUS } from "@/utils/constants/GlobalConst"
 import { useAppSelector } from "@/redux/hook"
 import ModalAntd from "@/components/Modal"
 import ModalUpdate from "./modalUpdate"
@@ -11,7 +11,7 @@ const ModalUser = () => {
     const type = useAppSelector((state) => state.modal.type)
     const userData = useAppSelector((state) => state.modal.data) as IUser
 
-    const isActive = userData?.status === STATUS.ACTIVE
+    const isActive = userData?.status === USER_STATUS.ACTIVE
 
     const getModalContent = () => {
         switch (type) {

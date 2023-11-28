@@ -2,28 +2,26 @@ import { Avatar, Dropdown, MenuProps } from "antd"
 import { MdOutlineAdminPanelSettings, MdLogout, MdOutlineHomeWork } from "react-icons/md"
 import { BiMapPin, BiUser } from "react-icons/bi"
 import { logOut } from "@/redux/features/auth/auth.slice"
-import { useAppDispatch, useAppSelector } from "@/redux/hook"
+import { useAppDispatch } from "@/redux/hook"
 import { MdOutlineMenu } from "react-icons/md"
 import { useState } from "react"
 import { ROLE } from "@/utils/constants/GlobalConst"
-import { IUser } from "@/interfaces/user.interface"
 import { SITE_MAP } from "@/utils/constants/Path"
 import { useNavigate } from "react-router-dom"
 import { VscSignIn } from "react-icons/vsc"
 import { HiLogin } from "react-icons/hi"
 import { AvatarDefault } from "@/assets/images"
 import { ItemType } from "antd/es/menu/hooks/useItems"
+import useAuth from "@/hooks/useAuth"
 import "./style.css"
 
 const UserMenu = () => {
-    const userInfo = useAppSelector((state) => state.auth.userInfo) as IUser
-    const role = userInfo?.role
-
-    const navigate = useNavigate()
-
+    const { userInfo, role, isAuth } = useAuth()
     const [isOpen, setIsOpen] = useState(false)
 
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
+
     const onClick: MenuProps["onClick"] = ({ key }) => {
         switch (key) {
             case "propfile":
@@ -107,7 +105,7 @@ const UserMenu = () => {
         }
     ]
 
-    const items = userInfo ? itemsUser : itemGuest
+    const items = isAuth ? itemsUser : itemGuest
 
     return (
         <Dropdown

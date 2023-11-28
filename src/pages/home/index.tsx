@@ -12,7 +12,7 @@ import { Empty } from "@/assets/images"
 import ScrollToTop from "@/components/ScrollToTop"
 
 const Home = () => {
-    useGetUtilitiesQuery("")
+    useGetUtilitiesQuery()
 
     const [searchParams] = useSearchParams()
     const [isShowMap, setIsShowMap] = useState(false)

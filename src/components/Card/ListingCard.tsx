@@ -7,7 +7,7 @@ import { useState } from "react"
 import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 import { useNavigate } from "react-router-dom"
 import { SITE_MAP } from "@/utils/constants/Path"
-import { formatNumberWithCommas } from "@/utils/helpers"
+import { formatPrice } from "@/utils/helpers"
 import { Tooltip } from "antd"
 import { useCreateChecklistMutation } from "@/redux/services/checklist/checklist.service"
 import { useAppSelector } from "@/redux/hook"
@@ -94,7 +94,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
                     ))}
                 </div>
                 <h4 className="mt-0.5 flex items-center gap-1 text-sm">
-                    <span className="font-medium">{formatNumberWithCommas(price)}</span> VND/month
+                    <span className="font-medium">{formatPrice(price)}</span> VND/month
                 </h4>
             </div>
         </div>

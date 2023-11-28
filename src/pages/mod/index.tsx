@@ -3,7 +3,7 @@ import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
 import { Outlet } from "react-router-dom"
 
 const Mod = () => {
-    useGetUtilitiesQuery("")
+    useGetUtilitiesQuery()
     return (
         <div className="flex h-screen overflow-y-hidden">
             <Slider />

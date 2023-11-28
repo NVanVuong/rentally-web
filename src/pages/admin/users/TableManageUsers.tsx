@@ -1,6 +1,13 @@
 import TableAntd from "@/components/Table"
 import { IUser } from "@/interfaces/user.interface"
-import { ROLE, ROLE_COLORS, RoleType, STATUS, STATUS_COLORS, StatusType } from "@/utils/constants/GlobalConst"
+import {
+    ROLE,
+    ROLE_COLORS,
+    RoleType,
+    USER_STATUS,
+    USER_STATUS_COLORS,
+    UserStatusType
+} from "@/utils/constants/GlobalConst"
 import { ColumnsType } from "antd/es/table"
 import { AlignType } from "rc-table/lib/interface"
 import { FaEllipsis } from "react-icons/fa6"
@@ -61,14 +68,14 @@ const TableManageUsers = () => {
             dataIndex: "status",
             width: "8%",
             filters: [
-                { text: "Active", value: STATUS.ACTIVE },
-                { text: "Disable", value: STATUS.DISABLED },
-                { text: "Registing", value: STATUS.REGISTING }
+                { text: "Active", value: USER_STATUS.ACTIVE },
+                { text: "Disable", value: USER_STATUS.DISABLED },
+                { text: "Registing", value: USER_STATUS.REGISTING }
             ],
             onFilter: (value, record) => record.status === value,
-            render: (status: StatusType) => (
+            render: (status: UserStatusType) => (
                 <Badge
-                    color={STATUS_COLORS[status]}
+                    color={USER_STATUS_COLORS[status]}
                     className="flex items-center text-xs font-medium"
                     text={formatStatus(status)}
                 ></Badge>

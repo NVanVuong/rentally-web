@@ -12,12 +12,13 @@ import { AiOutlineCloseCircle, AiOutlineHome } from "react-icons/ai"
 interface Props {
     room: IRoom
 }
+
 const RoomCard = ({ room }: Props) => {
     const dispatch = useAppDispatch()
     const srcImage = JSON.parse(useAppSelector((state) => state.generateRoom.srcImage))
     const { area, price, depositAmount, utilities, id } = room
-    const { data } = useGetUtilitiesQuery("")
-    // data as IUtiltity[]
+    const { data } = useGetUtilitiesQuery()
+
     const [roomName, setRoomName] = useState(room.roomName)
 
     const handleChange = (_: any, value: (IUtiltity | undefined)[]) => {
@@ -40,7 +41,7 @@ const RoomCard = ({ room }: Props) => {
                 }}
             />
 
-            <img className="h-[140px] rounded-t-[16px] object-cover" src={srcImage || ""} alt="" />
+            <img className="h-[140px] rounded-t-[16px] object-cover" src={srcImage || ""} alt="Room image" />
             <div className="flex w-full flex-col px-4 py-2">
                 <div className="flex gap-1 border-b px-2 ">
                     <AiOutlineHome className="h-4 w-4 text-primary" />
@@ -53,7 +54,7 @@ const RoomCard = ({ room }: Props) => {
                             dispatch(changeRoomName({ id: id || "", roomName: e.target.value }))
                         }}
                         placeholder="Room ID"
-                        className="h-full w-[100px] text-[14px] outline-none placeholder:text-[14px] placeholder:font-normal "
+                        className="h-full w-[100px] text-[14px] outline-none placeholder:text-[14px] placeholder:font-normal"
                     />
                 </div>
                 <div className="mb-1 border-b pb-1">

@@ -2,18 +2,21 @@ import { TbEdit } from "react-icons/tb"
 import { HiOutlineViewfinderCircle } from "react-icons/hi2"
 import { useAppDispatch } from "@/redux/hook"
 import { openModal } from "@/redux/features/modal/modal.slice"
-import { MODAL, STATUS_RENTAL } from "@/utils/constants/GlobalConst"
+import { MODAL, RENTAL_STATUS, ROLE } from "@/utils/constants/GlobalConst"
 import { MenuProps } from "antd"
 import { RiCalendarCloseFill } from "react-icons/ri"
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai"
 import { LuFileX2 } from "react-icons/lu"
 import { IRentals } from "@/interfaces/rentals.interface"
+import useAuth from "@/hooks/useAuth"
 
 export const useMenuActions = () => {
     const dispatch = useAppDispatch()
 
+    const { role } = useAuth()
+
     return (record: IRentals) => {
-        const commonActions = [
+        const viewAction = [
             {
                 label: (
                     <div
@@ -24,7 +27,10 @@ export const useMenuActions = () => {
                     </div>
                 ),
                 key: "0"
-            },
+            }
+        ]
+
+        const updateAction = [
             {
                 type: "divider"
             },
@@ -45,7 +51,7 @@ export const useMenuActions = () => {
 
         let statusSpecificActions: MenuProps["items"] = []
 
-        if (status === STATUS_RENTAL.CREATED) {
+        if (status === RENTAL_STATUS.CREATED) {
             statusSpecificActions = [
                 {
                     type: "divider"
@@ -80,7 +86,7 @@ export const useMenuActions = () => {
             ]
         }
 
-        if (status === STATUS_RENTAL.REQUEST_BREAK) {
+        if (status === RENTAL_STATUS.REQUEST_BREAK) {
             statusSpecificActions = [
                 {
                     type: "divider"
@@ -101,7 +107,7 @@ export const useMenuActions = () => {
             ]
         }
 
-        if (status === STATUS_RENTAL.COMPLETED) {
+        if (status === RENTAL_STATUS.COMPLETED) {
             statusSpecificActions = [
                 {
                     type: "divider"
@@ -120,6 +126,8 @@ export const useMenuActions = () => {
             ]
         }
 
-        return [...commonActions, ...statusSpecificActions] as MenuProps["items"]
+        if (role === ROLE.ADMIN) return viewAction as MenuProps["items"]
+
+        return [viewAction, updateAction, ...statusSpecificActions] as MenuProps["items"]
     }
 }
