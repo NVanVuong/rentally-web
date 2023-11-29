@@ -1,6 +1,6 @@
 import { Avatar, Dropdown, MenuProps } from "antd"
-import { MdOutlineAdminPanelSettings, MdLogout, MdOutlineHomeWork } from "react-icons/md"
-import { BiMapPin, BiUser } from "react-icons/bi"
+import { MdOutlineAdminPanelSettings, MdLogout } from "react-icons/md"
+import { BiUser } from "react-icons/bi"
 import { logOut } from "@/redux/features/auth/auth.slice"
 import { useAppDispatch } from "@/redux/hook"
 import { MdOutlineMenu } from "react-icons/md"
@@ -14,6 +14,9 @@ import { AvatarDefault } from "@/assets/images"
 import { ItemType } from "antd/es/menu/hooks/useItems"
 import useAuth from "@/hooks/useAuth"
 import "./style.css"
+import { FaRegHeart } from "react-icons/fa"
+import { RiVipCrownLine } from "react-icons/ri"
+import { LuClipboardSignature } from "react-icons/lu"
 
 const UserMenu = () => {
     const { userInfo, role, isAuth } = useAuth()
@@ -63,12 +66,17 @@ const UserMenu = () => {
         {
             key: "checklist",
             label: "My Checklist",
-            icon: <BiMapPin className="mr-4 h-4 w-4" />
+            icon: <FaRegHeart className="mr-4 h-4 w-4" />
         },
         {
             key: "my-rental",
             label: "My Rental",
-            icon: <MdOutlineHomeWork className="mr-4 h-4 w-4" />
+            icon: <LuClipboardSignature className="mr-4 h-4 w-4" />
+        },
+        {
+            key: "become-host",
+            label: "Become a host",
+            icon: <RiVipCrownLine className="mr-4 h-4 w-4" />
         },
         role === ROLE.ADMIN
             ? {
@@ -109,7 +117,7 @@ const UserMenu = () => {
 
     return (
         <Dropdown
-            className={`flex items-center justify-center gap-2 rounded-full border border-gray-200 py-1 pl-3 pr-2 transition duration-200 hover:shadow-xl ${
+            className={`relative flex items-center justify-center gap-2 rounded-full border border-gray-200 py-1 pl-3 pr-2 transition duration-200 hover:shadow-xl ${
                 isOpen ? "shadow-xl" : "shadow-none"
             }`}
             placement="bottomRight"
@@ -119,6 +127,14 @@ const UserMenu = () => {
             onOpenChange={() => setIsOpen(!isOpen)}
         >
             <div>
+                {role === ROLE.USER && (
+                    <button
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute right-24 hidden whitespace-nowrap text-sm font-bold md:block"
+                    >
+                        Become a host
+                    </button>
+                )}
                 <MdOutlineMenu className="h-5 w-5" />
                 <Avatar className="cursor-pointer" src={userInfo ? userInfo.photo : AvatarDefault} size={36} />
             </div>

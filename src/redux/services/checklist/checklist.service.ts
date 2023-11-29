@@ -6,11 +6,10 @@ const createApiGetCheckListWithAuth = createApiWithAuth("getChecklistApi", ["Che
 
 export const getChecklistApi = createApiGetCheckListWithAuth.injectEndpoints({
     endpoints: (builder) => ({
-        getChecklist: builder.query<{ message: string; status: number; data?: IRoomFinding[] }, any>({
-            query: (params) => {
+        getChecklist: builder.query<{ message: string; status: number; data?: IRoomFinding[] }, void>({
+            query: () => {
                 return {
-                    url: "/checklist",
-                    params: params
+                    url: "/checklist"
                 }
             },
             providesTags: ["Checklists"]

@@ -30,9 +30,6 @@ const AdminRoomsManagement = lazy(() => import("../pages/admin/room/Rooms"))
 const Checklist = lazy(() => import("../pages/checklist"))
 
 const MainRoute = () => {
-    useGetUtilitiesQuery()
-    useGetProvincesQuery()
-
     return (
         <Suspense fallback={<Loading />}>
             <BrowserRouter>

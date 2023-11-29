@@ -7,8 +7,7 @@ import { BsMapFill } from "react-icons/bs"
 import { AiOutlineUnorderedList } from "react-icons/ai"
 import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 import { useGetFindingRoomsQuery } from "@/redux/services/findingRoom/findingRoom.service"
-import { Empty, Skeleton } from "antd"
-import ScrollToTop from "@/components/ScrollToTop"
+import { Button, Empty, Skeleton } from "antd"
 
 const Home = () => {
     useGetUtilitiesQuery()
@@ -75,7 +74,7 @@ const Home = () => {
                 <div className="flex h-full flex-col">
                     <div className="my-6 grow">
                         {isLoading ? (
-                            <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-28">
+                            <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-6 md:px-10 xl:px-28">
                                 <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                                     {Array.from({ length: 10 }).map((_, index) => (
                                         <div style={{ width: "100%" }} key={index}>
@@ -140,8 +139,6 @@ const Home = () => {
                 {!isShowMap ? "Show map" : "Show list"}{" "}
                 <span>{!isShowMap ? <BsMapFill /> : <AiOutlineUnorderedList />}</span>
             </button>
-
-            <ScrollToTop />
         </div>
     )
 }

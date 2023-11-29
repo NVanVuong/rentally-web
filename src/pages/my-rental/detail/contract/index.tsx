@@ -1,9 +1,12 @@
-import { AiOutlinePhone, AiOutlineMail } from "react-icons/ai"
+import { AiOutlineMail } from "react-icons/ai"
 import { formatPrice } from "@/utils/helpers"
 import Button from "@/pages/room-detail/components/Button"
 import { AverageRating } from "@/pages/room-detail/rating"
 import { IHostInfo, IRoomInfo } from "@/interfaces/rentals.interface"
 import { Skeleton } from "antd"
+import { LuStar } from "react-icons/lu"
+import { SITE_MAP } from "@/utils/constants/Path"
+import { useNavigate, useParams } from "react-router-dom"
 
 interface IContractProps {
     hostInfo?: IHostInfo
@@ -15,8 +18,11 @@ const Contract = (props: IContractProps) => {
 
     const landlord = props?.hostInfo
 
-    const handleCallHost = () => {
-        window.location.href = `tel:${landlord?.phone}`
+    const navigate = useNavigate()
+    const { id } = useParams()
+
+    const handleReview = () => {
+        navigate(`/${SITE_MAP.ROOM}/${id}`)
     }
 
     const isLoading = !props?.hostInfo || !props?.roomInfo
@@ -59,12 +65,14 @@ const Contract = (props: IContractProps) => {
                             </div>
                         </div>
                     </div>
-                    <Button
-                        onClick={handleCallHost}
-                        className="ml-auto mt-4 w-fit rounded-lg bg-primary px-4 py-1 text-sm text-white"
-                    >
-                        Contact host <AiOutlinePhone />
-                    </Button>
+                    <div className="mt-4 flex items-center justify-end">
+                        <Button
+                            onClick={handleReview}
+                            className="w-fit rounded-lg bg-primary px-4 py-1 text-sm text-white transition duration-100 hover:shadow hover:shadow-primary"
+                        >
+                            Review <LuStar />
+                        </Button>
+                    </div>
                 </>
             ) : (
                 <>
@@ -74,11 +82,13 @@ const Contract = (props: IContractProps) => {
                         <Skeleton.Image style={{ width: "8rem", height: "6rem" }} active />
                         <div className="flex items-center gap-4">
                             <Skeleton.Avatar active />
-                            <Skeleton className="w-60" active paragraph={{ rows: 1 }} />
+                            <Skeleton className="w-40" active paragraph={{ rows: 2 }} />
                         </div>
                     </div>
                     <br />
-                    <Skeleton active paragraph={{ rows: 0 }} />
+                    <div className="mb-1 flex h-full items-center justify-end">
+                        <Skeleton.Button style={{ width: "80px" }} active />
+                    </div>
                 </>
             )}
         </div>

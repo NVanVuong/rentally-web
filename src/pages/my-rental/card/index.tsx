@@ -50,12 +50,14 @@ const MyRentalCard = (props: IRentalCard) => {
 
     return (
         <div className="overflow-hidden rounded-xl border border-gray-200 shadow-md">
-            <img
-                onClick={handleClick}
-                src={roomInfo.images[0]}
-                alt="Room image"
-                className="h-36 w-full cursor-pointer object-fill"
-            />
+            <div className="aspect-[5/3] h-auto w-full overflow-hidden">
+                <img
+                    onClick={handleClick}
+                    src={roomInfo.images[0]}
+                    alt="Room image"
+                    className="aspect-[5/3] h-auto w-full cursor-pointer transition-all duration-200 hover:scale-110"
+                />
+            </div>
             <div className="px-4 py-2">
                 <div className="flex items-center justify-between">
                     <span className="text-sm font-medium uppercase text-secondary">{roomInfo.roomName}</span>

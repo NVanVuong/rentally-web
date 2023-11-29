@@ -50,7 +50,7 @@ const MyProfile = () => {
 
     return (
         <>
-            <section className="pb-16 pt-16">
+            <section className="my-20">
                 <div className="mx-auto w-full px-4 md:w-2/3 lg:w-4/12">
                     <div className="-mb-14 flex justify-end">
                         <Button

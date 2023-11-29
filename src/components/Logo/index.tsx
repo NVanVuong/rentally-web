@@ -19,7 +19,7 @@ const Logo = (props: ILogo) => {
     return (
         <img
             onClick={(e) => handleClick(e)}
-            className={`${isOpen ? "h-full" : "h-8"} max-h-12 cursor-pointer transition duration-100`}
+            className={`${isOpen ? "h-full" : "h-8"} max-h-10 cursor-pointer transition duration-100`}
             src={isOpen ? RentallyLogoFull : RentallyLogo}
             alt="Rentally Logo"
         />
