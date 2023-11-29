@@ -6,7 +6,7 @@ import { IHostInfo, IRoomInfo } from "@/interfaces/rentals.interface"
 import { Skeleton } from "antd"
 import { LuStar } from "react-icons/lu"
 import { SITE_MAP } from "@/utils/constants/Path"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 interface IContractProps {
     hostInfo?: IHostInfo
@@ -14,12 +14,11 @@ interface IContractProps {
 }
 
 const Contract = (props: IContractProps) => {
-    const { price, images = [], utilities = [] } = props?.roomInfo || {}
+    const { price, images = [], utilities = [], id } = props?.roomInfo || {}
 
     const landlord = props?.hostInfo
 
     const navigate = useNavigate()
-    const { id } = useParams()
 
     const handleReview = () => {
         navigate(`/${SITE_MAP.ROOM}/${id}`)

@@ -49,7 +49,7 @@ const RoomDetail = () => {
                 </div>
             </div>
             <br />
-            <Skeleton active />
+            <Skeleton active paragraph={{ rows: 4 }} />
         </div>
     ) : (
         <div className="h-full px-4 pb-20 pt-4 sm:px-6 md:px-10 xl:px-28">
