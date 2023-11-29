@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
-import { useSearchParams } from "react-router-dom"
+import { useLocation, useSearchParams } from "react-router-dom"
 import ListingCard from "@/components/Card/ListingCard"
 import HomeMap from "@/components/Map/HomeMap"
 import { BsMapFill } from "react-icons/bs"
@@ -8,6 +8,7 @@ import { AiOutlineUnorderedList } from "react-icons/ai"
 import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 import { useGetFindingRoomsQuery } from "@/redux/services/findingRoom/findingRoom.service"
 import { Button, Empty, Skeleton } from "antd"
+import { SITE_MAP } from "@/utils/constants/Path"
 
 const Home = () => {
     useGetUtilitiesQuery()
@@ -60,7 +61,11 @@ const Home = () => {
         setSearchParamsObject(newSearchParamsObject)
     }, [searchParams])
 
-    if (currentRooms.length === 0 && !isLoading) {
+    const location = useLocation()
+
+    const isIndex = location.pathname === SITE_MAP.INDEX
+
+    if (currentRooms.length === 0 && !isIndex) {
         return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No rooms match in list." className="mt-24" />
     }
 
@@ -75,8 +80,8 @@ const Home = () => {
                     <div className="my-6 grow">
                         {isLoading ? (
                             <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-6 md:px-10 xl:px-28">
-                                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                                    {Array.from({ length: 10 }).map((_, index) => (
+                                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+                                    {Array.from({ length: 12 }).map((_, index) => (
                                         <div style={{ width: "100%" }} key={index}>
                                             <Skeleton.Image className="!aspect-square !h-auto !w-full" active />
                                             <Skeleton active style={{ marginTop: "10px" }} />
@@ -87,7 +92,7 @@ const Home = () => {
                         ) : (
                             <>
                                 <div className="mx-auto max-w-[2520px] px-4 sm:px-6 md:px-10 xl:px-28">
-                                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
                                         {currentRooms.map((dataRoom: IRoomFinding, index) => (
                                             <ListingCard key={dataRoom.id + index} dataRoom={dataRoom} />
                                         ))}

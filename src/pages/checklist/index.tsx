@@ -12,39 +12,34 @@ const Checklist = () => {
 
     const { data, isLoading } = useGetChecklistQuery()
 
-    if (isLoading) {
-        return (
-            <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-28">
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {Array.from({ length: 10 }).map((_, index) => (
-                        <div style={{ width: "100%" }} key={index}>
-                            <Skeleton.Image className="!aspect-square !h-auto !w-full" active />
-                            <Skeleton active style={{ marginTop: "10px" }} />
-                        </div>
-                    ))}
-                </div>
-            </div>
-        )
-    }
-
     if (data?.data?.length === 0 && !isLoading)
         return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No rooms match in list." className="mt-24" />
 
     return (
-        <div className="relative h-full w-full">
+        <div className="mb-8 mt-4 px-4 sm:px-6 md:px-10 xl:px-28">
+            <h1 className="mb-4 text-2xl font-bold text-secondary">My Rental</h1>
             {isShowMap ? (
                 <div className="absolute inset-0 h-screen">
                     <HomeMap dataRooms={data?.data || []} />
                 </div>
             ) : (
-                <div className="my-6">
-                    <div className="mx-auto max-w-[2520px] px-4 sm:px-6 md:px-10 xl:px-28">
-                        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+                    {!isLoading ? (
+                        <>
                             {data?.data?.map((dataRoom: IRoomFinding) => (
                                 <ListingCard key={dataRoom.id} dataRoom={dataRoom} />
                             ))}
-                        </div>
-                    </div>
+                        </>
+                    ) : (
+                        <>
+                            {Array.from({ length: 12 }).map((_, index) => (
+                                <div style={{ width: "100%" }} key={index}>
+                                    <Skeleton.Image className="!aspect-square !h-auto !w-full" active />
+                                    <Skeleton active style={{ marginTop: "10px" }} />
+                                </div>
+                            ))}
+                        </>
+                    )}
                 </div>
             )}
 

@@ -60,10 +60,12 @@ const MyRentalCard = (props: IRentalCard) => {
             </div>
             <div className="px-4 py-2">
                 <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium uppercase text-secondary">{roomInfo.roomName}</span>
+                    <span className="overflow-hidden text-ellipsis whitespace-nowrap text-sm font-medium uppercase text-secondary">
+                        {roomInfo.roomName}
+                    </span>
 
                     <span
-                        className="break-keep text-xs font-bold uppercase"
+                        className="ml-1 break-keep text-xs font-bold uppercase"
                         style={{ color: RENTAL_STATUS_COLORS[status as RENTAL_STATUS] }}
                     >
                         {RENTAL_STATUS_TEXT[status as RENTAL_STATUS]}
