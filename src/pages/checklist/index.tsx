@@ -4,22 +4,21 @@ import HomeMap from "@/components/Map/HomeMap"
 import { BsMapFill } from "react-icons/bs"
 import { AiOutlineUnorderedList } from "react-icons/ai"
 import { IRoomFinding } from "@/interfaces/roomfiding.interface"
-import { Skeleton } from "antd"
-import ScrollToTop from "@/components/ScrollToTop"
+import { Empty, Skeleton } from "antd"
 import { useGetChecklistQuery } from "@/redux/services/checklist/checklist.service"
 
 const Checklist = () => {
     const [isShowMap, setIsShowMap] = useState(false)
 
-    const { data, isLoading, isFetching } = useGetChecklistQuery({})
+    const { data, isLoading } = useGetChecklistQuery()
 
     if (isLoading) {
         return (
             <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-28">
                 <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {Array.from({ length: 10 }).map((_, index) => (
-                        <div style={{ width: "280px" }} key={index}>
-                            <Skeleton.Image style={{ width: "280px", height: "280px" }} active />
+                        <div style={{ width: "100%" }} key={index}>
+                            <Skeleton.Image className="!aspect-square !h-auto !w-full" active />
                             <Skeleton active style={{ marginTop: "10px" }} />
                         </div>
                     ))}
@@ -27,6 +26,9 @@ const Checklist = () => {
             </div>
         )
     }
+
+    if (data?.data?.length === 0 && !isLoading)
+        return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No rooms match in list." className="mt-24" />
 
     return (
         <div className="relative h-full w-full">
@@ -43,18 +45,6 @@ const Checklist = () => {
                             ))}
                         </div>
                     </div>
-                    {isFetching && (
-                        <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-2 md:px-10 xl:px-28">
-                            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                                {Array.from({ length: 10 }).map((_, index) => (
-                                    <div style={{ width: "280px" }} key={index}>
-                                        <Skeleton.Image style={{ width: "280px", height: "280px" }} active />
-                                        <Skeleton active style={{ marginTop: "10px" }} />
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    )}
                 </div>
             )}
 
@@ -67,8 +57,6 @@ const Checklist = () => {
                 {!isShowMap ? "Show map" : "Show list"}{" "}
                 <span>{!isShowMap ? <BsMapFill /> : <AiOutlineUnorderedList />}</span>
             </button>
-
-            <ScrollToTop />
         </div>
     )
 }

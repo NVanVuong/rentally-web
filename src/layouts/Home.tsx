@@ -1,3 +1,4 @@
+import ScrollToTop from "@/components/ScrollToTop"
 import Footer from "@/container/Footer"
 import Header from "@/container/Header"
 import { Outlet } from "react-router-dom"
@@ -10,6 +11,8 @@ const HomeLayout = () => {
                 <Outlet />
             </div>
             <Footer />
+
+            <ScrollToTop />
         </div>
     )
 }

@@ -14,7 +14,6 @@ import { IRoomBlock } from "@/interfaces/block.interface"
 import { ILandlord } from "@/interfaces/user.interface"
 import { Skeleton } from "antd"
 import "./style.css"
-import ScrollToTop from "@/components/ScrollToTop"
 
 export const gridLayout = ["2fr 1fr 1fr 1fr 1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr"]
 
@@ -80,8 +79,6 @@ const RoomDetail = () => {
             </div>
 
             {ratingDetail?.ratings.length > 0 && <Reviews reviews={ratingDetail?.ratings} />}
-
-            <ScrollToTop />
         </div>
     )
 }
