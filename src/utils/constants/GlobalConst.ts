@@ -126,5 +126,8 @@ export const MODAL = {
         APPROVE: "APPROVE_RENTAL",
         CANCEL: "CANCEL_RENTAL",
         ACCEPT_BREAK: "ACCEPT_BREAK_RENTAL"
+    },
+    REVIEW: {
+        RENTAL: "REVIEW_RENTAL"
     }
 } as const

@@ -5,8 +5,9 @@ import { AverageRating } from "@/pages/room-detail/rating"
 import { IHostInfo, IRoomInfo } from "@/interfaces/rentals.interface"
 import { Skeleton } from "antd"
 import { LuStar } from "react-icons/lu"
-import { SITE_MAP } from "@/utils/constants/Path"
-import { useNavigate } from "react-router-dom"
+import { useAppDispatch } from "@/redux/hook"
+import { MODAL } from "@/utils/constants/GlobalConst"
+import { openModal } from "@/redux/features/modal/modal.slice"
 
 interface IContractProps {
     hostInfo?: IHostInfo
@@ -14,14 +15,14 @@ interface IContractProps {
 }
 
 const Contract = (props: IContractProps) => {
-    const { price, images = [], utilities = [], id } = props?.roomInfo || {}
+    const { price, images = [], utilities = [] } = props?.roomInfo || {}
 
     const landlord = props?.hostInfo
 
-    const navigate = useNavigate()
+    const dispatch = useAppDispatch()
 
     const handleReview = () => {
-        navigate(`/${SITE_MAP.ROOM}/${id}`)
+        dispatch(openModal({ type: MODAL.REVIEW.RENTAL }))
     }
 
     const isLoading = !props?.hostInfo || !props?.roomInfo
