@@ -55,7 +55,7 @@ const Register = () => {
         email: Yup.string().email("Email is invalid!").required("Email Required!"),
         firstName: Yup.string().required("Firstname Required!"),
         lastName: Yup.string().required("Lastname Required!"),
-        password: Yup.string().min(6, "Password must be minimum 6 digits!").required("Password Required!"),
+        password: Yup.string().min(4, "Password must be minimum 4 digits!").required("Password Required!"),
         confirmPassword: Yup.string()
             .oneOf([Yup.ref("password"), undefined], "Password must match!")
             .required("Confirm password is reqired!"),
@@ -233,7 +233,7 @@ const Register = () => {
                                         <div className="m-8">
                                             <div className="mb-6 flex items-center justify-center gap-8">
                                                 <img src={mail} alt="" />
-                                                <h1 id='header' className="text-[24px] font-semibold text-secondary ">
+                                                <h1 className="text-[24px] font-semibold text-secondary ">
                                                     Check your email!
                                                 </h1>
                                             </div>

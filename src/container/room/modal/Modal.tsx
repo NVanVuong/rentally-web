@@ -164,7 +164,6 @@ const Modal = () => {
                             room.images = res.data
                         } else {
                             console.log("upload error")
-                            message.error("upload error")
                         }
                     }
                     console.log(rooms)
@@ -205,28 +204,14 @@ const Modal = () => {
                     <Form.Item
                         className="w-full"
                         name="area"
-                        rules={[{ required: true, message: "Please input area!" },  {
-                            validator: (_, value) => {
-                                if (value > 0) {
-                                    return Promise.resolve();
-                                }
-                                return Promise.reject("Area must be greater than 0!");
-                            },
-                        },]}
+                        rules={[{ required: true, message: "Please input area!" }]}
                     >
                         <TypedInputNumber className="w-full" placeholder="Area" />
                     </Form.Item>
                     <Form.Item
                         className="w-full"
                         name="price"
-                        rules={[{ required: true, message: "Please input price!" }, {
-                            validator: (_, value) => {
-                                if (value > 0) {
-                                    return Promise.resolve();
-                                }
-                                return Promise.reject("Price must be greater than 0!");
-                            },
-                        }]}
+                        rules={[{ required: true, message: "Please input price!" }]}
                     >
                         <TypedInputNumber className="w-full" placeholder="Price" />
                     </Form.Item>
@@ -236,14 +221,7 @@ const Modal = () => {
                         <Form.Item
                             className="w-full"
                             name="depositAmount"
-                            rules={[{ required: true, message: "Please input deposit amount" }, {
-                                validator: (_, value) => {
-                                    if (value >= 0) {
-                                        return Promise.resolve();
-                                    }
-                                    return Promise.reject("Deposit amount must be greater than or equal to 0!");
-                                },
-                            }]}
+                            rules={[{ required: true, message: "Please input deposit amount" }]}
                         >
                             <TypedInputNumber className="w-full" placeholder="Deposit amount" />
                         </Form.Item>
@@ -251,14 +229,7 @@ const Modal = () => {
                         <Form.Item
                             className="w-full"
                             name="quantity"
-                            rules={[{ required: true, message: "Please input quantity!" }, {
-                                validator: (_, value) => {
-                                    if (value > 0) {
-                                        return Promise.resolve();
-                                    }
-                                    return Promise.reject("Quantity must be greater than 0!");
-                                },
-                            }]}
+                            rules={[{ required: true, message: "Please input quantity!" }]}
                         >
                             <TypedInputNumber className="w-full" placeholder="Quantity" />
                         </Form.Item>
