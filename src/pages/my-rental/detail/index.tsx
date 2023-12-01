@@ -13,6 +13,7 @@ import { RENTAL_STATUS_COLORS, RENTAL_STATUS, RENTAL_STATUS_TEXT } from "@/utils
 import useServerMessage from "@/hooks/useServerMessage"
 import { message } from "antd"
 import { SITE_MAP } from "@/utils/constants/Path"
+import ModalReview from "../modalReview"
 
 export const dateFormat = "DD/MM/YYYY"
 
@@ -22,7 +23,6 @@ const MyRentalDetail = () => {
     const navigate = useNavigate()
 
     const confirm = new URLSearchParams(useLocation().search).get("confirm")
-    console.log(confirm)
 
     useEffect(() => {
         if (confirm) {
@@ -88,6 +88,7 @@ const MyRentalDetail = () => {
 
     return (
         <div className="mb-16 mt-4 px-4 sm:px-6 md:px-10 xl:px-28">
+            <ModalReview />
             <div className="flex flex-row items-center">
                 <span onClick={() => navigate(SITE_MAP.MY_RENTAL)}>
                     <MdOutlineArrowBackIosNew className="-ml-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full p-2 text-black transition duration-100 hover:scale-110 hover:bg-gray-100" />
@@ -208,7 +209,12 @@ const MyRentalDetail = () => {
                         text={RENTAL_STATUS_TEXT[status as RENTAL_STATUS]}
                         color={RENTAL_STATUS_COLORS[status as RENTAL_STATUS]}
                     >
-                        <Contract hostInfo={myRental?.hostInfo} roomInfo={myRental?.roomInfo} />
+                        <Contract
+                            isComplete={isComplete}
+                            rentalInfo={myRental?.rentalInfo}
+                            hostInfo={myRental?.hostInfo}
+                            roomInfo={myRental?.roomInfo}
+                        />
                     </Badge.Ribbon>
                 </div>
             </Spin>

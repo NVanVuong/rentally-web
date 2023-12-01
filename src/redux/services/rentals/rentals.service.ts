@@ -1,4 +1,10 @@
-import { IModInfoResponse, IMyRentalResponse, IRentals, IRentalsResponse } from "@/interfaces/rentals.interface"
+import {
+    IModInfoResponse,
+    IMyRentalResponse,
+    IRentals,
+    IRentalsResponse,
+    IReviewRentalRequest
+} from "@/interfaces/rentals.interface"
 import { createApiWithAuth } from "../apiWithAuth.service"
 import { convertDate } from "@/utils/helpers"
 
@@ -140,6 +146,14 @@ export const rentalsApi = createApiRentalskWithAuth.injectEndpoints({
                 method: "PUT"
             }),
             invalidatesTags: ["Rentals", "MyRentals"]
+        }),
+        reviewRental: builder.mutation<IRentalsResponse, IReviewRentalRequest>({
+            query: (data) => ({
+                url: `/rating`,
+                method: "POST",
+                body: data
+            }),
+            invalidatesTags: ["Rentals", "MyRentals"]
         })
     })
 })
@@ -156,5 +170,6 @@ export const {
     useAcceptBreakRentalMutation,
     useEndRentalMutation,
     useConfirmRentalMutation,
-    useRequestBreakRentalMutation
+    useRequestBreakRentalMutation,
+    useReviewRentalMutation
 } = rentalsApi

@@ -17,13 +17,13 @@ const Checklist = () => {
 
     return (
         <div className="mb-8 mt-4 px-4 sm:px-6 md:px-10 xl:px-28">
-            <h1 className="mb-4 text-2xl font-bold text-secondary">My Rental</h1>
+            <h1 className="mb-4 text-2xl font-bold text-secondary">My Checklist</h1>
             {isShowMap ? (
                 <div className="absolute inset-0 h-screen">
                     <HomeMap dataRooms={data?.data || []} />
                 </div>
             ) : (
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {!isLoading ? (
                         <>
                             {data?.data?.map((dataRoom: IRoomFinding) => (
