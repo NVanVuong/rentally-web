@@ -12,6 +12,7 @@ import { Tooltip } from "antd"
 import { useCreateChecklistMutation } from "@/redux/services/checklist/checklist.service"
 import { useAppSelector } from "@/redux/hook"
 import { IUser } from "@/interfaces/user.interface"
+import useServerMessage from "@/hooks/useServerMessage"
 interface ListingCardProps {
     dataRoom: IRoomFinding
     onClick?: () => void
@@ -26,7 +27,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
     const userInfo = useAppSelector((state) => state.auth.userInfo) as IUser
 
     const [currentSlide, setCurrentSlide] = useState(0)
-    const [createChecklist] = useCreateChecklistMutation()
+    const [createChecklist, { data, error }] = useCreateChecklistMutation()
 
     const { images, address, district, price, avgRate, utilities } = dataRoom
 
@@ -47,6 +48,8 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
             navigate("/login")
         }
     }
+
+    useServerMessage({ data, error })
 
     return (
         <div className="group col-span-1 mb-2 cursor-pointer">

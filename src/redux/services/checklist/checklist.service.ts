@@ -20,7 +20,7 @@ export const getChecklistApi = createApiGetCheckListWithAuth.injectEndpoints({
                 method: "POST",
                 body: data
             }),
-            invalidatesTags: ["Checklists"]
+            invalidatesTags: ["findingRoom", "Checklists"]
         })
     })
 })

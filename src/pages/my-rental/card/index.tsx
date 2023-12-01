@@ -1,7 +1,8 @@
 import { IRentals } from "@/interfaces/rentals.interface"
-import { RENTAL_STATUS_COLORS, RENTAL_STATUS, RENTAL_STATUS_TEXT } from "@/utils/constants/GlobalConst"
+import { RENTAL_STATUS_COLORS, RENTAL_STATUS, RENTAL_STATUS_TEXT, RATING_STATUS } from "@/utils/constants/GlobalConst"
 import { SITE_MAP } from "@/utils/constants/Path"
 import { formatPrice } from "@/utils/helpers"
+import { FaCheck } from "react-icons/fa"
 import { useNavigate } from "react-router-dom"
 
 interface IRentalCard {
@@ -12,6 +13,9 @@ const MyRentalCard = (props: IRentalCard) => {
     const myRental = props?.myRental
 
     const { rentalInfo, roomInfo, status } = myRental
+
+    const ratingStauts = rentalInfo?.ratingStatus
+    const isRated = ratingStauts === RATING_STATUS.RATED
 
     const navigate = useNavigate()
 
@@ -31,9 +35,17 @@ const MyRentalCard = (props: IRentalCard) => {
                 )
             case RENTAL_STATUS.COMPLETED:
                 return (
-                    <button className="ml-auto w-fit rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-white hover:shadow-md hover:shadow-primary">
-                        Request break
-                    </button>
+                    <div className="flex items-center justify-between">
+                        {isRated ? (
+                            <span className="flex items-center gap-2 font-medium">
+                                <FaCheck className="h-3 w-3 fill-green-500" />
+                                Reviewed
+                            </span>
+                        ) : null}
+                        <button className="ml-auto w-fit rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-white hover:shadow-md hover:shadow-primary">
+                            Request break
+                        </button>
+                    </div>
                 )
             case RENTAL_STATUS.REQUEST_BREAK:
                 return <span className="py-1.5 text-sm text-gray-400">Waiting host for accepting break</span>

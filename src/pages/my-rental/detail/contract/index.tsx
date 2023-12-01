@@ -1,28 +1,42 @@
-import { AiOutlineMail } from "react-icons/ai"
+import { AiOutlineMail, AiOutlinePhone } from "react-icons/ai"
 import { formatPrice } from "@/utils/helpers"
 import Button from "@/pages/room-detail/components/Button"
 import { AverageRating } from "@/pages/room-detail/rating"
-import { IHostInfo, IRoomInfo } from "@/interfaces/rentals.interface"
+import { IHostInfo, IRentalInfo, IRoomInfo } from "@/interfaces/rentals.interface"
 import { Skeleton } from "antd"
 import { LuStar } from "react-icons/lu"
 import { useAppDispatch } from "@/redux/hook"
-import { MODAL } from "@/utils/constants/GlobalConst"
+import { MODAL, RATING_STATUS } from "@/utils/constants/GlobalConst"
 import { openModal } from "@/redux/features/modal/modal.slice"
+import { SITE_MAP } from "@/utils/constants/Path"
+import { useNavigate } from "react-router-dom"
+import { FaCheck } from "react-icons/fa"
 
 interface IContractProps {
     hostInfo?: IHostInfo
     roomInfo?: IRoomInfo
+    rentalInfo?: IRentalInfo
+    isComplete?: boolean
 }
 
 const Contract = (props: IContractProps) => {
-    const { price, images = [], utilities = [] } = props?.roomInfo || {}
+    const { price, images = [], utilities = [], id } = props?.roomInfo || {}
 
     const landlord = props?.hostInfo
 
-    const dispatch = useAppDispatch()
+    const ratingStauts = props.rentalInfo?.ratingStatus
 
-    const handleReview = () => {
-        dispatch(openModal({ type: MODAL.REVIEW.RENTAL }))
+    const isRated = ratingStauts === RATING_STATUS.RATED
+
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+
+    const handleClick = () => {
+        if (props?.isComplete) {
+            dispatch(openModal({ type: MODAL.REVIEW.RENTAL }))
+        } else {
+            window.location.href = `tel:${landlord?.phone}`
+        }
     }
 
     const isLoading = !props?.hostInfo || !props?.roomInfo
@@ -38,7 +52,12 @@ const Contract = (props: IContractProps) => {
                         <AverageRating size="small" />
                     </div>
                     <div className="mt-4 flex h-32 items-center gap-4">
-                        <img src={images[0]} className="h-full w-40 rounded-xl object-cover" alt="Room image" />
+                        <img
+                            onClick={() => navigate(`/${SITE_MAP.ROOM}/${id}`)}
+                            src={images[0]}
+                            className="h-full w-40 cursor-pointer rounded-xl object-cover"
+                            alt="Room image"
+                        />
 
                         <div className="flex flex-col items-start">
                             <span className="mb-1 text-xs font-bold">Utilities</span>
@@ -65,12 +84,30 @@ const Contract = (props: IContractProps) => {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-4 flex items-center justify-end">
+                    <div className="mt-4 flex items-center justify-between">
+                        <div>
+                            {props.isComplete && isRated ? (
+                                <span className="flex items-center gap-2 font-medium">
+                                    <FaCheck className="h-3 w-3 fill-green-500" />
+                                    Reviewed
+                                </span>
+                            ) : (
+                                <span>Pending review</span>
+                            )}
+                        </div>
                         <Button
-                            onClick={handleReview}
+                            onClick={handleClick}
                             className="w-fit rounded-lg bg-primary px-4 py-1 text-sm text-white transition duration-100 hover:shadow hover:shadow-primary"
                         >
-                            Review <LuStar />
+                            {props.isComplete && !isRated ? (
+                                <>
+                                    Review <LuStar />
+                                </>
+                            ) : (
+                                <>
+                                    Contact host <AiOutlinePhone />
+                                </>
+                            )}
                         </Button>
                     </div>
                 </>

@@ -23,7 +23,6 @@ const MyRentalDetail = () => {
     const navigate = useNavigate()
 
     const confirm = new URLSearchParams(useLocation().search).get("confirm")
-    console.log(confirm)
 
     useEffect(() => {
         if (confirm) {
@@ -210,7 +209,12 @@ const MyRentalDetail = () => {
                         text={RENTAL_STATUS_TEXT[status as RENTAL_STATUS]}
                         color={RENTAL_STATUS_COLORS[status as RENTAL_STATUS]}
                     >
-                        <Contract hostInfo={myRental?.hostInfo} roomInfo={myRental?.roomInfo} />
+                        <Contract
+                            isComplete={isComplete}
+                            rentalInfo={myRental?.rentalInfo}
+                            hostInfo={myRental?.hostInfo}
+                            roomInfo={myRental?.roomInfo}
+                        />
                     </Badge.Ribbon>
                 </div>
             </Spin>

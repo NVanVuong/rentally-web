@@ -36,7 +36,10 @@ export interface IRentalInfo {
     moveInDate: string
     moveOutDate: string
     numberOfTenants: number
+    ratingStatus: TRatingStatus
 }
+
+export type TRatingStatus = "NONE" | "RATED"
 
 export interface IHostInfo {
     birthday: string
@@ -93,6 +96,15 @@ export interface IRentalsResponse {
     data: IRentals[]
     message: string
     status: string
+}
+
+export interface IReviewRentalRequest {
+    rentalId: number
+    comment: string
+    cleanRate: number
+    supportRate: number
+    locationRate: number
+    securityRate: number
 }
 
 export interface IMyRentalResponse {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
-import { useLocation, useSearchParams } from "react-router-dom"
+import { useLocation, useParams, useSearchParams } from "react-router-dom"
 import ListingCard from "@/components/Card/ListingCard"
 import HomeMap from "@/components/Map/HomeMap"
 import { BsMapFill } from "react-icons/bs"
@@ -13,6 +13,7 @@ import { SITE_MAP } from "@/utils/constants/Path"
 const Home = () => {
     useGetUtilitiesQuery()
 
+    const location = useLocation()
     const [searchParams] = useSearchParams()
     const [isShowMap, setIsShowMap] = useState(false)
     const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
@@ -20,11 +21,16 @@ const Home = () => {
     const [currentPage, setCurrentPage] = useState(2)
     const [perPage, setPerPage] = useState(20)
 
-    const { data, isLoading, isFetching } = useGetFindingRoomsQuery({
-        page: currentPage,
-        params: searchParamsObject,
-        perPage
-    })
+    const { data, isLoading, isFetching } = useGetFindingRoomsQuery(
+        {
+            page: currentPage,
+            params: searchParamsObject,
+            perPage
+        },
+        {
+            refetchOnMountOrArgChange: true
+        }
+    )
 
     const [currentRooms, setCurrentRooms] = useState<IRoomFinding[]>(data?.data?.rooms || [])
 
@@ -40,7 +46,7 @@ const Home = () => {
             const newRooms = data?.data?.rooms || []
             return Array.from(new Set([...prevRooms, ...newRooms]))
         })
-    }, [data, currentPage])
+    }, [data, currentPage, location])
 
     useEffect(() => {
         const params: [string, string][] = []
@@ -61,9 +67,9 @@ const Home = () => {
         setSearchParamsObject(newSearchParamsObject)
     }, [searchParams])
 
-    const location = useLocation()
-
     const isIndex = location.pathname === SITE_MAP.INDEX
+
+    const isEetchingInIndex = isIndex && isFetching
 
     if (currentRooms.length === 0 && !isIndex) {
         return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No rooms match in list." className="mt-24" />
@@ -78,9 +84,9 @@ const Home = () => {
             ) : (
                 <div className="flex h-full flex-col">
                     <div className="my-6 grow">
-                        {isLoading ? (
+                        {isLoading || isEetchingInIndex ? (
                             <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-6 md:px-10 xl:px-28">
-                                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+                                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                                     {Array.from({ length: 12 }).map((_, index) => (
                                         <div style={{ width: "100%" }} key={index}>
                                             <Skeleton.Image className="!aspect-square !h-auto !w-full" active />
@@ -92,7 +98,7 @@ const Home = () => {
                         ) : (
                             <>
                                 <div className="mx-auto max-w-[2520px] px-4 sm:px-6 md:px-10 xl:px-28">
-                                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+                                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                                         {currentRooms.map((dataRoom: IRoomFinding, index) => (
                                             <ListingCard key={dataRoom.id + index} dataRoom={dataRoom} />
                                         ))}

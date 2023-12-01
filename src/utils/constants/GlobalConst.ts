@@ -65,6 +65,11 @@ export const ROOM_STATUS_COLORS = {
     [ROOM_STATUS.EMPTY]: "red"
 }
 
+export enum RATING_STATUS {
+    NONE = "NONE",
+    RATED = "RATED"
+}
+
 export type RoleType = keyof typeof ROLE_COLORS
 export type UserStatusType = keyof typeof USER_STATUS_COLORS
 export type RentalStatusType = keyof typeof RENTAL_STATUS_COLORS
