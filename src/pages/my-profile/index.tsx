@@ -127,16 +127,7 @@ const MyProfile = () => {
                                         <Form.Item className="w-full" name="lastName">
                                             <Input placeholder="Lastname" />
                                         </Form.Item>
-                                        <Form.Item
-                                            className="w-full"
-                                            name="phoneNumber"
-                                            rules={[
-                                                {
-                                                    pattern: new RegExp(/^[0-9]{10,11}$/),
-                                                    message: "Please input phone number with 10 or 11 digits"
-                                                }
-                                            ]}
-                                        >
+                                        <Form.Item className="w-full" name="phoneNumber" rules={[]}>
                                             <Input placeholder="Phone" />
                                         </Form.Item>
 

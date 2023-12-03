@@ -6,6 +6,7 @@ import { createUserFormData, normFile } from "@/utils/helpers"
 import useServerMessage from "@/hooks/useServerMessage"
 import { IModal } from "@/interfaces/modal.interface"
 import Title from "@/components/Modal/Title"
+import parsePhoneNumberFromString from "libphonenumber-js"
 
 const ModalAdd = (props: IModal) => {
     const { title } = props
@@ -14,8 +15,11 @@ const ModalAdd = (props: IModal) => {
     useServerMessage({ data: data!, error: error })
 
     const onFinish = async (values: any) => {
+        const phoneNumber = parsePhoneNumberFromString(values.phoneNumber, "VN")
+        values.phoneNumber = phoneNumber?.number || ""
         const formData = createUserFormData(values)
         await createUser(formData)
+        // console.log(JSON.stringify(Object.fromEntries(formData.entries())))
     }
 
     return (
@@ -66,7 +70,13 @@ const ModalAdd = (props: IModal) => {
                 <Form.Item
                     className="w-full"
                     name="phoneNumber"
-                    rules={[{ required: true, message: "Please input phone number!" }]}
+                    rules={[
+                        { required: true, message: "Please input phone number!" },
+                        {
+                            pattern: new RegExp(/^[0-9]{10}$/),
+                            message: "Please input a valid phone number with 10 digits"
+                        }
+                    ]}
                 >
                     <Input placeholder="Phone" />
                 </Form.Item>
