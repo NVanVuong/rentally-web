@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
-import { useLocation, useParams, useSearchParams } from "react-router-dom"
+import { useLocation, useSearchParams } from "react-router-dom"
 import ListingCard from "@/components/Card/ListingCard"
 import HomeMap from "@/components/Map/HomeMap"
 import { BsMapFill } from "react-icons/bs"
