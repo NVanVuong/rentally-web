@@ -18,14 +18,12 @@ const Home = () => {
     const [isShowMap, setIsShowMap] = useState(false)
     const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
 
-    const [currentPage, setCurrentPage] = useState(2)
-    const [perPage, setPerPage] = useState(20)
+    const [currentPage, setCurrentPage] = useState(1)
 
-    const { data, isLoading, isFetching } = useGetFindingRoomsQuery(
+    const { data, isLoading, isFetching, isSuccess } = useGetFindingRoomsQuery(
         {
             page: currentPage,
-            params: searchParamsObject,
-            perPage
+            params: searchParamsObject
         },
         {
             refetchOnMountOrArgChange: true
@@ -38,15 +36,20 @@ const Home = () => {
 
     const handleLoadMore = () => {
         setCurrentPage((prev) => prev + 1)
-        setPerPage(10)
     }
 
     useEffect(() => {
-        setCurrentRooms((prevRooms) => {
-            const newRooms = data?.data?.rooms || []
-            return Array.from(new Set([...prevRooms, ...newRooms]))
-        })
-    }, [data, currentPage, location])
+        if (isSuccess) {
+            if (currentPage === 1) {
+                setCurrentRooms(data?.data?.rooms || [])
+            } else {
+                setCurrentRooms((prevRooms) => {
+                    const newRooms = data?.data?.rooms || []
+                    return Array.from(new Set([...prevRooms, ...newRooms]))
+                })
+            }
+        }
+    }, [data, currentPage, isFetching, isSuccess])
 
     useEffect(() => {
         const params: [string, string][] = []
@@ -69,7 +72,7 @@ const Home = () => {
 
     const isIndex = location.pathname === SITE_MAP.INDEX
 
-    const isEetchingInIndex = isIndex && isFetching
+    const isFetchingWhenBack = isFetching && currentPage === 1
 
     if (currentRooms.length === 0 && !isIndex) {
         return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No rooms match in list." className="mt-24" />
@@ -84,7 +87,7 @@ const Home = () => {
             ) : (
                 <div className="flex h-full flex-col">
                     <div className="my-6 grow">
-                        {isLoading || isEetchingInIndex ? (
+                        {isLoading || isFetchingWhenBack ? (
                             <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-6 md:px-10 xl:px-28">
                                 <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                                     {Array.from({ length: 12 }).map((_, index) => (
