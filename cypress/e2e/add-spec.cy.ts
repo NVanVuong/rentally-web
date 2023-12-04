@@ -2,7 +2,7 @@ import "cypress-file-upload"
 
 const testCases = [
     {
-        name: "requires all required fields",
+        name: "Requires all required fields",
         data: {
             email: "",
             password: "",
@@ -11,23 +11,22 @@ const testCases = [
             phoneNumber: "",
             role: ""
         },
-        expectedMessages: {
-            email: "Please input email!",
-            password: "Please input password!",
-            firstName: "Please input firstname!",
-            phoneNumber: "Please input phone number!",
-            role: "Please select a role!"
-        }
+        expectedMessages: [
+            "Please input email!",
+            "Please input password!",
+            "Please input firstname!",
+            "Please input phone number!",
+            "Please select a role!"
+        ]
     },
     {
-        name: "requires email field",
+        name: "Requires email field",
         data: {
             password: "0905123456",
             firstName: "New",
             lastName: "User",
             phoneNumber: "0905323456",
             photo: {
-                fieldName: "photo",
                 fileName: "4043276_christmas_clous_santa_icon.png",
                 fileType: "image/png"
             },
@@ -36,14 +35,13 @@ const testCases = [
         expectedMessage: "Please input email!"
     },
     {
-        name: "requires password field",
+        name: "Requires password field",
         data: {
             email: "newuser@example.com",
             firstName: "New",
             lastName: "User",
             phoneNumber: "0905123456",
             photo: {
-                fieldName: "photo",
                 fileName: "4043276_christmas_clous_santa_icon.png",
                 fileType: "image/png"
             },
@@ -52,14 +50,13 @@ const testCases = [
         expectedMessage: "Please input password!"
     },
     {
-        name: "requires firstName field",
+        name: "Requires firstName field",
         data: {
             email: "newuser@example.com",
             password: "12345678",
             lastName: "User",
             phoneNumber: "0905123456",
             photo: {
-                fieldName: "photo",
                 fileName: "4043276_christmas_clous_santa_icon.png",
                 fileType: "image/png"
             },
@@ -68,14 +65,13 @@ const testCases = [
         expectedMessage: "Please input firstname!"
     },
     {
-        name: "requires phoneNumber field",
+        name: "Requires phoneNumber field",
         data: {
             email: "newuser@example.com",
             password: "12345678",
             firstName: "New",
             lastName: "User",
             photo: {
-                fieldName: "photo",
                 fileName: "4043276_christmas_clous_santa_icon.png",
                 fileType: "image/png"
             },
@@ -84,14 +80,13 @@ const testCases = [
         expectedMessage: "Please input phone number!"
     },
     {
-        name: "requires role field",
+        name: "Requires role field",
         data: {
             email: "newuser@example.com",
             password: "12345678",
             firstName: "New",
             lastName: "User",
             photo: {
-                fieldName: "photo",
                 fileName: "4043276_christmas_clous_santa_icon.png",
                 fileType: "image/png"
             },
@@ -100,7 +95,7 @@ const testCases = [
         expectedMessage: "Please select a role!"
     },
     {
-        name: "requires valid email format",
+        name: "Requires valid email format",
         data: {
             email: "invalidemailformat",
             password: "12345678",
@@ -108,7 +103,6 @@ const testCases = [
             lastName: "User",
             phoneNumber: "0905323456",
             photo: {
-                fieldName: "photo",
                 fileName: "4043276_christmas_clous_santa_icon.png",
                 fileType: "image/png"
             },
@@ -117,7 +111,7 @@ const testCases = [
         expectedMessage: "The input is not valid email!"
     },
     {
-        name: "requires valid phoneNumber format",
+        name: "Requires valid phone number format",
         data: {
             email: "newuser@example.com",
             password: "12345678",
@@ -125,7 +119,6 @@ const testCases = [
             lastName: "User",
             phoneNumber: "11111",
             photo: {
-                fieldName: "photo",
                 fileName: "4043276_christmas_clous_santa_icon.png",
                 fileType: "image/png"
             },
@@ -134,7 +127,7 @@ const testCases = [
         expectedMessage: "Please input a valid phone number with 10 digits"
     },
     {
-        name: "shows 'Email is already in use' message",
+        name: "Check email is already in use",
         data: {
             email: "newuser@example.com",
             password: "12345678",
@@ -142,7 +135,6 @@ const testCases = [
             lastName: "User",
             phoneNumber: "0905555555",
             photo: {
-                fieldName: "photo",
                 fileName: "4043276_christmas_clous_santa_icon.png",
                 fileType: "image/png"
             },
@@ -151,7 +143,7 @@ const testCases = [
         expectedMessage: "Email is already in use"
     },
     {
-        name: "shows 'Phone number is already in use' message",
+        name: "Check phone number is already in use",
         data: {
             email: "newuser999@example.com",
             password: "12345678",
@@ -159,7 +151,6 @@ const testCases = [
             lastName: "User",
             phoneNumber: "0905123456",
             photo: {
-                fieldName: "photo",
                 fileName: "4043276_christmas_clous_santa_icon.png",
                 fileType: "image/png"
             },
@@ -168,15 +159,14 @@ const testCases = [
         expectedMessage: "Phone number is already in use"
     },
     {
-        name: "adds a new user successfully",
+        name: "Add a new user successfully",
         data: {
-            email: "newuser6@example.com",
+            email: "newuser7@example.com",
             password: "12345678",
             firstName: "New",
             lastName: "User",
-            phoneNumber: "0905823456",
+            phoneNumber: "0905923456",
             photo: {
-                fieldName: "photo",
                 fileName: "4043276_christmas_clous_santa_icon.png",
                 fileType: "image/png"
             },
@@ -188,7 +178,7 @@ const testCases = [
 
 describe("Users Management - Add account", () => {
     beforeEach(() => {
-        cy.visit("http://localhost:5173/login")
+        cy.visit("https://rentally-testing.netlify.app/login")
         cy.get('[name="email"]').type("admin@gmail.com")
         cy.get('[name="password"]').type("123456")
         cy.get('button[type="submit"]').click()
@@ -197,7 +187,7 @@ describe("Users Management - Add account", () => {
 
     testCases.forEach((testCase) => {
         it(testCase.name, () => {
-            cy.visit("http://localhost:5173/admin/users")
+            cy.visit("https://rentally-testing.netlify.app/admin/users")
             cy.contains("Add new").click()
             cy.get('[id="modal-title"]').should("exist").should("have.text", "Register New Account")
 
@@ -230,7 +220,13 @@ describe("Users Management - Add account", () => {
             if (testCase.name === "adds a new user successfully") cy.wait(2000)
 
             if (testCase.expectedMessage) {
-                cy.contains(testCase.expectedMessage).should("be.visible")
+                const messages = Array.isArray(testCase.expectedMessage)
+                    ? testCase.expectedMessage
+                    : [testCase.expectedMessage]
+
+                messages.forEach((expectedMessage) => {
+                    cy.contains(expectedMessage).should("be.visible")
+                })
             }
         })
     })

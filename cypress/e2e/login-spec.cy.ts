@@ -37,18 +37,18 @@ const testCase = [
     {
         name: "Login with unverified email",
         data: {
-            email: "102200397@sv1.dut.udn.vn",
-            password: "123456789"
+            email: "Kianna.Towne@yahoo.com",
+            password: "123456"
         },
         expectedMessage: "Email has not been verified"
     },
     {
         name: "Login with disabled account",
         data: {
-            email: "102200397@sv1.dut.udn.vn",
+            email: "Valentina_DuBuque86@yahoo.com",
             password: "123456"
         },
-        expectedMessage: "Account has been disabled"
+        expectedMessage: "User are disabled"
     },
     {
         name: "Login with valid email and password",
@@ -62,7 +62,7 @@ const testCase = [
 
 describe("Login", () => {
     beforeEach(() => {
-        cy.visit("http://localhost:5173/login")
+        cy.visit("https://rentally-testing.netlify.app/login")
         cy.wait(2000)
     })
 
