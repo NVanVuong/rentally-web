@@ -55,19 +55,5 @@ export const useMenuActions = () => {
                 ),
                 key: "2"
             }
-            // {
-            //     type: "divider"
-            // },
-            // {
-            //     label: (
-            //         <div
-            //             onClick={() => dispacth(openModal({ type: MODAL.DELETE, data: record }))}
-            //             className="flex justify-between font-medium text-red-500"
-            //         >
-            //             Delete <TbTrashX className="ml-2.5 h-5 w-5" />
-            //         </div>
-            //     ),
-            //     key: "3"
-            // }
         ] as MenuProps["items"]
 }

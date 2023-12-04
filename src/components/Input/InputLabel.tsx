@@ -22,7 +22,7 @@ const InputWithLabel = ({ placeholer, type, name, id, value, onChange }: Props) 
                 autoComplete="off"
                 className="w-[360px] rounded-lg border-2 border-neutral-300 bg-white p-3 placeholder:text-[18px] placeholder:font-normal placeholder:text-secondaryBlack/80 focus:border-primary focus:bg-white focus:outline-none focus:ring-0"
             />
-            <ErrorMessage component="div" name={name || ""} className="absolute text-[12px] text-red-700" />
+            <ErrorMessage id="error-message" component="div" name={name || ""} className="text-base text-red-500" />
         </div>
     )
 }

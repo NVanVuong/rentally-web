@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/redux/hook"
-import { Button, DatePicker, Form, Input, Select } from "antd"
+import { Button, DatePicker, Form, Input, InputNumber, Select } from "antd"
 import { dateFormat, message } from "../contract"
 import { MdOutlineArrowBackIosNew } from "react-icons/md"
 import { useNavigate, useParams } from "react-router-dom"
@@ -125,9 +125,9 @@ const Rental = () => {
                                         label="Identity number"
                                         name="identityNumber"
                                         className="text-sm"
-                                        rules={[{ required: true, message, pattern: new RegExp(/^[0-9]+$/) }]}
+                                        rules={[{ required: true, message }]}
                                     >
-                                        <Input />
+                                        <InputNumber className="w-full" type="number" controls={false} />
                                     </Form.Item>
                                     <Form.Item
                                         label="Identity date of issue"

@@ -25,19 +25,17 @@ const Login = () => {
         const errors: Partial<IAccountLogin> = {}
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
         if (!values.email) {
-            errors.email = "Email is required"
+            errors.email = "Please input email!"
         } else if (!regex.test(values.email)) {
-            errors.email = "Invalid Email"
+            errors.email = "Invalid email format!"
         }
         if (!values.password) {
-            errors.password = "Password is required"
+            errors.password = "Please input password!"
         }
         return errors
     }
 
     const submitForm = async (values: IAccountLogin) => {
-        console.log(values)
-
         try {
             const res = await login(values).unwrap()
             if (res.status === "SUCCESS" && res.data) {

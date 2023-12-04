@@ -16,6 +16,7 @@ const PageHeader = (props: IPageHeader) => {
         <div className="mb-3 flex w-full items-center justify-between">
             <div className="flex items-end gap-2">
                 <h1
+                    id="header-title"
                     onClick={() => isSubTitlePresent && navigate(-1)}
                     className={`cursor-pointer text-2xl font-medium text-secondary 
                     ${styleOrEmpty(isSubTitlePresent, "cursor-pointer")}`}

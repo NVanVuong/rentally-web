@@ -1,4 +1,4 @@
-import { Button, Form, Input, Select, Spin, Upload } from "antd"
+import { Button, Form, Input, InputNumber, Select, Spin, Upload } from "antd"
 import { ROLE } from "@/utils/constants/GlobalConst"
 import { AiOutlineUpload } from "react-icons/ai"
 import { useCreateUserMutation } from "@/redux/services/user/user.service"
@@ -73,12 +73,12 @@ const ModalAdd = (props: IModal) => {
                     rules={[
                         { required: true, message: "Please input phone number!" },
                         {
-                            pattern: new RegExp(/^[0-9]{10}$/),
+                            pattern: new RegExp(/^(84|0?[35789])\d{8}$/),
                             message: "Please input a valid phone number with 10 digits"
                         }
                     ]}
                 >
-                    <Input placeholder="Phone" />
+                    <InputNumber className="w-full" type="tel" controls={false} placeholder="Phone" />
                 </Form.Item>
 
                 <Form.Item className="w-full" name="photo" valuePropName="fileList" getValueFromEvent={normFile}>
@@ -92,7 +92,11 @@ const ModalAdd = (props: IModal) => {
                     </Upload>
                 </Form.Item>
 
-                <Form.Item className="w-full" name="role" rules={[{ required: true }]}>
+                <Form.Item
+                    className="w-full"
+                    name="role"
+                    rules={[{ required: true, message: "Please select a role!" }]}
+                >
                     <Select placement="topRight" placeholder="Role">
                         <Select.Option value={ROLE.ADMIN}>Admin</Select.Option>
                         <Select.Option value={ROLE.MOD}>Mod</Select.Option>
