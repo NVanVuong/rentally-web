@@ -74,9 +74,9 @@ const Login = () => {
                                 exit={{ x: -30, opacity: 0 }}
                                 className="flex w-full flex-col items-center justify-center"
                             >
-                                <h1 className="my-2 text-4xl font-semibold text-secondary ">Login to your account</h1>
+                                <h1 className="my-2 text-3xl font-semibold text-secondary ">Login to your account</h1>
                                 <div className="mt-3">
-                                    <p className="mb-1 text-[14px] text-secondary">
+                                    <p className="mb-1 text-sm text-secondary">
                                         Not a member?
                                         <Link to={"/register"} className="font-medium text-primary hover:underline">
                                             {" "}
@@ -103,14 +103,11 @@ const Login = () => {
                                         <ButtonAuth text="Login" type="submit" />
                                     </form>
                                     <div className="mt-4 flex items-center justify-between">
-                                        <Link
-                                            to="/forgot-password"
-                                            className="text-[14px] text-secondary hover:underline"
-                                        >
+                                        <Link to="/forgot-password" className="text-sm text-secondary hover:underline">
                                             Forgot your password?
                                         </Link>
                                         <button
-                                            className="flex items-center justify-center gap-2 rounded-[6px] border-2 border-neutral-300 p-1 text-[14px] hover:border-neutral-500 hover:bg-slate-200"
+                                            className="flex items-center justify-center gap-2 rounded-[6px] border-2 border-neutral-300 p-1 text-sm hover:border-neutral-500 hover:bg-slate-200"
                                             onClick={() => loginWithGG()}
                                         >
                                             Countinue with <img src={logoGG} alt="logoGG" />

@@ -29,6 +29,7 @@ const ModalAntd = (props: IModal) => {
                 }}
                 footer={null}
                 destroyOnClose
+                className="!w-96"
             >
                 <>{props.children}</>
             </Modal>

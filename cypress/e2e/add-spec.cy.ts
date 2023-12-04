@@ -1,3 +1,5 @@
+import "cypress-file-upload"
+
 const testCases = [
     {
         name: "requires all required fields",
@@ -24,6 +26,11 @@ const testCases = [
             firstName: "New",
             lastName: "User",
             phoneNumber: "0905323456",
+            photo: {
+                fieldName: "photo",
+                fileName: "4043276_christmas_clous_santa_icon.png",
+                fileType: "image/png"
+            },
             role: "User"
         },
         expectedMessage: "Please input email!"
@@ -35,6 +42,11 @@ const testCases = [
             firstName: "New",
             lastName: "User",
             phoneNumber: "0905123456",
+            photo: {
+                fieldName: "photo",
+                fileName: "4043276_christmas_clous_santa_icon.png",
+                fileType: "image/png"
+            },
             role: "User"
         },
         expectedMessage: "Please input password!"
@@ -46,6 +58,11 @@ const testCases = [
             password: "12345678",
             lastName: "User",
             phoneNumber: "0905123456",
+            photo: {
+                fieldName: "photo",
+                fileName: "4043276_christmas_clous_santa_icon.png",
+                fileType: "image/png"
+            },
             role: "User"
         },
         expectedMessage: "Please input firstname!"
@@ -57,6 +74,11 @@ const testCases = [
             password: "12345678",
             firstName: "New",
             lastName: "User",
+            photo: {
+                fieldName: "photo",
+                fileName: "4043276_christmas_clous_santa_icon.png",
+                fileType: "image/png"
+            },
             role: "User"
         },
         expectedMessage: "Please input phone number!"
@@ -68,6 +90,11 @@ const testCases = [
             password: "12345678",
             firstName: "New",
             lastName: "User",
+            photo: {
+                fieldName: "photo",
+                fileName: "4043276_christmas_clous_santa_icon.png",
+                fileType: "image/png"
+            },
             phoneNumber: "0901171605"
         },
         expectedMessage: "Please select a role!"
@@ -80,6 +107,11 @@ const testCases = [
             firstName: "New",
             lastName: "User",
             phoneNumber: "0905323456",
+            photo: {
+                fieldName: "photo",
+                fileName: "4043276_christmas_clous_santa_icon.png",
+                fileType: "image/png"
+            },
             role: "User"
         },
         expectedMessage: "The input is not valid email!"
@@ -92,6 +124,11 @@ const testCases = [
             firstName: "New",
             lastName: "User",
             phoneNumber: "11111",
+            photo: {
+                fieldName: "photo",
+                fileName: "4043276_christmas_clous_santa_icon.png",
+                fileType: "image/png"
+            },
             role: "User"
         },
         expectedMessage: "Please input a valid phone number with 10 digits"
@@ -104,6 +141,11 @@ const testCases = [
             firstName: "Existing",
             lastName: "User",
             phoneNumber: "0905555555",
+            photo: {
+                fieldName: "photo",
+                fileName: "4043276_christmas_clous_santa_icon.png",
+                fileType: "image/png"
+            },
             role: "User"
         },
         expectedMessage: "Email is already in use"
@@ -116,6 +158,11 @@ const testCases = [
             firstName: "New",
             lastName: "User",
             phoneNumber: "0905123456",
+            photo: {
+                fieldName: "photo",
+                fileName: "4043276_christmas_clous_santa_icon.png",
+                fileType: "image/png"
+            },
             role: "User"
         },
         expectedMessage: "Phone number is already in use"
@@ -123,11 +170,16 @@ const testCases = [
     {
         name: "adds a new user successfully",
         data: {
-            email: "newuser4@example.com",
+            email: "newuser6@example.com",
             password: "12345678",
             firstName: "New",
             lastName: "User",
-            phoneNumber: "0905623456",
+            phoneNumber: "0905823456",
+            photo: {
+                fieldName: "photo",
+                fileName: "4043276_christmas_clous_santa_icon.png",
+                fileType: "image/png"
+            },
             role: "User"
         },
         expectedMessage: "Added user successfully"
@@ -153,15 +205,29 @@ describe("Users Management - Add account", () => {
                 if (!value) {
                     return
                 }
-                if (field === "role") {
+                if (field === "photo" && testCase.data.photo) {
+                    cy.readFile("C:/Users/NVVuong/Downloads/4043276_christmas_clous_santa_icon.png", "base64").then(
+                        (fileContent) => {
+                            cy.get('[id="photo"]').attachFile({
+                                fileContent: fileContent,
+                                fileName: testCase.data.photo.fileName,
+                                mimeType: testCase.data.photo.fileType
+                            })
+                        }
+                    )
+                } else if (field === "role") {
                     cy.get(`[id="${field}"]`).click()
-                    cy.get(".ant-select-item-option").contains(value).click()
+                    cy.get(".ant-select-item-option")
+                        .contains(value as string)
+                        .click()
                 } else {
-                    cy.get(`[id="${field}"]`).type(value)
+                    cy.get(`[id="${field}"]`).type(value as string)
                 }
             })
 
             cy.get('button[type="submit"]').click()
+
+            if (testCase.name === "adds a new user successfully") cy.wait(2000)
 
             if (testCase.expectedMessage) {
                 cy.contains(testCase.expectedMessage).should("be.visible")

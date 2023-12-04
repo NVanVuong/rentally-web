@@ -20,9 +20,9 @@ const InputWithLabel = ({ placeholer, type, name, id, value, onChange }: Props) 
                 name={name}
                 onChange={onChange}
                 autoComplete="off"
-                className="w-[360px] rounded-lg border-2 border-neutral-300 bg-white p-3 placeholder:text-[18px] placeholder:font-normal placeholder:text-secondaryBlack/80 focus:border-primary focus:bg-white focus:outline-none focus:ring-0"
+                className="w-[360px] rounded-lg border-2 border-neutral-300 bg-white p-3 placeholder:text-sm placeholder:font-normal placeholder:text-secondaryBlack/80 focus:border-primary focus:bg-white focus:outline-none focus:ring-0"
             />
-            <ErrorMessage id="error-message" component="div" name={name || ""} className="text-base text-red-500" />
+            <ErrorMessage component="div" name={name || ""} className="error-message text-base text-red-500" />
         </div>
     )
 }

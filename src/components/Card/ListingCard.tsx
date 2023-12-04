@@ -14,7 +14,6 @@ import { useAppSelector } from "@/redux/hook"
 import { IUser } from "@/interfaces/user.interface"
 import useServerMessage from "@/hooks/useServerMessage"
 interface ListingCardProps {
-    id: string
     dataRoom: IRoomFinding
     onClick?: () => void
 }
@@ -24,7 +23,7 @@ const settings = {
     prevArrow: <GrFormPrevious />
 }
 
-const ListingCard: React.FC<ListingCardProps> = ({ dataRoom, id }) => {
+const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
     const userInfo = useAppSelector((state) => state.auth.userInfo) as IUser
 
     const [currentSlide, setCurrentSlide] = useState(0)
@@ -53,7 +52,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom, id }) => {
     useServerMessage({ data, error })
 
     return (
-        <div id={id} className="group col-span-1 mb-2 cursor-pointer">
+        <div id={dataRoom.id} className="group col-span-1 mb-2 cursor-pointer">
             <div className="flex w-full flex-col gap-2">
                 <div className="relative aspect-square w-full overflow-hidden rounded-xl">
                     <Carousel

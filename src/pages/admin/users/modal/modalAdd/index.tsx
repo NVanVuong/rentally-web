@@ -15,7 +15,7 @@ const ModalAdd = (props: IModal) => {
     useServerMessage({ data: data!, error: error })
 
     const onFinish = async (values: any) => {
-        const phoneNumber = parsePhoneNumberFromString(values.phoneNumber, "VN")
+        const phoneNumber = parsePhoneNumberFromString(values.phoneNumber.toString(), "VN")
         values.phoneNumber = phoneNumber?.number || ""
         const formData = createUserFormData(values)
         await createUser(formData)
