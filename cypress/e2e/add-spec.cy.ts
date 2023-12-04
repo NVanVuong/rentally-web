@@ -210,8 +210,8 @@ describe("Users Management - Add account", () => {
                         (fileContent) => {
                             cy.get('[id="photo"]').attachFile({
                                 fileContent: fileContent,
-                                fileName: testCase.data.photo.fileName,
-                                mimeType: testCase.data.photo.fileType
+                                fileName: testCase.data.photo?.fileName,
+                                mimeType: testCase.data.photo?.fileType
                             })
                         }
                     )

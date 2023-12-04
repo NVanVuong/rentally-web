@@ -102,12 +102,8 @@ const Home = () => {
                             <>
                                 <div className="mx-auto max-w-[2520px] px-4 sm:px-6 md:px-10 xl:px-28">
                                     <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                                        {currentRooms.map((dataRoom: IRoomFinding, index) => (
-                                            <ListingCard
-                                                id={`Room-${index}`}
-                                                key={`Room + ${dataRoom.id}`}
-                                                dataRoom={dataRoom}
-                                            />
+                                        {currentRooms.map((dataRoom: IRoomFinding) => (
+                                            <ListingCard key={`Room + ${dataRoom.id}`} dataRoom={dataRoom} />
                                         ))}
                                         {isFetching && (
                                             <>
