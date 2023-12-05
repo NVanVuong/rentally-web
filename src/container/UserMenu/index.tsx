@@ -52,6 +52,9 @@ const UserMenu = () => {
             case "login":
                 navigate(SITE_MAP.AUTH.LOGIN)
                 break
+            case "become-host":
+                navigate(SITE_MAP.BECOME_HOST)
+                break
             default:
                 break
         }
@@ -127,14 +130,14 @@ const UserMenu = () => {
             onOpenChange={() => setIsOpen(!isOpen)}
         >
             <div>
-                {role === ROLE.USER && (
+                {/* {role === ROLE.USER && (
                     <button
                         onClick={(e) => e.stopPropagation()}
                         className="absolute right-24 hidden whitespace-nowrap text-sm font-bold md:block"
                     >
                         Become a host
                     </button>
-                )}
+                )} */}
                 <MdOutlineMenu className="h-5 w-5" />
                 <Avatar className="cursor-pointer" src={userInfo ? userInfo.photo : AvatarDefault} size={36} />
             </div>

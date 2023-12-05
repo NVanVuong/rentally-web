@@ -96,7 +96,8 @@ export const MODAL = {
         BLOCK: "UPDATE_BLOCK",
         UTILITY: "UPDATE_UTILITY",
         RENTAL: "UPDATE_RENTAL",
-        PASSWORD: "UPDATE_PASSWORD"
+        PASSWORD: "UPDATE_PASSWORD",
+        HOST: "HOST"
     },
     DELETE: {
         USER: "DELETE_USER",
