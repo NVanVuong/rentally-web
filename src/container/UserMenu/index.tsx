@@ -76,11 +76,13 @@ const UserMenu = () => {
             label: "My Rental",
             icon: <LuClipboardSignature className="mr-4 h-4 w-4" />
         },
-        {
-            key: "become-host",
-            label: "Become a host",
-            icon: <RiVipCrownLine className="mr-4 h-4 w-4" />
-        },
+        role === ROLE.USER
+            ? {
+                  key: "become-host",
+                  label: "Become a host",
+                  icon: <RiVipCrownLine className="mr-4 h-4 w-4" />
+              }
+            : undefined,
         role === ROLE.ADMIN
             ? {
                   key: "admin",

@@ -1,8 +1,8 @@
 import { IBecomeHost, IMyInfoResponse } from "@/interfaces/user.interface"
 import { createApiWithAuth } from "../apiWithAuth.service"
 
-const creatApiBecomeHostWithAuth = createApiWithAuth("ecomeHostApi", ["BecomeHost"])
-export const ecomeHostApi = creatApiBecomeHostWithAuth.injectEndpoints({
+const creatApiBecomeHostWithAuth = createApiWithAuth("becomeHostApi", ["BecomeHost"])
+export const becomeHostApi = creatApiBecomeHostWithAuth.injectEndpoints({
     endpoints: (builder) => ({
         becomeHost: builder.mutation<IMyInfoResponse, IBecomeHost>({
             query: (body) => {
@@ -17,4 +17,4 @@ export const ecomeHostApi = creatApiBecomeHostWithAuth.injectEndpoints({
     })
 })
 
-export const { useBecomeHostMutation } = ecomeHostApi
+export const { useBecomeHostMutation } = becomeHostApi

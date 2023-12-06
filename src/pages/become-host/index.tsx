@@ -6,6 +6,7 @@ import CountryPhoneInput, { ConfigProvider } from "antd-country-phone-input"
 import en from "world_countries_lists/data/countries/en/world.json"
 import { useBecomeHostMutation } from "@/redux/services/becomeHost/become-host.service"
 import { useNavigate } from "react-router-dom"
+import { SITE_MAP } from "@/utils/constants/Path"
 
 const BecomeHost = () => {
     const navigate = useNavigate()
@@ -23,7 +24,7 @@ const BecomeHost = () => {
             const { data } = result
             if (data?.token) {
                 dispatch(setCredentials({ accessToken: data?.token.token }))
-                navigate("")
+                navigate(`${SITE_MAP.MOD}/blocks`)
             }
         }
     }
