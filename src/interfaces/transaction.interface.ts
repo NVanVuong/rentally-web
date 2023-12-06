@@ -5,7 +5,7 @@ export interface ITransactions {
     renterName?: string
     status: TransactionStatusType
     description: string
-    stripeId?: string
+    stripe_id?: string
     rental_id?: string
     created_at: string
 }
