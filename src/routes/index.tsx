@@ -9,6 +9,7 @@ import MyRental from "@/pages/my-rental"
 import MyRentalDetail from "@/pages/my-rental/detail"
 import MyProfile from "@/pages/my-profile"
 import Loading from "@/container/Loading"
+import BecomeHost from "@/pages/become-host"
 
 const HomePage = lazy(() => import("../pages/home"))
 const AdminPage = lazy(() => import("../pages/admin"))
@@ -42,6 +43,7 @@ const MainRoute = () => {
                             <Route path={SITE_MAP.MY_RENTAL} element={<MyRental />}></Route>
                             <Route path={SITE_MAP.MY_RENTAL_DETAIL} element={<MyRentalDetail />} />
                             <Route path={SITE_MAP.MY_PROFILE} element={<MyProfile />}></Route>
+                            <Route path={SITE_MAP.BECOME_HOST} element={<BecomeHost />}></Route>
                         </Route>
                     </Route>
                     <Route element={<RequireAuthAdmin />}>

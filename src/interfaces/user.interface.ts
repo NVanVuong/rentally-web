@@ -40,6 +40,11 @@ export interface IUpdatePassword {
     newPassword: string
 }
 
+export interface IBecomeHost {
+    bankCode: string
+    accountNumber: string
+    phoneNumber: string
+}
 export interface ICreateUserRequest extends FormData {}
 
 export interface IUpdateMyInfoRequest extends FormData {}
