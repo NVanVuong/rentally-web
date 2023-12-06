@@ -5,7 +5,7 @@ import ArrowCircle from "../../assets/icons/ArrowCircle"
 import { useNavigate } from "react-router-dom"
 import { SITE_MAP } from "@/utils/constants/Path"
 import { FaRegUser } from "react-icons/fa"
-import { BiHomeAlt } from "react-icons/bi"
+import { BiHomeAlt, BiStats } from "react-icons/bi"
 import Logo from "@/components/Logo"
 import { ROLE } from "@/utils/constants/GlobalConst"
 import "./style.css"
@@ -45,6 +45,7 @@ const Slider = () => {
         getItem(`${isExpanding ? "Room Blocks" : ""}`, "blocks", <BiHomeAlt className="h-5 w-5" />),
         getItem(`${isExpanding ? "Utilities" : ""}`, "utilities", <TbHomeCog className="h-5 w-5" />),
         getItem(`${isExpanding ? "Rentals" : ""}`, "rentals", <LuClipboardSignature className="h-5 w-5" />),
+        getItem(`${isExpanding ? "Transactions" : ""}`, "transactions", <BiStats className="h-5 w-5" />),
         { type: "divider" }
     ]
 
@@ -65,6 +66,9 @@ const Slider = () => {
                 break
             case "rentals":
                 navigate(SITE_MAP.RENTALS)
+                break
+            case "transactions":
+                navigate(SITE_MAP.TRANSACTION_MANAGEMENT)
                 break
             default:
                 break

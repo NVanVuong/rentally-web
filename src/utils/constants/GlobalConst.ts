@@ -35,6 +35,14 @@ export enum RENTAL_STATUS {
     ENDED = "ENDED"
 }
 
+export enum TRANSACTION_STATUS {
+    CREATED = "CREATED",
+    PAID = "PAID",
+    PAYOUT = "PAYOUT",
+    DEPOSITED = "DEPOSITED",
+    FAILED = "FAILED"
+}
+
 export const RENTAL_STATUS_TEXT: Record<RENTAL_STATUS, string> = {
     CREATED: "Created",
     APPROVED: "Approved",
@@ -53,6 +61,14 @@ export const RENTAL_STATUS_COLORS: Record<RENTAL_STATUS, string> = {
     [RENTAL_STATUS.REQUEST_BREAK]: "#f1c40f",
     [RENTAL_STATUS.BROKEN]: "#c0392b",
     [RENTAL_STATUS.ENDED]: "#e74c3c"
+}
+
+export const TRANSACTION_TYPE_COLOR: Record<TRANSACTION_STATUS, string> = {
+    [TRANSACTION_STATUS.CREATED]: "#3498db",
+    [TRANSACTION_STATUS.PAID]: "#27ae60",
+    [TRANSACTION_STATUS.PAYOUT]: "#f39c12",
+    [TRANSACTION_STATUS.DEPOSITED]: "#f1c40f",
+    [TRANSACTION_STATUS.FAILED]: "#ff0000"
 }
 
 export enum ROOM_STATUS {
@@ -92,13 +108,15 @@ export type RoleType = keyof typeof ROLE_COLORS
 export type UserStatusType = keyof typeof USER_STATUS_COLORS
 export type RentalStatusType = keyof typeof RENTAL_STATUS_COLORS
 export type RoomStatusType = keyof typeof ROOM_STATUS_COLORS
+export type TransactionStatusType = keyof typeof TRANSACTION_TYPE_COLOR
 
 export enum PAGE {
     USER = "USER",
     ROOM = "ROOM",
     BLOCK = "BLOCK",
     UTILITY = "UTILITY",
-    RENTAL = "RENTAL"
+    RENTAL = "RENTAL",
+    TRANSACTION = "TRANSACTION"
 }
 
 export const MODAL = {

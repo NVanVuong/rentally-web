@@ -15,6 +15,7 @@ export const SITE_MAP = {
     PROPS_MANAGEMENT: "props",
     BLOCKS_MANAGEMENT: "blocks",
     UTILITIES_MANAGEMENT: "utilities",
+    TRANSACTION_MANAGEMENT: "transactions",
     ROOM: "room",
     ROOM_DETAIL: "room/:id",
     RENT: "rental",
