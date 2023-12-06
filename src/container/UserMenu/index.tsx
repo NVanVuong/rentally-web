@@ -1,5 +1,5 @@
 import { Avatar, Dropdown, MenuProps } from "antd"
-import { MdOutlineAdminPanelSettings, MdLogout } from "react-icons/md"
+import { MdOutlineAdminPanelSettings, MdLogout, MdOutlinePayment } from "react-icons/md"
 import { BiUser } from "react-icons/bi"
 import { logOut } from "@/redux/features/auth/auth.slice"
 import { useAppDispatch } from "@/redux/hook"
@@ -36,6 +36,12 @@ const UserMenu = () => {
             case "my-rental":
                 navigate(SITE_MAP.MY_RENTAL)
                 break
+            case "my-payment":
+                navigate(SITE_MAP.MY_PAYMENT)
+                break
+            case "become-host":
+                navigate(SITE_MAP.BECOME_HOST)
+                break
             case "admin":
                 navigate(SITE_MAP.ADMIN)
                 break
@@ -51,9 +57,6 @@ const UserMenu = () => {
                 break
             case "login":
                 navigate(SITE_MAP.AUTH.LOGIN)
-                break
-            case "become-host":
-                navigate(SITE_MAP.BECOME_HOST)
                 break
             default:
                 break
@@ -75,6 +78,11 @@ const UserMenu = () => {
             key: "my-rental",
             label: "My Rental",
             icon: <LuClipboardSignature className="mr-4 h-4 w-4" />
+        },
+        {
+            key: "my-payment",
+            label: "My Payment",
+            icon: <MdOutlinePayment className="mr-4 h-4 w-4" />
         },
         role === ROLE.USER
             ? {
