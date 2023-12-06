@@ -70,6 +70,24 @@ export enum RATING_STATUS {
     RATED = "RATED"
 }
 
+export enum PAYMENT_STATUS {
+    PAID = "PAID",
+    UNPAID = "UNPAID",
+    PAYOUT = "PAYOUT"
+}
+
+export const PAYMENT_STATUS_COLORS = {
+    [PAYMENT_STATUS.PAID]: "#27ae60",
+    [PAYMENT_STATUS.PAYOUT]: "#27ae60",
+    [PAYMENT_STATUS.UNPAID]: "#b2b2b2"
+}
+
+export const PAYMENT_STATUS_TEXT: Record<PAYMENT_STATUS, string> = {
+    PAID: "Paid",
+    UNPAID: "Unpaid",
+    PAYOUT: "Payout"
+}
+
 export type RoleType = keyof typeof ROLE_COLORS
 export type UserStatusType = keyof typeof USER_STATUS_COLORS
 export type RentalStatusType = keyof typeof RENTAL_STATUS_COLORS

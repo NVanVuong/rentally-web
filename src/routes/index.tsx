@@ -10,6 +10,8 @@ import MyRentalDetail from "@/pages/my-rental/detail"
 import MyProfile from "@/pages/my-profile"
 import Loading from "@/container/Loading"
 import BecomeHost from "@/pages/become-host"
+import MyPayment from "@/pages/my-payment"
+import MyPaymentDetail from "@/pages/my-payment/detail"
 
 const HomePage = lazy(() => import("../pages/home"))
 const AdminPage = lazy(() => import("../pages/admin"))
@@ -39,11 +41,13 @@ const MainRoute = () => {
                         <Route path={SITE_MAP.ROOM_DETAIL} element={<RoomDetail />} />
                         <Route path={SITE_MAP.RENT_DETAIL} element={<Rental />} />
                         <Route element={<RequireAuth />}>
-                            <Route path={SITE_MAP.MY_CHECKLIST} element={<Checklist />}></Route>
-                            <Route path={SITE_MAP.MY_RENTAL} element={<MyRental />}></Route>
+                            <Route path={SITE_MAP.MY_PROFILE} element={<MyProfile />} />
+                            <Route path={SITE_MAP.MY_CHECKLIST} element={<Checklist />} />
+                            <Route path={SITE_MAP.BECOME_HOST} element={<BecomeHost />} />
+                            <Route path={SITE_MAP.MY_RENTAL} element={<MyRental />} />
                             <Route path={SITE_MAP.MY_RENTAL_DETAIL} element={<MyRentalDetail />} />
-                            <Route path={SITE_MAP.MY_PROFILE} element={<MyProfile />}></Route>
-                            <Route path={SITE_MAP.BECOME_HOST} element={<BecomeHost />}></Route>
+                            <Route path={SITE_MAP.MY_PAYMENT} element={<MyPayment />} />
+                            <Route path={SITE_MAP.MY_PAYMENT_DETAIL} element={<MyPaymentDetail />} />
                         </Route>
                     </Route>
                     <Route element={<RequireAuthAdmin />}>
