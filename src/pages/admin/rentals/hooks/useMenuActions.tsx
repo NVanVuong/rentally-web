@@ -26,7 +26,7 @@ export const useMenuActions = () => {
                         View <HiOutlineViewfinderCircle className="ml-2.5 h-5 w-5" />
                     </div>
                 ),
-                key: "0"
+                key: "view-rental"
             }
         ]
 
@@ -43,7 +43,7 @@ export const useMenuActions = () => {
                         Update <TbEdit className="ml-2.5 h-5 w-5" />
                     </div>
                 ),
-                key: "1"
+                key: "update-rental"
             }
         ]
 
@@ -128,6 +128,6 @@ export const useMenuActions = () => {
 
         if (role === ROLE.ADMIN) return viewAction as MenuProps["items"]
 
-        return [viewAction, updateAction, ...statusSpecificActions] as MenuProps["items"]
+        return [...viewAction, ...updateAction, ...statusSpecificActions] as MenuProps["items"]
     }
 }

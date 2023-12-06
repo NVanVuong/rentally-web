@@ -72,29 +72,9 @@ const MyProfile = () => {
                                 </div>
                                 <div className="w-full px-4 text-center">
                                     <div className="mt-5 text-center">
-                                        <h3 className="mb-2 text-xl font-semibold leading-normal text-gray-700">
+                                        <h3 className="mb-4 text-xl font-semibold leading-normal text-gray-700">
                                             {userInfo?.firstName} {userInfo?.lastName}
                                         </h3>
-                                    </div>
-                                    <div className="flex justify-center">
-                                        <div className="mr-4 p-3 text-center">
-                                            <span className="block text-xl font-bold uppercase tracking-wide text-gray-600">
-                                                5
-                                            </span>
-                                            <span className="text-sm text-gray-400">Blocks</span>
-                                        </div>
-                                        <div className="mr-4 p-3 text-center">
-                                            <span className="block text-xl font-bold uppercase tracking-wide text-gray-600">
-                                                30
-                                            </span>
-                                            <span className="text-sm text-gray-400">Rooms</span>
-                                        </div>
-                                        <div className="p-3 text-center">
-                                            <span className="block text-xl font-bold uppercase tracking-wide text-gray-600">
-                                                120
-                                            </span>
-                                            <span className="text-sm text-gray-400">Ratings</span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
