@@ -2,37 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-    @variants responsive {
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        .scrollbar::-webkit-scrollbar {
-            @apply h-4 w-2;
-        }
-
-        .scrollbar::-webkit-scrollbar-thumb {
-            @apply rounded-lg bg-gray-300;
-        }
-
-        .scrollbar::-webkit-scrollbar-track {
-            @apply bg-gray-50;
-        }
-    }
-}
-
 :root {
     --primary-color: #e36414;
     --secondary-color: #1d5868;
     --white-color: #ffffff;
     --gray-color: #e0e0e0;
     --black-color: #000000;
+}
+
+html::-webkit-scrollbar {
+    width: 6px;
+}
+
+html::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: var(--primary-color);
+}
+
+html::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
 }
 
 .leaflet-top.leaflet-left {

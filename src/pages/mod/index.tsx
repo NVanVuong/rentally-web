@@ -7,7 +7,7 @@ const Mod = () => {
     return (
         <div className="flex h-screen overflow-y-hidden">
             <Slider />
-            <div className="scrollbar h-full w-full overflow-y-auto">
+            <div className="h-full w-full overflow-y-auto">
                 <Outlet />
             </div>
         </div>
