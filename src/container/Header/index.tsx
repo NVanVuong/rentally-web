@@ -37,7 +37,7 @@ const Header = () => {
             className={`${isOpen ? "h-24" : "h-16"} ${isSticky ? "bg-white" : "bg-transparent"} ${
                 isHome ? "fixed" : "sticky"
             }
-            top-0 z-[999] flex w-full items-center justify-between px-4 py-3 shadow-sm transition-all duration-300 sm:px-6 md:px-10 xl:px-28`}
+            top-0 z-[999] flex w-full items-center justify-between px-4 py-3 shadow-sm transition-all duration-150 sm:px-6 md:px-10 xl:px-28`}
         >
             <Logo />
 
