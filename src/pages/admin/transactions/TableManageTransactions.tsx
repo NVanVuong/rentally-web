@@ -8,6 +8,7 @@ import useAuth from "@/hooks/useAuth"
 import { ITransactions } from "@/interfaces/transaction.interface"
 import { useGetTransactionsQuery } from "@/redux/services/transactions/transaction.service"
 import { Badge, Spin } from "antd"
+import { convertDate } from "@/utils/helpers"
 
 const TableManageTransactions = () => {
     const keyword = useAppSelector((state) => state.search.keyword)
@@ -26,11 +27,63 @@ const TableManageTransactions = () => {
         },
         {
             title: <span className="font-bold">Renter name</span>,
-            key: "paymentId",
-            width: "10%",
+            key: "renterName",
+            width: "8%",
             render: (record: ITransactions) => (
                 <div className="flex items-center">
                     <span className="ml-2 text-sm">{record.renterName ? record.renterName : "--N/A--"}</span>
+                </div>
+            )
+        },
+        {
+            title: <span className="font-bold">Description</span>,
+            key: "description",
+            width: "16%",
+            render: (record: ITransactions) => (
+                <div className="flex items-center">
+                    <span className="ml-2 text-sm">{record.description}</span>
+                </div>
+            )
+        },
+        {
+            title: <span className="font-bold">Stripe ID</span>,
+            key: "stripeId",
+            width: "8%",
+            render: (record: ITransactions) => (
+                <div className="ml-2 flex items-center">
+                    {record.stripe_id ? (
+                        <span className="text-sm">{record.stripe_id}</span>
+                    ) : (
+                        <span className="italic text-gray-300">N/A</span>
+                    )}
+                </div>
+            )
+        },
+        {
+            title: <span className="font-bold">Payment ID</span>,
+            key: "paymentId",
+            width: "8%",
+            render: (record: ITransactions) => (
+                <div className="ml-2 flex items-center">
+                    {record.payment_id ? (
+                        <span className="text-sm">{record.payment_id}</span>
+                    ) : (
+                        <span className="italic text-gray-300">N/A</span>
+                    )}
+                </div>
+            )
+        },
+        {
+            title: <span className="font-bold">Rental ID</span>,
+            key: "rentalId",
+            width: "8%",
+            render: (record: ITransactions) => (
+                <div className="ml-2 flex items-center">
+                    {record.rental_id ? (
+                        <span className="text-sm">{record.rental_id}</span>
+                    ) : (
+                        <span className="italic text-gray-300">N/A</span>
+                    )}
                 </div>
             )
         },
@@ -55,65 +108,12 @@ const TableManageTransactions = () => {
             )
         },
         {
-            title: <span className="font-bold">Description</span>,
-            key: "description",
-            width: "10%",
-            render: (record: ITransactions) => (
-                <div className="flex items-center">
-                    <span className="ml-2 text-sm">{record.description}</span>
-                </div>
-            )
-        },
-        {
-            title: <span className="font-bold">Stripe ID</span>,
-            key: "stripeId",
-            width: "10%",
-            render: (record: ITransactions) => (
-                <div className="flex items-center">
-                    {record.stripe_id ? (
-                        <span className="ml-2 text-sm">{record.stripe_id}</span>
-                    ) : (
-                        <span className="italic text-gray-300">N/A</span>
-                    )}
-                </div>
-            )
-        },
-        {
-            title: <span className="font-bold">Payment ID</span>,
-            key: "paymentId",
-            width: "10%",
-            render: (record: ITransactions) => (
-                <div className="flex items-center">
-                    {record.payment_id ? (
-                        <span className="ml-2 text-sm">{record.payment_id}</span>
-                    ) : (
-                        <span className="italic text-gray-300">N/A</span>
-                    )}
-                </div>
-            )
-        },
-        {
-            title: <span className="font-bold">Rental ID</span>,
-            key: "rentalId",
-            width: "10%",
-            render: (record: ITransactions) => (
-                <div className="flex items-center">
-                    {record.rental_id ? (
-                        <span className="ml-2 text-sm">{record.rental_id}</span>
-                    ) : (
-                        <span className="italic text-gray-300">N/A</span>
-                    )}
-                </div>
-            )
-        },
-
-        {
             title: <span className="font-bold">Created at</span>,
             key: "createdAt",
             width: "10%",
             render: (record: ITransactions) => (
                 <div className="flex items-center">
-                    <span className="ml-2 text-sm">{record.created_at}</span>
+                    <span className="ml-2 text-sm">{convertDate(record.created_at)}</span>
                 </div>
             )
         }
