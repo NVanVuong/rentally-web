@@ -27,7 +27,7 @@ const MyPaymentCard = (props: IPaymentCard) => {
 
     const getActionPayment = () => {
         switch (status) {
-            case PAYMENT_STATUS.PAID || PAYMENT_STATUS.PAYOUT:
+            case PAYMENT_STATUS.PAID:
                 return <span className="py-1.5 text-sm text-gray-400">Paymented!</span>
             case PAYMENT_STATUS.UNPAID:
                 return (
@@ -62,15 +62,15 @@ const MyPaymentCard = (props: IPaymentCard) => {
                 <div className="my-4 grid grid-cols-2 justify-between gap-y-2">
                     <div className="flex flex-col gap-1">
                         <p className="text-sm font-medium text-secondary">Water price: </p>
-                        <span className="text-sm">{formatPrice(totalWaterPrice)} VND</span>
+                        <span className="text-sm">{formatPrice(totalWaterPrice)}</span>
                     </div>
                     <div className="flex flex-col gap-1">
                         <p className="text-sm font-medium text-secondary">Electric price: </p>
-                        <span className="text-sm">{formatPrice(totalElectricPrice)} VND</span>
+                        <span className="text-sm">{formatPrice(totalElectricPrice)}</span>
                     </div>
                     <div className="flex flex-col gap-1">
                         <p className="text-sm font-medium text-secondary">Total price: </p>
-                        <span className="text-sm">{formatPrice(totalPrice)} VND</span>
+                        <span className="text-sm">{formatPrice(totalPrice)}</span>
                     </div>
                     <div className="flex flex-col gap-1">
                         <p className="text-sm font-medium text-secondary">Expiration date: </p>

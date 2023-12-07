@@ -8,6 +8,7 @@ import Rule from "./rule"
 import Contract from "./contract"
 import { useCreateRentalMutation } from "@/redux/services/rental/rental.service"
 import useServerMessage from "@/hooks/useServerMessage"
+import { formatDate } from "@/utils/helpers"
 
 const Rental = () => {
     const navigate = useNavigate()
@@ -18,8 +19,6 @@ const Rental = () => {
     const { email, phoneNumber: phone, firstName, lastName } = userInfo || {}
 
     const [createRental, { data, error, isLoading }] = useCreateRentalMutation()
-
-    console.log({ data, error })
 
     const initialValues = {
         firstName,
@@ -33,14 +32,6 @@ const Rental = () => {
         leaseTerm,
         moveInDate,
         numberOfTenants
-    }
-
-    const formatDate = (dateString: any) => {
-        const date = new Date(dateString)
-        const day = date.getDate().toString().padStart(2, "0")
-        const month = (date.getMonth() + 1).toString().padStart(2, "0")
-        const year = date.getFullYear()
-        return `${day}/${month}/${year}`
     }
 
     const onFinish = async (values: any) => {

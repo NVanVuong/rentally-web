@@ -47,7 +47,7 @@ const Contract = (props: IContractProps) => {
                 <>
                     <div className="flex justify-between">
                         <span className="text-xs">
-                            <b className="text-base font-bold">{formatPrice(price)}</b> VND/month
+                            <b className="text-base font-bold">{formatPrice(price)}</b> /month
                         </span>
                         <AverageRating size="small" />
                     </div>

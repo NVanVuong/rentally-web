@@ -4,8 +4,9 @@ import Title from "@/components/Modal/Title"
 import { IModal } from "@/interfaces/modal.interface"
 import { IRentals } from "@/interfaces/rentals.interface"
 import { useGetModInfoQuery, useUpdateRentalMutation } from "@/redux/services/rentals/rentals.service"
-import dayjs from "dayjs"
 import { useEffect } from "react"
+import { formatDate } from "@/utils/helpers"
+import moment from "moment"
 
 export const dateFormat = "YYYY-MM-DD"
 
@@ -23,26 +24,17 @@ const ModalUpdate = (props: IModal) => {
     useEffect(() => {
         if (modInfo?.data) {
             const { data: initialValues } = modInfo
-
             form.setFieldsValue({
                 firstName: initialValues.firstName,
                 identityNumber: initialValues.identityNumber,
-                identityDateOfIssue: dayjs(initialValues.identityDateOfIssue, dateFormat),
+                identityDateOfIssue: moment(initialValues.identityDateOfIssue),
                 identityPlaceOfIssue: initialValues.identityPlaceOfIssue,
-                birthday: dayjs(initialValues.birthday, dateFormat),
+                birthday: moment(initialValues.birthday),
                 electricPrice: initialValues.electricPrice,
                 waterPrice: initialValues.waterPrice
             })
         }
     }, [modInfo, form])
-
-    const formatDate = (dateString: any) => {
-        const date = new Date(dateString)
-        const day = date.getDate().toString().padStart(2, "0")
-        const month = (date.getMonth() + 1).toString().padStart(2, "0")
-        const year = date.getFullYear()
-        return `${day}/${month}/${year}`
-    }
 
     const onFinish = async (values: any) => {
         const data = {
@@ -83,7 +75,7 @@ const ModalUpdate = (props: IModal) => {
                     name="firstName"
                     rules={[{ required: true, message: "Please input firstName" }]}
                 >
-                    <Input placeholder="firstName" />
+                    <Input placeholder="First Name" />
                 </Form.Item>
                 <Form.Item
                     className="w-full"

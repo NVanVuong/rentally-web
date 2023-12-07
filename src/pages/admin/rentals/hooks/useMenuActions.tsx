@@ -9,6 +9,7 @@ import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai"
 import { LuFileX2 } from "react-icons/lu"
 import { IRentals } from "@/interfaces/rentals.interface"
 import useAuth from "@/hooks/useAuth"
+import { MdOutlinePayment } from "react-icons/md"
 
 export const useMenuActions = () => {
     const dispatch = useAppDispatch()
@@ -115,13 +116,27 @@ export const useMenuActions = () => {
                 {
                     label: (
                         <div
+                            onClick={() => dispatch(openModal({ type: MODAL.ADD.PAYMENT, data: record }))}
+                            className="flex justify-between font-medium text-secondary"
+                        >
+                            Payment <MdOutlinePayment className="ml-2.5 h-5 w-5" />
+                        </div>
+                    ),
+                    key: "5"
+                },
+                {
+                    type: "divider"
+                },
+                {
+                    label: (
+                        <div
                             onClick={() => dispatch(openModal({ type: MODAL.RENTAL.END, id: record.rentalInfo.id }))}
                             className="flex justify-between font-medium text-red-500"
                         >
                             End rental <RiCalendarCloseFill className="ml-2.5 h-5 w-5" />
                         </div>
                     ),
-                    key: "5"
+                    key: "6"
                 }
             ]
         }

@@ -7,6 +7,7 @@ import ModalApprove from "./modalApprove"
 import ModalCancel from "./modalCancel"
 import ModalEnd from "./modalEnd"
 import ModalAcceptBreak from "./modalAccept"
+import ModalPayment from "./modalPayment"
 
 const ModalRental = () => {
     const type = useAppSelector((state) => state.modal.type)
@@ -19,6 +20,8 @@ const ModalRental = () => {
                 return <ModalView title="Rental Overview" data={data} />
             case MODAL.UPDATE.RENTAL:
                 return <ModalUpdate title="Update Rental Information" data={data} />
+            case MODAL.ADD.PAYMENT:
+                return <ModalPayment title="Create Payment Monthly" data={data} />
             case MODAL.RENTAL.APPROVE:
                 return <ModalApprove title="Approve Rental" id={id} />
             case MODAL.RENTAL.CANCEL:

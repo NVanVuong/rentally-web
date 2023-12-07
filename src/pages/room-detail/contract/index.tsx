@@ -45,7 +45,7 @@ const Contract = (props: IContract) => {
                 onFinish={onFinish}
             >
                 <span className="text-sm">
-                    <b className="text-xl font-bold">{formatPrice(props.price)}</b> VND/month
+                    <b className="text-xl font-bold">{formatPrice(props.price)}</b> /month
                 </span>
                 <div className="mt-4 flex flex-col rounded-lg border border-gray-300 font-medium">
                     <div className="flex border-b">

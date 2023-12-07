@@ -35,14 +35,6 @@ export enum RENTAL_STATUS {
     ENDED = "ENDED"
 }
 
-export enum TRANSACTION_STATUS {
-    CREATED = "CREATED",
-    PAID = "PAID",
-    PAYOUT = "PAYOUT",
-    DEPOSITED = "DEPOSITED",
-    FAILED = "FAILED"
-}
-
 export const RENTAL_STATUS_TEXT: Record<RENTAL_STATUS, string> = {
     CREATED: "Created",
     APPROVED: "Approved",
@@ -61,6 +53,14 @@ export const RENTAL_STATUS_COLORS: Record<RENTAL_STATUS, string> = {
     [RENTAL_STATUS.REQUEST_BREAK]: "#f1c40f",
     [RENTAL_STATUS.BROKEN]: "#c0392b",
     [RENTAL_STATUS.ENDED]: "#e74c3c"
+}
+
+export enum TRANSACTION_STATUS {
+    CREATED = "CREATED",
+    PAID = "PAID",
+    PAYOUT = "PAYOUT",
+    DEPOSITED = "DEPOSITED",
+    FAILED = "FAILED"
 }
 
 export const TRANSACTION_TYPE_COLOR: Record<TRANSACTION_STATUS, string> = {
@@ -88,20 +88,17 @@ export enum RATING_STATUS {
 
 export enum PAYMENT_STATUS {
     PAID = "PAID",
-    UNPAID = "UNPAID",
-    PAYOUT = "PAYOUT"
+    UNPAID = "UNPAID"
 }
 
 export const PAYMENT_STATUS_COLORS = {
     [PAYMENT_STATUS.PAID]: "#27ae60",
-    [PAYMENT_STATUS.PAYOUT]: "#27ae60",
     [PAYMENT_STATUS.UNPAID]: "#b2b2b2"
 }
 
 export const PAYMENT_STATUS_TEXT: Record<PAYMENT_STATUS, string> = {
     PAID: "Paid",
-    UNPAID: "Unpaid",
-    PAYOUT: "Payout"
+    UNPAID: "Unpaid"
 }
 
 export type RoleType = keyof typeof ROLE_COLORS
@@ -109,6 +106,7 @@ export type UserStatusType = keyof typeof USER_STATUS_COLORS
 export type RentalStatusType = keyof typeof RENTAL_STATUS_COLORS
 export type RoomStatusType = keyof typeof ROOM_STATUS_COLORS
 export type TransactionStatusType = keyof typeof TRANSACTION_TYPE_COLOR
+export type PaymentStatusType = keyof typeof PAYMENT_STATUS_COLORS
 
 export enum PAGE {
     USER = "USER",
@@ -116,7 +114,8 @@ export enum PAGE {
     BLOCK = "BLOCK",
     UTILITY = "UTILITY",
     RENTAL = "RENTAL",
-    TRANSACTION = "TRANSACTION"
+    TRANSACTION = "TRANSACTION",
+    PAYMENT = "PAYMENT"
 }
 
 export const MODAL = {
@@ -124,7 +123,8 @@ export const MODAL = {
         USER: "ADD_USER",
         ROOM: "ADD_ROOM",
         BLOCK: "ADD_BLOCK",
-        UTILITY: "ADD_UTILITY"
+        UTILITY: "ADD_UTILITY",
+        PAYMENT: "ADD_PAYMENT"
     },
     UPDATE: {
         USER: "UPDATE_USER",
@@ -133,13 +133,15 @@ export const MODAL = {
         UTILITY: "UPDATE_UTILITY",
         RENTAL: "UPDATE_RENTAL",
         PASSWORD: "UPDATE_PASSWORD",
-        HOST: "HOST"
+        HOST: "HOST",
+        PAYMENT: "UPDATE_PAYMENT"
     },
     DELETE: {
         USER: "DELETE_USER",
         ROOM: "DELETE_ROOM",
         BLOCK: "DELETE_BLOCK",
-        UTILITY: "DELETE_UTILITY"
+        UTILITY: "DELETE_UTILITY",
+        PAYMENT: "DELETE_PAYMENT"
     },
     DISABLE: {
         USER: "DISABLE_USER",
@@ -155,7 +157,8 @@ export const MODAL = {
         USER: "VIEW_USER",
         ROOM: "VIEW_ROOM",
         BLOCK: "VIEW_BLOCK",
-        RENTAL: "VIEW_RENTAL"
+        RENTAL: "VIEW_RENTAL",
+        PAYMENT: "VIEW_PAYMENT"
     },
     SHARE: {
         ROOM_DETAIL: "SHARE_ROOM_DETAIL"
