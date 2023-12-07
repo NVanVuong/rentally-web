@@ -110,7 +110,7 @@ const SearchRoom = () => {
                 }}
                 className="flex justify-center"
             >
-                <div className=" flex h-14 w-[34rem] flex-row items-center gap-1 rounded-full border border-[#717171]">
+                <div className=" flex h-14 w-[34rem] flex-row items-center gap-1 rounded-full bg-white shadow-md shadow-black/10">
                     <div className="flex w-40 flex-col justify-center border-r pl-4 focus:rounded-full focus:border">
                         <label className="pl-4 text-[16px] font-bold">City</label>
                         <CustomAutoComplete

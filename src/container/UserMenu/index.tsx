@@ -130,7 +130,7 @@ const UserMenu = () => {
 
     return (
         <Dropdown
-            className={`relative flex items-center justify-center gap-2 rounded-full border border-gray-200 py-1 pl-3 pr-2 transition duration-200 hover:shadow-xl ${
+            className={`relative flex items-center justify-center gap-2 rounded-full border border-gray-200 bg-white py-1 pl-3 pr-2 transition duration-200 hover:shadow-xl ${
                 isOpen ? "shadow-xl" : "shadow-none"
             }`}
             placement="bottomRight"
