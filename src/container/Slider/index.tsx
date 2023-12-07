@@ -44,7 +44,7 @@ const Slider = () => {
         getItem(`${isExpanding ? "Accounts" : ""}`, "users", <FaRegUser className="h-5 w-5" />),
         getItem(`${isExpanding ? "Room Blocks" : ""}`, "blocks", <BiHomeAlt className="h-5 w-5" />),
         getItem(`${isExpanding ? "Rentals" : ""}`, "rentals", <LuClipboardSignature className="h-5 w-5" />),
-        getItem(`${isExpanding ? "Payments" : ""}`, "rentals", <MdOutlinePayment className="h-5 w-5" />),
+        getItem(`${isExpanding ? "Payments" : ""}`, "payments", <MdOutlinePayment className="h-5 w-5" />),
         getItem(`${isExpanding ? "Utilities" : ""}`, "utilities", <TbHomeCog className="h-5 w-5" />),
         getItem(`${isExpanding ? "Transactions" : ""}`, "transactions", <BiStats className="h-5 w-5" />),
 
@@ -65,6 +65,9 @@ const Slider = () => {
                 break
             case "utilities":
                 navigate(SITE_MAP.UTILITIES_MANAGEMENT)
+                break
+            case "payments":
+                navigate(SITE_MAP.PAYMENTS)
                 break
             case "rentals":
                 navigate(SITE_MAP.RENTALS)

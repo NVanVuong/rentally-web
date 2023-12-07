@@ -27,3 +27,12 @@ export interface IPaymentResponse {
     message: string
     status: string
 }
+
+export interface IPaymentRequest {
+    rental_id?: number
+    electricNumber: number
+    waterNumber: number
+    additionalPrice: number
+    month: number
+    year: number
+}

@@ -90,7 +90,7 @@ const MyRentalCard = (props: IRentalCard) => {
                     </div>
                     <div className="flex flex-col gap-1">
                         <p className="text-sm font-medium text-secondary">Monthly rent: </p>
-                        <span className="text-sm">{formatPrice(roomInfo.price)} VND</span>
+                        <span className="text-sm">{formatPrice(roomInfo.price)}</span>
                     </div>
                     <div className="flex flex-col gap-1">
                         <p className="text-sm font-medium text-secondary">Lease term: </p>
@@ -98,7 +98,7 @@ const MyRentalCard = (props: IRentalCard) => {
                     </div>
                     <div className="flex flex-col gap-1">
                         <p className="text-sm font-medium text-secondary">Deposit amount: </p>
-                        <span className="text-sm">{formatPrice(rentalInfo.leaseTerminationCost)} VND</span>
+                        <span className="text-sm">{formatPrice(rentalInfo.leaseTerminationCost)}</span>
                     </div>
                 </div>
                 <hr className="border border-b-gray-50" />

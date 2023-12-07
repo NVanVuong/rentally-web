@@ -20,6 +20,7 @@ const UsersPage = lazy(() => import("../pages/admin/users"))
 const BlocksPage = lazy(() => import("../pages/admin/blocks"))
 const UtilitiesPage = lazy(() => import("../pages/admin/utilities"))
 const RentalsPage = lazy(() => import("../pages/admin/rentals"))
+const PaymentsPage = lazy(() => import("../pages/admin/payments"))
 const TransatcionsPage = lazy(() => import("../pages/admin/transactions"))
 
 const Login = lazy(() => import("../pages/auth/Login"))
@@ -60,6 +61,7 @@ const MainRoute = () => {
                             <Route path={SITE_MAP.UTILITIES_MANAGEMENT} element={<UtilitiesPage />} />
                             <Route path={SITE_MAP.TRANSACTION_MANAGEMENT} element={<TransatcionsPage />} />
                             <Route path={SITE_MAP.RENTALS} element={<RentalsPage />} />
+                            <Route path={SITE_MAP.PAYMENTS} element={<PaymentsPage />} />
                         </Route>
                     </Route>
                     <Route element={<RequireAuthMod />}>
@@ -71,6 +73,7 @@ const MainRoute = () => {
                             <Route path={SITE_MAP.UTILITIES_MANAGEMENT} element={<UtilitiesPage />} />
                             <Route path={SITE_MAP.TRANSACTION_MANAGEMENT} element={<TransatcionsPage />} />
                             <Route path={SITE_MAP.RENTALS} element={<RentalsPage />} />
+                            <Route path={SITE_MAP.PAYMENTS} element={<PaymentsPage />} />
                         </Route>
                     </Route>
 
