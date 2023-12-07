@@ -9,7 +9,7 @@ import { BiHomeAlt, BiStats } from "react-icons/bi"
 import Logo from "@/components/Logo"
 import { ROLE } from "@/utils/constants/GlobalConst"
 import "./style.css"
-import { MdLogout } from "react-icons/md"
+import { MdLogout, MdOutlinePayment } from "react-icons/md"
 import Button from "@/pages/room-detail/components/Button"
 import { TbHomeCog } from "react-icons/tb"
 import { LuClipboardSignature } from "react-icons/lu"
@@ -43,9 +43,11 @@ const Slider = () => {
 
         getItem(`${isExpanding ? "Accounts" : ""}`, "users", <FaRegUser className="h-5 w-5" />),
         getItem(`${isExpanding ? "Room Blocks" : ""}`, "blocks", <BiHomeAlt className="h-5 w-5" />),
-        getItem(`${isExpanding ? "Utilities" : ""}`, "utilities", <TbHomeCog className="h-5 w-5" />),
         getItem(`${isExpanding ? "Rentals" : ""}`, "rentals", <LuClipboardSignature className="h-5 w-5" />),
+        getItem(`${isExpanding ? "Payments" : ""}`, "rentals", <MdOutlinePayment className="h-5 w-5" />),
+        getItem(`${isExpanding ? "Utilities" : ""}`, "utilities", <TbHomeCog className="h-5 w-5" />),
         getItem(`${isExpanding ? "Transactions" : ""}`, "transactions", <BiStats className="h-5 w-5" />),
+
         { type: "divider" }
     ]
 
