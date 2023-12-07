@@ -55,7 +55,7 @@ const MyPaymentCard = (props: IPaymentCard) => {
                     <span className="overflow-hidden text-ellipsis whitespace-nowrap rounded-md text-sm font-medium uppercase text-secondary">
                         {roomInfo.roomName}
                     </span>
-                    <span className="ml-1 break-keep rounded-sm bg-green-500 px-2 py-0.5 text-xs font-bold text-white">
+                    <span className="ml-1 break-keep rounded-md bg-secondary px-2 py-0.5 text-xs font-bold text-white">
                         {paymentTime}
                     </span>
                 </div>
