@@ -15,7 +15,7 @@ import ModalUpdatePassword from "./modal"
 import { ROLE } from "../../utils/constants/GlobalConst"
 
 const MyProfile = () => {
-    const dispatch: any = useAppDispatch()
+    const dispatch = useAppDispatch()
     const { userInfo } = useAuth()
     const [imageUrl, setImageUrl] = useState<string>()
     const [updateInfo, { data, error, isLoading }] = useUpdateMyInfoMutation()
@@ -116,10 +116,10 @@ const MyProfile = () => {
 
                                         {userInfo?.role === ROLE.MOD ? (
                                             <>
-                                                <Form.Item className="w-full" name="bankCode" rules={[]}>
+                                                <Form.Item className="w-full" name="bankCode">
                                                     <Input placeholder="Bank Code" readOnly />
                                                 </Form.Item>
-                                                <Form.Item className="w-full" name="bankAccount" rules={[]}>
+                                                <Form.Item className="w-full" name="bankAccount">
                                                     <Input placeholder="Bank Account" readOnly />
                                                 </Form.Item>
                                             </>
