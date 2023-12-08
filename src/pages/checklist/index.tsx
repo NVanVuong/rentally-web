@@ -13,7 +13,9 @@ const Checklist = () => {
     const { data, isLoading } = useGetChecklistQuery()
 
     if (data?.data?.length === 0 && !isLoading)
-        return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No rooms match in list." className="mt-24" />
+        return (
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No rooms in your checklist." className="mt-24" />
+        )
 
     return (
         <div className="mb-8 mt-4 px-4 sm:px-6 md:px-10 xl:px-28">
