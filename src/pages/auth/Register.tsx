@@ -66,7 +66,7 @@ const Register = () => {
             .oneOf([Yup.ref("password"), undefined], "Password must match!")
             .required("Confirm password is reqired!"),
         phoneNumber: Yup.string()
-            .matches(/^[\\+]?[(]?[0-9]{3}[)]?[-\s\\.]?[0-9]{3}[-\s\\.]?[0-9]{4,6}$/im, "Invalid phone number")
+            .matches(/^\+?(84|0[35789])\d{8,9}$/, "Invalid phone number")
             .required("Number phone must be required!"),
         role: Yup.string().required("Role Required!")
     })

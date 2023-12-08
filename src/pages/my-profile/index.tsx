@@ -110,11 +110,21 @@ const MyProfile = () => {
                                         <Form.Item className="w-full" name="lastName">
                                             <Input placeholder="Lastname" />
                                         </Form.Item>
-                                        <Form.Item className="w-full" name="phoneNumber" rules={[]}>
+                                        <Form.Item
+                                            className="w-full"
+                                            name="phoneNumber"
+                                            rules={[
+                                                { required: true, message: "Please input phone number!" },
+                                                {
+                                                    pattern: new RegExp(/^\+?(84|0[35789])\d{8,9}$/),
+                                                    message: "Please input a valid Viet Nam phone number"
+                                                }
+                                            ]}
+                                        >
                                             <Input placeholder="Phone" />
                                         </Form.Item>
 
-                                        {userInfo?.role === ROLE.MOD ? (
+                                        {userInfo?.role === ROLE.MOD && (
                                             <>
                                                 <Form.Item className="w-full" name="bankCode">
                                                     <Input placeholder="Bank Code" readOnly />
@@ -123,7 +133,7 @@ const MyProfile = () => {
                                                     <Input placeholder="Bank Account" readOnly />
                                                 </Form.Item>
                                             </>
-                                        ) : undefined}
+                                        )}
                                         <Form.Item
                                             className="w-full"
                                             name="photo"
