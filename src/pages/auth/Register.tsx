@@ -55,7 +55,13 @@ const Register = () => {
         email: Yup.string().email("Email is invalid!").required("Email Required!"),
         firstName: Yup.string().required("Firstname Required!"),
         lastName: Yup.string().required("Lastname Required!"),
-        password: Yup.string().min(4, "Password must be minimum 4 digits!").required("Password Required!"),
+        password: Yup.string()
+            .min(8, "Password must be minimum 8 digits!")
+            .matches(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+                "Password must contains at least one character in [a-z,A-Z,0-9]"
+            )
+            .required("Password Required!"),
         confirmPassword: Yup.string()
             .oneOf([Yup.ref("password"), undefined], "Password must match!")
             .required("Confirm password is reqired!"),

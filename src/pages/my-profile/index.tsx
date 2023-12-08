@@ -12,9 +12,10 @@ import { RiLockPasswordLine } from "react-icons/ri"
 import { openModal } from "@/redux/features/modal/modal.slice"
 import { MODAL } from "@/utils/constants/GlobalConst"
 import ModalUpdatePassword from "./modal"
+import { ROLE } from "../../utils/constants/GlobalConst"
 
 const MyProfile = () => {
-    const dispatch = useAppDispatch()
+    const dispatch: any = useAppDispatch()
     const { userInfo } = useAuth()
     const [imageUrl, setImageUrl] = useState<string>()
     const [updateInfo, { data, error, isLoading }] = useUpdateMyInfoMutation()
@@ -94,7 +95,9 @@ const MyProfile = () => {
                                             email: userInfo?.email,
                                             firstName: userInfo?.firstName,
                                             lastName: userInfo?.lastName,
-                                            phoneNumber: userInfo?.phoneNumber
+                                            phoneNumber: userInfo?.phoneNumber,
+                                            bankCode: userInfo?.bankCode,
+                                            bankAccount: userInfo?.accountNumber
                                         }}
                                     >
                                         <Form.Item className="w-full" name="email">
@@ -111,6 +114,16 @@ const MyProfile = () => {
                                             <Input placeholder="Phone" />
                                         </Form.Item>
 
+                                        {userInfo?.role === ROLE.MOD ? (
+                                            <>
+                                                <Form.Item className="w-full" name="bankCode" rules={[]}>
+                                                    <Input placeholder="Bank Code" readOnly />
+                                                </Form.Item>
+                                                <Form.Item className="w-full" name="bankAccount" rules={[]}>
+                                                    <Input placeholder="Bank Account" readOnly />
+                                                </Form.Item>
+                                            </>
+                                        ) : undefined}
                                         <Form.Item
                                             className="w-full"
                                             name="photo"
