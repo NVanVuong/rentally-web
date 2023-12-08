@@ -17,7 +17,7 @@ const Filters = () => {
 
     const { data } = useGetUtilitiesQuery()
 
-    const [values, setValues] = React.useState([0, 100])
+    const [values, setValues] = React.useState([1000000, 10000000])
 
     const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>([])
 
@@ -28,8 +28,8 @@ const Filters = () => {
     useEffect(() => {
         //set value when user change url
         setValues([
-            parseInt(searchParams.get("minPrice") || "0", 10),
-            parseInt(searchParams.get("maxPrice") || "100", 10)
+            parseInt(searchParams.get("minPrice") || "1000000", 10),
+            parseInt(searchParams.get("maxPrice") || "10000000", 10)
         ])
         // set value when user change url
         setSelectedOptions(
@@ -143,9 +143,9 @@ const Filters = () => {
                     <label className="text-[24px] font-semibold ">Price range</label>
                     <div className="mt-8 px-4">
                         <Range
-                            step={1}
-                            min={0}
-                            max={100}
+                            step={100000}
+                            min={1000000}
+                            max={10000000}
                             values={values}
                             onChange={(values) => setValues(values)}
                             renderTrack={({ props, children }) => (
@@ -172,7 +172,7 @@ const Filters = () => {
                             {/* Giá trị: {values[0].toFixed(1)} - {values[1].toFixed(1)} */}
                             <div className="h-12 flex-1 rounded-lg border border-[#717171] px-2 ">
                                 <label htmlFor="minPrice" className=" text-[#717171]">
-                                    Minimun
+                                    Minimum
                                 </label>
                                 <input
                                     id="minPrice"
@@ -184,7 +184,7 @@ const Filters = () => {
                             <p className="text-[40px] font-thin ">-</p>
                             <div className="h-12 flex-1 rounded-lg border border-[#717171] px-2 ">
                                 <label htmlFor="maxPrice" className=" text-[#717171]">
-                                    Maximun
+                                    Maximum
                                 </label>
                                 <input
                                     id="maxPrice"
@@ -200,7 +200,7 @@ const Filters = () => {
                 <div className="mt-4 flex justify-between border-t pt-3">
                     <button
                         onClick={() => {
-                            setValues([0, 100])
+                            setValues([1000000, 3000000])
                             setSelectedOptions([])
                         }}
                         className="rounded-xl bg-white px-3 py-2 font-semibold text-black underline hover:bg-slate-200 "
