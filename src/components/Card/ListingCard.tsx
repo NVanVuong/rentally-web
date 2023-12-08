@@ -86,7 +86,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
                     </h4>
                     <div className="flex items-center gap-1 text-sm font-normal">
                         <BsStarFill size={12} />
-                        {avgRate || 4.8}
+                        {avgRate || 0}
                     </div>
                 </div>
                 <div className="flex gap-2">
