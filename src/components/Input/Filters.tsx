@@ -9,6 +9,7 @@ import { createSearchParams, useNavigate, useSearchParams } from "react-router-d
 import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { closeModal } from "@/redux/features/modal/modal.slice"
 import { MODAL } from "@/utils/constants/GlobalConst"
+import { formatPrice } from "@/utils/helpers"
 
 const Filters = () => {
     const [searchParams] = useSearchParams()
@@ -177,7 +178,7 @@ const Filters = () => {
                                 <input
                                     id="minPrice"
                                     className="h-5 w-4/5 font-semibold"
-                                    value={values[0].toFixed(1)}
+                                    value={formatPrice(values[0])}
                                     placeholder=""
                                 />
                             </div>
@@ -190,7 +191,7 @@ const Filters = () => {
                                     id="maxPrice"
                                     type="text"
                                     className="h-5 w-4/5 font-semibold"
-                                    value={values[1].toFixed(1)}
+                                    value={formatPrice(values[1])}
                                     placeholder=""
                                 />
                             </div>
