@@ -8,6 +8,8 @@ export interface IUser {
     role: string
     googleId?: string
     status?: string
+    bankCode?: string
+    accountNumber?: string
 }
 
 export interface ILandlord {

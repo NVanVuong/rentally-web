@@ -12,6 +12,7 @@ import { RiLockPasswordLine } from "react-icons/ri"
 import { openModal } from "@/redux/features/modal/modal.slice"
 import { MODAL } from "@/utils/constants/GlobalConst"
 import ModalUpdatePassword from "./modal"
+import { ROLE } from "../../utils/constants/GlobalConst"
 
 const MyProfile = () => {
     const dispatch = useAppDispatch()
@@ -94,7 +95,9 @@ const MyProfile = () => {
                                             email: userInfo?.email,
                                             firstName: userInfo?.firstName,
                                             lastName: userInfo?.lastName,
-                                            phoneNumber: userInfo?.phoneNumber
+                                            phoneNumber: userInfo?.phoneNumber,
+                                            bankCode: userInfo?.bankCode,
+                                            bankAccount: userInfo?.accountNumber
                                         }}
                                     >
                                         <Form.Item className="w-full" name="email">
@@ -107,10 +110,30 @@ const MyProfile = () => {
                                         <Form.Item className="w-full" name="lastName">
                                             <Input placeholder="Lastname" />
                                         </Form.Item>
-                                        <Form.Item className="w-full" name="phoneNumber" rules={[]}>
+                                        <Form.Item
+                                            className="w-full"
+                                            name="phoneNumber"
+                                            rules={[
+                                                { required: true, message: "Please input phone number!" },
+                                                {
+                                                    pattern: new RegExp(/^\+?(84|0[35789])\d{8,9}$/),
+                                                    message: "Please input a valid Viet Nam phone number"
+                                                }
+                                            ]}
+                                        >
                                             <Input placeholder="Phone" />
                                         </Form.Item>
 
+                                        {userInfo?.role === ROLE.MOD && (
+                                            <>
+                                                <Form.Item className="w-full" name="bankCode">
+                                                    <Input placeholder="Bank Code" readOnly />
+                                                </Form.Item>
+                                                <Form.Item className="w-full" name="bankAccount">
+                                                    <Input placeholder="Bank Account" readOnly />
+                                                </Form.Item>
+                                            </>
+                                        )}
                                         <Form.Item
                                             className="w-full"
                                             name="photo"
