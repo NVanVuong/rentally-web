@@ -1,4 +1,4 @@
-import { Button, Form, Input, Spin, DatePicker } from "antd"
+import { Button, Form, Input, Spin, DatePicker, InputNumber } from "antd"
 import useServerMessage from "@/hooks/useServerMessage"
 import Title from "@/components/Modal/Title"
 import { IModal } from "@/interfaces/modal.interface"
@@ -6,9 +6,8 @@ import { IRentals } from "@/interfaces/rentals.interface"
 import { useGetModInfoQuery, useUpdateRentalMutation } from "@/redux/services/rentals/rentals.service"
 import { useEffect } from "react"
 import { formatDate } from "@/utils/helpers"
-import moment from "moment"
-
-export const dateFormat = "YYYY-MM-DD"
+import { dateFormat } from "@/utils/constants/GlobalConst"
+import dayjs from "dayjs"
 
 const ModalUpdate = (props: IModal) => {
     const { title, data: rental } = props
@@ -24,12 +23,18 @@ const ModalUpdate = (props: IModal) => {
     useEffect(() => {
         if (modInfo?.data) {
             const { data: initialValues } = modInfo
+
+            const identityValue = initialValues.identityDateOfIssue
+            const birthdayValue = initialValues.birthday
+            const identityDate = dayjs(identityValue).format(dateFormat)
+            const birthdayDate = dayjs(birthdayValue).format(dateFormat)
+
             form.setFieldsValue({
                 firstName: initialValues.firstName,
                 identityNumber: initialValues.identityNumber,
-                identityDateOfIssue: moment(initialValues.identityDateOfIssue),
+                identityDateOfIssue: identityValue !== null ? dayjs(identityDate, dateFormat) : "",
                 identityPlaceOfIssue: initialValues.identityPlaceOfIssue,
-                birthday: moment(initialValues.birthday),
+                birthday: birthdayValue !== null ? dayjs(birthdayDate, dateFormat) : "",
                 electricPrice: initialValues.electricPrice,
                 waterPrice: initialValues.waterPrice
             })
@@ -115,7 +120,7 @@ const ModalUpdate = (props: IModal) => {
                     name="birthday"
                     rules={[{ required: true, message: "Please input birthday" }]}
                 >
-                    <DatePicker placeholder="Birthday" className="w-full" format={dateFormat} />
+                    <DatePicker picker="date" placeholder="Birthday" className="w-full" format={dateFormat} />
                 </Form.Item>
                 <h2 className="mb-1 w-full text-lg font-bold">Rental information</h2>
                 <Form.Item
@@ -128,24 +133,29 @@ const ModalUpdate = (props: IModal) => {
                         }
                     ]}
                 >
-                    <Input placeholder="Electric Price" />
+                    <InputNumber type="number" className="w-full" placeholder="Electric Price" addonAfter="VND" />
                 </Form.Item>
                 <Form.Item
                     className="w-full"
                     name="waterPrice"
                     rules={[{ required: true, message: "Please input Water Price!" }]}
                 >
-                    <Input placeholder="Water Price" />
+                    <InputNumber type="number" className="w-full" placeholder="Water Price" addonAfter="VND" />
                 </Form.Item>
                 <Form.Item
                     className="w-full"
                     name="leaseTerminationCost"
                     rules={[{ required: true, message: "Please input Lease Termination Cost!" }]}
                 >
-                    <Input placeholder="Lease Termination Cost" />
+                    <InputNumber
+                        type="number"
+                        className="w-full"
+                        placeholder="Lease Termination Cost"
+                        addonAfter="VND"
+                    />
                 </Form.Item>
                 <Form.Item className="w-full" name="additionalPrice">
-                    <Input placeholder="Additional Price" />
+                    <InputNumber type="number" className="w-full" placeholder="Additional Price" addonAfter="VND" />
                 </Form.Item>
                 <Form.Item className="w-full">
                     <Button type="primary" htmlType="submit" className="h-10 bg-primary text-white">

@@ -16,7 +16,6 @@ const TableManagePayments = () => {
     const keyword = useAppSelector((state) => state.search.keyword)
     const { data, isLoading } = useGetPaymentsQuery({ keyword: keyword })
     const payments = data?.data as IPayments[]
-    console.log(payments)
 
     const { role } = useAuth()
 
@@ -62,7 +61,7 @@ const TableManagePayments = () => {
             )
         },
         {
-            title: <span className="font-bold">Payment Time</span>,
+            title: <span className="font-bold">Time</span>,
             key: "paymentTime",
             width: "8%",
             render: (record: IPayments) => <span className="ml-2 text-sm">{record.month + "/" + record.year}</span>

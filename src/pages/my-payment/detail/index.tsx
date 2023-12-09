@@ -9,8 +9,6 @@ import { message } from "antd"
 import { useCheckoutPaymentMutation, useGetMyPaymentQuery } from "@/redux/services/payments/payments.service"
 import { SITE_MAP } from "@/utils/constants/Path"
 
-export const dateFormat = "DD/MM/YYYY"
-
 const MyPaymentDetail = () => {
     const { id } = useParams()
     const [form] = Form.useForm()

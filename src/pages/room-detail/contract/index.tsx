@@ -6,11 +6,11 @@ import { useNavigate, useParams } from "react-router-dom"
 import dayjs from "dayjs"
 import { formatPrice } from "@/utils/helpers"
 import useAuth from "@/hooks/useAuth"
+import { dateFormat } from "@/utils/constants/GlobalConst"
 interface IContract {
     price: string
 }
 
-export const dateFormat = "DD/MM/YYYY"
 export const message = "Please input this field!"
 
 const Contract = (props: IContract) => {

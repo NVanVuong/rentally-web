@@ -10,17 +10,19 @@
     --black-color: #000000;
 }
 
-html::-webkit-scrollbar {
-    width: 6px;
-}
+html {
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
 
-html::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: var(--primary-color);
-}
+    ::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: var(--primary-color);
+    }
 
-html::-webkit-scrollbar-track {
-    background-color: #f0f0f0;
+    ::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
 }
 
 .leaflet-top.leaflet-left {

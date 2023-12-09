@@ -176,3 +176,6 @@ export const MODAL = {
         RENTAL: "REVIEW_RENTAL"
     }
 } as const
+
+export const monthFormat = "YYYY-MM"
+export const dateFormat = "YYYY-MM-DD"

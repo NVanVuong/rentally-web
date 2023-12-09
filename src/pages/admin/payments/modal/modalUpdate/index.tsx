@@ -6,7 +6,8 @@ import { useEffect } from "react"
 import { useUpdatePaymentMutation } from "@/redux/services/payments/payments.service"
 import { IPayments } from "@/interfaces/payments.interface"
 import { formatPrice } from "@/utils/helpers"
-import moment from "moment"
+import dayjs from "dayjs"
+import { monthFormat } from "@/utils/constants/GlobalConst"
 
 const ModalUpdate = (props: IModal) => {
     const { title, data: payment } = props
@@ -27,16 +28,19 @@ const ModalUpdate = (props: IModal) => {
 
     useEffect(() => {
         if (payment) {
+            const date = `${year}/${month.toString().padStart(2, "0")}`
+            const paymentDate = dayjs(date).format(monthFormat)
+
             form.setFieldsValue({
                 id,
                 electricNumber,
                 waterNumber,
                 additionalPrice,
-                paymentTime: moment(`${year}-${month}`).startOf("month")
+                paymentTime: dayjs(paymentDate, monthFormat)
             })
         }
         //eslint-disable-next-line
-    }, [payment])
+    }, [payment, form])
 
     const onFinish = async (values: any) => {
         const body = {
@@ -108,6 +112,7 @@ const ModalUpdate = (props: IModal) => {
                         picker="month"
                         placement={"bottomRight"}
                         className="w-full"
+                        format={monthFormat}
                     />
                 </Form.Item>
                 <Typography className="w-full">

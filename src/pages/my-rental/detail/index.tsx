@@ -15,8 +15,6 @@ import { message } from "antd"
 import { SITE_MAP } from "@/utils/constants/Path"
 import ModalReview from "../modalReview"
 
-export const dateFormat = "DD/MM/YYYY"
-
 const MyRentalDetail = () => {
     const { id } = useParams()
     const [form] = Form.useForm()

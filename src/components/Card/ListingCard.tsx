@@ -97,7 +97,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ dataRoom }) => {
                     ))}
                 </div>
                 <h4 className="mt-0.5 flex items-center gap-1 text-sm">
-                    <span className="font-medium">{formatPrice(price)}</span> VND/month
+                    <span className="font-medium">{formatPrice(price)}</span> /month
                 </h4>
             </div>
         </div>

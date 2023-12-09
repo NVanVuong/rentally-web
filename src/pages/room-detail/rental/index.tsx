@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/redux/hook"
 import { Button, DatePicker, Form, Input, Select } from "antd"
-import { dateFormat, message } from "../contract"
+import { message } from "../contract"
 import { MdOutlineArrowBackIosNew } from "react-icons/md"
 import { useNavigate, useParams } from "react-router-dom"
 import { IUser } from "@/interfaces/user.interface"
@@ -9,6 +9,7 @@ import Contract from "./contract"
 import { useCreateRentalMutation } from "@/redux/services/rental/rental.service"
 import useServerMessage from "@/hooks/useServerMessage"
 import { formatDate } from "@/utils/helpers"
+import { dateFormat } from "@/utils/constants/GlobalConst"
 
 const Rental = () => {
     const navigate = useNavigate()
