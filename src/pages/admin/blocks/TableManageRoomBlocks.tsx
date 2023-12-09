@@ -67,7 +67,9 @@ const TableManageRoomBlocks = () => {
             dataIndex: "deletedAt",
             width: "6%",
             align: "center" as AlignType,
-            render: (deletedAt: string) => <span className="text-sm font-medium">{convertDate(deletedAt)}</span>
+            render: (deletedAt: string) => (
+                <span className="text-sm text-gray-400">{deletedAt !== null ? convertDate(deletedAt) : "-----"}</span>
+            )
         },
         {
             title: <span className="text-center font-bold">Action</span>,

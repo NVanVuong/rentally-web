@@ -24,6 +24,8 @@ const ModalUpdate = (props: IModal) => {
         if (modInfo?.data) {
             const { data: initialValues } = modInfo
 
+            console.log(initialValues)
+
             const identityValue = initialValues.identityDateOfIssue
             const birthdayValue = initialValues.birthday
             const identityDate = dayjs(identityValue).format(dateFormat)
@@ -32,9 +34,9 @@ const ModalUpdate = (props: IModal) => {
             form.setFieldsValue({
                 firstName: initialValues.firstName,
                 identityNumber: initialValues.identityNumber,
-                identityDateOfIssue: identityValue !== null ? dayjs(identityDate, dateFormat) : "",
+                identityDateOfIssue: identityValue !== "" ? dayjs(identityDate, dateFormat) : "",
                 identityPlaceOfIssue: initialValues.identityPlaceOfIssue,
-                birthday: birthdayValue !== null ? dayjs(birthdayDate, dateFormat) : "",
+                birthday: birthdayValue !== "" ? dayjs(birthdayDate, dateFormat) : "",
                 electricPrice: initialValues.electricPrice,
                 waterPrice: initialValues.waterPrice
             })

@@ -36,8 +36,6 @@ const Login = () => {
     }
 
     const submitForm = async (values: IAccountLogin) => {
-        console.log(values)
-
         try {
             const res = await login(values).unwrap()
             if (res.status === "SUCCESS" && res.data) {
