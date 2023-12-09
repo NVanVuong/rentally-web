@@ -55,12 +55,18 @@ const Register = () => {
         email: Yup.string().email("Email is invalid!").required("Email Required!"),
         firstName: Yup.string().required("Firstname Required!"),
         lastName: Yup.string().required("Lastname Required!"),
-        password: Yup.string().min(4, "Password must be minimum 4 digits!").required("Password Required!"),
+        password: Yup.string()
+            .min(8, "Password must be minimum 8 digits!")
+            .matches(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+                "Password must contains at least one character in [a-z,A-Z,0-9]"
+            )
+            .required("Password Required!"),
         confirmPassword: Yup.string()
             .oneOf([Yup.ref("password"), undefined], "Password must match!")
             .required("Confirm password is reqired!"),
         phoneNumber: Yup.string()
-            .matches(/^[\\+]?[(]?[0-9]{3}[)]?[-\s\\.]?[0-9]{3}[-\s\\.]?[0-9]{4,6}$/im, "Invalid phone number")
+            .matches(/^\+?(84|0[35789])\d{8,9}$/, "Invalid phone number")
             .required("Number phone must be required!"),
         role: Yup.string().required("Role Required!")
     })
