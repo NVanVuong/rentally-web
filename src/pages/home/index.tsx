@@ -9,6 +9,7 @@ import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 import { useGetFindingRoomsQuery } from "@/redux/services/findingRoom/findingRoom.service"
 import { Button, Empty, Skeleton } from "antd"
 import { SITE_MAP } from "@/utils/constants/Path"
+import HeroSlide from "@/container/HeroSlide"
 
 const Home = () => {
     useGetUtilitiesQuery()
@@ -86,6 +87,7 @@ const Home = () => {
                 </div>
             ) : (
                 <div className="flex h-full flex-col">
+                    <HeroSlide />
                     <div className="my-6 grow">
                         {isLoading || isFetchingWhenBack ? (
                             <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-6 md:px-10 xl:px-28">
