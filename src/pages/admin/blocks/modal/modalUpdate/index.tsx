@@ -49,8 +49,8 @@ const ModalUpdate = (props: IModal) => {
             ...(placeInfo
                 ? {
                       address: placeInfo?.address.replace(/, \d{5},/g, ","),
-                      district: placeInfo?.city,
-                      city: "",
+                      district: placeInfo.district,
+                      city: placeInfo.city,
                       country: placeInfo?.country,
                       coordinate: {
                           latitude: placeInfo?.latlng.lat,

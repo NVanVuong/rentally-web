@@ -32,8 +32,8 @@ const ModalAdd = (props: IModal) => {
     const onFinish = async (values: any) => {
         const roomBlockRequest: IRoomBlockRequest = {
             address: placeInfo.address.replace(/, \d{5},/g, ","),
-            district: placeInfo.city,
-            city: "",
+            district: placeInfo.district,
+            city: placeInfo.city,
             country: placeInfo.country,
             coordinate: {
                 latitude: placeInfo.latlng.lat,
@@ -42,6 +42,8 @@ const ModalAdd = (props: IModal) => {
             description: values.description,
             landlordId: values.landlordId
         }
+
+        console.log(roomBlockRequest)
 
         await createRoomBlock({ role, data: roomBlockRequest })
     }

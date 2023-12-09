@@ -18,10 +18,10 @@ const searchMapSlice = createSlice({
     initialState,
     reducers: {
         setPlaceInfo: (state, action) => {
-            const { name, address, city, country, latlng } = action.payload
+            const { name, city, country, latlng, district } = action.payload
             state.placeInfo = {
-                address: name ? name : address,
-                district: city,
+                address: name,
+                district,
                 city,
                 country,
                 latlng

@@ -83,3 +83,17 @@ export const formatDate = (dateString: any) => {
 /** Style */
 
 export const styleOrEmpty = (condition: boolean, style: string) => (condition ? style : "")
+
+/** Get */
+export const getCityAndCountry = async (lat: number, lon: number) => {
+    return new Promise((resolve, reject) => {
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=vi`)
+            .then((res) => res.json())
+            .then((data) => {
+                resolve(data.address)
+            })
+            .catch((err) => {
+                reject(err)
+            })
+    })
+}

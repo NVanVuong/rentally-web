@@ -1,5 +1,6 @@
 import { setPlaceInfo } from "@/redux/features/search-map/search-map.slice"
 import { useAppDispatch } from "@/redux/hook"
+import { getCityAndCountry } from "@/utils/helpers"
 import { Input } from "antd"
 import { useEffect, useState } from "react"
 
@@ -17,6 +18,25 @@ export const SearchMap = (props: ISearchMap) => {
     const dispatch = useAppDispatch()
     const [address, setAddress] = useState<string | undefined>(props.myAddress)
 
+    const handleResult = async (info: any) => {
+        const res: any = await getCityAndCountry(info.latlng.lat, info.latlng.lng)
+
+        const city = res?.city
+        const country = res?.country
+
+        if (res) {
+            const place = {
+                name: info.name,
+                city: city ? city : "",
+                country: country ? country : "",
+                latlng: info.latlng,
+                district: info.city
+            }
+
+            dispatch(setPlaceInfo(place))
+        }
+    }
+
     useEffect(() => {
         const searchMap = document.getElementById("search-map")
 
@@ -29,10 +49,8 @@ export const SearchMap = (props: ISearchMap) => {
             })
 
             search.on("change", (e: any) => {
-                console.log(e)
-
                 if (e.result) {
-                    dispatch(setPlaceInfo(e.result))
+                    handleResult(e.result)
                     setAddress(e.result.name)
                     search.close()
                 }
