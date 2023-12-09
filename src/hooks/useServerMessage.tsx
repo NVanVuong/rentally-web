@@ -2,12 +2,13 @@ import { useEffect } from "react"
 import { message } from "antd"
 import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { closeModal } from "@/redux/features/modal/modal.slice"
-type IServerMessage = {
+
+export type TServerMessage = {
     error: any
     data: any
 }
 
-function useServerMessage({ data, error }: IServerMessage) {
+function useServerMessage({ data, error }: TServerMessage) {
     const dispatch = useAppDispatch()
     const isOpen = useAppSelector((state) => state.modal.isOpen)
 

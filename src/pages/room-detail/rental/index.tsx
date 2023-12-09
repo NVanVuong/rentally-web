@@ -7,9 +7,10 @@ import { IUser } from "@/interfaces/user.interface"
 import Rule from "./rule"
 import Contract from "./contract"
 import { useCreateRentalMutation } from "@/redux/services/rental/rental.service"
-import useServerMessage from "@/hooks/useServerMessage"
+import useServerMessage, { TServerMessage } from "@/hooks/useServerMessage"
 import { formatDate } from "@/utils/helpers"
 import { dateFormat } from "@/utils/constants/GlobalConst"
+import { SITE_MAP } from "@/utils/constants/Path"
 
 const Rental = () => {
     const navigate = useNavigate()
@@ -52,7 +53,12 @@ const Rental = () => {
             }
         }
 
-        await createRental({ data: rentalInfo })
+        const res = (await createRental({ data: rentalInfo })) as TServerMessage
+        const data = res?.data
+
+        if (data && (data.status === "success" || data.success === true)) {
+            navigate(SITE_MAP.MY_RENTAL)
+        }
     }
 
     useServerMessage({ data, error })
