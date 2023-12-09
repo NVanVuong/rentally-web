@@ -1,4 +1,5 @@
 export const BASE_URL = import.meta.env.VITE_REACT_APP_API_URL as string
+export const RENTALLY_URL = import.meta.env.VITE_DOMAIN as string
 export const CLIENT_ID = import.meta.env.VITE_REACT_APP_CLIENT_ID as string
 
 export enum ROLE {

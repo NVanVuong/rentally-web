@@ -57,7 +57,7 @@ const Rental = () => {
         const data = res?.data
 
         if (data && (data.status === "success" || data.success === true)) {
-            navigate(SITE_MAP.MY_RENTAL)
+            navigate(`/${SITE_MAP.MY_RENTAL}`)
         }
     }
 
