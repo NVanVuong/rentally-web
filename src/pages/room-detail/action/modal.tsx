@@ -19,7 +19,7 @@ const ModalShare: React.FC<ShareRoomDetailProp> = ({ dataRoom }) => {
     if (type !== MODAL.SHARE.ROOM_DETAIL) return null
 
     const handleClick = () => {
-        navigator.clipboard.writeText(`${domain} ${location.pathname}`)
+        navigator.clipboard.writeText(`${domain}${location.pathname}`)
         message.success("Link copied to clipboard")
     }
 
