@@ -7,13 +7,14 @@ import { useAppDispatch } from "@/redux/hook"
 import { openModal } from "@/redux/features/modal/modal.slice"
 import { VscSettings } from "react-icons/vsc"
 import SearchRoom from "@/components/Input/SearchRoom"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { SITE_MAP } from "@/utils/constants/Path"
 
 const Header = () => {
     const dispacth = useAppDispatch()
 
+    const searchToolRef = useRef<HTMLDivElement>(null)
     const [isOpen, setIsOpen] = useState(false)
     const [isSticky, setIsSticky] = useState(false)
 
@@ -22,10 +23,21 @@ const Header = () => {
         setIsOpen(true)
     }
 
+    const handleClickOutside = (e: any) => {
+        if (searchToolRef.current && !searchToolRef.current.contains(e.target as HTMLElement)) {
+            setIsOpen(false)
+        }
+    }
+
     useEffect(() => {
         const handleScroll = () => setIsSticky(window.scrollY > 200)
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
+    }, [])
+
+    useEffect(() => {
+        document.addEventListener("click", handleClickOutside)
+        return () => document.removeEventListener("click", handleClickOutside)
     }, [])
 
     const location = useLocation()
@@ -60,6 +72,7 @@ const Header = () => {
 
                     <div className={`${isOpen ? "hidden" : "block"} cursor-pointer `}>
                         <div
+                            ref={searchToolRef}
                             onClick={handleOnClick}
                             className={`flex w-fit items-center justify-center gap-4 rounded-3xl border border-gray-100 bg-white py-1 pl-4 pr-2 text-sm font-bold shadow-md shadow-black/20`}
                         >

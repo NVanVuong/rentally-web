@@ -10,9 +10,9 @@ import { useGetChecklistQuery } from "@/redux/services/checklist/checklist.servi
 const Checklist = () => {
     const [isShowMap, setIsShowMap] = useState(false)
 
-    const { data, isLoading } = useGetChecklistQuery()
+    const { data, isLoading, isFetching } = useGetChecklistQuery(undefined, { refetchOnMountOrArgChange: true })
 
-    if (data?.data?.length === 0 && !isLoading)
+    if (data?.data?.length === 0 && !isLoading && !isFetching)
         return (
             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No rooms in your checklist." className="mt-24" />
         )
@@ -26,7 +26,7 @@ const Checklist = () => {
                 </div>
             ) : (
                 <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                    {!isLoading ? (
+                    {!isLoading || !isFetching ? (
                         <>
                             {data?.data?.map((dataRoom: IRoomFinding) => (
                                 <ListingCard key={dataRoom.id} dataRoom={dataRoom} />

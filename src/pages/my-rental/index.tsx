@@ -4,17 +4,17 @@ import { IRentals } from "@/interfaces/rentals.interface"
 import { Empty, Skeleton } from "antd"
 
 const MyRental = () => {
-    const { data, isLoading } = useGetMyRentalsQuery()
+    const { data, isLoading, isFetching } = useGetMyRentalsQuery(undefined, { refetchOnMountOrArgChange: true })
 
     const myRentals = data?.data
 
-    if (myRentals?.length === 0 && !isLoading)
+    if (myRentals?.length === 0 && !isLoading && !isFetching)
         return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No rooms match in list." className="mt-24" />
 
     return (
         <div className="mb-8 mt-4 px-4 sm:px-6 md:px-10 xl:px-28">
             <h1 className="mb-4 text-2xl font-bold text-secondary">My Rental</h1>
-            {isLoading ? (
+            {isLoading || isFetching ? (
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {Array.from({ length: 12 }).map((_, index) => (
                         <div key={index} className="w-full overflow-hidden rounded-xl border border-gray-200 shadow-md">
