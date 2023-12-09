@@ -12,6 +12,7 @@ import { useEffect, useState } from "react"
 import { Spin, message } from "antd"
 import useServerMessage from "@/hooks/useServerMessage"
 import { SITE_MAP } from "@/utils/constants/Path"
+import { useGetRoomBlockQuery } from "@/redux/services/block/block.service"
 
 const GenerateRooms = () => {
     const dispatch = useAppDispatch()
@@ -22,7 +23,7 @@ const GenerateRooms = () => {
     const navigate = useNavigate()
     const [isSave, setIsSave] = useState(false)
     const { id } = useParams()
-
+    const { data: dataBlock } = useGetRoomBlockQuery({ role, id: id || "" })
     useServerMessage({ data: data!, error: error })
 
     useEffect(() => {
@@ -54,9 +55,9 @@ const GenerateRooms = () => {
     }
 
     return (
-        <div className="w-full">
+        <div className="w-full flex-1 px-6 py-4">
             <Spin spinning={isLoading || uploadImagesResult.isLoading}>
-                <PageHeader title="Room Management - Block Nguyen Van Linh" />
+                <PageHeader title="Rooms Management" subTitle={`${dataBlock?.data?.roomBlock.address}`} />
                 <div className="mx-4 mb-4 flex justify-end gap-4">
                     <button
                         onClick={() => {
