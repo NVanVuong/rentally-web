@@ -7,7 +7,7 @@ import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 import { Empty, Skeleton } from "antd"
 import { useGetChecklistQuery } from "@/redux/services/checklist/checklist.service"
 
-const Checklist = () => {
+const MyChecklist = () => {
     const [isShowMap, setIsShowMap] = useState(false)
 
     const { data, isLoading, isFetching } = useGetChecklistQuery(undefined, { refetchOnMountOrArgChange: true })
@@ -58,4 +58,4 @@ const Checklist = () => {
     )
 }
 
-export default Checklist
+export default MyChecklist

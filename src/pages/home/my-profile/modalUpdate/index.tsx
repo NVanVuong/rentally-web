@@ -1,12 +1,12 @@
 import { Button, Form, Input, Spin } from "antd"
 import useServerMessage from "@/hooks/useServerMessage"
 import Title from "@/components/Modal/Title"
-import { IModal } from "@/interfaces/modal.interface"
 import { IUpdatePassword } from "@/interfaces/user.interface"
 import { useUpdatePasswordMutation } from "@/redux/services/myProfile/my-profile.service"
+import { useAppSelector } from "@/redux/hook"
+import { MODAL } from "@/utils/constants/GlobalConst"
 
-const ModalUpdate = (props: IModal) => {
-    const { title } = props
+const ModalUpdatePassword = () => {
     const [updatePassword, { data, error, isLoading }] = useUpdatePasswordMutation()
 
     useServerMessage({ data: data!, error: error })
@@ -18,10 +18,13 @@ const ModalUpdate = (props: IModal) => {
         }
         await updatePassword(body)
     }
+    const type = useAppSelector((state) => state.modal.type)
+
+    if (type !== MODAL.UPDATE.PASSWORD) return null
 
     return (
         <Spin spinning={isLoading}>
-            <Title>{title}</Title>
+            <Title>Update New Password</Title>
             <Form
                 onFinish={onFinish}
                 labelCol={{ span: 4 }}
@@ -77,4 +80,4 @@ const ModalUpdate = (props: IModal) => {
     )
 }
 
-export default ModalUpdate
+export default ModalUpdatePassword

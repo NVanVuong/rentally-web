@@ -1,7 +1,7 @@
+@import url("leaflet/dist/leaflet.css");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("leaflet/dist/leaflet.css");
 
 :root {
     --primary-color: #e36414;
@@ -11,19 +11,17 @@
     --black-color: #000000;
 }
 
-html {
-    ::-webkit-scrollbar {
-        width: 6px;
-    }
+::-webkit-scrollbar {
+    width: 6px;
+}
 
-    ::-webkit-scrollbar-thumb {
-        border-radius: 4px;
-        background-color: var(--primary-color);
-    }
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: var(--primary-color);
+}
 
-    ::-webkit-scrollbar-track {
-        background-color: transparent;
-    }
+::-webkit-scrollbar-track {
+    background-color: transparent;
 }
 
 .leaflet-top.leaflet-left {
@@ -48,15 +46,11 @@ html {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
 .MuiAutocomplete-inputRoot::-webkit-scrollbar {
     display: none;
 }
 
 .MuiAutocomplete-inputRoot:focus {
     border: none;
-}
-
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
 }

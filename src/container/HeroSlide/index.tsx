@@ -15,12 +15,15 @@ const HeroSlide = () => {
                 transition={{ type: "spring", stiffness: 120 }}
                 className="absolute inset-0 z-50 flex flex-col items-center justify-center gap-6 text-center text-white"
             >
-                <h2 className="drop-shawdown-[#e28743] select-none text-6xl font-bold tracking-wide drop-shadow-xl">
-                    Welcome to Rentally!
-                </h2>
-                <h3 className="drop-shawdow-[#000] mb-8 select-none text-2xl font-medium drop-shadow-2xl">
-                    Your Gateway to Unique and Comfortable Rentals. Find Your Ideal Stay Today.
-                </h3>
+                <div>
+                    {" "}
+                    <h2 className="drop-shawdown-[#e28743] select-none text-6xl font-bold tracking-wide drop-shadow-xl">
+                        Welcome to Rentally!
+                    </h2>
+                    <h3 className="drop-shawdow-[#000] mb-8 select-none text-2xl font-medium drop-shadow-2xl">
+                        Your Gateway to Unique and Comfortable Rentals. Find Your Ideal Stay Today.
+                    </h3>
+                </div>
             </motion.div>
             <div className="absolute inset-0 bg-black/40" />
 

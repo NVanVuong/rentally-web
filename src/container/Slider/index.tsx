@@ -10,7 +10,7 @@ import Logo from "@/components/Logo"
 import { ROLE } from "@/utils/constants/GlobalConst"
 import "./style.css"
 import { MdLogout, MdOutlinePayment } from "react-icons/md"
-import Button from "@/pages/room-detail/components/Button"
+import Button from "@/pages/home/room-detail/components/Button"
 import { TbHomeCog } from "react-icons/tb"
 import { LuClipboardSignature } from "react-icons/lu"
 import useAuth from "@/hooks/useAuth"
@@ -58,13 +58,13 @@ const Slider = () => {
     const onClick: MenuProps["onClick"] = (e) => {
         switch (e.key) {
             case "users":
-                navigate(SITE_MAP.USERS_MANAGEMENT)
+                navigate(SITE_MAP.USERS)
                 break
             case "blocks":
-                navigate(SITE_MAP.BLOCKS_MANAGEMENT)
+                navigate(SITE_MAP.BLOCKS)
                 break
             case "utilities":
-                navigate(SITE_MAP.UTILITIES_MANAGEMENT)
+                navigate(SITE_MAP.UTILITIES)
                 break
             case "payments":
                 navigate(SITE_MAP.PAYMENTS)
@@ -73,7 +73,7 @@ const Slider = () => {
                 navigate(SITE_MAP.RENTALS)
                 break
             case "transactions":
-                navigate(SITE_MAP.TRANSACTION_MANAGEMENT)
+                navigate(SITE_MAP.TRANSACTIONS)
                 break
             default:
                 break

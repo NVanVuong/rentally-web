@@ -11,8 +11,8 @@ import useServerMessage from "@/hooks/useServerMessage"
 import { RiLockPasswordLine } from "react-icons/ri"
 import { openModal } from "@/redux/features/modal/modal.slice"
 import { MODAL } from "@/utils/constants/GlobalConst"
-import ModalUpdatePassword from "./modal"
-import { ROLE } from "../../utils/constants/GlobalConst"
+import ModalUpdatePassword from "./modalUpdate"
+import { ROLE } from "@/utils/constants/GlobalConst"
 
 const MyProfile = () => {
     const dispatch = useAppDispatch()

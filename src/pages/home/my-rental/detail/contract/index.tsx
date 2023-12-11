@@ -1,14 +1,16 @@
 import { AiOutlineMail, AiOutlinePhone } from "react-icons/ai"
 import { formatPrice } from "@/utils/helpers"
-import Button from "@/pages/room-detail/components/Button"
-import { AverageRating } from "@/pages/room-detail/rating"
+import Button from "@/pages/home/room-detail/components/Button"
+import { AverageRating } from "@/pages/home/room-detail/rating"
 import { IHostInfo, IRentalInfo, IRoomInfo } from "@/interfaces/rentals.interface"
 import { Skeleton } from "antd"
+import { LuStar } from "react-icons/lu"
 import { useAppDispatch } from "@/redux/hook"
-import { MODAL } from "@/utils/constants/GlobalConst"
+import { MODAL, RATING_STATUS } from "@/utils/constants/GlobalConst"
 import { openModal } from "@/redux/features/modal/modal.slice"
 import { SITE_MAP } from "@/utils/constants/Path"
 import { useNavigate } from "react-router-dom"
+import { FaCheck } from "react-icons/fa"
 
 interface IContractProps {
     hostInfo?: IHostInfo
@@ -21,6 +23,10 @@ const Contract = (props: IContractProps) => {
     const { price, images = [], utilities = [], id } = props?.roomInfo || {}
 
     const landlord = props?.hostInfo
+
+    const ratingStauts = props.rentalInfo?.ratingStatus
+
+    const isRated = ratingStauts === RATING_STATUS.RATED
 
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
@@ -41,7 +47,7 @@ const Contract = (props: IContractProps) => {
                 <>
                     <div className="flex justify-between">
                         <span className="text-xs">
-                            <b className="text-base font-bold">{formatPrice(price)}</b> VND/month
+                            <b className="text-base font-bold">{formatPrice(price)}</b> /month
                         </span>
                         <AverageRating size="small" />
                     </div>
@@ -78,12 +84,30 @@ const Contract = (props: IContractProps) => {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-4 flex items-center justify-end">
+                    <div className="mt-4 flex items-center justify-between">
+                        <div>
+                            {props.isComplete && isRated ? (
+                                <span className="flex items-center gap-2 font-medium">
+                                    <FaCheck className="h-3 w-3 fill-green-500" />
+                                    Reviewed
+                                </span>
+                            ) : (
+                                <span>Pending review</span>
+                            )}
+                        </div>
                         <Button
                             onClick={handleClick}
                             className="w-fit rounded-lg bg-primary px-4 py-1 text-sm text-white transition duration-100 hover:shadow hover:shadow-primary"
                         >
-                            Contact host <AiOutlinePhone />
+                            {props.isComplete && !isRated ? (
+                                <>
+                                    Review <LuStar />
+                                </>
+                            ) : (
+                                <>
+                                    Contact host <AiOutlinePhone />
+                                </>
+                            )}
                         </Button>
                     </div>
                 </>
