@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react"
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet"
-import "leaflet/dist/leaflet.css"
-import "./index.css"
-import ListingCard from "../Card/ListingCard"
-import L from "leaflet"
 import { IRoomFinding } from "@/interfaces/roomfiding.interface"
+import ListingCard from "@/components/Card/ListingCard"
+import L from "leaflet"
+import "./index.css"
 
 interface MapProps {
-    dataRooms: IRoomFinding[]
+    rooms: IRoomFinding[]
     zoom?: number
     markerText?: string
 }
 
-const HomeMap: React.FC<MapProps> = ({ zoom = 20, dataRooms }) => {
+const MapView: React.FC<MapProps> = ({ zoom = 20, rooms: dataRooms = [] }) => {
     const [center, setCenter] = useState([dataRooms[0].coordinate.latitude, dataRooms[0].coordinate.longitude])
-    function MyMap() {
+
+    const MyMap = () => {
         const map = useMap()
 
         React.useEffect(() => {
@@ -31,6 +31,7 @@ const HomeMap: React.FC<MapProps> = ({ zoom = 20, dataRooms }) => {
 
         return null
     }
+
     const CenteredMap = () => {
         const map = useMap()
         map.invalidateSize()
@@ -42,6 +43,7 @@ const HomeMap: React.FC<MapProps> = ({ zoom = 20, dataRooms }) => {
 
         return null
     }
+
     const customDivIcon = (text: string, isClick: boolean) =>
         L.divIcon({
             className: `custom-div-icon${isClick ? "-white" : ""}`,
@@ -76,4 +78,4 @@ const HomeMap: React.FC<MapProps> = ({ zoom = 20, dataRooms }) => {
     )
 }
 
-export default HomeMap
+export default MapView
