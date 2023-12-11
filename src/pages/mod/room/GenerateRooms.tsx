@@ -31,7 +31,7 @@ const GenerateRooms = () => {
             if (isSave && id) {
                 await createRooms({ role, body: { roomBlockId: +(id || 0), rooms } })
                 setIsSave(false)
-                navigate(`${SITE_MAP.MOD}/${SITE_MAP.BLOCKS_MANAGEMENT}/${id}/rooms`)
+                navigate(`${SITE_MAP.MOD}/${SITE_MAP.BLOCKS}/${id}/rooms`)
                 dispatch(saveRoom())
             }
         }

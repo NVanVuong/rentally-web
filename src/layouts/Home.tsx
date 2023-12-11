@@ -1,7 +1,7 @@
 import ScrollToTop from "@/components/ScrollToTop"
 import Footer from "@/container/Footer"
 import Header from "@/container/Header"
-import { SITE_MAP } from "@/utils/constants/Path"
+import usePath from "@/hooks/usePath"
 import { useEffect } from "react"
 import { Outlet, useLocation } from "react-router-dom"
 
@@ -12,13 +12,13 @@ const HomeLayout = () => {
         window.scrollTo(0, 0)
     }, [location])
 
-    const isHome = location.pathname === SITE_MAP.INDEX
+    const { isIndex } = usePath()
 
     return (
-        <div className="flex min-h-screen w-full flex-col overflow-y-auto">
+        <div className="flex min-h-screen w-full flex-col overflow-y-auto overflow-x-hidden">
             <Header />
 
-            {!isHome && <div className="h-16" />}
+            {!isIndex && <div className="h-16" />}
 
             <div className="grow">
                 <Outlet />

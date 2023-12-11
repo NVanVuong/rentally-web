@@ -1,6 +1,6 @@
 import { IUtiltity } from "@/interfaces/utility.interface"
 import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
-import { Autocomplete, Slider, TextField } from "@mui/material"
+import { Autocomplete, Slider, TextField, ThemeProvider, createTheme } from "@mui/material"
 import { useEffect, useState } from "react"
 import ModalAntd from "@/components/Modal"
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
@@ -9,11 +9,15 @@ import { closeModal } from "@/redux/features/modal/modal.slice"
 import { MODAL } from "@/utils/constants/GlobalConst"
 import { formatPrice } from "@/utils/helpers"
 
-function valuetext(value: number) {
-    return `${value} VND`
-}
-
 const minDistance = 100000
+
+const sliderTheme = createTheme({
+    palette: {
+        primary: {
+            main: "#E36414"
+        }
+    }
+})
 
 const Filters = () => {
     const [searchParams] = useSearchParams()
@@ -70,7 +74,7 @@ const Filters = () => {
         setSelectedOptions(value)
     }
 
-    const handlePriceChange = (event: Event, newValue: number | number[], activeThumb: number) => {
+    const handlePriceChange = (_: Event, newValue: number | number[], activeThumb: number) => {
         if (!Array.isArray(newValue)) {
             return
         }
@@ -129,8 +133,9 @@ const Filters = () => {
                             "& .MuiOutlinedInput-root": {
                                 border: "1px solid #e0e0e0",
                                 margin: "0.5rem 0 1.5rem",
-                                height: "2.5rem",
-                                width: "full",
+                                height: "fit-content",
+                                minHeight: "2.5rem",
+                                width: "100%",
                                 fontSize: "0.75rem",
                                 borderRadius: "0.5rem",
                                 zIndex: "10",
@@ -166,31 +171,17 @@ const Filters = () => {
                     <label className="text-lg font-semibold">Price range</label>
                     <div className="mt-4">
                         <div className="my-6 px-2">
-                            <Slider
-                                step={100000}
-                                min={1000000}
-                                max={10000000}
-                                value={value}
-                                onChange={handlePriceChange}
-                                getAriaValueText={valuetext}
-                                disableSwap
-                                sx={{
-                                    color: "#E36414",
-                                    "& .MuiSlider-thumb": {
-                                        backgroundColor: "#E36414",
-                                        border: "1px solid currentColor",
-                                        "&:hover": {
-                                            boxShadow: "0 0 0 8px rgb(227, 100, 20, 0.15)"
-                                        },
-                                        "&:active": {
-                                            boxShadow: "0 0 0 14px rgb(227, 100, 20, 0.15)"
-                                        },
-                                        "&:focus": {
-                                            boxShadow: "0 0 0 14px rgb(227, 100, 20, 0.15)"
-                                        }
-                                    }
-                                }}
-                            />
+                            <ThemeProvider theme={sliderTheme}>
+                                <Slider
+                                    step={100000}
+                                    min={1000000}
+                                    max={10000000}
+                                    value={value}
+                                    onChange={handlePriceChange}
+                                    valueLabelDisplay="auto"
+                                    disableSwap
+                                />
+                            </ThemeProvider>
                         </div>
                         <div className="my-4 flex items-center gap-2">
                             <div className="h-12 flex-1 rounded-lg border border-gray-0 px-2">

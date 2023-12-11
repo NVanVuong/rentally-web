@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react"
-import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
-import { useLocation, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import { BsMapFill } from "react-icons/bs"
 import { AiOutlineUnorderedList } from "react-icons/ai"
 import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 import { useGetFindingRoomsQuery } from "@/redux/services/findingRoom/findingRoom.service"
 import { Empty } from "antd"
-import { SITE_MAP } from "@/utils/constants/Path"
 import MapView from "./map-view"
 import RoomList from "./room-list"
+import usePath from "@/hooks/usePath"
 
 const Home = () => {
-    useGetUtilitiesQuery()
-
-    const location = useLocation()
     const [searchParams] = useSearchParams()
     const [isShowMap, setIsShowMap] = useState(false)
     const [searchParamsObject, setSearchParamsObject] = useState<Record<string, string[]>>({})
@@ -32,7 +28,7 @@ const Home = () => {
 
     const [currentRooms, setCurrentRooms] = useState<IRoomFinding[]>(data?.data?.rooms || [])
 
-    const isFull = Number(data?.data?.totalRoom) <= currentRooms.length
+    const isFull = Number(data?.data?.totalRoom) < currentRooms.length
 
     const handleLoadMore = () => {
         setCurrentPage((prev) => prev + 1)
@@ -70,12 +66,12 @@ const Home = () => {
         setSearchParamsObject(newSearchParamsObject)
     }, [searchParams])
 
-    const isIndex = location.pathname === SITE_MAP.INDEX
+    const { isIndex } = usePath()
 
     const isFetchingWhenBack = isFetching && currentPage === 1
 
-    if (currentRooms.length === 0 && !isIndex) {
-        return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No rooms match in list." className="mt-24" />
+    if (currentRooms.length === 0 && !isIndex && !isLoading && !isFetching) {
+        return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No rooms match in list." className="mt-32" />
     }
 
     return (

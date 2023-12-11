@@ -16,7 +16,7 @@ const RoomList = ({ rooms, isLoading, isFetching, isFetchingWhenBack, isFull, ha
     return (
         <div className="flex h-full flex-col">
             <HeroSlide />
-            <div className="my-6 grow">
+            <div id="room-list" className="my-6 grow">
                 {isLoading || isFetchingWhenBack ? (
                     <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-6 md:px-10 xl:px-28">
                         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
