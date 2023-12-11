@@ -1,9 +1,7 @@
 import { IUtiltity } from "@/interfaces/utility.interface"
 import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
 import { Autocomplete, Slider, TextField } from "@mui/material"
-import * as React from "react"
 import { useEffect, useState } from "react"
-import { Range } from "react-range"
 import ModalAntd from "@/components/Modal"
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "@/redux/hook"
@@ -168,31 +166,6 @@ const Filters = () => {
                     <label className="text-lg font-semibold">Price range</label>
                     <div className="mt-4">
                         <div className="my-6 px-2">
-                            {/* <Range
-                                step={100000}
-                                min={1000000}
-                                max={10000000}
-                                values={value}
-                                onChange={(values) => setValue(values)}
-                                renderTrack={({ props, children }) => (
-                                    <div
-                                        {...props}
-                                        style={{
-                                            ...props.style,
-                                            height: "2.5px",
-                                            backgroundColor: "#000"
-                                        }}
-                                    >
-                                        {children}
-                                    </div>
-                                )}
-                                renderThumb={({ props }) => (
-                                    <div
-                                        className="h-6 w-6 rounded-full border bg-white shadow-lg active:h-7 active:w-7 active:border-primary active:bg-primary"
-                                        {...props}
-                                    />
-                                )}
-                            /> */}
                             <Slider
                                 step={100000}
                                 min={1000000}
