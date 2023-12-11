@@ -49,28 +49,30 @@ const HomeMap: React.FC<MapProps> = ({ zoom = 20, dataRooms }) => {
         })
 
     return (
-        <MapContainer zoom={zoom} style={{ width: "100%", height: "100%", zIndex: 0 }}>
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <MyMap />
-            {dataRooms.map((dataRoom) => {
-                return (
-                    <Marker
-                        position={[dataRoom.coordinate.latitude, dataRoom.coordinate.longitude]}
-                        icon={customDivIcon(`${(Number(dataRoom.price) / 1000000).toFixed(1)}` + "m", true)}
-                        eventHandlers={{
-                            click: () => {
-                                setCenter([dataRoom.coordinate.latitude, dataRoom.coordinate.longitude])
-                            }
-                        }}
-                    >
-                        <Popup>
-                            <ListingCard dataRoom={dataRoom} />
-                        </Popup>
-                    </Marker>
-                )
-            })}
-            <CenteredMap />
-        </MapContainer>
+        <div className="absolute inset-0 h-screen">
+            <MapContainer zoom={zoom} style={{ width: "100%", height: "100%", zIndex: 0 }}>
+                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                <MyMap />
+                {dataRooms.map((dataRoom) => {
+                    return (
+                        <Marker
+                            position={[dataRoom.coordinate.latitude, dataRoom.coordinate.longitude]}
+                            icon={customDivIcon(`${(Number(dataRoom.price) / 1000000).toFixed(1)}` + "m", true)}
+                            eventHandlers={{
+                                click: () => {
+                                    setCenter([dataRoom.coordinate.latitude, dataRoom.coordinate.longitude])
+                                }
+                            }}
+                        >
+                            <Popup>
+                                <ListingCard dataRoom={dataRoom} />
+                            </Popup>
+                        </Marker>
+                    )
+                })}
+                <CenteredMap />
+            </MapContainer>
+        </div>
     )
 }
 
