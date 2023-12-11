@@ -1,6 +1,6 @@
 import { IUtiltity } from "@/interfaces/utility.interface"
 import { useGetUtilitiesQuery } from "@/redux/services/help/help.service"
-import { Autocomplete, TextField } from "@mui/material"
+import { Autocomplete, Slider, TextField } from "@mui/material"
 import * as React from "react"
 import { useEffect, useState } from "react"
 import { Range } from "react-range"
@@ -11,6 +11,12 @@ import { closeModal } from "@/redux/features/modal/modal.slice"
 import { MODAL } from "@/utils/constants/GlobalConst"
 import { formatPrice } from "@/utils/helpers"
 
+function valuetext(value: number) {
+    return `${value} VND`
+}
+
+const minDistance = 100000
+
 const Filters = () => {
     const [searchParams] = useSearchParams()
     const navigate = useNavigate()
@@ -18,7 +24,7 @@ const Filters = () => {
 
     const { data } = useGetUtilitiesQuery()
 
-    const [values, setValues] = React.useState([1000000, 10000000])
+    const [value, setValue] = useState<number[]>([1000000, 10000000])
 
     const [selectedOptions, setSelectedOptions] = useState<IUtiltity[]>([])
 
@@ -28,7 +34,7 @@ const Filters = () => {
 
     useEffect(() => {
         //set value when user change url
-        setValues([
+        setValue([
             parseInt(searchParams.get("minPrice") || "1000000", 10),
             parseInt(searchParams.get("maxPrice") || "10000000", 10)
         ])
@@ -66,6 +72,24 @@ const Filters = () => {
         setSelectedOptions(value)
     }
 
+    const handlePriceChange = (event: Event, newValue: number | number[], activeThumb: number) => {
+        if (!Array.isArray(newValue)) {
+            return
+        }
+
+        if (newValue[1] - newValue[0] < minDistance) {
+            if (activeThumb === 0) {
+                const clamped = Math.min(newValue[0], 10000000 - minDistance)
+                setValue([clamped, clamped + minDistance])
+            } else {
+                const clamped = Math.max(newValue[1], minDistance)
+                setValue([clamped - minDistance, clamped])
+            }
+        } else {
+            setValue(newValue as number[])
+        }
+    }
+
     const handleFilters = () => {
         const queryCodesObj = new URLSearchParams()
 
@@ -81,8 +105,8 @@ const Filters = () => {
             })
         })
 
-        appendKeyValuePair("minPrice", String(values[0]))
-        appendKeyValuePair("maxPrice", String(values[1]))
+        appendKeyValuePair("minPrice", String(value[0]))
+        appendKeyValuePair("maxPrice", String(value[1]))
         selectedOptions.forEach((option) => queryCodesObj.append("utilities", String(option.id)))
 
         navigate({
@@ -96,20 +120,21 @@ const Filters = () => {
     return (
         <ModalAntd>
             <div onClick={(e) => e.stopPropagation()}>
-                <h2 className="w-full border-b pb-2 text-center text-[18px] font-bold">Filters</h2>
+                <h2 className="w-full border-b pb-2 text-center text-xl font-bold">Filters</h2>
                 <div className="mt-4">
-                    <label className="text-[24px] font-semibold">Utilities</label>
+                    <label className="text-lg font-semibold">Utilities</label>
                     <Autocomplete
                         onChange={handleChange}
                         multiple
                         id="tags-outlined"
                         sx={{
                             "& .MuiOutlinedInput-root": {
-                                border: "px solid #d9d9d9",
-                                lineHeight: "0px",
-                                height: "120px",
+                                border: "1px solid #e0e0e0",
+                                margin: "0.5rem 0 1.5rem",
+                                height: "2.5rem",
                                 width: "full",
-                                fontSize: "12px",
+                                fontSize: "0.75rem",
+                                borderRadius: "0.5rem",
                                 zIndex: "10",
                                 "&.Mui-focused fieldset": {
                                     border: "0px solid #fff"
@@ -134,65 +159,87 @@ const Filters = () => {
                                         fontSize: "12px"
                                     }
                                 }}
-                                label=""
                                 placeholder="New util"
                             />
                         )}
                     />
                 </div>
                 <div>
-                    <label className="text-[24px] font-semibold ">Price range</label>
-                    <div className="mt-8 px-4">
-                        <Range
-                            step={100000}
-                            min={1000000}
-                            max={10000000}
-                            values={values}
-                            onChange={(values) => setValues(values)}
-                            renderTrack={({ props, children }) => (
-                                <div
-                                    {...props}
-                                    style={{
-                                        ...props.style,
-                                        height: "2px",
-                                        width: "100%",
-                                        backgroundColor: "#000"
-                                    }}
-                                >
-                                    {children}
-                                </div>
-                            )}
-                            renderThumb={({ props }) => (
-                                <div
-                                    className="h-8 w-8 rounded-full border bg-white shadow-lg  active:h-9 active:w-9 active:bg-slate-100 "
-                                    {...props}
-                                />
-                            )}
-                        />
-                        <div className="mb-3 mt-4 flex items-center gap-2">
-                            {/* Giá trị: {values[0].toFixed(1)} - {values[1].toFixed(1)} */}
-                            <div className="h-12 flex-1 rounded-lg border border-[#717171] px-2 ">
-                                <label htmlFor="minPrice" className=" text-[#717171]">
+                    <label className="text-lg font-semibold">Price range</label>
+                    <div className="mt-4">
+                        <div className="my-6 px-2">
+                            {/* <Range
+                                step={100000}
+                                min={1000000}
+                                max={10000000}
+                                values={value}
+                                onChange={(values) => setValue(values)}
+                                renderTrack={({ props, children }) => (
+                                    <div
+                                        {...props}
+                                        style={{
+                                            ...props.style,
+                                            height: "2.5px",
+                                            backgroundColor: "#000"
+                                        }}
+                                    >
+                                        {children}
+                                    </div>
+                                )}
+                                renderThumb={({ props }) => (
+                                    <div
+                                        className="h-6 w-6 rounded-full border bg-white shadow-lg active:h-7 active:w-7 active:border-primary active:bg-primary"
+                                        {...props}
+                                    />
+                                )}
+                            /> */}
+                            <Slider
+                                step={100000}
+                                min={1000000}
+                                max={10000000}
+                                value={value}
+                                onChange={handlePriceChange}
+                                getAriaValueText={valuetext}
+                                disableSwap
+                                sx={{
+                                    color: "#E36414",
+                                    "& .MuiSlider-thumb": {
+                                        backgroundColor: "#E36414",
+                                        border: "1px solid currentColor",
+                                        "&:hover": {
+                                            boxShadow: "0 0 0 8px rgb(227, 100, 20, 0.15)"
+                                        },
+                                        "&:active": {
+                                            boxShadow: "0 0 0 14px rgb(227, 100, 20, 0.15)"
+                                        },
+                                        "&:focus": {
+                                            boxShadow: "0 0 0 14px rgb(227, 100, 20, 0.15)"
+                                        }
+                                    }
+                                }}
+                            />
+                        </div>
+                        <div className="my-4 flex items-center gap-2">
+                            <div className="h-12 flex-1 rounded-lg border border-gray-0 px-2">
+                                <label htmlFor="minPrice" className="text-xs font-medium text-black">
                                     Minimum
                                 </label>
                                 <input
                                     id="minPrice"
                                     className="h-5 w-4/5 font-semibold"
-                                    value={formatPrice(values[0])}
-                                    placeholder=""
+                                    value={formatPrice(value[0])}
                                 />
                             </div>
-                            <p className="text-[40px] font-thin ">-</p>
-                            <div className="h-12 flex-1 rounded-lg border border-[#717171] px-2 ">
-                                <label htmlFor="maxPrice" className=" text-[#717171]">
+                            <p className="text-[40px] font-thin">-</p>
+                            <div className="h-12 flex-1 rounded-lg border border-gray-0 px-2">
+                                <label htmlFor="maxPrice" className="text-xs font-medium text-black">
                                     Maximum
                                 </label>
                                 <input
                                     id="maxPrice"
                                     type="text"
                                     className="h-5 w-4/5 font-semibold"
-                                    value={formatPrice(values[1])}
-                                    placeholder=""
+                                    value={formatPrice(value[1])}
                                 />
                             </div>
                         </div>
@@ -201,10 +248,10 @@ const Filters = () => {
                 <div className="mt-4 flex justify-between border-t pt-3">
                     <button
                         onClick={() => {
-                            setValues([1000000, 3000000])
+                            setValue([1000000, 3000000])
                             setSelectedOptions([])
                         }}
-                        className="rounded-xl bg-white px-3 py-2 font-semibold text-black underline hover:bg-slate-200 "
+                        className="rounded-xl bg-white px-3 py-2 font-semibold text-black underline underline-offset-2 transition duration-100 hover:text-primary hover:no-underline"
                     >
                         Clear All
                     </button>
@@ -213,7 +260,7 @@ const Filters = () => {
                             dispacth(closeModal())
                             handleFilters()
                         }}
-                        className="rounded-xl bg-black px-6 py-3 font-semibold text-white "
+                        className="rounded-xl bg-primary px-4 py-2 font-semibold text-white transition duration-100 hover:shadow-md"
                     >
                         Show places
                     </button>
