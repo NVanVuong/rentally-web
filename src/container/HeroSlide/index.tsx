@@ -61,7 +61,7 @@ const HeroSlide = () => {
                     className="flex items-center gap-2 rounded-lg bg-primary px-6 py-1.5 text-lg font-medium text-white shadow-md hover:shadow-lg"
                     onClick={scrollToRoomList}
                 >
-                    <span className="select-none"> Get start</span> <IoArrowDownOutline className="h-4 w-4" />
+                    <span className="select-none">Get start</span> <IoArrowDownOutline className="h-4 w-4" />
                 </button>
             </div>
         </div>

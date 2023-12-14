@@ -33,7 +33,7 @@ const Contract = (props: IContract) => {
     const currentDate = dayjs(date).format(dateFormat)
 
     return (
-        <div className="h-fit w-96 rounded-lg border border-gray-200 px-8 py-6 shadow-lg">
+        <div className="relative z-[9999999] h-fit w-96 rounded-lg border border-gray-200 bg-white px-8 py-6 shadow-lg">
             <Form
                 name="contractForm"
                 layout="vertical"

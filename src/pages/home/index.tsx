@@ -70,17 +70,20 @@ const Home = () => {
 
     const isFetchingWhenBack = isFetching && currentPage === 1
 
-    const [isShow, setIsShow] = useState(false)
+    const [isShowButton, setIsShowButton] = useState(false)
 
     useEffect(() => {
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 200) {
-                setIsShow(true)
-            } else {
-                setIsShow(false)
-            }
-        })
-    }, [])
+        const handleScroll = () => {
+            const shouldShowButton = window.scrollY > 200 || isShowMap
+            setIsShowButton(shouldShowButton)
+        }
+
+        window.addEventListener("scroll", handleScroll)
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+        }
+    }, [isShowMap])
 
     if (currentRooms.length === 0 && !isIndex && !isLoading && !isFetching) {
         return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No rooms match in list." className="mt-32" />
@@ -101,7 +104,7 @@ const Home = () => {
                 />
             )}
 
-            {isShow && (
+            {isShowButton && (
                 <button
                     onClick={() => {
                         setIsShowMap((state) => !state)

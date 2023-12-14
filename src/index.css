@@ -34,8 +34,16 @@ html {
     background-color: transparent;
 }
 
+.leaflet-container {
+    @apply z-10;
+}
+
 .leaflet-top.leaflet-left {
-    z-index: 998;
+    @apply z-50;
+}
+
+.leaflet-bottom.leaflet-right {
+    @apply z-10;
 }
 
 .awesome-marker .icon-white {

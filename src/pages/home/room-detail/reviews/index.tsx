@@ -1,5 +1,7 @@
 import { IRating } from "@/interfaces/room-detail.interface"
 import { Rate } from "antd"
+import { useState } from "react"
+import { FiChevronsRight } from "react-icons/fi"
 
 interface IReviews {
     reviews: IRating[]
@@ -8,11 +10,17 @@ interface IReviews {
 const Reviews = (props: IReviews) => {
     const { reviews } = props
 
+    const totalReviews = reviews.length
+
+    const [isShowAll, setIsShowAll] = useState(false)
+
+    const displayedReviews = isShowAll ? reviews : reviews.slice(0, 6)
+
     return (
         <div className="mt-6 pl-2">
             <h1 className="text-lg font-bold">Reviews</h1>
-            <div className="grid grid-cols-2 gap-x-40 gap-y-4">
-                {reviews.map((review) => (
+            <div className="grid grid-cols-2 gap-x-20 gap-y-4">
+                {displayedReviews.map((review) => (
                     <div key={review.id} className="col-span-1 mt-4 flex flex-col items-start gap-2">
                         <div className="flex items-center gap-2">
                             <img className="h-12 w-12 rounded-full" src={review.renterPhoto} alt={review.renterPhoto} />
@@ -33,6 +41,15 @@ const Reviews = (props: IReviews) => {
                     </div>
                 ))}
             </div>
+            {!isShowAll && (
+                <button
+                    onClick={() => setIsShowAll(true)}
+                    className="group mt-8 flex w-fit items-center gap-1 rounded-lg border-2 border-black py-2 pl-5 pr-3 text-sm font-medium transition duration-200 hover:shadow-md"
+                >
+                    Show all {totalReviews} reviews{" "}
+                    <FiChevronsRight className="hidden h-4 w-4 transition-all duration-200 group-hover:block" />
+                </button>
+            )}
         </div>
     )
 }
