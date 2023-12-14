@@ -1,5 +1,15 @@
 import React, { useEffect } from "react"
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet"
+import L from "leaflet"
+import "leaflet.awesome-markers/dist/leaflet.awesome-markers"
+
+L.AwesomeMarkers.Icon.prototype.options.prefix = "fa"
+export const MarkerIcon = L.AwesomeMarkers.icon({
+    icon: "home",
+    markerColor: "orange",
+    className: "awesome-marker",
+    shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png"
+})
 
 interface MapProps {
     center: [number, number]
@@ -39,7 +49,7 @@ const Map: React.FC<MapProps> = ({
             tap={!isView}
         >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <Marker position={center}>
+            <Marker position={center} icon={MarkerIcon}>
                 <Popup>{markerText}</Popup>
             </Marker>
             <CenteredMap />

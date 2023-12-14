@@ -1,19 +1,13 @@
 import Logo from "@/components/Logo"
 import UserMenu from "../UserMenu"
 import { AiOutlineSearch } from "react-icons/ai"
-import { MODAL } from "@/utils/constants/GlobalConst"
-import Filters from "@/components/Input/Filters"
-import { useAppDispatch } from "@/redux/hook"
-import { openModal } from "@/redux/features/modal/modal.slice"
-import { VscSettings } from "react-icons/vsc"
-import SearchRoom from "@/components/Input/SearchRoom"
 import { useEffect, useRef, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { SITE_MAP } from "@/utils/constants/Path"
+import SearchRoom from "./search"
+import Filter from "./filter"
 
 const Header = () => {
-    const dispacth = useAppDispatch()
-
     const searchToolRef = useRef<HTMLDivElement>(null)
     const [isOpen, setIsOpen] = useState(false)
     const [isSticky, setIsSticky] = useState(false)
@@ -55,17 +49,7 @@ const Header = () => {
                 <div className="flex h-full grow flex-col items-center justify-center transition-all duration-200">
                     <div className={`BG-W my-1 flex items-center justify-center gap-4 ${isOpen ? "block" : "hidden"}`}>
                         <SearchRoom />
-                        <div
-                            className={`flex h-12 cursor-pointer items-center justify-center gap-2 rounded-lg bg-white p-3 px-4 shadow-md shadow-black/10`}
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                dispacth(openModal({ type: MODAL.FILTER.ROOM_FINDING }))
-                            }}
-                        >
-                            <VscSettings size={24} />
-                            <p className="text-sm font-medium">Filters</p>
-                        </div>
-                        <Filters />
+                        <Filter />
                     </div>
 
                     <div className={`${isOpen ? "hidden" : "block"} cursor-pointer `}>

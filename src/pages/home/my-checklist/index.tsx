@@ -1,11 +1,10 @@
 import { useState } from "react"
-import ListingCard from "@/components/Card/ListingCard"
-import HomeMap from "@/components/Map/HomeMap"
 import { BsMapFill } from "react-icons/bs"
 import { AiOutlineUnorderedList } from "react-icons/ai"
-import { IRoomFinding } from "@/interfaces/roomfiding.interface"
-import { Empty, Skeleton } from "antd"
+import { Empty } from "antd"
 import { useGetChecklistQuery } from "@/redux/services/checklist/checklist.service"
+import RoomList from "../room-list"
+import MapView from "../map-view"
 
 const MyChecklist = () => {
     const [isShowMap, setIsShowMap] = useState(false)
@@ -18,31 +17,12 @@ const MyChecklist = () => {
         )
 
     return (
-        <div className="mb-8 mt-4 px-4 sm:px-6 md:px-10 xl:px-28">
-            <h1 className="mb-4 text-2xl font-bold text-secondary">My Checklist</h1>
+        <div className="mb-8 mt-4">
+            <h1 className="mb-4 px-4 text-2xl font-bold  text-secondary sm:px-6 md:px-10 xl:px-28">My Checklist</h1>
             {isShowMap ? (
-                <div className="absolute inset-0 h-screen">
-                    <HomeMap dataRooms={data?.data || []} />
-                </div>
+                <MapView rooms={data?.data} />
             ) : (
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                    {!isLoading || !isFetching ? (
-                        <>
-                            {data?.data?.map((dataRoom: IRoomFinding) => (
-                                <ListingCard key={dataRoom.id} dataRoom={dataRoom} />
-                            ))}
-                        </>
-                    ) : (
-                        <>
-                            {Array.from({ length: 12 }).map((_, index) => (
-                                <div style={{ width: "100%" }} key={index}>
-                                    <Skeleton.Image className="!aspect-square !h-auto !w-full" active />
-                                    <Skeleton active style={{ marginTop: "10px" }} />
-                                </div>
-                            ))}
-                        </>
-                    )}
-                </div>
+                <RoomList rooms={data?.data} isLoading={isLoading} isFetching={isFetching} />
             )}
 
             <button

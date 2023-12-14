@@ -2,20 +2,23 @@ import { Button, Skeleton } from "antd"
 import { IRoomFinding } from "@/interfaces/roomfiding.interface"
 import ListingCard from "@/components/Card/ListingCard"
 import HeroSlide from "@/container/HeroSlide"
+import usePath from "@/hooks/usePath"
 
 interface IRoomList {
-    rooms: IRoomFinding[]
+    rooms?: IRoomFinding[]
     isLoading: boolean
     isFetching: boolean
-    isFetchingWhenBack: boolean
-    isFull: boolean
-    handleLoadMore: () => void
+    isFetchingWhenBack?: boolean
+    isFull?: boolean
+    handleLoadMore?: () => void
 }
 
-const RoomList = ({ rooms, isLoading, isFetching, isFetchingWhenBack, isFull, handleLoadMore }: IRoomList) => {
+const RoomList = ({ rooms, isLoading, isFetching, isFetchingWhenBack, isFull = true, handleLoadMore }: IRoomList) => {
+    const { isIndex } = usePath()
+
     return (
         <div className="flex h-full flex-col">
-            <HeroSlide />
+            {isIndex && <HeroSlide />}
             <div id="room-list" className="my-6 grow">
                 {isLoading || isFetchingWhenBack ? (
                     <div className="mx-auto mt-4 max-w-[2520px] px-4 sm:px-6 md:px-10 xl:px-28">
@@ -32,7 +35,7 @@ const RoomList = ({ rooms, isLoading, isFetching, isFetchingWhenBack, isFull, ha
                     <>
                         <div className="mx-auto max-w-[2520px] px-4 sm:px-6 md:px-10 xl:px-28">
                             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                                {rooms.map((dataRoom: IRoomFinding, index) => (
+                                {rooms?.map((dataRoom: IRoomFinding, index) => (
                                     <ListingCard key={dataRoom.id + index} dataRoom={dataRoom} />
                                 ))}
                                 {isFetching && (

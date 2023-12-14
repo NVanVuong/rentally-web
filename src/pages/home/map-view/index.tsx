@@ -6,7 +6,7 @@ import L from "leaflet"
 import "./index.css"
 
 interface MapProps {
-    rooms: IRoomFinding[]
+    rooms?: IRoomFinding[]
     zoom?: number
     markerText?: string
 }

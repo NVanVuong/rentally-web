@@ -19,7 +19,7 @@ const sliderTheme = createTheme({
     }
 })
 
-const Filters = () => {
+const ModalFilters = () => {
     const [searchParams] = useSearchParams()
     const navigate = useNavigate()
     const dispacth = useAppDispatch()
@@ -234,4 +234,4 @@ const Filters = () => {
     )
 }
 
-export default Filters
+export default ModalFilters

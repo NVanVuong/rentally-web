@@ -70,6 +70,18 @@ const Home = () => {
 
     const isFetchingWhenBack = isFetching && currentPage === 1
 
+    const [isShow, setIsShow] = useState(false)
+
+    useEffect(() => {
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 200) {
+                setIsShow(true)
+            } else {
+                setIsShow(false)
+            }
+        })
+    }, [])
+
     if (currentRooms.length === 0 && !isIndex && !isLoading && !isFetching) {
         return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No rooms match in list." className="mt-32" />
     }
@@ -89,15 +101,17 @@ const Home = () => {
                 />
             )}
 
-            <button
-                onClick={() => {
-                    setIsShowMap((state) => !state)
-                }}
-                className="fixed bottom-8 right-1/2 z-50 flex translate-x-1/2 items-center justify-center gap-2 rounded-full bg-secondary px-4 py-3 font-semibold text-white transition hover:scale-110  "
-            >
-                {isShowMap ? "Show list" : "Show map"}{" "}
-                <span>{isShowMap ? <AiOutlineUnorderedList /> : <BsMapFill />}</span>
-            </button>
+            {isShow && (
+                <button
+                    onClick={() => {
+                        setIsShowMap((state) => !state)
+                    }}
+                    className="fixed bottom-8 right-1/2 z-50 flex translate-x-1/2 items-center justify-center gap-2 rounded-full bg-secondary px-4 py-3 font-semibold text-white transition hover:scale-110  "
+                >
+                    {isShowMap ? "Show list" : "Show map"}{" "}
+                    <span>{isShowMap ? <AiOutlineUnorderedList /> : <BsMapFill />}</span>
+                </button>
+            )}
         </div>
     )
 }

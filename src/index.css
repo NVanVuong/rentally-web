@@ -1,3 +1,5 @@
+@import url("@fortawesome/fontawesome-free/css/all.css");
+@import url("leaflet.awesome-markers/dist/leaflet.awesome-markers.css");
 @import url("leaflet/dist/leaflet.css");
 @import url("swiper/css");
 @import url("swiper/css/pagination");
@@ -34,6 +36,10 @@ html {
 
 .leaflet-top.leaflet-left {
     z-index: 998;
+}
+
+.awesome-marker .icon-white {
+    @apply z-50 text-sm !important;
 }
 
 .grid_product {
