@@ -14,7 +14,6 @@ import { IRoomBlock } from "@/interfaces/block.interface"
 import { ILandlord } from "@/interfaces/user.interface"
 import { Affix, Skeleton } from "antd"
 import "./style.css"
-import { useState } from "react"
 
 export const gridLayout = ["2fr 1fr 1fr 1fr 1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr"]
 
