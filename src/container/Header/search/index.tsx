@@ -147,7 +147,7 @@ const SearchRoom = () => {
                             e.stopPropagation()
                             handleSearch()
                         }}
-                        className="mr-2 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-primary text-white transition-all duration-100 hover:scale-110"
+                        className="mr-2 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-primary text-white transition-all duration-150 hover:scale-110"
                     >
                         <svg
                             className="h-4 w-4 transition-all duration-100 hover:scale-110"

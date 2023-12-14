@@ -12,8 +12,9 @@ import { useGetRoomDetailQuery } from "@/redux/services/room-detail/room-detail.
 import { IRoomDetail } from "@/interfaces/room-detail.interface"
 import { IRoomBlock } from "@/interfaces/block.interface"
 import { ILandlord } from "@/interfaces/user.interface"
-import { Skeleton } from "antd"
+import { Affix, Skeleton } from "antd"
 import "./style.css"
+import { useState } from "react"
 
 export const gridLayout = ["2fr 1fr 1fr 1fr 1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr"]
 
@@ -59,26 +60,27 @@ const RoomDetail = () => {
                 <RoomAction dataRoom={roomDetail} />
             </div>
             <Gallery images={images} />
-            <div className="mt-6 flex flex-col justify-between gap-8 lg:flex-row">
-                <div className="flex w-full flex-col gap-4 lg:w-3/5">
+            <div className="mt-6 flex flex-col items-end gap-12 lg:flex-row lg:items-start lg:justify-between">
+                <div className="flex w-full flex-col gap-4 lg:w-5/6">
                     <HostInformation roomblock={roomblock} landlord={landlord} />
                     <Utilities utilities={utilities} />
                     <RatingDashboard ratingDetail={ratingDetail} />
+                    <h1 className="mb-4 text-lg font-bold">Where you will go</h1>
+                    <Map
+                        markerText="This is where you will go"
+                        zoom={16}
+                        center={[coordinate.latitude, coordinate.longitude]}
+                        height="480px"
+                    />
+
+                    {ratingDetail?.ratings.length > 0 && <Reviews reviews={ratingDetail?.ratings} />}
                 </div>
-                <Contract price={price} />
+                <Affix className="!z-50" offsetTop={100}>
+                    <Contract price={price} />
+                </Affix>
             </div>
 
-            <div className="z-0 mt-6 pl-2">
-                <h1 className="mb-4 text-lg font-bold">Where you will go</h1>
-                <Map
-                    markerText="This is where you will go"
-                    zoom={16}
-                    center={[coordinate.latitude, coordinate.longitude]}
-                    height="480px"
-                />
-            </div>
-
-            {ratingDetail?.ratings.length > 0 && <Reviews reviews={ratingDetail?.ratings} />}
+            <div className="z-0 mt-6 pl-2"></div>
         </div>
     )
 }
