@@ -6,6 +6,7 @@ import "leaflet.awesome-markers/dist/leaflet.awesome-markers"
 declare module "leaflet" {
     interface AwesomeMarkers {
         Icon: any
+        icon: any
     }
 
     const AwesomeMarkers: AwesomeMarkers
@@ -13,7 +14,7 @@ declare module "leaflet" {
 
 L.AwesomeMarkers.Icon.prototype.options.prefix = "fa"
 
-export const MarkerIcon = L.AwesomeMarkers.Icon({
+export const MarkerIcon = L.AwesomeMarkers.icon({
     icon: "home",
     markerColor: "orange",
     className: "awesome-marker",
