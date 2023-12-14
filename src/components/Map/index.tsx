@@ -1,10 +1,19 @@
 import React, { useEffect } from "react"
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet"
-import L from "leaflet"
+import * as L from "leaflet"
 import "leaflet.awesome-markers/dist/leaflet.awesome-markers"
 
+declare module "leaflet" {
+    interface AwesomeMarkers {
+        Icon: any
+    }
+
+    const AwesomeMarkers: AwesomeMarkers
+}
+
 L.AwesomeMarkers.Icon.prototype.options.prefix = "fa"
-export const MarkerIcon = L.AwesomeMarkers.icon({
+
+export const MarkerIcon = L.AwesomeMarkers.Icon({
     icon: "home",
     markerColor: "orange",
     className: "awesome-marker",
