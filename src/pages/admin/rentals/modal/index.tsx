@@ -21,7 +21,7 @@ const ModalRental = () => {
             case MODAL.UPDATE.RENTAL:
                 return <ModalUpdate title="Update Rental Information" data={data} />
             case MODAL.ADD.PAYMENT:
-                return <ModalPayment title="Create Payment Monthly" data={data} />
+                return <ModalPayment title="Create Monthly Payment" data={data} />
             case MODAL.RENTAL.APPROVE:
                 return <ModalApprove title="Approve Rental" id={id} />
             case MODAL.RENTAL.CANCEL:
