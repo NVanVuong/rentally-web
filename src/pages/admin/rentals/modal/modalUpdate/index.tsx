@@ -11,7 +11,6 @@ import dayjs from "dayjs"
 
 const ModalUpdate = (props: IModal) => {
     const { title, data: rental } = props
-
     const { rentalInfo } = rental as IRentals
 
     const [updateRental, { data, error, isLoading }] = useUpdateRentalMutation()
@@ -131,6 +130,7 @@ const ModalUpdate = (props: IModal) => {
                     rules={[
                         {
                             required: true,
+                            min: 0,
                             message: "Please input electricPrice!"
                         }
                     ]}
@@ -140,14 +140,14 @@ const ModalUpdate = (props: IModal) => {
                 <Form.Item
                     className="w-full"
                     name="waterPrice"
-                    rules={[{ required: true, message: "Please input Water Price!" }]}
+                    rules={[{ required: true, min: 0, message: "Please input Water Price!" }]}
                 >
                     <InputNumber type="number" className="w-full" placeholder="Water Price" addonAfter="VND" />
                 </Form.Item>
                 <Form.Item
                     className="w-full"
                     name="leaseTerminationCost"
-                    rules={[{ required: true, message: "Please input Lease Termination Cost!" }]}
+                    rules={[{ required: true, min: 0, message: "Please input Lease Termination Cost!" }]}
                 >
                     <InputNumber
                         type="number"
@@ -156,7 +156,16 @@ const ModalUpdate = (props: IModal) => {
                         addonAfter="VND"
                     />
                 </Form.Item>
-                <Form.Item className="w-full" name="additionalPrice">
+                <Form.Item
+                    className="w-full"
+                    name="additionalPrice"
+                    rules={[
+                        {
+                            required: false,
+                            min: 0
+                        }
+                    ]}
+                >
                     <InputNumber type="number" className="w-full" placeholder="Additional Price" addonAfter="VND" />
                 </Form.Item>
                 <Form.Item className="w-full">
