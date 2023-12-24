@@ -9,7 +9,7 @@ const MyPayment = () => {
     const myPayments = data?.data
 
     if (myPayments?.length === 0 && !isLoading && !isFetching)
-        return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No rooms match in list." className="mt-24" />
+        return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No payments in list." className="mt-24" />
 
     return (
         <div className="mb-8 mt-4 px-4 sm:px-6 md:px-10 xl:px-28">
