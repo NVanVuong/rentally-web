@@ -74,7 +74,7 @@ const Register = () => {
     const sendCodeValidate = (values: SendCodeValues): Partial<SendCodeValues> => {
         const errors: Partial<SendCodeValues> = {}
         if (!values.code) {
-            errors.code = "Email is required"
+            errors.code = "Code is required"
         }
         return errors
     }
