@@ -2,15 +2,20 @@ import { IPayments } from "@/interfaces/payments.interface"
 import { useGetMyPaymentsQuery } from "@/redux/services/payments/payments.service"
 import { Empty, Skeleton } from "antd"
 import MyPaymentCard from "./card"
+import { useState } from "react"
 
 const MyPayment = () => {
     const { data, isLoading, isFetching } = useGetMyPaymentsQuery(undefined, { refetchOnMountOrArgChange: true })
+    const [filter, setFilter] = useState<"UNPAID" | "PAID">("UNPAID")
 
     const myPayments = data?.data
 
     if (myPayments?.length === 0 && !isLoading && !isFetching)
         return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No payments in list." className="mt-24" />
 
+    const filteredPayments = myPayments?.filter((payment) =>
+        filter === "PAID" ? payment.status === "PAID" : payment.status === "UNPAID"
+    )
     return (
         <div className="mb-8 mt-4 px-4 sm:px-6 md:px-10 xl:px-28">
             <h1 className="mb-4 text-2xl font-bold text-secondary">My Payment</h1>
@@ -33,8 +38,28 @@ const MyPayment = () => {
                     ))}
                 </div>
             ) : (
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                    {myPayments?.map((item: IPayments) => <MyPaymentCard key={item.id} myPayment={item} />)}
+                <div>
+                    <div className="mb-4 flex space-x-4">
+                        <button
+                            className={`text-lg font-medium focus:outline-none ${
+                                filter === "UNPAID" ? "text-primary" : "text-gray-500"
+                            }`}
+                            onClick={() => setFilter("UNPAID")}
+                        >
+                            UNPAID
+                        </button>
+                        <button
+                            className={`text-lg font-medium focus:outline-none ${
+                                filter === "PAID" ? "text-primary" : "text-gray-500"
+                            }`}
+                            onClick={() => setFilter("PAID")}
+                        >
+                            PAID
+                        </button>
+                    </div>
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                        {filteredPayments?.map((item: IPayments) => <MyPaymentCard key={item.id} myPayment={item} />)}
+                    </div>
                 </div>
             )}
         </div>
