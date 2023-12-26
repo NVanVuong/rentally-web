@@ -12,7 +12,7 @@ import "./style.css"
 import { MdLogout, MdOutlinePayment } from "react-icons/md"
 import Button from "@/pages/home/room-detail/components/Button"
 import { TbHomeCog } from "react-icons/tb"
-import { LuClipboardSignature } from "react-icons/lu"
+import { LuClipboardSignature, LuLayoutDashboard } from "react-icons/lu"
 import useAuth from "@/hooks/useAuth"
 
 type MenuItem = Required<MenuProps>["items"][number]
@@ -47,6 +47,7 @@ const Slider = () => {
         getItem(`${isExpanding ? "Payments" : ""}`, "payments", <MdOutlinePayment className="h-5 w-5" />),
         getItem(`${isExpanding ? "Utilities" : ""}`, "utilities", <TbHomeCog className="h-5 w-5" />),
         getItem(`${isExpanding ? "Transactions" : ""}`, "transactions", <BiStats className="h-5 w-5" />),
+        getItem(`${isExpanding ? "Statistic" : ""}`, "statistic", <LuLayoutDashboard className="h-5 w-5" />),
 
         { type: "divider" }
     ]
@@ -74,6 +75,9 @@ const Slider = () => {
                 break
             case "transactions":
                 navigate(SITE_MAP.TRANSACTIONS)
+                break
+            case "statistic":
+                navigate(SITE_MAP.STATISTICS)
                 break
             default:
                 break

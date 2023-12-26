@@ -25,6 +25,7 @@ const UtilitiesPage = lazy(() => import("../pages/admin/utilities"))
 const RentalsPage = lazy(() => import("../pages/admin/rentals"))
 const PaymentsPage = lazy(() => import("../pages/admin/payments"))
 const TransatcionsPage = lazy(() => import("../pages/admin/transactions"))
+const StatisticsPage = lazy(() => import("../pages/admin/statistics"))
 const GenerateRoomsPage = lazy(() => import("../pages/mod/room/GenerateRooms"))
 const AdminRoomsManagementPage = lazy(() => import("../pages/admin/room/Rooms"))
 
@@ -63,6 +64,7 @@ const MainRoute = () => {
                             <Route path={SITE_MAP.TRANSACTIONS} element={<TransatcionsPage />} />
                             <Route path={SITE_MAP.RENTALS} element={<RentalsPage />} />
                             <Route path={SITE_MAP.PAYMENTS} element={<PaymentsPage />} />
+                            <Route path={SITE_MAP.STATISTICS} element={<StatisticsPage />} />
                         </Route>
                     </Route>
 
@@ -76,6 +78,7 @@ const MainRoute = () => {
                             <Route path={SITE_MAP.TRANSACTIONS} element={<TransatcionsPage />} />
                             <Route path={SITE_MAP.RENTALS} element={<RentalsPage />} />
                             <Route path={SITE_MAP.PAYMENTS} element={<PaymentsPage />} />
+                            <Route path={SITE_MAP.STATISTICS} element={<StatisticsPage />} />
                         </Route>
                     </Route>
 
