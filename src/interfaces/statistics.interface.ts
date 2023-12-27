@@ -1,3 +1,5 @@
+import { IRoom } from "./room.interface"
+
 export interface IStatisticRevenue {
     revenue: number
     electric: number
@@ -12,5 +14,14 @@ export interface IStatisticRevenueResponse {
     data: {
         statistics: IStatisticRevenue[]
         totalRevenue: number
+    }
+}
+
+export interface IStatisticRatingResponse {
+    message: string
+    status: string
+    data: {
+        good: IRoom[]
+        bad: IRoom[]
     }
 }

@@ -36,7 +36,7 @@ export interface IRoomBlockRespone {
 }
 
 export interface IRoomBlockQuery {
-    keyword: string
+    keyword?: string
     role: string
 }
 
