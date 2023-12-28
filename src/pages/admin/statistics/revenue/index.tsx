@@ -107,7 +107,7 @@ const Revenue = () => {
         <div className="!h-44">
             <h1 className="font-medium">Revenue report</h1>
             <div className="rounded-md p-2 shadow-md">
-                <div className="-mb-6 flex justify-end">
+                <div className="relative z-50 -mb-6 flex justify-end">
                     <Select defaultValue={currentYear} style={{ width: 100 }} onChange={handleYearChange}>
                         {years.map((year) => (
                             <Option key={year} value={year}>

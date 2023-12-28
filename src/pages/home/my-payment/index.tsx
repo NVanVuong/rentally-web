@@ -1,12 +1,13 @@
 import { IPayments } from "@/interfaces/payments.interface"
 import { useGetMyPaymentsQuery } from "@/redux/services/payments/payments.service"
-import { Empty, Skeleton } from "antd"
+import { Empty, Skeleton, Tabs, TabsProps } from "antd"
 import MyPaymentCard from "./card"
 import { useState } from "react"
+import { PAYMENT_STATUS } from "@/utils/constants/GlobalConst"
 
 const MyPayment = () => {
     const { data, isLoading, isFetching } = useGetMyPaymentsQuery(undefined, { refetchOnMountOrArgChange: true })
-    const [filter, setFilter] = useState<"UNPAID" | "PAID">("UNPAID")
+    const [filter, setFilter] = useState<PAYMENT_STATUS.UNPAID | PAYMENT_STATUS.PAID>(PAYMENT_STATUS.UNPAID)
 
     const myPayments = data?.data
 
@@ -14,11 +15,29 @@ const MyPayment = () => {
         return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No payments in list." className="mt-24" />
 
     const filteredPayments = myPayments?.filter((payment) =>
-        filter === "PAID" ? payment.status === "PAID" : payment.status === "UNPAID"
+        filter === PAYMENT_STATUS.PAID
+            ? payment.status === PAYMENT_STATUS.PAID
+            : payment.status === PAYMENT_STATUS.UNPAID
     )
+
+    const items: TabsProps["items"] = [
+        {
+            key: PAYMENT_STATUS.UNPAID,
+            label: "Unpaid"
+        },
+        {
+            key: PAYMENT_STATUS.PAID,
+            label: "Paid"
+        }
+    ]
+
+    const onChange = (key: string) => {
+        setFilter(key as PAYMENT_STATUS.UNPAID | PAYMENT_STATUS.PAID)
+    }
+
     return (
         <div className="mb-8 mt-4 px-4 sm:px-6 md:px-10 xl:px-28">
-            <h1 className="mb-4 text-2xl font-bold text-secondary">My Payment</h1>
+            <h1 className="mb-2 text-2xl font-bold text-secondary">My Payment</h1>
             {isLoading || isFetching ? (
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {Array.from({ length: 12 }).map((_, index) => (
@@ -38,29 +57,12 @@ const MyPayment = () => {
                     ))}
                 </div>
             ) : (
-                <div>
-                    <div className="mb-4 flex space-x-4">
-                        <button
-                            className={`text-lg font-medium focus:outline-none ${
-                                filter === "UNPAID" ? "text-primary" : "text-gray-500"
-                            }`}
-                            onClick={() => setFilter("UNPAID")}
-                        >
-                            UNPAID
-                        </button>
-                        <button
-                            className={`text-lg font-medium focus:outline-none ${
-                                filter === "PAID" ? "text-primary" : "text-gray-500"
-                            }`}
-                            onClick={() => setFilter("PAID")}
-                        >
-                            PAID
-                        </button>
-                    </div>
+                <>
+                    <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         {filteredPayments?.map((item: IPayments) => <MyPaymentCard key={item.id} myPayment={item} />)}
                     </div>
-                </div>
+                </>
             )}
         </div>
     )

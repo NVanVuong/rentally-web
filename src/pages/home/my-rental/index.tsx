@@ -1,9 +1,9 @@
 import { useGetMyRentalsQuery } from "@/redux/services/rentals/rentals.service"
 import MyRentalCard from "./card"
 import { IRentals } from "@/interfaces/rentals.interface"
-import { Empty, Skeleton } from "antd"
+import { Empty, Skeleton, Tabs, TabsProps } from "antd"
 import { useState } from "react"
-import { RENTAL_STATUS, RENTAL_STATUS_COLORS } from "@/utils/constants/GlobalConst"
+import { RENTAL_STATUS } from "@/utils/constants/GlobalConst"
 
 const MyRental = () => {
     const { data, isLoading, isFetching } = useGetMyRentalsQuery(undefined, { refetchOnMountOrArgChange: true })
@@ -40,19 +40,44 @@ const MyRental = () => {
         }
     })
 
-    const RentalStatusFilter = ({ filter, setFilter, status, text, color }: any) => (
-        <button
-            className={`text-lg font-medium focus:outline-none `}
-            style={{ color: `${filter === status ? color : "#dcddde"}` }}
-            onClick={() => setFilter(status)}
-        >
-            {text}
-        </button>
-    )
+    const items: TabsProps["items"] = [
+        {
+            key: RENTAL_STATUS.CREATED,
+            label: "Created"
+        },
+        {
+            key: RENTAL_STATUS.APPROVED,
+            label: "Approved"
+        },
+        {
+            key: RENTAL_STATUS.COMPLETED,
+            label: "Completed"
+        },
+        {
+            key: RENTAL_STATUS.CANCELED,
+            label: "Canceled"
+        },
+        {
+            key: RENTAL_STATUS.REQUEST_BREAK,
+            label: "Request Break"
+        },
+        {
+            key: RENTAL_STATUS.BROKEN,
+            label: "Broken"
+        },
+        {
+            key: RENTAL_STATUS.ENDED,
+            label: "Ended"
+        }
+    ]
+
+    const onChange = (key: string) => {
+        setFilter(key as RENTAL_STATUS)
+    }
 
     return (
         <div className="mb-8 mt-4 px-4 sm:px-6 md:px-10 xl:px-28">
-            <h1 className="mb-4 text-2xl font-bold text-secondary">My Rental</h1>
+            <h1 className="mb-2 text-2xl font-bold text-secondary">My Rental</h1>
             {isLoading || isFetching ? (
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {Array.from({ length: 12 }).map((_, index) => (
@@ -72,41 +97,14 @@ const MyRental = () => {
                     ))}
                 </div>
             ) : (
-                <div>
-                    <div className="mb-4 flex space-x-4">
-                        {[
-                            { status: RENTAL_STATUS.CREATED, text: "CREATED", color: RENTAL_STATUS_COLORS.CREATED },
-                            { status: RENTAL_STATUS.APPROVED, text: "APPROVED", color: RENTAL_STATUS_COLORS.APPROVED },
-                            {
-                                status: RENTAL_STATUS.COMPLETED,
-                                text: "COMPLETED",
-                                color: RENTAL_STATUS_COLORS.COMPLETED
-                            },
-                            { status: RENTAL_STATUS.CANCELED, text: "CANCELED", color: RENTAL_STATUS_COLORS.CANCELED },
-                            {
-                                status: RENTAL_STATUS.REQUEST_BREAK,
-                                text: "REQUEST BREAK",
-                                color: RENTAL_STATUS_COLORS.REQUEST_BREAK
-                            },
-                            { status: RENTAL_STATUS.BROKEN, text: "BROKEN", color: RENTAL_STATUS_COLORS.BROKEN },
-                            { status: RENTAL_STATUS.ENDED, text: "ENDED", color: RENTAL_STATUS_COLORS.ENDED }
-                        ].map(({ status, text, color }) => (
-                            <RentalStatusFilter
-                                key={status}
-                                filter={filter}
-                                setFilter={setFilter}
-                                status={status}
-                                text={text}
-                                color={color}
-                            />
-                        ))}
-                    </div>
+                <>
+                    <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         {filteredRentals?.map((item: IRentals) => (
                             <MyRentalCard key={item.rentalInfo.id} myRental={item} />
                         ))}
                     </div>
-                </div>
+                </>
             )}
         </div>
     )

@@ -9,6 +9,7 @@ export interface IRoom {
     deletedAt?: string
     status?: string
     ratings?: number
+    address?: string
 }
 export interface IRoomQuery {
     keyword: string

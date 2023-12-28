@@ -130,7 +130,7 @@ const ModalUpdate = (props: IModal) => {
                     rules={[
                         {
                             required: true,
-                            min: 0,
+
                             message: "Please input electricPrice!"
                         }
                     ]}
@@ -140,14 +140,14 @@ const ModalUpdate = (props: IModal) => {
                 <Form.Item
                     className="w-full"
                     name="waterPrice"
-                    rules={[{ required: true, min: 0, message: "Please input Water Price!" }]}
+                    rules={[{ required: true, message: "Please input Water Price!" }]}
                 >
                     <InputNumber type="number" className="w-full" placeholder="Water Price" addonAfter="VND" />
                 </Form.Item>
                 <Form.Item
                     className="w-full"
                     name="leaseTerminationCost"
-                    rules={[{ required: true, min: 0, message: "Please input Lease Termination Cost!" }]}
+                    rules={[{ required: true, message: "Please input Lease Termination Cost!" }]}
                 >
                     <InputNumber
                         type="number"
@@ -162,7 +162,7 @@ const ModalUpdate = (props: IModal) => {
                     rules={[
                         {
                             required: false,
-                            min: 0
+                            message: "Please input Additional Price!"
                         }
                     ]}
                 >

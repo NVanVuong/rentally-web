@@ -18,10 +18,10 @@ const Rooms = () => {
 
     const [id, setId] = useState(initialId)
 
-    const { data, isLoading } = useGetStatisticRoomQuery({ id })
-    const empty = data?.data.empty
-    const occupied = data?.data.occupied
-    const total = empty + occupied
+    const { data, isLoading } = useGetStatisticRoomQuery({ id: Number(id) }, { skip: !id })
+    const empty = data?.data.empty || 0
+    const occupied = data?.data.occupied || 0
+    const total = empty + occupied || 0
 
     const dataRoom = {
         labels: ["Empty", "Occupied"],
@@ -54,7 +54,12 @@ const Rooms = () => {
             <h1 className="font-medium">Rooms report</h1>
             <Spin spinning={isLoading}>
                 <div className="flex flex-col rounded-md px-6 pb-3 pt-2 shadow-md">
-                    <Select className="!w-full" placeholder="Select a block" onChange={handleBlockChange} value={id}>
+                    <Select
+                        defaultValue={initialId}
+                        className="!w-full"
+                        placeholder="Select a block"
+                        onChange={handleBlockChange}
+                    >
                         {blocks?.map((block) => (
                             <Select.Option key={block.id} value={block.id}>
                                 {block.address}

@@ -65,16 +65,16 @@ const ModalPayment = (props: IModal) => {
                 <Form.Item
                     className="w-full"
                     name="electricNumber"
-                    rules={[{ required: true, min: 0, message: "Please input electric number" }]}
+                    rules={[{ required: true, message: "Please input electric number" }]}
                 >
                     <InputNumber className="w-full" type="number" placeholder="Electric number" />
                 </Form.Item>
                 <Form.Item
                     className="w-full"
                     name="waterNumber"
-                    rules={[{ required: true, min: 0, message: "Please input water number" }]}
+                    rules={[{ required: true, message: "Please input water number" }]}
                 >
-                    <InputNumber className="w-full" placeholder="Water number" type="number" />
+                    <Input className="w-full" placeholder="Water number" type="number" />
                 </Form.Item>
                 <Form.Item
                     className="w-full"
@@ -82,12 +82,11 @@ const ModalPayment = (props: IModal) => {
                     rules={[
                         {
                             required: true,
-                            min: 0,
                             message: "Please input additional price"
                         }
                     ]}
                 >
-                    <InputNumber addonAfter="VND" className="w-full" type="number" placeholder="Additional price" />
+                    <Input addonAfter="VND" className="w-full" type="number" placeholder="Additional price" />
                 </Form.Item>
                 <Form.Item
                     className="w-full"
