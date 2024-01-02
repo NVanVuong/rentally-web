@@ -14,6 +14,7 @@ const MyRentalPage = lazy(() => import("../pages/home/my-rental"))
 const MyRentalDetailPage = lazy(() => import("../pages/home/my-rental/detail"))
 const MyPaymentPage = lazy(() => import("../pages/home/my-payment"))
 const MyPaymentDetailPage = lazy(() => import("../pages/home/my-payment/detail"))
+const MyStatisticsPage = lazy(() => import("../pages/home/my-statistic"))
 const BecomeHostPage = lazy(() => import("../pages/home/become-host"))
 
 const AdminPage = lazy(() => import("../pages/admin"))
@@ -50,6 +51,7 @@ const MainRoute = () => {
                             <Route path={SITE_MAP.MY_RENTAL_DETAIL} element={<MyRentalDetailPage />} />
                             <Route path={SITE_MAP.MY_PAYMENT} element={<MyPaymentPage />} />
                             <Route path={SITE_MAP.MY_PAYMENT_DETAIL} element={<MyPaymentDetailPage />} />
+                            <Route path={SITE_MAP.MY_STATISTICS} element={<MyStatisticsPage />} />
                             <Route path={SITE_MAP.BECOME_HOST} element={<BecomeHostPage />} />
                         </Route>
                     </Route>

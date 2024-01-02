@@ -27,5 +27,6 @@ export const SITE_MAP = {
     MY_PAYMENT_DETAIL: "my-payment/:id",
     MY_CHECKLIST: "/my-checklist",
     MY_PROFILE: "/my-profile",
+    MY_STATISTICS: "/my-statistics",
     BECOME_HOST: "/become-host"
 }

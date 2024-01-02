@@ -25,3 +25,21 @@ export interface IStatisticRatingResponse {
         bad: IRoom[]
     }
 }
+
+export interface IStatisticCostResponse {
+    message: string
+    status: string
+    data: {
+        statistics: IStatisticCost[]
+        totalCost: number
+    }
+}
+
+export interface IStatisticCost {
+    cost: number
+    electric: number
+    water: number
+    additionalPrice: number
+    month: number
+    increase: number
+}

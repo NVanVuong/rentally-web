@@ -12,6 +12,20 @@ export const statisticsApi = createApiStatistics.injectEndpoints({
                 }
             }
         }),
+        getStatisticUser: builder.query<any, { year: number }>({
+            query: ({ year }) => {
+                return {
+                    url: `/statistic/users/${year}`
+                }
+            }
+        }),
+        getStatisticCost: builder.query<any, { year: number }>({
+            query: ({ year }) => {
+                return {
+                    url: `/statistic/cost/${year}`
+                }
+            }
+        }),
         getStatisticRating: builder.query<IStatisticRatingResponse, void>({
             query: () => {
                 return {
@@ -45,6 +59,8 @@ export const statisticsApi = createApiStatistics.injectEndpoints({
 
 export const {
     useGetStatisticRevenueQuery,
+    useGetStatisticUserQuery,
+    useGetStatisticCostQuery,
     useGetStatisticRatingQuery,
     useGetStatisticRentalQuery,
     useGetStatisticRoomQuery,

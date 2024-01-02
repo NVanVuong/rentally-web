@@ -16,7 +16,7 @@ import useAuth from "@/hooks/useAuth"
 import "./style.css"
 import { FaRegHeart } from "react-icons/fa"
 import { RiVipCrownLine } from "react-icons/ri"
-import { LuClipboardSignature } from "react-icons/lu"
+import { LuClipboardSignature, LuLayoutDashboard } from "react-icons/lu"
 
 const UserMenu = () => {
     const { userInfo, role, isAuth } = useAuth()
@@ -35,6 +35,9 @@ const UserMenu = () => {
                 break
             case "my-rental":
                 navigate(SITE_MAP.MY_RENTAL)
+                break
+            case "my-statistics":
+                navigate(SITE_MAP.MY_STATISTICS)
                 break
             case "my-payment":
                 navigate(SITE_MAP.MY_PAYMENT)
@@ -83,6 +86,11 @@ const UserMenu = () => {
             key: "my-payment",
             label: "My Payment",
             icon: <MdOutlinePayment className="mr-4 h-4 w-4" />
+        },
+        {
+            key: "my-statistics",
+            label: "My Statistics",
+            icon: <LuLayoutDashboard className="mr-4 h-4 w-4" />
         },
         role === ROLE.USER
             ? {
