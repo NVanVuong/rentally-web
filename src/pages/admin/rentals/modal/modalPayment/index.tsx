@@ -74,7 +74,7 @@ const ModalPayment = (props: IModal) => {
                     name="waterNumber"
                     rules={[{ required: true, message: "Please input water number" }]}
                 >
-                    <Input className="w-full" placeholder="Water number" type="number" />
+                    <InputNumber className="w-full" placeholder="Water number" type="number" />
                 </Form.Item>
                 <Form.Item
                     className="w-full"
@@ -86,7 +86,7 @@ const ModalPayment = (props: IModal) => {
                         }
                     ]}
                 >
-                    <Input addonAfter="VND" className="w-full" type="number" placeholder="Additional price" />
+                    <InputNumber addonAfter="VND" className="w-full" type="number" placeholder="Additional price" />
                 </Form.Item>
                 <Form.Item
                     className="w-full"
