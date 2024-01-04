@@ -89,11 +89,14 @@ const MyRentalDetail = () => {
     }
 
     const generatePDF = async () => {
-        const report = new JsPDF("portrait", "pt", "a4")
+        const report = new JsPDF({
+            orientation: "portrait",
+            unit: "pt",
+            format: "a4"
+        })
         const div = document.createElement("div")
         document.body.appendChild(div)
 
-        // Render the JSX content into the div
         ReactDOM.render(
             <RentalContract
                 roomBlockAddress={myRental?.roomBlockInfo.address}
@@ -121,17 +124,16 @@ const MyRentalDetail = () => {
             div
         )
 
-        // Use html2canvas to convert the JSX content to an image
         const canvas = await html2canvas(div)
 
-        // Add the image to the PDF
-        report.addImage(canvas.toDataURL("image/png"), "PNG", 20, 20, 550, 0)
+        // Adjust the dimensions to fit the content
+        const contentWidth = 600 // Adjust this based on your content
+        const contentHeight = canvas.height * (contentWidth / canvas.width)
+        report.addImage(canvas.toDataURL("image/png"), "PNG", 20, 20, contentWidth, contentHeight)
 
-        // Remove the temporary div
         document.body.removeChild(div)
 
-        // Save the PDF
-        report.save("report.pdf")
+        report.save("contract.pdf")
     }
 
     return (

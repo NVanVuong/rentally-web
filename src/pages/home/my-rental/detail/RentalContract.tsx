@@ -1,3 +1,5 @@
+import { formatDate, formatPrice } from "@/utils/helpers"
+
 export const RentalContract = ({
     roomBlockAddress,
     AFullName,
@@ -20,58 +22,65 @@ export const RentalContract = ({
     moveOutDate,
     ASignature,
     BSignature
-}) => {
+}: any) => {
     return (
-        <div style={{ width: "50%", margin: "0 auto" }}>
+        <div className="mx-auto w-5/6 text-2xl leading-normal">
             <br />
-            <p style={{ textAlign: "center" }}>CỘNG H&Ograve;A X&Atilde; HỘI CHỦ NGHĨA VIỆT NAM</p>
-            <p style={{ textAlign: "center" }}>Độc lập &ndash; Tự do &ndash; Hạnh ph&uacute;c</p>
-            <p style={{ textAlign: "center" }}>
+            <p className="text-center font-medium">CỘNG H&Ograve;A X&Atilde; HỘI CHỦ NGHĨA VIỆT NAM</p>
+            <p className="text-center font-medium">Độc lập &ndash; Tự do &ndash; Hạnh ph&uacute;c</p>
+            <p className="text-center">
                 <br />
             </p>
-            <p style={{ textAlign: "center" }}>
+            <p className="text-center">
                 <strong>HỢP ĐỒNG THU&Ecirc; PH&Ograve;NG TRỌ</strong>
             </p>
             <p>
                 <br />
             </p>
-            <p>H&ocirc;m nay ng&agrave;y ..... th&aacute;ng ..... năm .....; tại địa chỉ: {roomBlockAddress}.</p>
-            <p>Ch&uacute;ng t&ocirc;i gồm:</p>
-            <p>1.Đại diện b&ecirc;n cho thu&ecirc; ph&ograve;ng trọ (B&ecirc;n A):</p>
             <p>
-                &Ocirc;ng/b&agrave;: {AFullName} Sinh ng&agrave;y: {ABirthDay}
+                Ng&agrave;y ................. th&aacute;ng ................ năm .................. tại địa chỉ:{" "}
+                {roomBlockAddress}.
+            </p>
+            <p>Ch&uacute;ng t&ocirc;i gồm:</p>
+            <p className="font-medium">1. Đại diện b&ecirc;n cho thu&ecirc; ph&ograve;ng trọ (B&ecirc;n A):</p>
+            <p>
+                &Ocirc;ng/b&agrave;: {AFullName} <span className="ml-20" /> Sinh ng&agrave;y: {formatDate(ABirthDay)}
             </p>
             <p>Nơi đăng k&yacute; HK thường tr&uacute;:</p>
             <p>
-                CMND số: {AIdentifyNo} cấp ng&agrave;y {AIdentifyDate} tại: {AIdentifyAddress}
+                CMND: {AIdentifyNo} <span className="ml-20" /> Ng&agrave;y cấp: {formatDate(AIdentifyDate)}{" "}
+                <span className="ml-20" /> Nơi cấp: {AIdentifyAddress}
             </p>
             <p>Số điện thoại: {APhoneNumber}</p>
-            <p>2. B&ecirc;n thu&ecirc; ph&ograve;ng trọ (B&ecirc;n B):</p>
+            <p className="font-medium">2. B&ecirc;n thu&ecirc; ph&ograve;ng trọ (B&ecirc;n B):</p>
             <p>
-                &Ocirc;ng/b&agrave;: {BFullName} Sinh ng&agrave;y: {BBirthDay}
+                &Ocirc;ng/b&agrave;: {BFullName} <span className="ml-20" /> Sinh ng&agrave;y: {formatDate(BBirthDay)}
             </p>
             <p>Nơi đăng k&yacute; HK thường tr&uacute;:</p>
             <p>
-                Số CMND: {BIdentifyNo} cấp ng&agrave;y {BIdentifyDate} tại: {BIdentifyAddress}
+                Số CMND: {BIdentifyNo} <span className="ml-20" /> Ng&agrave;y cấp {formatDate(BIdentifyDate)}{" "}
+                <span className="ml-20" /> Nơi cấp: {BIdentifyAddress}
             </p>
             <p>Số điện thoại: {BPhoneNumber}</p>
-            <p>
+            <br />
+            <p className="font-medium">
                 Sau khi b&agrave;n bạc tr&ecirc;n tinh thần d&acirc;n chủ, hai b&ecirc;n c&ugrave;ng c&oacute; lợi,
                 c&ugrave;ng thống nhất như sau:
             </p>
             <p>
-                B&ecirc;n A đồng &yacute; cho b&ecirc;n B thu&ecirc; 01 ph&ograve;ng ở tại địa chỉ: {roomBlockAddress}.
+                - B&ecirc;n A đồng &yacute; cho b&ecirc;n B thu&ecirc; 01 ph&ograve;ng ở tại địa chỉ: {roomBlockAddress}
+                .
             </p>
-            <p>Gi&aacute; thu&ecirc;: {roomPrice} đ/th&aacute;ng</p>
-            <p>H&igrave;nh thức thanh to&aacute;n: Tiền mặt hoặc chuyển khoản</p>
+            <p>- Gi&aacute; thu&ecirc;: {formatPrice(roomPrice)}/th&aacute;ng</p>
             <p>
-                Tiền điện: {electricPrice} đ/kwh t&iacute;nh theo chỉ số c&ocirc;ng tơ, thanh to&aacute;n v&agrave;o
-                cuối c&aacute;c th&aacute;ng.
+                - H&igrave;nh thức thanh to&aacute;n: Tiền mặt hoặc chuyển khoản (thanh to&aacute;n v&agrave;o đầu
+                c&aacute;c th&aacute;ng).
             </p>
-            <p>Tiền nước: {waterPrice} đ/người thanh to&aacute;n v&agrave;o đầu c&aacute;c th&aacute;ng.</p>
-            <p>Tiền đặt cọc: {depositAmount}</p>
+            <p>- Tiền điện: {formatPrice(electricPrice)}/kwh t&iacute;nh theo chỉ số c&ocirc;ng tơ.</p>
+            <p>- Tiền nước: {formatPrice(waterPrice)}/m3.</p>
+            <p>- Tiền đặt cọc: {formatPrice(depositAmount)}.</p>
             <p>
-                Hợp đồng c&oacute; gi&aacute; trị kể từ {moveInDate} đến {moveOutDate}
+                * Hợp đồng c&oacute; gi&aacute; trị kể từ {formatDate(moveInDate)} đến {formatDate(moveOutDate)}.
             </p>
             <p>
                 <br />
@@ -130,21 +139,21 @@ export const RentalContract = ({
             </p>
             - Hợp đồng được lập th&agrave;nh 02 bản c&oacute; gi&aacute; trị ph&aacute;p l&yacute; như nhau, mỗi
             b&ecirc;n giữ một bản.
-            <p>
-                <strong>ĐẠI DIỆN BÊN A</strong>
-                <span style={{ float: "right" }}>
-                    <strong>ĐẠI DIỆN BÊN B</strong>
-                </span>
-            </p>
-            <p style={{ textAlign: "left" }}>
-                <strong>{ASignature}</strong>
-                <span style={{ float: "right" }}>
-                    <strong>{BSignature}</strong>
-                </span>
-            </p>
-            <p>
+            <div className="mt-12 px-32">
+                <p className="text-left">
+                    <strong>ĐẠI DIỆN BÊN A</strong>
+                    <span className="float-right">
+                        <strong>ĐẠI DIỆN BÊN B</strong>
+                    </span>
+                </p>
+                <p className="text-left">
+                    <strong>{ASignature}</strong>
+                    <span className="float-right">
+                        <strong>{BSignature}</strong>
+                    </span>
+                </p>
                 <br />
-            </p>
+            </div>
         </div>
     )
 }
