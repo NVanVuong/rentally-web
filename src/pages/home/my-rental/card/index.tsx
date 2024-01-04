@@ -35,7 +35,7 @@ const MyRentalCard = (props: IRentalCard) => {
                 )
             case RENTAL_STATUS.COMPLETED:
                 return (
-                    <div className="flex items-center justify-between">
+                    <div className="flex w-full items-center justify-between">
                         {isRated ? (
                             <span className="flex items-center gap-2 font-medium">
                                 <FaCheck className="h-3 w-3 fill-green-500" />
