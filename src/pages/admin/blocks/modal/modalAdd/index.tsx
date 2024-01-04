@@ -11,6 +11,7 @@ import "../style.css"
 import { useGetLandLordQuery } from "@/redux/services/user/user.service"
 import { ILandlord } from "@/interfaces/user.interface"
 import { ROLE } from "@/utils/constants/GlobalConst"
+const { TextArea } = Input
 
 export const formRoomBlockRules = {
     description: [{ required: true, message: "Please input description!" }],
@@ -72,7 +73,7 @@ const ModalAdd = (props: IModal) => {
                     </Form.Item>
                 )}
                 <Form.Item className="w-full" name="description" rules={formRoomBlockRules.description}>
-                    <Input placeholder="Description" />
+                    <TextArea rows={4} placeholder="Description" />
                 </Form.Item>
                 <Form.Item className="w-full" rules={formRoomBlockRules.address}>
                     <SearchMap />

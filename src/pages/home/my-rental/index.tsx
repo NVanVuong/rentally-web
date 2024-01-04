@@ -98,7 +98,12 @@ const MyRental = () => {
                 </div>
             ) : (
                 <>
-                    <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+                    <Tabs
+                        defaultActiveKey={RENTAL_STATUS.COMPLETED}
+                        defaultValue={RENTAL_STATUS.COMPLETED}
+                        items={items}
+                        onChange={onChange}
+                    />
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         {filteredRentals?.map((item: IRentals) => (
                             <MyRentalCard key={item.rentalInfo.id} myRental={item} />

@@ -58,7 +58,7 @@ const MyPayment = () => {
                 </div>
             ) : (
                 <>
-                    <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+                    <Tabs defaultValue={PAYMENT_STATUS.UNPAID} items={items} onChange={onChange} />
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         {filteredPayments?.map((item: IPayments) => <MyPaymentCard key={item.id} myPayment={item} />)}
                     </div>
