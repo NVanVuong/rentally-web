@@ -13,8 +13,8 @@ import {
 } from "chart.js"
 import { ChartOptions } from "chart.js"
 import { Select, Spin } from "antd"
-import { useState } from "react"
-import { Line } from "react-chartjs-2"
+import { useRef, useState } from "react"
+import { Line, getElementAtEvent } from "react-chartjs-2"
 import { TbReportMoney } from "react-icons/tb"
 import { formatPrice } from "@/utils/helpers"
 const { Option } = Select
@@ -50,6 +50,7 @@ const currentMonth = new Date().getMonth() + 1
 const months = Array.from({ length: 12 }, (_, index) => index + 1)
 
 const MonthlyCost = () => {
+    const chartRef = useRef<any>()
     const [year, setYear] = useState(currentYear)
     const [month, setMonth] = useState(currentMonth)
     const { data, isLoading } = useGetStatisticCostQuery({ year })
@@ -79,13 +80,23 @@ const MonthlyCost = () => {
         setMonth(month)
     }
 
+    const onClick = (event: any) => {
+        const chart = getElementAtEvent(chartRef.current, event)
+
+        if (chart && chart[0]) {
+            console.log(chart[0].index + 1)
+
+            setMonth(chart[0].index + 1)
+        }
+    }
+
     return (
         <div className="flex w-full gap-6">
             <div className="flex-1 ">
                 <h1 className="font-medium">Monthly dashboard</h1>
                 <div className="rounded-md p-2 shadow-md">
                     <div className="relative z-50 flex justify-end">
-                        <Select defaultValue={currentYear} style={{ width: 100 }} onChange={handleYearChange}>
+                        <Select defaultValue={year} style={{ width: 100 }} onChange={handleYearChange}>
                             {years.map((year) => (
                                 <Option key={year} value={year}>
                                     {year}
@@ -94,15 +105,15 @@ const MonthlyCost = () => {
                         </Select>
                     </div>
                     <Spin spinning={isLoading}>
-                        <Line className="!h-52" data={dataRental} options={options} />
+                        <Line className="!h-52" ref={chartRef} data={dataRental} options={options} onClick={onClick} />
                     </Spin>
                 </div>
             </div>
-            <div className=" w-72">
+            <div className="w-80">
                 <h1 className="font-medium">Detail</h1>
                 <div className="rounded-md p-2 shadow-md">
                     <div className="relative z-50 flex justify-end">
-                        <Select defaultValue={currentMonth} style={{ width: 100 }} onChange={handleMonthChange}>
+                        <Select defaultValue={month} value={month} style={{ width: 100 }} onChange={handleMonthChange}>
                             {months.map((month) => (
                                 <Option key={month} value={month}>
                                     {month}
@@ -130,7 +141,7 @@ const MonthlyCost = () => {
                                         <span>Electric payment</span>
                                     </div>
                                     <span className="font-bold text-red-500">
-                                        -{statistics ? formatPrice(statistics[month - 1].cost) : "N/A"}
+                                        -{statistics ? formatPrice(statistics[month - 1].electric) : "N/A"}
                                     </span>
                                 </div>
                             </div>
@@ -141,7 +152,7 @@ const MonthlyCost = () => {
                                         <span>Water payment</span>
                                     </div>
                                     <span className="font-bold text-red-500">
-                                        -{statistics ? formatPrice(statistics[month - 1].cost) : "N/A"}
+                                        -{statistics ? formatPrice(statistics[month - 1].water) : "N/A"}
                                     </span>
                                 </div>
                             </div>
@@ -152,7 +163,7 @@ const MonthlyCost = () => {
                                         <span>Additional payment</span>
                                     </div>
                                     <span className="font-bold text-red-500">
-                                        -{statistics ? formatPrice(statistics[month - 1].cost) : "N/A"}
+                                        -{statistics ? formatPrice(statistics[month - 1].additionalPrice) : "N/A"}
                                     </span>
                                 </div>
                             </div>

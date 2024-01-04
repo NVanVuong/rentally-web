@@ -3,7 +3,7 @@ import { useGetRoomBlocksQuery } from "@/redux/services/block/block.service"
 import { useGetStatisticRoomQuery } from "@/redux/services/statistics/statistics.service"
 import { Select, Spin } from "antd"
 import { Chart as ChartJS, ArcElement, Legend, Tooltip } from "chart.js"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Doughnut } from "react-chartjs-2"
 
 ChartJS.register(ArcElement, Tooltip, Legend)
@@ -17,6 +17,12 @@ const Rooms = () => {
     const initialId = blocks?.[0]?.id
 
     const [id, setId] = useState(initialId)
+
+    useEffect(() => {
+        if (initialId) {
+            setId(initialId)
+        }
+    }, [initialId])
 
     const { data, isLoading } = useGetStatisticRoomQuery({ id: Number(id) }, { skip: !id })
     const empty = data?.data.empty || 0
@@ -55,7 +61,7 @@ const Rooms = () => {
             <Spin spinning={isLoading}>
                 <div className="flex flex-col rounded-md px-6 pb-3 pt-2 shadow-md">
                     <Select
-                        defaultValue={initialId}
+                        defaultValue={blocks?.[0]?.id}
                         className="!w-full"
                         placeholder="Select a block"
                         onChange={handleBlockChange}

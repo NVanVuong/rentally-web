@@ -30,7 +30,7 @@ const RoomRank = () => {
     const currentRoom = tab === "1" ? highestRoom : lowestRoom
 
     return (
-        <div className="h-full w-80">
+        <div className="h-full w-96">
             <h1 className="font-medium">Room ranking</h1>
             <div className="mt-2 w-full rounded-md px-4 pb-2 shadow-md">
                 <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
