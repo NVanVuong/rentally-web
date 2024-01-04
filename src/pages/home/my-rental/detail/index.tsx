@@ -1,6 +1,8 @@
 import { Badge, Button, Form, Input, Spin } from "antd"
 import { MdOutlineArrowBackIosNew } from "react-icons/md"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
+import JsPDF from "jspdf"
+import html2canvas from "html2canvas"
 import Rule from "./rule"
 import Contract from "./contract"
 import {
@@ -14,6 +16,8 @@ import useServerMessage from "@/hooks/useServerMessage"
 import { message } from "antd"
 import { SITE_MAP } from "@/utils/constants/Path"
 import ModalReview from "../modalReview"
+import { RentalContract } from "./RentalContract"
+import ReactDOM from "react-dom"
 
 const MyRentalDetail = () => {
     const { id } = useParams()
@@ -84,6 +88,52 @@ const MyRentalDetail = () => {
         }
     }
 
+    const generatePDF = async () => {
+        const report = new JsPDF("portrait", "pt", "a4")
+        const div = document.createElement("div")
+        document.body.appendChild(div)
+
+        // Render the JSX content into the div
+        ReactDOM.render(
+            <RentalContract
+                roomBlockAddress={myRental?.roomBlockInfo.address}
+                AFullName={`${myRental?.hostInfo.firstName} ${myRental?.hostInfo.lastName}`}
+                ABirthDay={myRental?.hostInfo.birthday}
+                AIdentifyNo={myRental?.hostInfo.identityNumber}
+                AIdentifyDate={myRental?.hostInfo.identityDateOfIssue}
+                AIdentifyAddress={myRental?.hostInfo.identityPlaceOfIssue}
+                APhoneNumber={myRental?.hostInfo.phone}
+                BFullName={`${myRental?.renterInfo.firstName} ${myRental?.renterInfo.lastName}`}
+                BBirthDay={myRental?.renterInfo.birthday}
+                BIdentifyNo={myRental?.renterInfo.identityNumber}
+                BIdentifyDate={myRental?.renterInfo.identityDateOfIssue}
+                BIdentifyAddress={myRental?.renterInfo.identityPlaceOfIssue}
+                BPhoneNumber={myRental?.renterInfo.phone}
+                roomPrice={myRental?.roomInfo.price}
+                electricPrice={myRental?.rentalInfo.electricPrice}
+                waterPrice={myRental?.rentalInfo.waterPrice}
+                depositAmount={myRental?.roomInfo.depositAmount}
+                moveInDate={myRental?.rentalInfo.moveInDate}
+                moveOutDate={myRental?.rentalInfo.moveOutDate}
+                ASignature={`${myRental?.hostInfo.firstName} ${myRental?.hostInfo.lastName}`}
+                BSignature={`${myRental?.renterInfo.firstName} ${myRental?.renterInfo.lastName}`}
+            />,
+            div
+        )
+
+        // Use html2canvas to convert the JSX content to an image
+        const canvas = await html2canvas(div)
+
+        // Add the image to the PDF
+        report.addImage(canvas.toDataURL("image/png"), "PNG", 20, 20, 550, 0)
+
+        // Remove the temporary div
+        document.body.removeChild(div)
+
+        // Save the PDF
+        report.save("report.pdf")
+    }
+
     return (
         <div className="mb-16 mt-4 px-4 sm:px-6 md:px-10 xl:px-28">
             <ModalReview />
@@ -94,7 +144,12 @@ const MyRentalDetail = () => {
                 <div className="flex w-full items-center justify-between">
                     <h1 className="text-xl font-bold">My rentals</h1>
                     {isComplete && (
-                        <Button className="h-full w-fit rounded-lg bg-primary px-5 py-1.5 text-sm font-bold text-white hover:shadow-md hover:shadow-primary/60">
+                        <Button
+                            onClick={async () => {
+                                await generatePDF()
+                            }}
+                            className="h-full w-fit rounded-lg bg-primary px-5 py-1.5 text-sm font-bold text-white hover:shadow-md hover:shadow-primary/60"
+                        >
                             Export to PDF
                         </Button>
                     )}
