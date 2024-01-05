@@ -18,7 +18,7 @@ const MyChecklist = () => {
 
     return (
         <div className="mb-8 mt-4">
-            <h1 className="mb-4 px-4 text-2xl font-bold  text-secondary sm:px-6 md:px-10 xl:px-28">My Checklist</h1>
+            <h1 className="px-4 text-2xl font-bold  text-secondary sm:px-6 md:px-10 xl:px-28">My Checklist</h1>
             {isShowMap ? (
                 <MapView rooms={data?.data} />
             ) : (

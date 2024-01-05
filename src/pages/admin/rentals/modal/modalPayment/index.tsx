@@ -10,7 +10,11 @@ import { formatPrice } from "@/utils/helpers"
 const ModalPayment = (props: IModal) => {
     const { title, data: rental } = props
 
-    const { rentalInfo } = rental as IRentals
+    const { rentalInfo, roomInfo } = rental as IRentals
+    console.log(rentalInfo)
+    console.log(rental)
+
+    const monthlyPrice = roomInfo?.price
 
     const [createPayment, { data, error, isLoading }] = useCreatePaymentMutation()
 
@@ -22,7 +26,7 @@ const ModalPayment = (props: IModal) => {
 
     const electricPrice = electricNumber * Number(rentalInfo?.electricPrice)
     const waterPrice = waterNumber * Number(rentalInfo?.waterPrice)
-    const totalPrice = electricPrice + waterPrice + Number(additionalPrice)
+    const totalPrice = electricPrice + waterPrice + Number(additionalPrice) + Number(monthlyPrice)
 
     useEffect(() => {
         if (rentalInfo) {
@@ -106,6 +110,7 @@ const ModalPayment = (props: IModal) => {
                     />
                 </Form.Item>
                 <Typography className="w-full">
+                    <pre>Monthly price: {monthlyPrice ? formatPrice(monthlyPrice) : ""}</pre>
                     <pre>Total electric price: {electricPrice ? formatPrice(electricPrice) : ""}</pre>
                     <pre>Total water price: {waterPrice ? formatPrice(waterPrice) : ""}</pre>
                     <pre>Total price: {totalPrice ? formatPrice(totalPrice) : ""}</pre>

@@ -41,7 +41,7 @@ const Reviews = (props: IReviews) => {
                     </div>
                 ))}
             </div>
-            {!isShowAll && (
+            {!isShowAll && totalReviews > 6 && (
                 <button
                     onClick={() => setIsShowAll(true)}
                     className="group mt-8 flex w-fit items-center gap-1 rounded-lg border-2 border-black py-2 pl-5 pr-3 text-sm font-medium transition duration-200 hover:shadow-md"

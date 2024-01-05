@@ -15,7 +15,7 @@ const MyRental = () => {
         | RENTAL_STATUS.REQUEST_BREAK
         | RENTAL_STATUS.BROKEN
         | RENTAL_STATUS.ENDED
-    >(RENTAL_STATUS.COMPLETED)
+    >(RENTAL_STATUS.CREATED)
 
     const myRentals = data?.data
     if (myRentals?.length === 0 && !isLoading && !isFetching)
@@ -99,8 +99,8 @@ const MyRental = () => {
             ) : (
                 <>
                     <Tabs
-                        defaultActiveKey={RENTAL_STATUS.COMPLETED}
-                        defaultValue={RENTAL_STATUS.COMPLETED}
+                        defaultActiveKey={RENTAL_STATUS.CREATED}
+                        defaultValue={RENTAL_STATUS.CREATED}
                         items={items}
                         onChange={onChange}
                     />
